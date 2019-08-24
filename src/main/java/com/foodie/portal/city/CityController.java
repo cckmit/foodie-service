@@ -5,6 +5,7 @@ import com.github.jsonzou.jmockdata.TypeReference;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.var;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Collection;
@@ -15,20 +16,20 @@ import java.util.Map;
 @RequestMapping("city")
 public class CityController {
 
-    private Map<String, City> cities = JMockData.mock(new TypeReference<Map<String, City>>() {
-    });
+    @Autowired
+    private CityApplicationService cityApplicationService;
 
     @ApiOperation("城市列表")
     @GetMapping
     public Collection<City> cities() {
-        return cities.values();
+        return cityApplicationService.fetchCities();
     }
 
     @ApiOperation("添加城市")
     @PostMapping
-    public void addCity(@RequestBody City cityCommond) {
-        var city = new City();
-        cities.put(city.getId(), city);
+    public void addCity(@RequestBody CreateCityCommand cityCommand) {
+        cityApplicationService.addCity(cityCommand);
+
     }
 
 

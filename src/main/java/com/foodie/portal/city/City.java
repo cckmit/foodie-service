@@ -7,16 +7,23 @@ import lombok.Data;
 @Data
 public class City {
 
-    @ApiModelProperty("城市ID")
     private String id;
-    @ApiModelProperty("城市名称")
     private String name;
-    @ApiModelProperty("城市描述")
-    private String desc;
-    @ApiModelProperty("城市图片")
+    private String description;
     private String images;
 
     public City() {
         this.id = IdUtil.fastSimpleUUID();
+    }
+
+    public City(String name, String desc, String images) {
+        this.id = IdUtil.fastSimpleUUID();
+        this.name = name;
+        this.description = desc;
+        this.images = images;
+    }
+
+    public static City create(String name, String desc, String images) {
+        return new City(name, desc, images);
     }
 }
