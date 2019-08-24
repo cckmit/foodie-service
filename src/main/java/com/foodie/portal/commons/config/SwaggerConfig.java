@@ -1,4 +1,4 @@
-package com.foodie.portal.config;
+package com.foodie.portal.commons.config;
 
 import com.google.common.collect.ImmutableList;
 import org.springframework.context.annotation.Bean;

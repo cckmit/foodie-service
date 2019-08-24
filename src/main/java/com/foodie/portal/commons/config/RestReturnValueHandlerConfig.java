@@ -1,4 +1,4 @@
-package com.foodie.portal.config;
+package com.foodie.portal.commons.config;
 
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;

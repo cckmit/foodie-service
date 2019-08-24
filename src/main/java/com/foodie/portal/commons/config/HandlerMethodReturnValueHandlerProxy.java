@@ -1,5 +1,6 @@
-package com.foodie.portal.config;
+package com.foodie.portal.commons.config;
 
+import com.foodie.portal.commons.ErrorCode;
 import org.springframework.core.MethodParameter;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.context.request.NativeWebRequest;

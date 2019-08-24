@@ -1,4 +1,4 @@
-package com.foodie.portal.config;
+package com.foodie.portal.commons;
 
 /**
  * 错误码
