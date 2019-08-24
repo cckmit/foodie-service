@@ -8,8 +8,11 @@ import org.springframework.cloud.commons.util.IdUtils;
 public class City {
 
     private String id;
+    private String name;
+    private String desc;
+    private String images;
 
     public City() {
-        this.id = IdUtil.fastSimpleUUID() ;
+        this.id = IdUtil.fastSimpleUUID();
     }
 }
