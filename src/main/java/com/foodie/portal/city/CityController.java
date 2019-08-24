@@ -3,6 +3,7 @@ package com.foodie.portal.city;
 import com.github.jsonzou.jmockdata.JMockData;
 import com.github.jsonzou.jmockdata.TypeReference;
 import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import lombok.var;
 import org.springframework.web.bind.annotation.*;
 
@@ -17,11 +18,13 @@ public class CityController {
     private Map<String, City> cities = JMockData.mock(new TypeReference<Map<String, City>>() {
     });
 
+    @ApiOperation("城市列表")
     @GetMapping
     public Collection<City> cities() {
         return cities.values();
     }
 
+    @ApiOperation("添加城市")
     @PostMapping
     public void addCity(@RequestBody City cityCommond) {
         var city = new City();

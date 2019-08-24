@@ -2,16 +2,18 @@ package com.foodie.portal.user;
 
 import com.foodie.portal.commons.RestException;
 import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import static com.foodie.portal.commons.ErrorCode.UNAUTHORIZED;
 
-@Api
+@Api(tags = "用户管理")
 @RestController
 public class UserController {
 
+    @ApiOperation("登陆")
     @PostMapping("login")
     public String login(@RequestBody User user) {
 

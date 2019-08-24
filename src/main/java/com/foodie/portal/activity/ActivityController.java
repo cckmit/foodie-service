@@ -22,16 +22,17 @@ public class ActivityController {
     private Map<String, Activity> activities = JMockData.mock(new TypeReference<Map<String, Activity>>() {
     });
 
-    @ApiOperation("所有活动")
-    @GetMapping
-    public Collection<Activity> activities() {
-        return  activities.values();
-    }
-
-    @PostMapping("发布活动")
+    @ApiOperation("发布活动")
+    @PostMapping
     public Activity addActivity(Activity activityCommand) {
         Activity activity = new Activity();
         activities.put(activity.getId(), activity);
         return activity;
+    }
+
+    @ApiOperation("所有活动")
+    @GetMapping
+    public Collection<Activity> activities() {
+        return  activities.values();
     }
 }
