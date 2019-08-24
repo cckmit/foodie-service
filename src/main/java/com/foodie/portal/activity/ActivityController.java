@@ -14,8 +14,8 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 
+@Api("活动管理")
 @RestController
-@Api
 @RequestMapping("activities")
 public class ActivityController {
 

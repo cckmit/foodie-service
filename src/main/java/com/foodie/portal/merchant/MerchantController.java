@@ -3,12 +3,14 @@ package com.foodie.portal.merchant;
 import com.foodie.portal.city.City;
 import com.github.jsonzou.jmockdata.JMockData;
 import com.github.jsonzou.jmockdata.TypeReference;
+import io.swagger.annotations.Api;
 import lombok.var;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Collection;
 import java.util.Map;
 
+@Api("商家管理")
 @RestController
 @RequestMapping("merchant")
 public class MerchantController {
