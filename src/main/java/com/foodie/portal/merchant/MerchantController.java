@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.Collection;
 import java.util.Map;
 
-@Api("商家管理")
+@Api(tags = "商家管理")
 @RestController
 @RequestMapping("merchant")
 public class MerchantController {

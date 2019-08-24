@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.Collection;
 import java.util.Map;
 
-@Api("城市管理")
+@Api(tags = "城市管理")
 @RestController
 @RequestMapping("city")
 public class CityController {
