@@ -1,13 +1,9 @@
 package com.foodie.portal.city;
 
-import com.github.jsonzou.jmockdata.JMockData;
-import com.github.jsonzou.jmockdata.TypeReference;
+import com.foodie.portal.commons.Pagination;
 import lombok.var;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import java.util.Collection;
-import java.util.Map;
 
 @Service
 public class CityApplicationService {
@@ -15,15 +11,27 @@ public class CityApplicationService {
     @Autowired
     private CityRepository cityRepository;
 
-    private Map<String, City> cities = JMockData.mock(new TypeReference<Map<String, City>>() {
-    });
-
-    public Collection<City> fetchCities() {
-        return cityRepository.findAll();
+    public Pagination<City> fetchCities(int page, int size) {
+        return cityRepository.find(page - 1, size);
     }
 
     public void addCity(CreateCityCommand cityCommand) {
         var city = City.create(cityCommand.getName(), cityCommand.getDesc(), cityCommand.getImages());
         cityRepository.save(city);
+    }
+
+    public City retrieve(String id) {
+        return cityRepository.findById(id);
+    }
+
+    public City updateDescription(String id, String description) {
+        City city = cityRepository.findById(id);
+        city.setDescription(description);
+        cityRepository.save(city);
+        return city;
+    }
+
+    public void delete(String id) {
+        cityRepository.delete(id);
     }
 }

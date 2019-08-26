@@ -2,9 +2,12 @@ package com.foodie.portal.city;
 
 import com.foodie.portal.city.repository.CityEntityMapper;
 import com.foodie.portal.city.repository.CityJpaRepository;
+import com.foodie.portal.commons.Pagination;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Component;
-import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
@@ -19,7 +22,15 @@ public class CityRepository {
     }
 
 
-    public List<City> findAll() {
-        return CityEntityMapper.instance.to(cityJpaRepository.findAll());
+    public Pagination<City> find(int page, int size) {
+        return CityEntityMapper.instance.to(cityJpaRepository.findAll(PageRequest.of(page, size)));
+    }
+
+    public City findById(String id) {
+        return CityEntityMapper.instance.to(cityJpaRepository.getOne(id));
+    }
+
+    public void delete(String id) {
+        cityJpaRepository.deleteById(id);
     }
 }
