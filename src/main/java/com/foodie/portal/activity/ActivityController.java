@@ -1,6 +1,8 @@
 package com.foodie.portal.activity;
 
 import com.foodie.portal.city.City;
+import com.foodie.portal.commons.PageCommand;
+import com.foodie.portal.commons.Pagination;
 import com.github.jsonzou.jmockdata.JMockData;
 import com.github.jsonzou.jmockdata.TypeReference;
 import io.swagger.annotations.Api;
@@ -31,7 +33,25 @@ public class ActivityController {
 
     @ApiOperation("所有活动")
     @GetMapping
-    public Collection<Activity> activities() {
-        return  activityApplicationService.find();
+    public Pagination<Activity> activities(PageCommand pageCommand) {
+        return  activityApplicationService.find(pageCommand.getPage(), pageCommand.getSize());
+    }
+
+    @ApiOperation("活动详情")
+    @GetMapping("{id}")
+    public Activity detail(@PathVariable String id) {
+        return activityApplicationService.retrieveById(id);
+    }
+
+    @ApiOperation("修改城市描述")
+    @PatchMapping("{id}")
+    public void updateActivity(@PathVariable String id, @RequestBody CreateActivityCommand activityCommand) {
+        activityApplicationService.updateActivity(id, activityCommand);
+    }
+
+    @ApiOperation("删除活动")
+    @DeleteMapping("{id}")
+    public void deleteActivity(@PathVariable String id) {
+        activityApplicationService.delete(id);
     }
 }

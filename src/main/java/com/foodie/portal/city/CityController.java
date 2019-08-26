@@ -1,5 +1,6 @@
 package com.foodie.portal.city;
 
+import com.foodie.portal.commons.PageCommand;
 import com.foodie.portal.commons.Pagination;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -16,8 +17,8 @@ public class CityController {
 
     @ApiOperation("城市列表分页")
     @GetMapping
-    public Pagination<City> cities(@RequestParam(required = false, defaultValue = "1") int page, @RequestParam(required = false, defaultValue = "10") int size) {
-        return cityApplicationService.fetchCities(page, size);
+    public Pagination<City> cities(PageCommand pageCommand) {
+        return cityApplicationService.fetchCities(pageCommand.getPage(), pageCommand.getSize());
     }
 
     @ApiOperation("添加城市")

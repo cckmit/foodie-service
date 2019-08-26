@@ -49,4 +49,21 @@ public class Activity {
     public static Activity create(String title, String subTitle, String desc, String category, String duration, int maxPeopleCount, String images, String language, String address, String cityId,String cityName, List<ActivityPrice> costList, List<ActivityDateTime> dates, String state) {
         return new Activity(title, subTitle, desc, category, duration, maxPeopleCount, images, language, address, cityId, cityName ,costList, dates, state);
     }
+
+    public void update(String title, String subTitle, String desc, String category, String time, int maxPeopleCount, String images, String language, String address, String city,String cityName, List<ActivityPrice> costList, List<ActivityDateTime> dates, String state) {
+        this.title = title;
+        this.subTitle = subTitle;
+        this.description = desc;
+        this.category = category;
+        this.duration = time;
+        this.maxPeopleCount = maxPeopleCount;
+        this.images = images;
+        this.language = language;
+        this.address = address;
+        this.cityId = city;
+        this.cityName = cityName;
+        this.priceList = costList;
+        this.serviceTime = dates;
+        this.state = state;
+    }
 }
