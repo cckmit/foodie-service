@@ -1,7 +1,5 @@
 package com.foodie.portal.merchant;
 
-import com.foodie.portal.city.City;
-import com.foodie.portal.city.repository.CityEntityMapper;
 import com.foodie.portal.commons.Pagination;
 import com.foodie.portal.merchant.repository.MerchantEntityMapper;
 import com.foodie.portal.merchant.repository.MerchantJpaRepository;
@@ -21,6 +19,14 @@ public class MerchantRepository {
 
     public Pagination<Merchant> findByPage(int page, int size) {
         return MerchantEntityMapper.instance.to(merchantJpaRepository.findAll(PageRequest.of(page, size)));
+    }
+
+    public Merchant findById(String id) {
+        return MerchantEntityMapper.instance.to(merchantJpaRepository.getOne(id));
+    }
+
+    public void delete(String id) {
+        merchantJpaRepository.deleteById(id);
     }
 
 }
