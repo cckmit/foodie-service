@@ -17,7 +17,7 @@ public class UserController {
     @PostMapping("login")
     public String login(@RequestBody User user) {
 
-        if (user.getPassword().endsWith("123456")) {
+        if (user.getPassword().equals("123456")) {
             return "success";
         } else {
             throw new RestException(UNAUTHORIZED.getCode(), "用户名或密码错误");
