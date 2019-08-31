@@ -33,7 +33,7 @@ public class SwaggerConfig {
                 .select()
                 .apis(RequestHandlerSelectors.withClassAnnotation(RestController.class))
                 .build()
-                .globalOperationParameters(pars)
+//                .globalOperationParameters(pars)
                 .apiInfo(apiInfo());
     }
 
