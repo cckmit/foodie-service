@@ -43,7 +43,7 @@ public class ActivityController {
         return activityApplicationService.retrieveById(id);
     }
 
-    @ApiOperation("修改城市描述")
+    @ApiOperation("修改活动")
     @PatchMapping("{id}")
     public void updateActivity(@PathVariable String id, @RequestBody CreateActivityCommand activityCommand) {
         activityApplicationService.updateActivity(id, activityCommand);
