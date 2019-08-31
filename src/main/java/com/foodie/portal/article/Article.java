@@ -23,4 +23,15 @@ public class Article {
     public Article() {
         this.id = IdUtil.fastSimpleUUID();
     }
+
+    public Article(String title, String content) {
+        this();
+        this.title = title;
+        this.content = content;
+    }
+
+    public static Article create(String title, String content) {
+        return new Article(title, content);
+    }
+
 }
