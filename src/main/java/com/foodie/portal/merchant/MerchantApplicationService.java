@@ -1,12 +1,12 @@
 package com.foodie.portal.merchant;
 
+import com.foodie.portal.commons.Pagination;
 import com.github.jsonzou.jmockdata.JMockData;
 import com.github.jsonzou.jmockdata.TypeReference;
 import lombok.var;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.Collection;
 import java.util.Map;
 
 @Service
@@ -17,13 +17,13 @@ public class MerchantApplicationService {
     @Autowired
     private MerchantRepository merchantRepository;
 
-    public Collection<Merchant> merchants() {
-        return merchants.values();
+    public Pagination<Merchant> merchants(int page, int size) {
+        return merchantRepository.findByPage(page - 1, size);
     }
 
     public void addMerchant(Merchant merchantCommand) {
         var merchant = Merchant.create(merchantCommand.getName(), merchantCommand.getEmail(), merchantCommand.getCity(),
-                merchantCommand.getDesc(), merchantCommand.getActiveDesc(), merchantCommand.getImages());
+                merchantCommand.getDescription(), merchantCommand.getActiveDesc(), merchantCommand.getImages());
         merchants.put(merchant.getId(), merchant);
         merchantRepository.save(merchant);
     }
@@ -32,7 +32,7 @@ public class MerchantApplicationService {
         return merchants.get(id);
     }
 
-    public Merchant updateMerchant(String id,Merchant merchantCommand) {
+    public Merchant updateMerchant(String id, Merchant merchantCommand) {
         return merchants.put(id, merchantCommand);
     }
 

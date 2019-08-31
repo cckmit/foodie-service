@@ -18,7 +18,7 @@ public class Merchant {
     @ApiModelProperty(value = "商家城市")
     private String city;
     @ApiModelProperty(value = "商家描述")
-    private String desc;
+    private String description;
     @ApiModelProperty(value = "活动描述")
     private String activeDesc;
     @ApiModelProperty(value = "商家图片")
@@ -33,7 +33,7 @@ public class Merchant {
         this.name = name;
         this.email = email;
         this.city = city;
-        this.desc = desc;
+        this.description = desc;
         this.activeDesc = activeDesc;
         this.images = images;
     }
