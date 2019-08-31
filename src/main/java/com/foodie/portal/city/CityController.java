@@ -33,10 +33,10 @@ public class CityController {
         return cityApplicationService.retrieve(id);
     }
 
-    @ApiOperation("修改城市描述")
+    @ApiOperation("修改城市描述和图片")
     @PatchMapping("{id}")
-    public City updateCity(@PathVariable String id, String description) {
-        return cityApplicationService.updateDescription(id, description);
+    public City updateCity(@PathVariable String id, @RequestBody UpdateCityCommand updateCityCommand) {
+        return cityApplicationService.updateDescription(id, updateCityCommand);
     }
 
     @ApiOperation("删除城市")
