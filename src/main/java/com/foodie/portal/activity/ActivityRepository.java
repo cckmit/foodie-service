@@ -26,8 +26,8 @@ public class ActivityRepository {
 
     public void save(Activity activity) {
         ActivityEntity activityEntity = ActivityEntityMapper.instance.from(activity);
-        activityEntity.setPriceList(JsonUtils.toJsonStr(activity.getPriceList()));
-        activityEntity.setServiceTime(JsonUtils.toJsonStr(activity.getServiceTime()));
+//        activityEntity.setPriceList(JsonUtils.toJsonStr(activity.getPriceList()));
+//        activityEntity.setServiceTime(JsonUtils.toJsonStr(activity.getServiceTime()));
         activityJpaRepository.save(activityEntity);
     }
 
@@ -54,10 +54,10 @@ public class ActivityRepository {
 
     private static Activity apply(ActivityEntity activityEntity) {
         Activity activity = ActivityEntityMapper.instance.to(activityEntity);
-        activity.setPriceList(JsonUtils.toBean(activityEntity.getPriceList(), new TypeReference<List<ActivityPrice>>() {
-        }));
-        activity.setServiceTime(JsonUtils.toBean(activityEntity.getServiceTime(), new TypeReference<List<ActivityDateTime>>() {
-        }));
+//        activity.setPriceList(JsonUtils.toBean(activityEntity.getPriceList(), new TypeReference<List<ActivityPrice>>() {
+//        }));
+//        activity.setServiceTime(JsonUtils.toBean(activityEntity.getServiceTime(), new TypeReference<List<ActivityDateTime>>() {
+//        }));
         return activity;
     }
 }

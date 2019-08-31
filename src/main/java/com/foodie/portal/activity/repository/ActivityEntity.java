@@ -4,6 +4,8 @@ import com.foodie.portal.activity.ActivityDateTime;
 import com.foodie.portal.activity.ActivityPrice;
 import lombok.Data;
 
+import javax.persistence.Column;
+import javax.persistence.Convert;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
@@ -26,7 +28,11 @@ public class ActivityEntity {
     private String address;
     private String cityId;
     private String cityName;
-    private String priceList;
-    private String serviceTime;
+    @Column(columnDefinition = "text")
+    @Convert(converter = PriceListConverter.class)
+    private List<ActivityPrice> priceList;
+    @Column(columnDefinition = "text")
+    @Convert(converter = ServiceTimeConverter.class)
+    private List<ActivityDateTime> serviceTime;
     private String state;
 }
