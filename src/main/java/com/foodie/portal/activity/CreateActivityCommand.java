@@ -1,11 +1,13 @@
 package com.foodie.portal.activity;
 
+import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 
 import java.util.List;
 
 @Data
+@ApiModel
 public class CreateActivityCommand {
 
     @ApiModelProperty("活动ID")
@@ -20,8 +22,8 @@ public class CreateActivityCommand {
     private String category;
     @ApiModelProperty("活动时长")
     private String duration;
-    @ApiModelProperty("人数限制")
-    private int limit;
+    @ApiModelProperty("最大人数限制")
+    private int maxPeopleLimit;
     @ApiModelProperty("活动图片")
     private String images;
     @ApiModelProperty("活动语言")

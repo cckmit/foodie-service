@@ -22,7 +22,8 @@ public class ActivityEntity {
     private String description;
     private String category;
     private String duration;
-    private String maxPeopleCount;
+    @Column(name = "maxPeopleCount")
+    private String maxPeopleLimit;
     private String images;
     private String language;
     private String address;

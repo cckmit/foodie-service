@@ -14,7 +14,7 @@ public class ActivityApplicationService {
     public void addActivity(CreateActivityCommand activityCommand) {
         var activity = Activity.create(activityCommand.getTitle(),activityCommand.getSubTitle(),
                 activityCommand.getDescription(),activityCommand.getCategory(),activityCommand.getDuration(),
-                activityCommand.getLimit(),activityCommand.getImages(),activityCommand.getLanguage(),
+                activityCommand.getMaxPeopleLimit(),activityCommand.getImages(),activityCommand.getLanguage(),
                 activityCommand.getAddress(),activityCommand.getCityId(),activityCommand.getCityName(),activityCommand.getCostList(),
                 activityCommand.getDates(),activityCommand.getState());
         activityRepository.save(activity);
@@ -32,7 +32,7 @@ public class ActivityApplicationService {
         Activity activity = activityRepository.findById(id);
         activity.update(activityCommand.getTitle(),activityCommand.getSubTitle(),
                 activityCommand.getDescription(),activityCommand.getCategory(),activityCommand.getDuration(),
-                activityCommand.getLimit(),activityCommand.getImages(),activityCommand.getLanguage(),
+                activityCommand.getMaxPeopleLimit(),activityCommand.getImages(),activityCommand.getLanguage(),
                 activityCommand.getAddress(),activityCommand.getCityId(),activityCommand.getCityName(),activityCommand.getCostList(),
                 activityCommand.getDates(),activityCommand.getState());
         activityRepository.save(activity);

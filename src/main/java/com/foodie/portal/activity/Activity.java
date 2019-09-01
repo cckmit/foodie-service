@@ -14,7 +14,7 @@ public class Activity {
     private String description;
     private String category;
     private String duration;
-    private int maxPeopleCount;
+    private int maxPeopleLimit;
     private String images;
     private String language;
     private String address;
@@ -35,7 +35,7 @@ public class Activity {
         this.description = desc;
         this.category = category;
         this.duration = time;
-        this.maxPeopleCount = maxPeopleCount;
+        this.maxPeopleLimit = maxPeopleCount;
         this.images = images;
         this.language = language;
         this.address = address;
@@ -56,7 +56,7 @@ public class Activity {
         this.description = desc;
         this.category = category;
         this.duration = time;
-        this.maxPeopleCount = maxPeopleCount;
+        this.maxPeopleLimit = maxPeopleCount;
         this.images = images;
         this.language = language;
         this.address = address;
