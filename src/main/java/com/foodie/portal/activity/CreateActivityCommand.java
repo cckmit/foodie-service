@@ -15,7 +15,7 @@ public class CreateActivityCommand {
     @ApiModelProperty("副标题")
     private String subTitle;
     @ApiModelProperty("活动介绍")
-    private String desc;
+    private String description;
     @ApiModelProperty("项目类型-餐饮")
     private String category;
     @ApiModelProperty("活动时长")
