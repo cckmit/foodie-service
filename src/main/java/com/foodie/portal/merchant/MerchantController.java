@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Collection;
+import java.util.List;
 
 @Api(tags = "商家管理")
 @RestController
@@ -57,6 +58,12 @@ public class MerchantController {
     @PostMapping("{id}/reject")
     public void reject(@PathVariable String id) {
         merchantApplicationService.reject(id);
+    }
+
+    @ApiOperation("待审核商家列表")
+    @GetMapping("non-approval")
+    public Pagination<Merchant> waitForApprovedMerchant(PageCommand pageCommand) {
+        return merchantApplicationService.waitForApprovedMerchant(pageCommand.getPage(), pageCommand.getSize());
     }
 
 }

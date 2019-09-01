@@ -5,6 +5,8 @@ import lombok.var;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class MerchantApplicationService {
 
@@ -47,5 +49,9 @@ public class MerchantApplicationService {
         Merchant merchant = merchantRepository.findById(id);
         merchant.reject();
         merchantRepository.save(merchant);
+    }
+
+    public Pagination<Merchant> waitForApprovedMerchant(int page , int size) {
+        return merchantRepository.findNonApprovedMerchant(page - 1, size);
     }
 }
