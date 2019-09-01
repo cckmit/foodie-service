@@ -22,13 +22,14 @@ public class Activity {
     private String cityName;
     private List<ActivityPrice> priceList;
     private List<ActivityDateTime> serviceTime;
-    private String state;
+    private ActivityStatus status;
 
     public Activity() {
         this.id = IdUtil.fastSimpleUUID();
+        status = ActivityStatus.NON_APPROVE;
     }
 
-    public Activity(String title, String subTitle, String desc, String category, String time, int maxPeopleCount, String images, String language, String address, String city,String cityName, List<ActivityPrice> costList, List<ActivityDateTime> dates, String state) {
+    public Activity(String title, String subTitle, String desc, String category, String time, int maxPeopleCount, String images, String language, String address, String city,String cityName, List<ActivityPrice> costList, List<ActivityDateTime> dates) {
         this();
         this.title = title;
         this.subTitle = subTitle;
@@ -43,14 +44,13 @@ public class Activity {
         this.cityName = cityName;
         this.priceList = costList;
         this.serviceTime = dates;
-        this.state = state;
     }
 
-    public static Activity create(String title, String subTitle, String desc, String category, String duration, int maxPeopleCount, String images, String language, String address, String cityId,String cityName, List<ActivityPrice> costList, List<ActivityDateTime> dates, String state) {
-        return new Activity(title, subTitle, desc, category, duration, maxPeopleCount, images, language, address, cityId, cityName ,costList, dates, state);
+    public static Activity create(String title, String subTitle, String desc, String category, String duration, int maxPeopleCount, String images, String language, String address, String cityId,String cityName, List<ActivityPrice> costList, List<ActivityDateTime> dates) {
+        return new Activity(title, subTitle, desc, category, duration, maxPeopleCount, images, language, address, cityId, cityName ,costList, dates);
     }
 
-    public void update(String title, String subTitle, String desc, String category, String time, int maxPeopleCount, String images, String language, String address, String city,String cityName, List<ActivityPrice> costList, List<ActivityDateTime> dates, String state) {
+    public void update(String title, String subTitle, String desc, String category, String time, int maxPeopleCount, String images, String language, String address, String city,String cityName, List<ActivityPrice> costList, List<ActivityDateTime> dates) {
         this.title = title;
         this.subTitle = subTitle;
         this.description = desc;
@@ -64,6 +64,13 @@ public class Activity {
         this.cityName = cityName;
         this.priceList = costList;
         this.serviceTime = dates;
-        this.state = state;
+    }
+
+    public void pass() {
+        this.status = ActivityStatus.PASSED;
+    }
+
+    public void reject() {
+        this.status = ActivityStatus.REJECTED;
     }
 }

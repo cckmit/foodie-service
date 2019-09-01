@@ -2,11 +2,14 @@ package com.foodie.portal.activity.repository;
 
 import com.foodie.portal.activity.ActivityDateTime;
 import com.foodie.portal.activity.ActivityPrice;
+import com.foodie.portal.activity.ActivityStatus;
 import lombok.Data;
 
 import javax.persistence.Column;
 import javax.persistence.Convert;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import java.util.List;
@@ -35,5 +38,6 @@ public class ActivityEntity {
     @Column(columnDefinition = "text")
     @Convert(converter = ServiceTimeConverter.class)
     private List<ActivityDateTime> serviceTime;
-    private String state;
+    @Enumerated(EnumType.STRING)
+    private ActivityStatus status;
 }

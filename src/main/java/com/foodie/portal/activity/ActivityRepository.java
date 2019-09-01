@@ -35,4 +35,7 @@ public class ActivityRepository {
         activityJpaRepository.deleteById(id);
     }
 
+    public Pagination<Activity> findNonApprovedActivities(int page, int size) {
+        return ActivityEntityMapper.instance.to(activityJpaRepository.findByStatus(ActivityStatus.NON_APPROVE, PageRequest.of(page, size)));
+    }
 }

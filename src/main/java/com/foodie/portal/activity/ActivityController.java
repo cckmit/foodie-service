@@ -3,6 +3,7 @@ package com.foodie.portal.activity;
 import com.foodie.portal.city.City;
 import com.foodie.portal.commons.PageCommand;
 import com.foodie.portal.commons.Pagination;
+import com.foodie.portal.merchant.Merchant;
 import com.github.jsonzou.jmockdata.JMockData;
 import com.github.jsonzou.jmockdata.TypeReference;
 import io.swagger.annotations.Api;
@@ -53,5 +54,23 @@ public class ActivityController {
     @DeleteMapping("{id}")
     public void deleteActivity(@PathVariable String id) {
         activityApplicationService.delete(id);
+    }
+
+    @ApiOperation("活动审批通过")
+    @PostMapping("{id}/pass")
+    public void pass(@PathVariable String id) {
+        activityApplicationService.pass(id);
+    }
+
+    @ApiOperation("活动审批拒绝")
+    @PostMapping("{id}/reject")
+    public void reject(@PathVariable String id) {
+        activityApplicationService.reject(id);
+    }
+
+    @ApiOperation("待审核活动列表")
+    @GetMapping("non-approval")
+    public Pagination<Activity> waitForApprovedActivities(PageCommand pageCommand) {
+        return activityApplicationService.waitForApprovedActivities(pageCommand.getPage(), pageCommand.getSize());
     }
 }
