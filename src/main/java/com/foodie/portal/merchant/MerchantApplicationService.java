@@ -15,7 +15,7 @@ public class MerchantApplicationService {
         return merchantRepository.findByPage(page - 1, size);
     }
 
-    public void addMerchant(Merchant merchantCommand) {
+    public void addMerchant(CreateMerchantCommand merchantCommand) {
         var merchant = Merchant.create(merchantCommand.getName(), merchantCommand.getEmail(), merchantCommand.getCity(),
                 merchantCommand.getDescription(), merchantCommand.getActiveDesc(), merchantCommand.getImages());
         merchantRepository.save(merchant);
@@ -25,10 +25,12 @@ public class MerchantApplicationService {
         return merchantRepository.findById(id);
     }
 
-    public Merchant updateMerchant(String id, Merchant merchantCommand) {
-        merchantCommand.setId(id);
-        merchantRepository.save(merchantCommand);
-        return merchantCommand;
+    public Merchant updateMerchant(String id, CreateMerchantCommand merchantCommand) {
+        var merchant = merchantRepository.findById(id);
+        merchant.update(merchantCommand.getName(), merchantCommand.getEmail(), merchantCommand.getCity(),
+                merchantCommand.getDescription(), merchantCommand.getCity(), merchantCommand.getImages());
+        merchantRepository.save(merchant);
+        return merchant;
     }
 
     public void deleteMerchant(String id) {

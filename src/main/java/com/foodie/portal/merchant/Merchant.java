@@ -38,6 +38,15 @@ public class Merchant {
         return new Merchant(name, email, city, desc, activeDesc, images);
     }
 
+    public void update(String name, String email, String city, String desc, String activeDescription, String images){
+        this.name = name;
+        this.email = email;
+        this.city = city;
+        this.description = desc;
+        this.activeDesc = activeDescription;
+        this.images = images;
+    }
+
     public void pass() {
         this.status = PASSED;
     }

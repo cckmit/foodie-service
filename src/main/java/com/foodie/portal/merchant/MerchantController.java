@@ -25,7 +25,7 @@ public class MerchantController {
 
     @ApiOperation("添加商家")
     @PostMapping
-    public void addMerchant(@RequestBody Merchant merchantCommand) {
+    public void addMerchant(@RequestBody CreateMerchantCommand merchantCommand) {
         merchantApplicationService.addMerchant(merchantCommand);
     }
 
@@ -37,7 +37,7 @@ public class MerchantController {
 
     @ApiOperation("修改商家信息")
     @PatchMapping("{id}")
-    public Merchant updateMerchant(@PathVariable String id, @RequestBody Merchant merchantCommand) {
+    public Merchant updateMerchant(@PathVariable String id, @RequestBody CreateMerchantCommand merchantCommand) {
         return merchantApplicationService.updateMerchant(id, merchantCommand);
     }
 
