@@ -34,4 +34,16 @@ public class MerchantApplicationService {
     public void deleteMerchant(String id) {
         merchantRepository.delete(id);
     }
+
+    public void pass(String id) {
+        Merchant merchant = merchantRepository.findById(id);
+        merchant.pass();
+        merchantRepository.save(merchant);
+    }
+
+    public void reject(String id) {
+        Merchant merchant = merchantRepository.findById(id);
+        merchant.reject();
+        merchantRepository.save(merchant);
+    }
 }

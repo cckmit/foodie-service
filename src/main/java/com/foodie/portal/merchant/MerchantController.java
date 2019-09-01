@@ -47,5 +47,16 @@ public class MerchantController {
         merchantApplicationService.deleteMerchant(id);
     }
 
+    @ApiOperation("商家审批通过")
+    @PostMapping("{id}/pass")
+    public void pass(@PathVariable String id) {
+        merchantApplicationService.pass(id);
+    }
+
+    @ApiOperation("商家审批拒绝")
+    @PostMapping("{id}/reject")
+    public void reject(@PathVariable String id) {
+        merchantApplicationService.reject(id);
+    }
 
 }
