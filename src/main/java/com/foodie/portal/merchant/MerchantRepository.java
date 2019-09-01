@@ -7,8 +7,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Component;
 
-import java.util.List;
-
 @Component
 public class MerchantRepository {
 
@@ -32,6 +30,6 @@ public class MerchantRepository {
     }
 
     public Pagination<Merchant> findNonApprovedMerchant(int page, int size) {
-        return MerchantEntityMapper.instance.to(merchantJpaRepository.findByStatus(MerchantStatus.NON_APPROVE,PageRequest.of(page, size)));
+        return MerchantEntityMapper.instance.to(merchantJpaRepository.findByStatus(MerchantStatus.NON_APPROVE, PageRequest.of(page, size)));
     }
 }

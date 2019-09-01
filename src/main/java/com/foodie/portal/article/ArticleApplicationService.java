@@ -1,41 +1,42 @@
 package com.foodie.portal.article;
 
-import com.github.jsonzou.jmockdata.JMockData;
-import com.github.jsonzou.jmockdata.MockConfig;
-import com.github.jsonzou.jmockdata.TypeReference;
+import com.foodie.portal.commons.Pagination;
 import lombok.var;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Collection;
-import java.util.Map;
 
 @Service
 public class ArticleApplicationService {
 
-    MockConfig config = MockConfig.newInstance().subConfig("title").stringRegex("文章标题\\w+")
-            .subConfig("content").stringRegex("文章内容\\w+").globalConfig();
-    private Map<String, Article> articles = JMockData.mock(new TypeReference<Map<String, Article>>() {
-    }, config);
+    @Autowired
+    private ArticleRepository articleRepository;
 
     public Article retrieve(String id) {
-        return articles.get(id);
+        return articleRepository.findById(id);
 
     }
 
-    public void addArticle(Article articleCommand) {
-        var article = Article.create(articleCommand.getTitle(), articleCommand.getContent());
-        articles.put(article.getId(), article);
+    public void addArticle(CreateArticleCommand articleCommand) {
+        var article = Article.create(articleCommand.getTitle(), articleCommand.getCover(), articleCommand.getContent());
+        articleRepository.save(article);
     }
 
-    public Article updateArticle(String id, Article articleCommand) {
-        return articles.put(id, articleCommand);
+    public Article updateArticle(String id, CreateArticleCommand articleCommand) {
+        var article = articleRepository.findById(id);
+        article.setContent(articleCommand.getContent());
+        article.setCover(articleCommand.getCover());
+        article.setTitle(articleCommand.getTitle());
+        articleRepository.save(article);
+        return article;
     }
 
     public void delete(String id) {
-        articles.remove(id);
+        articleRepository.deleteById(id);
     }
 
-    public Collection<Article> articles() {
-        return articles.values();
+    public Pagination<Article> articles(int page, int size) {
+        return articleRepository.find(page - 1, size);
     }
 }

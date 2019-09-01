@@ -1,5 +1,6 @@
 package com.foodie.portal.article;
 
+import com.foodie.portal.commons.PageCommand;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,8 +25,8 @@ public class ArticleController {
 
     @ApiOperation("文章列表")
     @GetMapping
-    public Collection<Article> articles() {
-        return articleApplicationService.articles();
+    public Collection<Article> articles(PageCommand pageCommand) {
+        return articleApplicationService.articles(pageCommand.getPage(), pageCommand.getSize());
     }
 
     @ApiOperation("发布文章")
