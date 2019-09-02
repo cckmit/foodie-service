@@ -1,6 +1,5 @@
 package com.foodie.portal.commons.config.shiro;
 
-import com.foodie.portal.user.model.Merchant;
 import org.apache.shiro.subject.Subject;
 import org.apache.shiro.web.filter.AccessControlFilter;
 import org.apache.shiro.web.util.WebUtils;
@@ -17,8 +16,7 @@ public class SysUserFilter extends AccessControlFilter {
     protected boolean isAccessAllowed(ServletRequest request, ServletResponse response, Object mappedValue)
             throws Exception {
         Subject subject = getSubject(request, response);
-        if(subject.isAuthenticated()) {
-            Merchant user = (Merchant) subject.getPrincipal();
+        if (subject.isAuthenticated()) {
             return true;
         }
         return false;

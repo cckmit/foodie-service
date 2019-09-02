@@ -30,7 +30,7 @@ public class ActivityApplicationService {
         return activityRepository.find(page - 1, size);
     }
 
-    public Activity retrieveById(String id) {
+    public Activity findById(String id) {
         return activityRepository.findById(id);
     }
 

@@ -42,7 +42,7 @@ public class ActivityMerchantController {
     @ApiOperation("我的活动详情")
     @GetMapping("{id}")
     public Activity detail(@PathVariable String id) {
-        return activityApplicationService.retrieveById(id);
+        return activityApplicationService.findById(id);
     }
 
     @ApiOperation("修改我的活动")

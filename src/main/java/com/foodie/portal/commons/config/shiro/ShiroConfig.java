@@ -117,12 +117,14 @@ public class ShiroConfig {
 
         Map<String, String> filterChainDefinitionMap = new LinkedHashMap<>();
         filterChainDefinitionMap.put("/**/login", "anon");
+        filterChainDefinitionMap.put("/**/register", "anon");
         filterChainDefinitionMap.put("/kaptcha", "anon");
         filterChainDefinitionMap.put("/swagger-resources/**", "anon");
         filterChainDefinitionMap.put("/swagger-ui.html**", "anon");
         filterChainDefinitionMap.put("/v2/api-docs**", "anon");
         filterChainDefinitionMap.put("/favicon.ico", "anon");
         filterChainDefinitionMap.put("/merchant/**", "user");
+        filterChainDefinitionMap.put("/user/**", "user");
 
         shiroFilterFactoryBean.setFilterChainDefinitionMap(filterChainDefinitionMap);
         return shiroFilterFactoryBean;

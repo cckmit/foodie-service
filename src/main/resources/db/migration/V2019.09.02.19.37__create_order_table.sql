@@ -8,6 +8,6 @@ CREATE TABLE foodie_order
     PRICE       DECIMAL     NULL,
     COUNT       int         null,
     STATUS      varchar(20) NULL,
-    CREATE_AT   timestamp   NULL
+    CREATED_AT   timestamp   NULL
 );
 
