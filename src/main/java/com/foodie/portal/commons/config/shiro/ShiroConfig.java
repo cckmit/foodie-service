@@ -91,7 +91,7 @@ public class ShiroConfig {
         FilterRegistrationBean filterRegistration = new FilterRegistrationBean();
         filterRegistration.setFilter(new DelegatingFilterProxy("shiroFilter"));
         filterRegistration.setEnabled(true);
-        filterRegistration.addUrlPatterns("/admin/*");
+        filterRegistration.addUrlPatterns("/*");
         filterRegistration.setDispatcherTypes(DispatcherType.REQUEST);
         return filterRegistration;
     }
