@@ -1,5 +1,6 @@
-package com.foodie.portal.commons.config.shiro;
+package com.foodie.portal.user;
 
+import com.foodie.portal.commons.config.shiro.LoginToken;
 import com.foodie.portal.user.model.SysUser;
 import com.foodie.portal.user.UserApplicationService;
 import lombok.extern.slf4j.Slf4j;

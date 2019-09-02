@@ -16,6 +16,7 @@ public class LoginToken extends UsernamePasswordToken {
 
     public enum LoginType {
         MERCHANT,
-        USER
+        USER,
+        ADMIN
     }
 }
