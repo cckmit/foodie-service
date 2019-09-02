@@ -19,7 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import javax.validation.Valid;
 
-@Api(tags = "（用户）订单功能")
+@Api(tags = "（商家）订单功能")
 @RestController
 @RequestMapping("merchant/order")
 public class MerchantOrderController {

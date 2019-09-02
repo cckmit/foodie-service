@@ -41,6 +41,7 @@ public class UserOrderController {
         return orderApplicationService.myOrderList(command.getPage(), command.getSize(), user);
     }
 
+    @ApiOperation("用户付款")
     @PostMapping("/{id}/payment")
     public void pay(@PathVariable(name = "id") String id, @RequestBody @Valid PayOrderCommand command) {
         orderApplicationService.pay(id, command);
