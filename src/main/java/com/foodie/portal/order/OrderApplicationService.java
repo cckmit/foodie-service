@@ -23,17 +23,13 @@ public class OrderApplicationService {
 
     public Order create(CreateOrderCommand createOrderCommand, User user) {
         Activity activity = activityApplicationService.findById(createOrderCommand.getActivityId());
-        if (Objects.isNull(activity)) {
-            throw new RestException(ErrorCode.NO_RESULT_FOUND.getCode(), "活动不存在");
-        }
         var order = Order.create(activity, createOrderCommand.getCount());
         order.setUser(user);
         orderRepository.save(order);
-
         return order;
     }
 
-    public Pagination<Order> findByPage(int page, int size) {
+    public Pagination<Order> orderList(int page, int size) {
         return orderRepository.findByPage(page - 1, size);
     }
 
@@ -41,5 +37,9 @@ public class OrderApplicationService {
         var order = orderRepository.byId(id);
         order.pay(command.getPaidPrice());
         orderRepository.save(order);
+    }
+
+    public Pagination<Order> myOrderList(int page, int size, User user) {
+        return orderRepository.findByUserId(page - 1, size, user.getId());
     }
 }

@@ -1,11 +1,14 @@
 package com.foodie.portal.order;
 
+import com.foodie.portal.commons.PageCommand;
+import com.foodie.portal.commons.Pagination;
 import com.foodie.portal.user.model.User;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.var;
 import org.apache.shiro.SecurityUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -27,6 +30,13 @@ public class UserOrderController {
     public Order createOrder(@RequestBody CreateOrderCommand command) {
         var user = (User) SecurityUtils.getSubject().getPrincipal();
         return orderApplicationService.create(command, user);
+    }
+
+    @ApiOperation("我的列表")
+    @GetMapping("list")
+    public Pagination<Order> orders(PageCommand command) {
+        var user = (User) SecurityUtils.getSubject().getPrincipal();
+        return orderApplicationService.myOrderList(command.getPage(), command.getSize(), user);
     }
 
     @PostMapping("/{id}/payment")

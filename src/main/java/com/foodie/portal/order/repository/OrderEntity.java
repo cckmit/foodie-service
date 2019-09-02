@@ -4,6 +4,8 @@ import com.foodie.portal.activity.repository.ActivityEntity;
 import com.foodie.portal.order.OrderStatus;
 import com.foodie.portal.user.repository.UserEntity;
 import lombok.Data;
+import org.hibernate.annotations.NotFound;
+import org.hibernate.annotations.NotFoundAction;
 
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -26,6 +28,7 @@ public class OrderEntity {
     private int count;
     private BigDecimal price;
     @ManyToOne
+    @NotFound(action = NotFoundAction.IGNORE)
     private UserEntity user;
     @Enumerated(EnumType.STRING)
     private OrderStatus status;
