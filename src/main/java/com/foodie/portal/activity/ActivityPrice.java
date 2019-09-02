@@ -2,6 +2,7 @@ package com.foodie.portal.activity;
 
 import lombok.Data;
 
+import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
 
@@ -10,6 +11,6 @@ public class ActivityPrice {
 
     private int count;
 
-    private double price;
+    private BigDecimal price;
 
 }

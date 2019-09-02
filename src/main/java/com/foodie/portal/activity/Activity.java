@@ -1,9 +1,12 @@
 package com.foodie.portal.activity;
 
 import cn.hutool.core.util.IdUtil;
+import com.foodie.portal.commons.ErrorCode;
+import com.foodie.portal.commons.RestException;
 import com.foodie.portal.user.model.Merchant;
 import lombok.Data;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 @Data
@@ -74,5 +77,14 @@ public class Activity {
 
     public void reject() {
         this.status = ActivityStatus.REJECTED;
+    }
+
+    public BigDecimal getPrice(int count) {
+        for (ActivityPrice activityPrice: this.getPriceList()) {
+            if (activityPrice.getCount() == count) {
+                return activityPrice.getPrice();
+            }
+        }
+        throw new RestException(ErrorCode.REFUSED, "不包含当前人数的价格");
     }
 }

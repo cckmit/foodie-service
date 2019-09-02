@@ -25,7 +25,8 @@ public class OrderApplicationService {
         if (Objects.isNull(activity)) {
             throw new RestException(ErrorCode.NO_RESULT_FOUND.getCode(), "活动不存在");
         }
-        var order = Order.create(activity, createOrderCommand.getCount(), createOrderCommand.getPrice());
+
+        var order = Order.create(activity, createOrderCommand.getCount(), activity.getPrice(createOrderCommand.getCount()));
         order.setUser(user);
         orderRepository.save(order);
 

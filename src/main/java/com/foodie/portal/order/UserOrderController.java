@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-@Api("（用户）订单功能")
+@Api(tags = "（用户）订单功能")
 @RestController
 @RequestMapping("user/order")
 public class UserOrderController {

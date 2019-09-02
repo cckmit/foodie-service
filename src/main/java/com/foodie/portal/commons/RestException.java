@@ -17,4 +17,9 @@ public class RestException extends RuntimeException {
         this.code = code;
         this.message = message;
     }
+
+    public RestException(ErrorCode errorCode, String message) {
+        this.code = errorCode.getCode();
+        this.message = message;
+    }
 }
