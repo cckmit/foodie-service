@@ -1,5 +1,8 @@
 package com.foodie.portal.order;
 
+import com.foodie.portal.user.model.User;
+import lombok.var;
+import org.apache.shiro.SecurityUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -15,6 +18,7 @@ public class UserOrderController {
 
     @PostMapping
     public Order createOrder(@RequestBody CreateOrderCommand command) {
-        return orderApplicationService.create(command);
+        var user = (User) SecurityUtils.getSubject().getPrincipal();
+        return orderApplicationService.create(command, user);
     }
 }

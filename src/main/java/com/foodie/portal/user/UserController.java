@@ -5,7 +5,6 @@ import com.foodie.portal.commons.RestException;
 import com.foodie.portal.commons.config.shiro.LoginToken;
 import com.foodie.portal.user.command.MerchantLoginCommand;
 import com.foodie.portal.user.command.UserRegisterCommand;
-import com.foodie.portal.user.model.Merchant;
 import com.foodie.portal.user.model.User;
 import io.swagger.annotations.ApiOperation;
 import org.apache.shiro.SecurityUtils;

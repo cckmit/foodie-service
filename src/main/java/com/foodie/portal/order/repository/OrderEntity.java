@@ -1,19 +1,18 @@
 package com.foodie.portal.order.repository;
 
-import cn.hutool.core.util.IdUtil;
-import com.foodie.portal.activity.Activity;
 import com.foodie.portal.activity.repository.ActivityEntity;
 import com.foodie.portal.order.OrderStatus;
+import com.foodie.portal.user.repository.UserEntity;
 import lombok.Data;
 
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import java.math.BigDecimal;
 import java.time.Instant;
-
-import static java.time.Instant.now;
 
 @Data
 @Entity
@@ -26,6 +25,9 @@ public class OrderEntity {
     private ActivityEntity activity;
     private int count;
     private BigDecimal price;
+    @ManyToOne
+    private UserEntity user;
+    @Enumerated(EnumType.STRING)
     private OrderStatus status;
     private Instant createdAt;
 
