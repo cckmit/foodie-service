@@ -2,16 +2,14 @@ package com.foodie.portal.order;
 
 import com.foodie.portal.activity.Activity;
 import com.foodie.portal.activity.ActivityApplicationService;
-import com.foodie.portal.commons.ErrorCode;
 import com.foodie.portal.commons.Pagination;
-import com.foodie.portal.commons.RestException;
+import com.foodie.portal.user.model.Merchant;
 import com.foodie.portal.user.model.User;
 import lombok.var;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.validation.Valid;
-import java.util.Objects;
 
 @Service
 public class OrderApplicationService {
@@ -40,6 +38,24 @@ public class OrderApplicationService {
     }
 
     public Pagination<Order> myOrderList(int page, int size, User user) {
-        return orderRepository.findByUserId(page - 1, size, user.getId());
+        return orderRepository.findByMerchantId(page - 1, size, user.getId());
+    }
+
+    public Pagination<Order> merchantOrderList(int page, int size, Merchant merchant) {
+        return orderRepository.findByMerchantId(page - 1, size, merchant.getId());
+    }
+
+    public Order accept(String id, Merchant merchant) {
+        var order =  orderRepository.byId(id);
+        order.accept(merchant);
+        orderRepository.save(order);
+        return order;
+    }
+
+    public Order reject(String id, String reason, Merchant merchant) {
+        var order =  orderRepository.byId(id);
+        order.reject(reason, merchant);
+        orderRepository.save(order);
+        return order;
     }
 }

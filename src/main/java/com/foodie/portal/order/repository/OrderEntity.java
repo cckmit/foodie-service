@@ -2,6 +2,8 @@ package com.foodie.portal.order.repository;
 
 import com.foodie.portal.activity.repository.ActivityEntity;
 import com.foodie.portal.order.OrderStatus;
+import com.foodie.portal.user.model.Merchant;
+import com.foodie.portal.user.repository.MerchantEntity;
 import com.foodie.portal.user.repository.UserEntity;
 import lombok.Data;
 import org.hibernate.annotations.NotFound;
@@ -32,6 +34,11 @@ public class OrderEntity {
     private UserEntity user;
     @Enumerated(EnumType.STRING)
     private OrderStatus status;
+    private String payNo;
+    private String rejectReason;
+    @ManyToOne
+    @NotFound(action = NotFoundAction.IGNORE)
+    private MerchantEntity merchant;
     private Instant createdAt;
 
 }

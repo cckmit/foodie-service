@@ -1,16 +1,16 @@
 package com.foodie.portal.order;
 
 import cn.hutool.core.util.IdUtil;
-import cn.hutool.core.util.IdcardUtil;
+import cn.hutool.core.util.RandomUtil;
 import com.foodie.portal.activity.Activity;
 import com.foodie.portal.activity.ActivityStatus;
 import com.foodie.portal.commons.ErrorCode;
 import com.foodie.portal.commons.RestException;
+import com.foodie.portal.user.model.Merchant;
 import com.foodie.portal.user.model.User;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
 import java.time.Instant;
 import java.util.Objects;
@@ -27,6 +27,9 @@ public class Order {
     private BigDecimal price;
     private User user;
     private OrderStatus status;
+    private String payNo;
+    private String rejectReason;
+    private Merchant merchant;
     private Instant createdAt;
 
     public Order(Activity activity, int count) {
@@ -36,6 +39,8 @@ public class Order {
         this.count = count;
         this.price = activity.getPrice(count);
         this.status = OrderStatus.CREATED;
+        this.payNo = RandomUtil.randomNumbers(6);
+        this.merchant = activity.getMerchant();
         this.createdAt = now();
     }
 
@@ -57,5 +62,20 @@ public class Order {
 
     private BigDecimal calculateTotalPrice() {
         return price.multiply(BigDecimal.valueOf(count));
+    }
+
+    public void accept(Merchant merchant) {
+        if (!this.activity.getMerchant().getId().equals(merchant.getId())) {
+            throw new RestException(ErrorCode.FAILED, "非本商家订单");
+        }
+        this.status = OrderStatus.ACCEPTED;
+    }
+
+    public void reject(String reason, Merchant merchant) {
+        if (!this.activity.getMerchant().getId().equals(merchant.getId())) {
+            throw new RestException(ErrorCode.FAILED, "非本商家订单");
+        }
+        this.status = OrderStatus.REJECTED;
+        this.rejectReason = reason;
     }
 }

@@ -80,7 +80,10 @@ public class Activity {
     }
 
     public BigDecimal getPrice(int count) {
-        for (ActivityPrice activityPrice: this.getPriceList()) {
+        if(priceList == null) {
+            return BigDecimal.ZERO;
+        }
+        for (ActivityPrice activityPrice: priceList) {
             if (activityPrice.getCount() == count) {
                 return activityPrice.getPrice();
             }
