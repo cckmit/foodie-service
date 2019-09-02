@@ -1,4 +1,4 @@
-package com.foodie.portal.user;
+package com.foodie.portal.user.command;
 
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;

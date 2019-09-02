@@ -1,4 +1,4 @@
-package com.foodie.portal.user;
+package com.foodie.portal.user.model;
 
 import lombok.Data;
 

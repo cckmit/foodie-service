@@ -1,11 +1,11 @@
 package com.foodie.portal.commons.config.shiro;
 
+import com.foodie.portal.user.MerchantRealm;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Maps;
 import org.apache.shiro.authc.AuthenticationInfo;
 import org.apache.shiro.authc.AuthenticationToken;
 import org.apache.shiro.authc.credential.HashedCredentialsMatcher;
-import org.apache.shiro.authc.pam.AllSuccessfulStrategy;
 import org.apache.shiro.authc.pam.ModularRealmAuthenticator;
 import org.apache.shiro.realm.Realm;
 import org.apache.shiro.spring.LifecycleBeanPostProcessor;

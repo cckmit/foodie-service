@@ -1,7 +1,8 @@
-package com.foodie.portal.commons.config.shiro;
+package com.foodie.portal.user;
 
-import com.foodie.portal.user.Merchant;
-import com.foodie.portal.user.SysUser;
+import com.foodie.portal.commons.config.shiro.LoginToken;
+import com.foodie.portal.user.model.Merchant;
+import com.foodie.portal.user.model.SysUser;
 import com.foodie.portal.user.UserApplicationService;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.shiro.authc.AuthenticationException;
@@ -22,6 +23,9 @@ public class MerchantRealm extends AuthorizingRealm {
 
     @Autowired
     private UserApplicationService userApplicationService;
+
+    @Autowired
+    private MerchantApplicationService merchantApplicationService;
 
     @Override
     public boolean supports(AuthenticationToken token) {
@@ -55,7 +59,7 @@ public class MerchantRealm extends AuthorizingRealm {
     @Override
     protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken authenticationToken) throws AuthenticationException {
         UsernamePasswordToken token = (UsernamePasswordToken) authenticationToken;
-        Merchant user = userApplicationService.findByMerchantEmail(token.getUsername());
+        Merchant user = merchantApplicationService.findByEmail(token.getUsername());
         if (user == null) {
             return null;
         }

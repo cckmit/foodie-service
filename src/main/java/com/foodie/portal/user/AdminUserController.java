@@ -2,6 +2,8 @@ package com.foodie.portal.user;
 
 import com.foodie.portal.commons.PageCommand;
 import com.foodie.portal.commons.Pagination;
+import com.foodie.portal.user.command.CreateMerchantCommand;
+import com.foodie.portal.user.model.Merchant;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;

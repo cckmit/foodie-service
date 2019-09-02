@@ -1,6 +1,6 @@
 package com.foodie.portal.commons.config.shiro;
 
-import com.foodie.portal.user.SysUser;
+import com.foodie.portal.user.model.SysUser;
 import com.foodie.portal.user.UserApplicationService;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.shiro.authc.AuthenticationException;

@@ -1,6 +1,6 @@
 package com.foodie.portal.commons.config.shiro;
 
-import com.foodie.portal.user.Merchant;
+import com.foodie.portal.user.model.Merchant;
 import org.apache.shiro.subject.Subject;
 import org.apache.shiro.web.filter.AccessControlFilter;
 import org.apache.shiro.web.util.WebUtils;

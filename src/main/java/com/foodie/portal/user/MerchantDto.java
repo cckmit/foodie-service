@@ -1,5 +1,7 @@
 package com.foodie.portal.user;
 
+import com.foodie.portal.user.model.Merchant;
+import com.foodie.portal.user.model.MerchantStatus;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;

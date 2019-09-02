@@ -2,7 +2,7 @@ package com.foodie.portal.activity;
 
 import com.foodie.portal.commons.PageCommand;
 import com.foodie.portal.commons.Pagination;
-import com.foodie.portal.user.Merchant;
+import com.foodie.portal.user.model.Merchant;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.var;

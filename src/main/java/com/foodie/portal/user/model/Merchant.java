@@ -1,11 +1,11 @@
-package com.foodie.portal.user;
+package com.foodie.portal.user.model;
 
 import cn.hutool.core.util.IdUtil;
 import com.foodie.portal.commons.ErrorCode;
 import com.foodie.portal.commons.RestException;
 import lombok.Data;
 
-import static com.foodie.portal.user.MerchantStatus.PASSED;
+import static com.foodie.portal.user.model.MerchantStatus.PASSED;
 
 @Data
 public class Merchant {

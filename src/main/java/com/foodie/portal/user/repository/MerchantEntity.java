@@ -1,6 +1,6 @@
 package com.foodie.portal.user.repository;
 
-import com.foodie.portal.user.MerchantStatus;
+import com.foodie.portal.user.model.MerchantStatus;
 import lombok.Data;
 
 import javax.persistence.Column;

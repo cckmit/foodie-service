@@ -4,6 +4,8 @@ import com.foodie.portal.commons.ErrorCode;
 import com.foodie.portal.commons.RestException;
 import com.foodie.portal.commons.config.shiro.LoginToken;
 import com.foodie.portal.user.command.ChangeMerchantPasswordCommand;
+import com.foodie.portal.user.command.MerchantLoginCommand;
+import com.foodie.portal.user.model.Merchant;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.var;
@@ -21,8 +23,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
-import static com.foodie.portal.commons.ErrorCode.UNAUTHORIZED;
 
 @Api(tags = "Merchant user info")
 @RestController

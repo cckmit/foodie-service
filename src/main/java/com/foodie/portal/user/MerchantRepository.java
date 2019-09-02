@@ -1,6 +1,8 @@
 package com.foodie.portal.user;
 
 import com.foodie.portal.commons.Pagination;
+import com.foodie.portal.user.model.Merchant;
+import com.foodie.portal.user.model.MerchantStatus;
 import com.foodie.portal.user.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
