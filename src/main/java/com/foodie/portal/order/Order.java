@@ -65,17 +65,27 @@ public class Order {
     }
 
     public void accept(Merchant merchant) {
-        if (!this.activity.getMerchant().getId().equals(merchant.getId())) {
-            throw new RestException(ErrorCode.FAILED, "非本商家订单");
-        }
+        checkOrder(merchant);
         this.status = OrderStatus.ACCEPTED;
     }
 
     public void reject(String reason, Merchant merchant) {
+        checkOrder(merchant);
+        this.status = OrderStatus.REJECTED;
+        this.rejectReason = reason;
+    }
+
+    public void startService(String payNo, Merchant merchant) {
+        checkOrder(merchant);
+        if (!payNo.equals(this.payNo)) {
+            throw new RestException(ErrorCode.FAILED, "消费码不正确");
+        }
+        this.status = OrderStatus.SERVICING;
+    }
+
+    private void checkOrder(Merchant merchant) {
         if (!this.activity.getMerchant().getId().equals(merchant.getId())) {
             throw new RestException(ErrorCode.FAILED, "非本商家订单");
         }
-        this.status = OrderStatus.REJECTED;
-        this.rejectReason = reason;
     }
 }

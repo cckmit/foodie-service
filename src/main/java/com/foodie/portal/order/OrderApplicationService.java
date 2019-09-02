@@ -3,6 +3,8 @@ package com.foodie.portal.order;
 import com.foodie.portal.activity.Activity;
 import com.foodie.portal.activity.ActivityApplicationService;
 import com.foodie.portal.commons.Pagination;
+import com.foodie.portal.order.command.CreateOrderCommand;
+import com.foodie.portal.order.command.PayOrderCommand;
 import com.foodie.portal.user.model.Merchant;
 import com.foodie.portal.user.model.User;
 import lombok.var;
@@ -55,6 +57,13 @@ public class OrderApplicationService {
     public Order reject(String id, String reason, Merchant merchant) {
         var order =  orderRepository.byId(id);
         order.reject(reason, merchant);
+        orderRepository.save(order);
+        return order;
+    }
+
+    public Order startService(String id, String payNo, Merchant merchant) {
+        var order = orderRepository.byId(id);
+        order.startService(payNo, merchant);
         orderRepository.save(order);
         return order;
     }

@@ -2,6 +2,7 @@ package com.foodie.portal.order;
 
 import com.foodie.portal.commons.PageCommand;
 import com.foodie.portal.commons.Pagination;
+import com.foodie.portal.order.command.StartServiceCommand;
 import com.foodie.portal.user.model.Merchant;
 import com.foodie.portal.user.model.User;
 import io.swagger.annotations.Api;
@@ -12,8 +13,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import javax.validation.Valid;
 
 @Api(tags = "（用户）订单功能")
 @RestController
@@ -37,7 +41,14 @@ public class MerchantOrderController {
         return orderApplicationService.reject(id, reason, merchant);
     }
 
-    @ApiOperation("我的列表")
+    @ApiOperation("开始服务")
+    @PostMapping("{id}/starting")
+    public Order startService(@PathVariable String id, @Valid @RequestBody StartServiceCommand command) {
+        var merchant = (Merchant) SecurityUtils.getSubject().getPrincipal();
+        return orderApplicationService.startService(id, command.getPayNo(), merchant);
+    }
+
+    @ApiOperation("我的服务列表")
     @GetMapping("list")
     public Pagination<Order> orders(PageCommand command) {
         var merchant = (Merchant) SecurityUtils.getSubject().getPrincipal();

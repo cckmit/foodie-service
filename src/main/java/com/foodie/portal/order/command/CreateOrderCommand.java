@@ -1,4 +1,4 @@
-package com.foodie.portal.order;
+package com.foodie.portal.order.command;
 
 import lombok.Data;
 
