@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import static com.foodie.portal.commons.ErrorCode.UNAUTHORIZED;
 
-@Api(tags = "用户管理")
+@Api(tags = "（管理员）个人信息")
 @RestController
 public class UserController {
 

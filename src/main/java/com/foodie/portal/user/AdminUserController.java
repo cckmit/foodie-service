@@ -9,7 +9,7 @@ import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-@Api(tags = "商家管理")
+@Api(tags = "（管理员）用户/商家管理")
 @RestController
 @RequestMapping("merchants")
 public class AdminUserController {

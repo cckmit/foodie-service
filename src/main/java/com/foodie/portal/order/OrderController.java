@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
-@Api(tags = "订单管理")
+@Api(tags = "（管理员）订单管理")
 @RestController
 @RequestMapping("order")
 public class OrderController {

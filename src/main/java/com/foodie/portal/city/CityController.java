@@ -7,7 +7,7 @@ import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-@Api(tags = "城市管理")
+@Api(tags = "（管理员）城市管理")
 @RestController
 @RequestMapping("city")
 public class CityController {

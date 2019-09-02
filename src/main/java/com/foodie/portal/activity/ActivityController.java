@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.Map;
 
-@Api(tags = "活动管理")
+@Api(tags = "（管理员）活动管理")
 @RestController
 @RequestMapping("activities")
 public class ActivityController {

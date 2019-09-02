@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-@Api(tags = "商家活动管理")
+@Api(tags = "（商家）活动管理")
 @RestController
 @RequestMapping("merchant/activities")
 public class ActivityMerchantController {
