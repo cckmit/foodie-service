@@ -32,4 +32,8 @@ public class MerchantRepository {
     public Pagination<Merchant> findNonApprovedMerchant(int page, int size) {
         return MerchantEntityMapper.instance.to(merchantJpaRepository.findByStatus(MerchantStatus.NON_APPROVE, PageRequest.of(page, size)));
     }
+
+    public Merchant findByUsername(String username) {
+        return MerchantEntityMapper.instance.to(merchantJpaRepository.findByUsername(username));
+    }
 }

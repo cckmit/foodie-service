@@ -38,4 +38,8 @@ public class ActivityRepository {
     public Pagination<Activity> findNonApprovedActivities(int page, int size) {
         return ActivityEntityMapper.instance.to(activityJpaRepository.findByStatus(ActivityStatus.NON_APPROVE, PageRequest.of(page, size)));
     }
+
+    public Pagination<Activity> findByMerchantId(String merchantId, int page, int size) {
+        return ActivityEntityMapper.instance.to(activityJpaRepository.findByMerchantId(merchantId,  PageRequest.of(page, size)));
+    }
 }

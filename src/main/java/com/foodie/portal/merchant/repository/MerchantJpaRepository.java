@@ -10,4 +10,6 @@ import org.springframework.stereotype.Repository;
 public interface MerchantJpaRepository extends JpaRepository<MerchantEntity, String> {
 
     Page<MerchantEntity> findByStatus(MerchantStatus status, Pageable pageable);
+
+    MerchantEntity findByUsername(String username);
 }

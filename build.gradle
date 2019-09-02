@@ -42,6 +42,7 @@ dependencies {
     implementation "com.cuisongliu:kaptcha-spring-boot-starter:1+"
     implementation ("org.apache.shiro:shiro-spring-boot-web-starter:$shiroVersion")
 
+    implementation("mysql:mysql-connector-java:8.0.15")
     runtimeOnly 'com.h2database:h2'
     annotationProcessor 'org.springframework.boot:spring-boot-configuration-processor'
 

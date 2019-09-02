@@ -3,7 +3,10 @@ package com.foodie.portal.activity.repository;
 import com.foodie.portal.activity.ActivityDateTime;
 import com.foodie.portal.activity.ActivityPrice;
 import com.foodie.portal.activity.ActivityStatus;
+import com.foodie.portal.merchant.repository.MerchantEntity;
 import lombok.Data;
+import org.hibernate.annotations.NotFound;
+import org.hibernate.annotations.NotFoundAction;
 
 import javax.persistence.Column;
 import javax.persistence.Convert;
@@ -11,6 +14,7 @@ import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import java.util.List;
 
@@ -40,4 +44,7 @@ public class ActivityEntity {
     private List<ActivityDateTime> serviceTime;
     @Enumerated(EnumType.STRING)
     private ActivityStatus status;
+    @ManyToOne
+    @NotFound(action = NotFoundAction.IGNORE)
+    private MerchantEntity merchant;
 }

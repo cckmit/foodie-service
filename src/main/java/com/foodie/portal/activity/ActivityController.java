@@ -1,9 +1,7 @@
 package com.foodie.portal.activity;
 
-import com.foodie.portal.city.City;
 import com.foodie.portal.commons.PageCommand;
 import com.foodie.portal.commons.Pagination;
-import com.foodie.portal.merchant.Merchant;
 import com.github.jsonzou.jmockdata.JMockData;
 import com.github.jsonzou.jmockdata.TypeReference;
 import io.swagger.annotations.Api;
@@ -11,8 +9,6 @@ import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Collection;
-import java.util.List;
 import java.util.Map;
 
 @Api(tags = "活动管理")

@@ -54,4 +54,8 @@ public class MerchantApplicationService {
     public Pagination<Merchant> waitForApprovedMerchant(int page , int size) {
         return merchantRepository.findNonApprovedMerchant(page - 1, size);
     }
+
+    public Merchant findByUsername(String username) {
+        return merchantRepository.findByUsername(username);
+    }
 }

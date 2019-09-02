@@ -13,11 +13,16 @@ public class ActivityApplicationService {
     private ActivityRepository activityRepository;
 
     public void addActivity(CreateActivityCommand activityCommand) {
+        addActivity(activityCommand, null);
+    }
+
+    public void addActivity(CreateActivityCommand activityCommand, Merchant merchant) {
         var activity = Activity.create(activityCommand.getTitle(),activityCommand.getSubTitle(),
                 activityCommand.getDescription(),activityCommand.getCategory(),activityCommand.getDuration(),
                 activityCommand.getMaxPeopleLimit(),activityCommand.getImages(),activityCommand.getLanguage(),
                 activityCommand.getAddress(),activityCommand.getCityId(),activityCommand.getCityName(),activityCommand.getCostList(),
                 activityCommand.getDates());
+        activity.setMerchant(merchant);
         activityRepository.save(activity);
     }
 
@@ -57,5 +62,10 @@ public class ActivityApplicationService {
         var activity = activityRepository.findById(id);
         activity.reject();
         activityRepository.save(activity);
+    }
+
+
+    public Pagination<Activity> findOwnerActivity(String merchantId, int page, int size) {
+        return activityRepository.findByMerchantId(merchantId, page - 1, size);
     }
 }

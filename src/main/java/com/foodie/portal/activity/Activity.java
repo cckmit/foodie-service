@@ -1,6 +1,7 @@
 package com.foodie.portal.activity;
 
 import cn.hutool.core.util.IdUtil;
+import com.foodie.portal.merchant.Merchant;
 import lombok.Data;
 
 import java.util.List;
@@ -23,6 +24,7 @@ public class Activity {
     private List<ActivityPrice> priceList;
     private List<ActivityDateTime> serviceTime;
     private ActivityStatus status;
+    private Merchant merchant;
 
     public Activity() {
         this.id = IdUtil.fastSimpleUUID();

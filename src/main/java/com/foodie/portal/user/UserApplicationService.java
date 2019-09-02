@@ -1,12 +1,17 @@
 package com.foodie.portal.user;
 
 import com.foodie.portal.merchant.Merchant;
+import com.foodie.portal.merchant.MerchantApplicationService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
 public class UserApplicationService {
+
+    @Autowired
+    private MerchantApplicationService merchantApplicationService;
 
     public SysUser findByUserName(String username) {
         SysUser sysUser = new SysUser();
@@ -16,10 +21,7 @@ public class UserApplicationService {
     }
 
     public Merchant findByMerchantName(String username) {
-        Merchant sysUser = new Merchant();
-        sysUser.setName("string");
-        sysUser.setPassword("123");
-        return sysUser;
+        return merchantApplicationService.findByUsername(username);
     }
 
     public List<String> selectPermissionByUserName(String username) {
