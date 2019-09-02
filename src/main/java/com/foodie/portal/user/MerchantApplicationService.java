@@ -56,4 +56,10 @@ public class MerchantApplicationService {
     public Merchant findByEmail(String email) {
         return merchantRepository.findByEmail(email);
     }
+
+    public void changePassword(Merchant merchant, String password) {
+        var merchantInDb = merchantRepository.findById(merchant.getId());
+        merchantInDb.setPassword(password);
+        merchantRepository.save(merchantInDb);
+    }
 }
