@@ -18,8 +18,8 @@ public class UserApplicationService {
         return sysUser;
     }
 
-    public Merchant findByMerchantName(String username) {
-        return merchantApplicationService.findByUsername(username);
+    public Merchant findByMerchantEmail(String email) {
+        return merchantApplicationService.findByEmail(email);
     }
 
     public List<String> selectPermissionByUserName(String username) {

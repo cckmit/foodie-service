@@ -1,8 +1,7 @@
 package com.foodie.portal.user;
 
 import com.foodie.portal.commons.Pagination;
-import com.foodie.portal.user.repository.MerchantEntityMapper;
-import com.foodie.portal.user.repository.MerchantJpaRepository;
+import com.foodie.portal.user.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Component;
@@ -33,7 +32,7 @@ public class MerchantRepository {
         return MerchantEntityMapper.instance.to(merchantJpaRepository.findByStatus(MerchantStatus.NON_APPROVE, PageRequest.of(page, size)));
     }
 
-    public Merchant findByUsername(String username) {
-        return MerchantEntityMapper.instance.to(merchantJpaRepository.findByUsername(username));
+    public Merchant findByEmail(String email) {
+        return MerchantEntityMapper.instance.to(merchantJpaRepository.findByEmail(email));
     }
 }

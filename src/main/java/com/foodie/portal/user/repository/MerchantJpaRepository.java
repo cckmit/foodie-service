@@ -11,5 +11,5 @@ public interface MerchantJpaRepository extends JpaRepository<MerchantEntity, Str
 
     Page<MerchantEntity> findByStatus(MerchantStatus status, Pageable pageable);
 
-    MerchantEntity findByUsername(String username);
+    MerchantEntity findByEmail(String email);
 }

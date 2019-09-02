@@ -53,7 +53,7 @@ public class MerchantApplicationService {
         return merchantRepository.findNonApprovedMerchant(page - 1, size);
     }
 
-    public Merchant findByUsername(String username) {
-        return merchantRepository.findByUsername(username);
+    public Merchant findByEmail(String email) {
+        return merchantRepository.findByEmail(email);
     }
 }

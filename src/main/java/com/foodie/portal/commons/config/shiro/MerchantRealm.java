@@ -55,7 +55,7 @@ public class MerchantRealm extends AuthorizingRealm {
     @Override
     protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken authenticationToken) throws AuthenticationException {
         UsernamePasswordToken token = (UsernamePasswordToken) authenticationToken;
-        Merchant user = userApplicationService.findByMerchantName(token.getUsername());
+        Merchant user = userApplicationService.findByMerchantEmail(token.getUsername());
         if (user == null) {
             return null;
         }
