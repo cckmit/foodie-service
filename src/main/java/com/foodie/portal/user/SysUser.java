@@ -3,7 +3,7 @@ package com.foodie.portal.user;
 import lombok.Data;
 
 @Data
-public class User {
+public class SysUser {
 
     private String username;
 
