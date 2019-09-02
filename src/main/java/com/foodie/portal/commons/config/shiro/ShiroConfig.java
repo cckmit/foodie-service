@@ -1,5 +1,6 @@
-package com.foodie.portal.commons.config;
+package com.foodie.portal.commons.config.shiro;
 
+import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Maps;
 import org.apache.shiro.authc.credential.HashedCredentialsMatcher;
 import org.apache.shiro.spring.LifecycleBeanPostProcessor;
@@ -19,15 +20,34 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 
 @Configuration
-public class ShiroMerchantConfig {
+public class ShiroConfig {
 
-
+    /**
+     * 凭证匹配器
+     *
+     * @return
+     */
+    @Bean
+    public HashedCredentialsMatcher hashedCredentialsMatcher() {
+        HashedCredentialsMatcher hashedCredentialsMatcher = new HashedCredentialsMatcher();
+        //md5加密1次
+        hashedCredentialsMatcher.setHashAlgorithmName("md5");
+        hashedCredentialsMatcher.setHashIterations(1);
+        return hashedCredentialsMatcher;
+    }
 
     /**
      * 自定义realm
      *
      * @return
      */
+    @Bean
+    public UserRealm userRealm() {
+        UserRealm userRealm = new UserRealm();
+//        userRealm.setCredentialsMatcher(hashedCredentialsMatcher());
+        return userRealm;
+    }
+
     @Bean
     public MerchantRealm merchantRealm() {
         MerchantRealm merchantRealm = new MerchantRealm();
@@ -42,18 +62,19 @@ public class ShiroMerchantConfig {
      * @return
      */
     @Bean
-    public DefaultWebSecurityManager merchantSecurityManager() {
+    public DefaultWebSecurityManager securityManager() {
         DefaultWebSecurityManager securityManager = new DefaultWebSecurityManager();
-        securityManager.setRealm(merchantRealm());
+        securityManager.setRealms(ImmutableList.of(userRealm(), merchantRealm()));
+
         return securityManager;
     }
 
     @Bean
-    public FilterRegistrationBean merchantFilterRegistrationBean() {
+    public FilterRegistrationBean filterRegistrationBean() {
         FilterRegistrationBean filterRegistration = new FilterRegistrationBean();
-        filterRegistration.setFilter(new DelegatingFilterProxy("merchantShiroFilter"));
+        filterRegistration.setFilter(new DelegatingFilterProxy("shiroFilter"));
         filterRegistration.setEnabled(true);
-        filterRegistration.addUrlPatterns("/merchant/*");
+        filterRegistration.addUrlPatterns("/admin/*");
         filterRegistration.setDispatcherTypes(DispatcherType.REQUEST);
         return filterRegistration;
     }
@@ -65,9 +86,9 @@ public class ShiroMerchantConfig {
      * @return
      */
     @Bean
-    public ShiroFilterFactoryBean merchantShiroFilter() {
+    public ShiroFilterFactoryBean shiroFilter() {
         ShiroFilterFactoryBean shiroFilterFactoryBean = new ShiroFilterFactoryBean();
-        shiroFilterFactoryBean.setSecurityManager(merchantSecurityManager());
+        shiroFilterFactoryBean.setSecurityManager(securityManager());
 
         //注意此处使用的是LinkedHashMap，是有顺序的，shiro会按从上到下的顺序匹配验证，匹配了就不再继续验证
         //所以上面的url要苛刻，宽松的url要放在下面，尤其是"/**"要放到最下面，如果放前面的话其后的验证规则就没作用了。
@@ -89,5 +110,28 @@ public class ShiroMerchantConfig {
         return shiroFilterFactoryBean;
     }
 
+    @Bean
+    public LifecycleBeanPostProcessor lifecycleBeanPostProcessor() {
+        return new LifecycleBeanPostProcessor();
+    }
 
+    /**
+     * 开启shiro aop注解支持. 使用代理方式;所以需要开启代码支持;
+     *
+     * @return
+     */
+    @Bean
+    public AuthorizationAttributeSourceAdvisor authorizationAttributeSourceAdvisor() {
+        AuthorizationAttributeSourceAdvisor authorizationAttributeSourceAdvisor = new AuthorizationAttributeSourceAdvisor();
+        authorizationAttributeSourceAdvisor.setSecurityManager(securityManager());
+        return authorizationAttributeSourceAdvisor;
+    }
+
+    @Bean
+    @DependsOn(value = {"lifecycleBeanPostProcessor"})
+    public DefaultAdvisorAutoProxyCreator defaultAdvisorAutoProxyCreator() {
+        DefaultAdvisorAutoProxyCreator defaultCreator = new DefaultAdvisorAutoProxyCreator();
+        defaultCreator.setProxyTargetClass(true);
+        return defaultCreator;
+    }
 }

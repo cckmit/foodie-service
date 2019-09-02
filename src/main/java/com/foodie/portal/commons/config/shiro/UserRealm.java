@@ -1,6 +1,5 @@
-package com.foodie.portal.commons.config;
+package com.foodie.portal.commons.config.shiro;
 
-import com.foodie.portal.user.Merchant;
 import com.foodie.portal.user.SysUser;
 import com.foodie.portal.user.UserApplicationService;
 import lombok.extern.slf4j.Slf4j;
@@ -11,18 +10,25 @@ import org.apache.shiro.authc.SimpleAuthenticationInfo;
 import org.apache.shiro.authc.UsernamePasswordToken;
 import org.apache.shiro.authz.AuthorizationInfo;
 import org.apache.shiro.authz.SimpleAuthorizationInfo;
+import org.apache.shiro.crypto.hash.Md5Hash;
 import org.apache.shiro.realm.AuthorizingRealm;
 import org.apache.shiro.subject.PrincipalCollection;
+import org.apache.shiro.util.ByteSource;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;
 
 @Slf4j
-public class MerchantRealm extends AuthorizingRealm {
+public class UserRealm extends AuthorizingRealm {
 
     @Autowired
     private UserApplicationService userApplicationService;
 
+
+    @Override
+    public boolean supports(AuthenticationToken token) {
+        return ((LoginToken)token).getLoginType() == LoginToken.LoginType.USER;
+    }
 
     /**
      * 授权
@@ -51,11 +57,12 @@ public class MerchantRealm extends AuthorizingRealm {
     @Override
     protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken authenticationToken) throws AuthenticationException {
         UsernamePasswordToken token = (UsernamePasswordToken) authenticationToken;
-        Merchant user = userApplicationService.findByMerchantName(token.getUsername());
+        SysUser user = userApplicationService.findByUserName(token.getUsername());
         if (user == null) {
             return null;
         }
-        log.info("doGetAuthenticationInfo");
+        log.info("doGetAuthenticationInfo-userRealm");
+        ByteSource saltSource = new Md5Hash(user.getUsername());
         return new SimpleAuthenticationInfo(
                 user, //用户
                 user.getPassword(), //密码

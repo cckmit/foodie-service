@@ -1,4 +1,4 @@
-package com.foodie.portal.commons.config;
+package com.foodie.portal.commons.config.shiro;
 
 import com.foodie.portal.user.Merchant;
 import org.apache.shiro.subject.Subject;
