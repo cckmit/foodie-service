@@ -17,6 +17,11 @@ public class OrderRepository {
         orderJpaRepository.save(OrderEntityMapper.instance.from(order));
     }
 
+    public Order byId(String id) {
+        return OrderEntityMapper.instance.to(orderJpaRepository.getOne(id));
+    }
+
+
     public Pagination<Order> findByPage(int page, int size) {
         return OrderEntityMapper.instance.to(orderJpaRepository.findAll(PageRequest.of(page, size)));
     }

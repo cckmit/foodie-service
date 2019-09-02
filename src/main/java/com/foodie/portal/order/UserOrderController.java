@@ -6,10 +6,13 @@ import io.swagger.annotations.ApiOperation;
 import lombok.var;
 import org.apache.shiro.SecurityUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import javax.validation.Valid;
 
 @Api(tags = "（用户）订单功能")
 @RestController
@@ -24,5 +27,10 @@ public class UserOrderController {
     public Order createOrder(@RequestBody CreateOrderCommand command) {
         var user = (User) SecurityUtils.getSubject().getPrincipal();
         return orderApplicationService.create(command, user);
+    }
+
+    @PostMapping("/{id}/payment")
+    public void pay(@PathVariable(name = "id") String id, @RequestBody @Valid PayOrderCommand command) {
+        orderApplicationService.pay(id, command);
     }
 }
