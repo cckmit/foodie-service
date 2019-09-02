@@ -65,7 +65,7 @@ public class ShiroConfig {
         FilterRegistrationBean filterRegistration = new FilterRegistrationBean();
         filterRegistration.setFilter(new DelegatingFilterProxy("shiroFilter"));
         filterRegistration.setEnabled(true);
-        filterRegistration.addUrlPatterns("/*");
+        filterRegistration.addUrlPatterns("/admin/*");
         filterRegistration.setDispatcherTypes(DispatcherType.REQUEST);
         return filterRegistration;
     }
@@ -98,7 +98,6 @@ public class ShiroConfig {
         filterChainDefinitionMap.put("/swagger-ui.html**", "anon");
         filterChainDefinitionMap.put("/v2/api-docs**", "anon");
         filterChainDefinitionMap.put("/favicon.ico", "anon");
-        filterChainDefinitionMap.put("/merchant/**", "user");
 
         shiroFilterFactoryBean.setFilterChainDefinitionMap(filterChainDefinitionMap);
         return shiroFilterFactoryBean;
