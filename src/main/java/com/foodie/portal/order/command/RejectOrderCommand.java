@@ -8,5 +8,5 @@ import java.math.BigDecimal;
 @Data
 public class RejectOrderCommand {
     @NotNull(message = "原因不能为空")
-    private BigDecimal reason;
+    private String reason;
 }

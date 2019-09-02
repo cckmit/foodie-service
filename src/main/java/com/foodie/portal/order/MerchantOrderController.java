@@ -2,6 +2,7 @@ package com.foodie.portal.order;
 
 import com.foodie.portal.commons.PageCommand;
 import com.foodie.portal.commons.Pagination;
+import com.foodie.portal.order.command.RejectOrderCommand;
 import com.foodie.portal.order.command.StartServiceCommand;
 import com.foodie.portal.user.model.Merchant;
 import com.foodie.portal.user.model.User;
@@ -36,9 +37,9 @@ public class MerchantOrderController {
 
     @ApiOperation("拒绝服务")
     @PostMapping("{id}/rejecting")
-    public Order reject(@PathVariable String id, String reason) {
+    public Order reject(@PathVariable String id, @Valid @RequestBody RejectOrderCommand command) {
         var merchant = (Merchant) SecurityUtils.getSubject().getPrincipal();
-        return orderApplicationService.reject(id, reason, merchant);
+        return orderApplicationService.reject(id, command.getReason(), merchant);
     }
 
     @ApiOperation("开始服务")
