@@ -15,11 +15,8 @@ public class UserApplicationService {
     @Autowired
     private UserRepository userRepository;
 
-    public SysUser findByUserName(String email) {
-        SysUser sysUser = new SysUser();
-        sysUser.setUsername("string");
-        sysUser.setPassword("123");
-        return sysUser;
+    public User findByEmail(String email) {
+        return userRepository.findByEmail(email);
     }
 
     public User register(UserRegisterCommand command) {

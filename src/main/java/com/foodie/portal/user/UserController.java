@@ -31,7 +31,7 @@ public class UserController {
 
     @ApiOperation("用户登陆")
     @PostMapping("login")
-    public MerchantDto userLogin(@RequestBody MerchantLoginCommand user) {
+    public User userLogin(@RequestBody MerchantLoginCommand user) {
         Subject subject = SecurityUtils.getSubject();
 
         UsernamePasswordToken token = new LoginToken(user.getEmail(), user.getPassword(), LoginToken.LoginType.USER);
@@ -47,7 +47,7 @@ public class UserController {
         } catch (ExcessiveAttemptsException e) {
             throw new RestException(ErrorCode.FAILED.getCode(), "尝试输入错误次数过多，最多可以登录5次，请10分钟后重试。!");
         }
-        return MerchantDto.toDto((Merchant) subject.getPrincipal());
+        return (User) subject.getPrincipal();
     }
 
     @ApiOperation("用户注册")

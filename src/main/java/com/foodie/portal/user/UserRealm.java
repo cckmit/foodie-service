@@ -3,6 +3,7 @@ package com.foodie.portal.user;
 import com.foodie.portal.commons.config.shiro.LoginToken;
 import com.foodie.portal.user.model.SysUser;
 import com.foodie.portal.user.UserApplicationService;
+import com.foodie.portal.user.model.User;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.AuthenticationInfo;
@@ -58,12 +59,12 @@ public class UserRealm extends AuthorizingRealm {
     @Override
     protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken authenticationToken) throws AuthenticationException {
         UsernamePasswordToken token = (UsernamePasswordToken) authenticationToken;
-        SysUser user = userApplicationService.findByUserName(token.getUsername());
+        User user = userApplicationService.findByEmail(token.getUsername());
         if (user == null) {
             return null;
         }
         log.info("doGetAuthenticationInfo-userRealm");
-        ByteSource saltSource = new Md5Hash(user.getUsername());
+        ByteSource saltSource = new Md5Hash(user.getEmail());
         return new SimpleAuthenticationInfo(
                 user, //用户
                 user.getPassword(), //密码
