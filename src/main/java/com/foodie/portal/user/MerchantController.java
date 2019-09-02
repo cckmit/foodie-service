@@ -13,6 +13,7 @@ import org.apache.shiro.authc.LockedAccountException;
 import org.apache.shiro.authc.UnknownAccountException;
 import org.apache.shiro.authc.UsernamePasswordToken;
 import org.apache.shiro.subject.Subject;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -20,17 +21,17 @@ import org.springframework.web.bind.annotation.RestController;
 
 import static com.foodie.portal.commons.ErrorCode.UNAUTHORIZED;
 
-@Api(tags = "用户管理")
+@Api(tags = "Merchant user info")
 @RestController
 @RequestMapping("merchant")
 public class MerchantController {
 
     @ApiOperation("商家登陆")
     @PostMapping("login")
-    public MerchantDto merchantLogin(@RequestBody SysUser user) {
+    public MerchantDto merchantLogin(@RequestBody MerchantLoginCommand user) {
         Subject subject = SecurityUtils.getSubject();
 
-        UsernamePasswordToken token = new LoginToken(user.getUsername(), user.getPassword(), LoginToken.LoginType.MERCHANT);
+        UsernamePasswordToken token = new LoginToken(user.getEmail(), user.getPassword(), LoginToken.LoginType.MERCHANT);
         try {
             subject.login(token);
         } catch (UnknownAccountException | IncorrectCredentialsException e) {
@@ -44,6 +45,14 @@ public class MerchantController {
             throw new RestException(ErrorCode.FAILED.getCode(), "尝试输入错误次数过多，最多可以登录5次，请10分钟后重试。!");
         }
        return MerchantDto.toDto((Merchant) subject.getPrincipal());
+    }
+
+
+    @ApiOperation("商家用户信息")
+    @GetMapping("user-info")
+    public MerchantDto merchantInfo() {
+        Subject subject = SecurityUtils.getSubject();
+        return MerchantDto.toDto((Merchant) subject.getPrincipal());
     }
 
 }
