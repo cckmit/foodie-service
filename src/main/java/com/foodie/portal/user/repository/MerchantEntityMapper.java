@@ -1,9 +1,7 @@
-package com.foodie.portal.merchant.repository;
+package com.foodie.portal.user.repository;
 
-import com.foodie.portal.activity.Activity;
-import com.foodie.portal.activity.repository.ActivityEntity;
 import com.foodie.portal.commons.BaseMapper;
-import com.foodie.portal.merchant.Merchant;
+import com.foodie.portal.user.Merchant;
 import org.mapstruct.Mapper;
 import org.mapstruct.factory.Mappers;
 

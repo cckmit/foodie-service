@@ -1,7 +1,5 @@
 package com.foodie.portal.user;
 
-import com.foodie.portal.merchant.Merchant;
-import com.foodie.portal.merchant.MerchantApplicationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

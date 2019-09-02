@@ -2,9 +2,7 @@ package com.foodie.portal.activity;
 
 import com.foodie.portal.commons.PageCommand;
 import com.foodie.portal.commons.Pagination;
-import com.foodie.portal.merchant.Merchant;
-import com.github.jsonzou.jmockdata.JMockData;
-import com.github.jsonzou.jmockdata.TypeReference;
+import com.foodie.portal.user.Merchant;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.var;
@@ -18,8 +16,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
-import java.util.Map;
 
 @Api(tags = "商家活动管理")
 @RestController

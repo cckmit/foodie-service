@@ -1,7 +1,6 @@
-package com.foodie.portal.merchant.repository;
+package com.foodie.portal.user.repository;
 
-import com.foodie.portal.merchant.MerchantStatus;
-import io.swagger.annotations.ApiModelProperty;
+import com.foodie.portal.user.MerchantStatus;
 import lombok.Data;
 
 import javax.persistence.Column;

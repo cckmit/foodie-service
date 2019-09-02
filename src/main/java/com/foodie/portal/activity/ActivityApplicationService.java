@@ -1,7 +1,7 @@
 package com.foodie.portal.activity;
 
 import com.foodie.portal.commons.Pagination;
-import com.foodie.portal.merchant.Merchant;
+import com.foodie.portal.user.Merchant;
 import lombok.var;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

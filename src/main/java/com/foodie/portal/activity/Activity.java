@@ -1,7 +1,7 @@
 package com.foodie.portal.activity;
 
 import cn.hutool.core.util.IdUtil;
-import com.foodie.portal.merchant.Merchant;
+import com.foodie.portal.user.Merchant;
 import lombok.Data;
 
 import java.util.List;

@@ -1,6 +1,6 @@
-package com.foodie.portal.merchant.repository;
+package com.foodie.portal.user.repository;
 
-import com.foodie.portal.merchant.MerchantStatus;
+import com.foodie.portal.user.MerchantStatus;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;

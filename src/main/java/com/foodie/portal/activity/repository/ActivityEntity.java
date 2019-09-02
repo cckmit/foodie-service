@@ -3,7 +3,7 @@ package com.foodie.portal.activity.repository;
 import com.foodie.portal.activity.ActivityDateTime;
 import com.foodie.portal.activity.ActivityPrice;
 import com.foodie.portal.activity.ActivityStatus;
-import com.foodie.portal.merchant.repository.MerchantEntity;
+import com.foodie.portal.user.repository.MerchantEntity;
 import lombok.Data;
 import org.hibernate.annotations.NotFound;
 import org.hibernate.annotations.NotFoundAction;

@@ -1,4 +1,4 @@
-package com.foodie.portal.merchant;
+package com.foodie.portal.user;
 
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;

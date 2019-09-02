@@ -1,6 +1,6 @@
 package com.foodie.portal.commons.config;
 
-import com.foodie.portal.merchant.Merchant;
+import com.foodie.portal.user.Merchant;
 import com.foodie.portal.user.SysUser;
 import com.foodie.portal.user.UserApplicationService;
 import lombok.extern.slf4j.Slf4j;
@@ -11,10 +11,8 @@ import org.apache.shiro.authc.SimpleAuthenticationInfo;
 import org.apache.shiro.authc.UsernamePasswordToken;
 import org.apache.shiro.authz.AuthorizationInfo;
 import org.apache.shiro.authz.SimpleAuthorizationInfo;
-import org.apache.shiro.crypto.hash.Md5Hash;
 import org.apache.shiro.realm.AuthorizingRealm;
 import org.apache.shiro.subject.PrincipalCollection;
-import org.apache.shiro.util.ByteSource;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;

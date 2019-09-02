@@ -1,8 +1,8 @@
-package com.foodie.portal.merchant;
+package com.foodie.portal.user;
 
 import com.foodie.portal.commons.Pagination;
-import com.foodie.portal.merchant.repository.MerchantEntityMapper;
-import com.foodie.portal.merchant.repository.MerchantJpaRepository;
+import com.foodie.portal.user.repository.MerchantEntityMapper;
+import com.foodie.portal.user.repository.MerchantJpaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Component;

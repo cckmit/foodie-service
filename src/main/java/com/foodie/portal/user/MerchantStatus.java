@@ -1,4 +1,4 @@
-package com.foodie.portal.merchant;
+package com.foodie.portal.user;
 
 public enum MerchantStatus {
     NON_APPROVE,

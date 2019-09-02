@@ -1,4 +1,4 @@
-package com.foodie.portal.merchant;
+package com.foodie.portal.user;
 
 import com.foodie.portal.commons.PageCommand;
 import com.foodie.portal.commons.Pagination;
@@ -6,9 +6,6 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.Collection;
-import java.util.List;
 
 @Api(tags = "商家管理")
 @RestController
