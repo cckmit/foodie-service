@@ -29,7 +29,7 @@ public class ActivityMerchantController {
     @Autowired
     private ActivityApplicationService activityApplicationService;
 
-    @ApiOperation("发布活动")
+    @ApiOperation("发布我的活动")
     @PostMapping
     public void addActivity(@RequestBody CreateActivityCommand activityCommand) {
         var merchant = (Merchant)SecurityUtils.getSubject().getPrincipal();
@@ -43,19 +43,19 @@ public class ActivityMerchantController {
         return  activityApplicationService.findOwnerActivity(merchant.getId(), pageCommand.getPage(), pageCommand.getSize());
     }
 
-    @ApiOperation("活动详情")
+    @ApiOperation("我的活动详情")
     @GetMapping("{id}")
     public Activity detail(@PathVariable String id) {
         return activityApplicationService.retrieveById(id);
     }
 
-    @ApiOperation("修改活动")
+    @ApiOperation("修改我的活动")
     @PatchMapping("{id}")
     public void updateActivity(@PathVariable String id, @RequestBody CreateActivityCommand activityCommand) {
         activityApplicationService.updateActivity(id, activityCommand);
     }
 
-    @ApiOperation("删除活动")
+    @ApiOperation("删除我的活动")
     @DeleteMapping("{id}")
     public void deleteActivity(@PathVariable String id) {
         activityApplicationService.delete(id);
