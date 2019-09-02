@@ -1,6 +1,5 @@
--- 商家表
-DROP TABLE IF EXISTS foodie_order;
-CREATE TABLE foodie_order
+-- 用户表
+CREATE TABLE foodie_user
 (
     ID        varchar(32)  NOT NULL PRIMARY KEY,
     NAME      varchar(50)  NULL,
