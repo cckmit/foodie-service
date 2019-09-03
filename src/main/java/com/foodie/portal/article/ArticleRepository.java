@@ -35,8 +35,8 @@ public class ArticleRepository {
         articleJpaRepository.deleteById(id);
     }
 
-    public List<Article> findArticleByCityId(String cityId, int limit) {
-        return ArticleEntityMapper.instance.to(articleJpaRepository.findByCityId(cityId, PageRequest.of(0, limit)).getContent());
+    public List<Article> findActivitiesByIds(List<String> ids) {
+        return ArticleEntityMapper.instance.to(articleJpaRepository.findByIdIn(ids));
     }
 
     public Pagination<Article> findByCityIdAndType(String cityId, ArticleType type, int page, int size) {

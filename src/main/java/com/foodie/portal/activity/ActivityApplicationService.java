@@ -28,7 +28,7 @@ public class ActivityApplicationService {
         var activity = Activity.create(command.getTitle(), command.getSubTitle(),
                 command.getDescription(), command.getCategory(), command.getDuration(),
                 command.getMaxPeopleLimit(), command.getImages(), command.getLanguage(),
-                command.getAddress(), city,  command.getCostList(),
+                command.getAddress(), city, command.getCostList(),
                 command.getDates(), command.getType());
         activity.setMerchant(merchant);
         activityRepository.save(activity);
@@ -78,14 +78,15 @@ public class ActivityApplicationService {
     }
 
     public List<Activity> fetchActivitiesByIds(List<String> ids) {
-        return activityRepository.fetchActivitiesByIds(ids);
+        return activityRepository.findByIds(ids);
     }
 
     public List<Activity> topCityActivities(String cityId, ActivityType type, int limit) {
-        return activityRepository.findTopActivityByCityIdAndType(cityId, type,limit);
+        return activityRepository.findTopActivityByCityIdAndType(cityId, type, limit);
     }
 
-    public List<Activity> topCityActivities(String cityId,  int limit) {
-        return activityRepository.findTopActivityByCityId(cityId,limit);
+    public List<Activity> topCityActivities(String cityId, int limit) {
+        return activityRepository.findTopActivityByCityId(cityId, limit);
     }
+
 }

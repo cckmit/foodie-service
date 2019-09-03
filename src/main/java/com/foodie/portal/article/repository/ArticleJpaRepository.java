@@ -12,7 +12,7 @@ import java.util.List;
 @Repository
 public interface ArticleJpaRepository extends JpaRepository<ArticleEntity, String> {
 
-    Page<ArticleEntity> findByCityId(String cityId, Pageable pageable);
+    List<ArticleEntity> findByIdIn(List<String> ids);
 
     Page<ArticleEntity> findByCityIdAndType(String cityId, ArticleType type, Pageable pageable);
 }

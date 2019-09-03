@@ -46,8 +46,8 @@ public class ArticleApplicationService {
         return articleRepository.find(page - 1, size);
     }
 
-    public List<Article> topCityArticles(String cityId, int limit) {
-        return articleRepository.findArticleByCityId(cityId, limit);
+    public List<Article> findArticlesByIds(List<String> ids) {
+        return articleRepository.findActivitiesByIds(ids);
     }
 
     public Pagination<Article> findArticleByCityIdAndType(String cityId, ArticleType type, int page, int size) {

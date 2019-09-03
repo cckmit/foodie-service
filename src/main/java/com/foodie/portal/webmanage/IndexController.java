@@ -22,19 +22,14 @@ public class IndexController {
         return webManageApplicationService.featuredAreas(cityId);
     }
 
-    @GetMapping("city-activities")
-    public List<Activity> retrieveCityActivity(String cityId) {
-        return webManageApplicationService.fetchRecommendCityActivities(cityId);
+    @GetMapping("recommend-food-guide")
+    public List<Article> recommendFoodGuide() {
+        return webManageApplicationService.recommendFoodGuide();
     }
 
-    @GetMapping("food-guide")
-    public Pagination<Article> foodGuide(String cityId, ArticleType type, PageCommand pageCommand) {
-        return webManageApplicationService.foodGuide(cityId, type, pageCommand.getPage(), pageCommand.getSize());
-    }
-
-    @GetMapping("food-guide")
-    public Pagination<Article> recommendActivities(String cityId, ArticleType type, PageCommand pageCommand) {
-        return webManageApplicationService.foodGuide(cityId, type, pageCommand.getPage(), pageCommand.getSize());
+    @GetMapping("top-rated-activities")
+    public List<Activity> topRatedActivities() {
+        return webManageApplicationService.topRatedActivities();
     }
 
 }

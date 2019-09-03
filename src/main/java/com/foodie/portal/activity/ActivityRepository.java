@@ -48,7 +48,7 @@ public class ActivityRepository {
         return ActivityEntityMapper.instance.to(activityJpaRepository.findByMerchantId(merchantId, PageRequest.of(page, size)));
     }
 
-    public List<Activity> fetchActivitiesByIds(List<String> ids) {
+    public List<Activity> findByIds(List<String> ids) {
         return ActivityEntityMapper.instance.to(activityJpaRepository.findByIdIn(ids));
     }
 
@@ -63,4 +63,6 @@ public class ActivityRepository {
                 activityJpaRepository.findByCityId(cityId, PageRequest.of(0, limit))
                         .getContent());
     }
+
+
 }
