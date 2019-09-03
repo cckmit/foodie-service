@@ -8,6 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Component;
 
+import java.util.List;
+
 @Component
 public class ArticleRepository {
 
@@ -33,4 +35,7 @@ public class ArticleRepository {
         articleJpaRepository.deleteById(id);
     }
 
+    public List<Article> findArticleByCityId(String cityId, int limit) {
+        return ArticleEntityMapper.instance.to(articleJpaRepository.findByCityId(cityId, PageRequest.of(0, limit)).getContent());
+    }
 }

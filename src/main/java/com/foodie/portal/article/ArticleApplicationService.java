@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Collection;
+import java.util.List;
 
 @Service
 public class ArticleApplicationService {
@@ -42,5 +43,9 @@ public class ArticleApplicationService {
 
     public Pagination<Article> articles(int page, int size) {
         return articleRepository.find(page - 1, size);
+    }
+
+    public List<Article> toCityArticles(String cityId, int limit) {
+        return articleRepository.findArticleByCityId(cityId, limit);
     }
 }
