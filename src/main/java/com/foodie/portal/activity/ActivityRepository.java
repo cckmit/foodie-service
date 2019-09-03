@@ -9,6 +9,8 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Component;
 
+import java.util.List;
+
 @Component
 public class ActivityRepository {
 
@@ -41,5 +43,13 @@ public class ActivityRepository {
 
     public Pagination<Activity> findByMerchantId(String merchantId, int page, int size) {
         return ActivityEntityMapper.instance.to(activityJpaRepository.findByMerchantId(merchantId,  PageRequest.of(page, size)));
+    }
+
+    public List<Activity> fetchActivitiesByIds(List<String> ids) {
+        return ActivityEntityMapper.instance.to(activityJpaRepository.findByIdIn(ids));
+    }
+
+    public List<Activity> findTopActivityByCityId(String cityId, int limit){
+        return ActivityEntityMapper.instance.to(activityJpaRepository.findByCityId(cityId, PageRequest.of(0, limit)).getContent());
     }
 }

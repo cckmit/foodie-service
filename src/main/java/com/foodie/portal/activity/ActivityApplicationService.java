@@ -6,6 +6,8 @@ import lombok.var;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class ActivityApplicationService {
 
@@ -67,5 +69,13 @@ public class ActivityApplicationService {
 
     public Pagination<Activity> findOwnerActivity(String merchantId, int page, int size) {
         return activityRepository.findByMerchantId(merchantId, page - 1, size);
+    }
+
+    public List<Activity> fetchActivitiesByIds(List<String> ids) {
+        return activityRepository.fetchActivitiesByIds(ids);
+    }
+
+    public List<Activity> topCityActivities(String cityId, int limit) {
+        return activityRepository.findTopActivityByCityId(cityId, limit);
     }
 }

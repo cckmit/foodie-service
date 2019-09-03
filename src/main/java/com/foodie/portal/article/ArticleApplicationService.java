@@ -1,5 +1,6 @@
 package com.foodie.portal.article;
 
+import com.foodie.portal.city.CityApplicationService;
 import com.foodie.portal.commons.Pagination;
 import lombok.var;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +13,8 @@ public class ArticleApplicationService {
 
     @Autowired
     private ArticleRepository articleRepository;
+    @Autowired
+    private CityApplicationService cityApplicationService;
 
     public Article retrieve(String id) {
         return articleRepository.findById(id);
@@ -19,7 +22,8 @@ public class ArticleApplicationService {
     }
 
     public void addArticle(CreateArticleCommand articleCommand) {
-        var article = Article.create(articleCommand.getTitle(), articleCommand.getCover(), articleCommand.getContent());
+        var city = cityApplicationService.retrieve(articleCommand.getCityId());
+        var article = Article.create(articleCommand.getTitle(), articleCommand.getCover(), articleCommand.getContent(), city);
         articleRepository.save(article);
     }
 

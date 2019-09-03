@@ -4,10 +4,17 @@ import com.foodie.portal.activity.ActivityStatus;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+
+import java.util.List;
 
 public interface ActivityJpaRepository extends JpaRepository<ActivityEntity, String> {
 
     Page<ActivityEntity> findByStatus(ActivityStatus status, Pageable pageable);
 
     Page<ActivityEntity> findByMerchantId(String merchantId, Pageable pageable);
+
+    List<ActivityEntity> findByIdIn(List<String> ids);
+
+    Page<ActivityEntity> findByCityId(String cityId, Pageable pageable);
 }

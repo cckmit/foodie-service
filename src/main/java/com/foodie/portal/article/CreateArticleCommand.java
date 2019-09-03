@@ -1,6 +1,5 @@
 package com.foodie.portal.article;
 
-import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 
@@ -13,4 +12,7 @@ public class CreateArticleCommand {
     private String cover;
     @ApiModelProperty("文章内容")
     private String content;
+    @ApiModelProperty("城市ID")
+    private String cityId;
 }
+
