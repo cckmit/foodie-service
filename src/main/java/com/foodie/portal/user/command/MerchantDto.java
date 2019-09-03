@@ -1,4 +1,4 @@
-package com.foodie.portal.user;
+package com.foodie.portal.user.command;
 
 import com.foodie.portal.user.model.Merchant;
 import com.foodie.portal.user.model.MerchantStatus;

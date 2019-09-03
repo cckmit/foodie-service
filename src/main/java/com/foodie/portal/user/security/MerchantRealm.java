@@ -1,6 +1,7 @@
-package com.foodie.portal.user;
+package com.foodie.portal.user.security;
 
 import com.foodie.portal.commons.config.shiro.LoginToken;
+import com.foodie.portal.user.MerchantApplicationService;
 import com.foodie.portal.user.model.Merchant;
 import com.foodie.portal.user.model.SysUser;
 import com.foodie.portal.user.UserApplicationService;

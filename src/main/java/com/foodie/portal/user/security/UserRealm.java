@@ -1,4 +1,4 @@
-package com.foodie.portal.user;
+package com.foodie.portal.user.security;
 
 import com.foodie.portal.commons.config.shiro.LoginToken;
 import com.foodie.portal.user.model.SysUser;

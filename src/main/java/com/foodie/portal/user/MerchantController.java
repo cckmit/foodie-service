@@ -4,6 +4,7 @@ import com.foodie.portal.commons.ErrorCode;
 import com.foodie.portal.commons.RestException;
 import com.foodie.portal.commons.config.shiro.LoginToken;
 import com.foodie.portal.user.command.ChangeMerchantPasswordCommand;
+import com.foodie.portal.user.command.MerchantDto;
 import com.foodie.portal.user.command.MerchantLoginCommand;
 import com.foodie.portal.user.model.Merchant;
 import io.swagger.annotations.Api;

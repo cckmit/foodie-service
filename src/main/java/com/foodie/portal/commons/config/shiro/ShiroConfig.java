@@ -1,7 +1,7 @@
 package com.foodie.portal.commons.config.shiro;
 
-import com.foodie.portal.user.MerchantRealm;
-import com.foodie.portal.user.UserRealm;
+import com.foodie.portal.user.security.MerchantRealm;
+import com.foodie.portal.user.security.UserRealm;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Maps;
 import org.apache.shiro.authc.AuthenticationInfo;
