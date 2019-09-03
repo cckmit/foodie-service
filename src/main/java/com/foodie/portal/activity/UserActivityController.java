@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-@Api(tags = "（用户端）活动管理")
+@Api(tags = "（用户）活动管理")
 @RestController
 @RequestMapping("activity")
 public class UserActivityController {

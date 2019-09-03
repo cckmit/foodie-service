@@ -2,6 +2,7 @@ package com.foodie.portal.webmanage;
 
 import com.foodie.portal.activity.model.Activity;
 import com.foodie.portal.activity.ActivityApplicationService;
+import com.foodie.portal.activity.model.ActivityType;
 import com.foodie.portal.article.Article;
 import com.foodie.portal.article.ArticleApplicationService;
 import com.foodie.portal.article.ArticleType;
@@ -33,12 +34,21 @@ public class WebManageApplicationService {
 
     public CityDetailDto cityDetail(String id) {
         var city = cityApplicationService.retrieve(id);
-        var activities = activityApplicationService.topCityActivities(id, 6);
-        var article = articleApplicationService.toCityArticles(id, 3);
-        return CityDetailDto.toDto(city, activities, article);
+        var article = articleApplicationService.topCityArticles(id, 3);
+        return CityDetailDto.toDto(city, article);
+    }
+
+    public List<Activity> cityActivities(String id , ActivityType type) {
+        return activityApplicationService.topCityActivities(id, type,6);
     }
 
     public Pagination<Article> foodGuide(String cityId, ArticleType type, int page, int size) {
         return articleApplicationService.findArticleByCityIdAndType(cityId, type, page, size);
+    }
+
+    public FeaturedAreasDto featuredAreas(String cityId) {
+        var city = cityApplicationService.retrieve(cityId);
+        var activities = activityApplicationService.topCityActivities(cityId, 3);
+        return FeaturedAreasDto.toDto(city, activities);
     }
 }

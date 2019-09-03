@@ -2,6 +2,7 @@ package com.foodie.portal.activity;
 
 import com.foodie.portal.activity.model.Activity;
 import com.foodie.portal.activity.model.ActivityStatus;
+import com.foodie.portal.activity.model.ActivityType;
 import com.foodie.portal.activity.repository.ActivityEntity;
 import com.foodie.portal.activity.repository.ActivityEntityMapper;
 import com.foodie.portal.activity.repository.ActivityJpaRepository;
@@ -44,14 +45,22 @@ public class ActivityRepository {
     }
 
     public Pagination<Activity> findByMerchantId(String merchantId, int page, int size) {
-        return ActivityEntityMapper.instance.to(activityJpaRepository.findByMerchantId(merchantId,  PageRequest.of(page, size)));
+        return ActivityEntityMapper.instance.to(activityJpaRepository.findByMerchantId(merchantId, PageRequest.of(page, size)));
     }
 
     public List<Activity> fetchActivitiesByIds(List<String> ids) {
         return ActivityEntityMapper.instance.to(activityJpaRepository.findByIdIn(ids));
     }
 
-    public List<Activity> findTopActivityByCityId(String cityId, int limit){
-        return ActivityEntityMapper.instance.to(activityJpaRepository.findByCityId(cityId, PageRequest.of(0, limit)).getContent());
+    public List<Activity> findTopActivityByCityIdAndType(String cityId, ActivityType type, int limit) {
+        return ActivityEntityMapper.instance.to(
+                activityJpaRepository.findByCityIdAndType(cityId, type, PageRequest.of(0, limit))
+                        .getContent());
+    }
+
+    public List<Activity> findTopActivityByCityId(String cityId, int limit) {
+        return ActivityEntityMapper.instance.to(
+                activityJpaRepository.findByCityId(cityId, PageRequest.of(0, limit))
+                        .getContent());
     }
 }

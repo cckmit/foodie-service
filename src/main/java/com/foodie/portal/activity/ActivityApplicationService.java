@@ -1,6 +1,7 @@
 package com.foodie.portal.activity;
 
 import com.foodie.portal.activity.model.Activity;
+import com.foodie.portal.activity.model.ActivityType;
 import com.foodie.portal.city.CityApplicationService;
 import com.foodie.portal.commons.Pagination;
 import com.foodie.portal.user.model.Merchant;
@@ -80,7 +81,11 @@ public class ActivityApplicationService {
         return activityRepository.fetchActivitiesByIds(ids);
     }
 
-    public List<Activity> topCityActivities(String cityId, int limit) {
-        return activityRepository.findTopActivityByCityId(cityId, limit);
+    public List<Activity> topCityActivities(String cityId, ActivityType type, int limit) {
+        return activityRepository.findTopActivityByCityIdAndType(cityId, type,limit);
+    }
+
+    public List<Activity> topCityActivities(String cityId,  int limit) {
+        return activityRepository.findTopActivityByCityId(cityId,limit);
     }
 }
