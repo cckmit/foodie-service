@@ -4,6 +4,7 @@ import com.foodie.portal.activity.model.ActivityDateTime;
 import com.foodie.portal.activity.model.ActivityPrice;
 import com.foodie.portal.activity.model.ActivityStatus;
 import com.foodie.portal.activity.model.ActivityType;
+import com.foodie.portal.city.repository.CityEntity;
 import com.foodie.portal.user.repository.*;
 import lombok.Data;
 import org.hibernate.annotations.NotFound;
@@ -35,8 +36,9 @@ public class ActivityEntity {
     private String images;
     private String language;
     private String address;
-    private String cityId;
-    private String cityName;
+    @ManyToOne
+    @NotFound(action = NotFoundAction.IGNORE)
+    private CityEntity city;
     @Column(columnDefinition = "text")
     @Convert(converter = PriceListConverter.class)
     private List<ActivityPrice> priceList;

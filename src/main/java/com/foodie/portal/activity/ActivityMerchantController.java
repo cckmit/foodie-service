@@ -18,6 +18,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.validation.Valid;
+
 @Api(tags = "（商家）活动管理")
 @RestController
 @RequestMapping("merchant/activities")
@@ -28,7 +30,7 @@ public class ActivityMerchantController {
 
     @ApiOperation("发布我的活动")
     @PostMapping
-    public void addActivity(@RequestBody CreateActivityCommand activityCommand) {
+    public void addActivity(@Valid @RequestBody CreateActivityCommand activityCommand) {
         var merchant = (Merchant)SecurityUtils.getSubject().getPrincipal();
         activityApplicationService.addActivity(activityCommand, merchant);
     }
@@ -48,7 +50,7 @@ public class ActivityMerchantController {
 
     @ApiOperation("修改我的活动")
     @PatchMapping("{id}")
-    public void updateActivity(@PathVariable String id, @RequestBody CreateActivityCommand activityCommand) {
+    public void updateActivity(@PathVariable String id, @Valid @RequestBody UpdateActivityCommand activityCommand) {
         activityApplicationService.updateActivity(id, activityCommand);
     }
 

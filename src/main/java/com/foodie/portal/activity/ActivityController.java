@@ -41,7 +41,7 @@ public class ActivityController {
 
     @ApiOperation("修改活动")
     @PatchMapping("{id}")
-    public void updateActivity(@PathVariable String id, @RequestBody CreateActivityCommand activityCommand) {
+    public void updateActivity(@PathVariable String id, @RequestBody UpdateActivityCommand activityCommand) {
         activityApplicationService.updateActivity(id, activityCommand);
     }
 
