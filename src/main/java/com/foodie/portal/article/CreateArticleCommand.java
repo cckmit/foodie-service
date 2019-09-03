@@ -1,10 +1,12 @@
 package com.foodie.portal.article;
 
+import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 
 import javax.validation.constraints.NotNull;
 
+@ApiModel
 @Data
 public class CreateArticleCommand {
     @ApiModelProperty("主标题")
