@@ -49,4 +49,8 @@ public class ArticleApplicationService {
     public List<Article> toCityArticles(String cityId, int limit) {
         return articleRepository.findArticleByCityId(cityId, limit);
     }
+
+    public Pagination<Article> findArticleByCityIdAndType(String cityId, ArticleType type, int page, int size) {
+        return articleRepository.findByCityIdAndType(cityId, type, page - 1, size);
+    }
 }

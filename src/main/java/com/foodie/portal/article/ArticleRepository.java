@@ -38,4 +38,8 @@ public class ArticleRepository {
     public List<Article> findArticleByCityId(String cityId, int limit) {
         return ArticleEntityMapper.instance.to(articleJpaRepository.findByCityId(cityId, PageRequest.of(0, limit)).getContent());
     }
+
+    public Pagination<Article> findByCityIdAndType(String cityId, ArticleType type, int page, int size) {
+        return ArticleEntityMapper.instance.to(articleJpaRepository.findByCityIdAndType(cityId, type, PageRequest.of(page, size)));
+    }
 }
