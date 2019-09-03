@@ -22,9 +22,10 @@ public class ArticleApplicationService {
 
     }
 
-    public void addArticle(CreateArticleCommand articleCommand) {
-        var city = cityApplicationService.retrieve(articleCommand.getCityId());
-        var article = Article.create(articleCommand.getTitle(), articleCommand.getCover(), articleCommand.getContent(), city);
+    public void addArticle(CreateArticleCommand command) {
+        var city = cityApplicationService.retrieve(command.getCityId());
+        var article = Article.create(command.getTitle(), command.getCover(),
+                command.getContent(), city, command.getType());
         articleRepository.save(article);
     }
 

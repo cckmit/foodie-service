@@ -1,5 +1,6 @@
 package com.foodie.portal.article.repository;
 
+import com.foodie.portal.article.ArticleType;
 import com.foodie.portal.city.City;
 import com.foodie.portal.city.repository.CityEntity;
 import lombok.Data;
@@ -7,6 +8,8 @@ import org.hibernate.annotations.NotFound;
 import org.hibernate.annotations.NotFoundAction;
 
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
@@ -24,5 +27,7 @@ public class ArticleEntity {
     @ManyToOne
     @NotFound(action = NotFoundAction.IGNORE)
     private CityEntity city;
+    @Enumerated(EnumType.STRING)
+    private ArticleType type;
     private Instant createdAt;
 }
