@@ -2,8 +2,8 @@ package com.foodie.portal.order;
 
 import cn.hutool.core.util.IdUtil;
 import cn.hutool.core.util.RandomUtil;
-import com.foodie.portal.activity.Activity;
-import com.foodie.portal.activity.ActivityStatus;
+import com.foodie.portal.activity.model.Activity;
+import com.foodie.portal.activity.model.ActivityStatus;
 import com.foodie.portal.commons.ErrorCode;
 import com.foodie.portal.commons.RestException;
 import com.foodie.portal.user.model.Merchant;

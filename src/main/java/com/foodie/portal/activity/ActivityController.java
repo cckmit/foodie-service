@@ -1,5 +1,6 @@
 package com.foodie.portal.activity;
 
+import com.foodie.portal.activity.model.Activity;
 import com.foodie.portal.commons.PageCommand;
 import com.foodie.portal.commons.Pagination;
 import com.github.jsonzou.jmockdata.JMockData;
@@ -9,6 +10,7 @@ import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.Map;
 
 @Api(tags = "（管理员）活动管理")
@@ -16,15 +18,12 @@ import java.util.Map;
 @RequestMapping("activities")
 public class ActivityController {
 
-    private Map<String, Activity> activities = JMockData.mock(new TypeReference<Map<String, Activity>>() {
-    });
-
     @Autowired
     private ActivityApplicationService activityApplicationService;
 
     @ApiOperation("发布活动")
     @PostMapping
-    public void addActivity(@RequestBody CreateActivityCommand activityCommand) {
+    public void addActivity(@Valid @RequestBody CreateActivityCommand activityCommand) {
         activityApplicationService.addActivity(activityCommand);
     }
 

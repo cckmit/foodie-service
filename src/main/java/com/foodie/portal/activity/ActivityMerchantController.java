@@ -1,5 +1,6 @@
 package com.foodie.portal.activity;
 
+import com.foodie.portal.activity.model.Activity;
 import com.foodie.portal.commons.PageCommand;
 import com.foodie.portal.commons.Pagination;
 import com.foodie.portal.user.model.Merchant;

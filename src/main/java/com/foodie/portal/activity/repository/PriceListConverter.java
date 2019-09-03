@@ -1,7 +1,7 @@
 package com.foodie.portal.activity.repository;
 
 import com.fasterxml.jackson.core.type.TypeReference;
-import com.foodie.portal.activity.ActivityPrice;
+import com.foodie.portal.activity.model.ActivityPrice;
 import com.foodie.portal.commons.utils.JsonUtils;
 
 import javax.persistence.AttributeConverter;

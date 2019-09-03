@@ -1,6 +1,6 @@
 package com.foodie.portal.webmanage;
 
-import com.foodie.portal.activity.Activity;
+import com.foodie.portal.activity.model.Activity;
 import com.github.jsonzou.jmockdata.JMockData;
 import com.github.jsonzou.jmockdata.TypeReference;
 import io.swagger.annotations.Api;

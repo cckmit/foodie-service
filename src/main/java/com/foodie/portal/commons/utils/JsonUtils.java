@@ -3,10 +3,8 @@ package com.foodie.portal.commons.utils;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.foodie.portal.activity.ActivityPrice;
 
 import java.io.IOException;
-import java.util.List;
 
 public class JsonUtils {
 

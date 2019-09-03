@@ -1,5 +1,7 @@
 package com.foodie.portal.activity;
 
+import com.foodie.portal.activity.model.Activity;
+import com.foodie.portal.city.CityApplicationService;
 import com.foodie.portal.commons.Pagination;
 import com.foodie.portal.user.model.Merchant;
 import lombok.var;
@@ -13,17 +15,20 @@ public class ActivityApplicationService {
 
     @Autowired
     private ActivityRepository activityRepository;
+    @Autowired
+    private CityApplicationService cityApplicationService;
 
     public void addActivity(CreateActivityCommand activityCommand) {
         addActivity(activityCommand, null);
     }
 
-    public void addActivity(CreateActivityCommand activityCommand, Merchant merchant) {
-        var activity = Activity.create(activityCommand.getTitle(),activityCommand.getSubTitle(),
-                activityCommand.getDescription(),activityCommand.getCategory(),activityCommand.getDuration(),
-                activityCommand.getMaxPeopleLimit(),activityCommand.getImages(),activityCommand.getLanguage(),
-                activityCommand.getAddress(),activityCommand.getCityId(),activityCommand.getCityName(),activityCommand.getCostList(),
-                activityCommand.getDates());
+    public void addActivity(CreateActivityCommand command, Merchant merchant) {
+        var city = cityApplicationService.retrieve(command.getCityId());
+        var activity = Activity.create(command.getTitle(), command.getSubTitle(),
+                command.getDescription(), command.getCategory(), command.getDuration(),
+                command.getMaxPeopleLimit(), command.getImages(), command.getLanguage(),
+                command.getAddress(), city, command.getCityName(), command.getCostList(),
+                command.getDates(), command.getType());
         activity.setMerchant(merchant);
         activityRepository.save(activity);
     }
@@ -38,10 +43,10 @@ public class ActivityApplicationService {
 
     public void updateActivity(String id, CreateActivityCommand activityCommand) {
         Activity activity = activityRepository.findById(id);
-        activity.update(activityCommand.getTitle(),activityCommand.getSubTitle(),
-                activityCommand.getDescription(),activityCommand.getCategory(),activityCommand.getDuration(),
-                activityCommand.getMaxPeopleLimit(),activityCommand.getImages(),activityCommand.getLanguage(),
-                activityCommand.getAddress(),activityCommand.getCityId(),activityCommand.getCityName(),activityCommand.getCostList(),
+        activity.update(activityCommand.getTitle(), activityCommand.getSubTitle(),
+                activityCommand.getDescription(), activityCommand.getCategory(), activityCommand.getDuration(),
+                activityCommand.getMaxPeopleLimit(), activityCommand.getImages(), activityCommand.getLanguage(),
+                activityCommand.getAddress(), activityCommand.getCityName(), activityCommand.getCostList(),
                 activityCommand.getDates());
         activityRepository.save(activity);
     }

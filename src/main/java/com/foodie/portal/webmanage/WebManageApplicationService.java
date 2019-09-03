@@ -1,11 +1,10 @@
 package com.foodie.portal.webmanage;
 
-import com.foodie.portal.activity.Activity;
+import com.foodie.portal.activity.model.Activity;
 import com.foodie.portal.activity.ActivityApplicationService;
 import com.foodie.portal.article.Article;
 import com.foodie.portal.article.ArticleApplicationService;
 import com.foodie.portal.article.ArticleType;
-import com.foodie.portal.city.City;
 import com.foodie.portal.city.CityApplicationService;
 import com.foodie.portal.commons.Pagination;
 import com.foodie.portal.webmanage.command.CityDetailDto;

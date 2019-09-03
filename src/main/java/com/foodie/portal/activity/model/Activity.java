@@ -1,6 +1,7 @@
-package com.foodie.portal.activity;
+package com.foodie.portal.activity.model;
 
 import cn.hutool.core.util.IdUtil;
+import com.foodie.portal.city.City;
 import com.foodie.portal.commons.ErrorCode;
 import com.foodie.portal.commons.RestException;
 import com.foodie.portal.user.model.Merchant;
@@ -8,6 +9,7 @@ import lombok.Data;
 
 import java.math.BigDecimal;
 import java.util.List;
+import java.util.Objects;
 
 @Data
 public class Activity {
@@ -22,11 +24,12 @@ public class Activity {
     private String images;
     private String language;
     private String address;
-    private String cityId;
+    private City city;
     private String cityName;
     private List<ActivityPrice> priceList;
     private List<ActivityDateTime> serviceTime;
     private ActivityStatus status;
+    private ActivityType type;
     private Merchant merchant;
 
     public Activity() {
@@ -34,7 +37,9 @@ public class Activity {
         status = ActivityStatus.NON_APPROVE;
     }
 
-    public Activity(String title, String subTitle, String desc, String category, String time, int maxPeopleCount, String images, String language, String address, String city,String cityName, List<ActivityPrice> costList, List<ActivityDateTime> dates) {
+    public Activity(String title, String subTitle, String desc, String category, String time, int maxPeopleCount,
+                    String images, String language, String address, City city,String cityName,
+                    List<ActivityPrice> costList, List<ActivityDateTime> dates, ActivityType type) {
         this();
         this.title = title;
         this.subTitle = subTitle;
@@ -45,17 +50,25 @@ public class Activity {
         this.images = images;
         this.language = language;
         this.address = address;
-        this.cityId = city;
+        this.city = city;
         this.cityName = cityName;
         this.priceList = costList;
         this.serviceTime = dates;
+        this.type = type;
     }
 
-    public static Activity create(String title, String subTitle, String desc, String category, String duration, int maxPeopleCount, String images, String language, String address, String cityId,String cityName, List<ActivityPrice> costList, List<ActivityDateTime> dates) {
-        return new Activity(title, subTitle, desc, category, duration, maxPeopleCount, images, language, address, cityId, cityName ,costList, dates);
+    public static Activity create(String title, String subTitle, String desc, String category, String duration, int maxPeopleCount,
+                                  String images, String language, String address, City city,String cityName,
+                                  List<ActivityPrice> costList, List<ActivityDateTime> dates, ActivityType type) {
+        if(Objects.isNull(city)) {
+            throw new RestException(ErrorCode.FAILED, "所选城市不能存在");
+        }
+        return new Activity(title, subTitle, desc, category, duration, maxPeopleCount, images, language, address, city, cityName ,costList, dates, type);
     }
 
-    public void update(String title, String subTitle, String desc, String category, String time, int maxPeopleCount, String images, String language, String address, String city,String cityName, List<ActivityPrice> costList, List<ActivityDateTime> dates) {
+    public void update(String title, String subTitle, String desc, String category, String time, int maxPeopleCount,
+                       String images, String language, String address,
+                       String cityName, List<ActivityPrice> costList, List<ActivityDateTime> dates) {
         this.title = title;
         this.subTitle = subTitle;
         this.description = desc;
@@ -65,7 +78,6 @@ public class Activity {
         this.images = images;
         this.language = language;
         this.address = address;
-        this.cityId = city;
         this.cityName = cityName;
         this.priceList = costList;
         this.serviceTime = dates;

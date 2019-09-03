@@ -1,8 +1,9 @@
 package com.foodie.portal.activity.repository;
 
-import com.foodie.portal.activity.ActivityDateTime;
-import com.foodie.portal.activity.ActivityPrice;
-import com.foodie.portal.activity.ActivityStatus;
+import com.foodie.portal.activity.model.ActivityDateTime;
+import com.foodie.portal.activity.model.ActivityPrice;
+import com.foodie.portal.activity.model.ActivityStatus;
+import com.foodie.portal.activity.model.ActivityType;
 import com.foodie.portal.user.repository.*;
 import lombok.Data;
 import org.hibernate.annotations.NotFound;
@@ -44,6 +45,8 @@ public class ActivityEntity {
     private List<ActivityDateTime> serviceTime;
     @Enumerated(EnumType.STRING)
     private ActivityStatus status;
+    @Enumerated(EnumType.STRING)
+    private ActivityType type;
     @ManyToOne
     @NotFound(action = NotFoundAction.IGNORE)
     private MerchantEntity merchant;

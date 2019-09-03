@@ -1,5 +1,7 @@
 package com.foodie.portal.activity;
 
+import com.foodie.portal.activity.model.Activity;
+import com.foodie.portal.activity.model.ActivityStatus;
 import com.foodie.portal.activity.repository.ActivityEntity;
 import com.foodie.portal.activity.repository.ActivityEntityMapper;
 import com.foodie.portal.activity.repository.ActivityJpaRepository;

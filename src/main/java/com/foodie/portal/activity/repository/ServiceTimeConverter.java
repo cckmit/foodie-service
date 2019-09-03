@@ -1,7 +1,7 @@
 package com.foodie.portal.activity.repository;
 
 import com.fasterxml.jackson.core.type.TypeReference;
-import com.foodie.portal.activity.ActivityDateTime;
+import com.foodie.portal.activity.model.ActivityDateTime;
 import com.foodie.portal.commons.utils.JsonUtils;
 
 import javax.persistence.AttributeConverter;

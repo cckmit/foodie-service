@@ -2,7 +2,6 @@ package com.foodie.portal.activity;
 
 import com.foodie.portal.activity.model.ActivityDateTime;
 import com.foodie.portal.activity.model.ActivityPrice;
-import com.foodie.portal.activity.model.ActivityStatus;
 import com.foodie.portal.activity.model.ActivityType;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
@@ -13,7 +12,7 @@ import java.util.List;
 
 @Data
 @ApiModel
-public class CreateActivityCommand {
+public class UpdateActivityCommand {
 
     @ApiModelProperty("主标题")
     @NotNull
@@ -34,13 +33,9 @@ public class CreateActivityCommand {
     private String language;
     @ApiModelProperty("服务地点")
     private String address;
-    @ApiModelProperty("服务所在城市ID")
-    private String cityId;
     @ApiModelProperty("活动价格列表")
     private List<ActivityPrice> costList;
     @ApiModelProperty("活动时间")
     private List<ActivityDateTime> dates;
-    @ApiModelProperty("活动类型")
-    @NotNull
-    private ActivityType type;
+
 }

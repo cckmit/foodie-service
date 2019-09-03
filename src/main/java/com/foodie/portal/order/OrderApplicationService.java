@@ -1,6 +1,6 @@
 package com.foodie.portal.order;
 
-import com.foodie.portal.activity.Activity;
+import com.foodie.portal.activity.model.Activity;
 import com.foodie.portal.activity.ActivityApplicationService;
 import com.foodie.portal.commons.Pagination;
 import com.foodie.portal.order.command.CreateOrderCommand;
