@@ -4,6 +4,6 @@ import com.foodie.portal.order.Order;
 import lombok.Data;
 
 @Data
-public class OrderFinishedEvent {
+public class OrderFinishedEvent extends DomainEvent{
     private Order order;
 }
