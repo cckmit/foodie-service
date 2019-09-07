@@ -27,7 +27,7 @@ public class CityRepository {
     }
 
     public City findById(String id) {
-        return CityEntityMapper.instance.to(cityJpaRepository.getOne(id));
+        return CityEntityMapper.instance.to(cityJpaRepository.findById(id).orElse(null));
     }
 
     public void delete(String id) {

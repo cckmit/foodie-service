@@ -21,8 +21,6 @@ public class UpdateActivityCommand {
     private String subTitle;
     @ApiModelProperty("活动介绍")
     private String description;
-    @ApiModelProperty("项目类型-餐饮")
-    private String category;
     @ApiModelProperty("活动时长")
     private String duration;
     @ApiModelProperty("最大人数限制")
