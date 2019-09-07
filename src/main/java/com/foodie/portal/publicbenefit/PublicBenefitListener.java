@@ -1,4 +1,4 @@
-package com.foodie.portal.public_benefit;
+package com.foodie.portal.publicbenefit;
 
 import com.foodie.portal.commons.event.OrderFinishedEvent;
 import org.springframework.beans.factory.annotation.Autowired;

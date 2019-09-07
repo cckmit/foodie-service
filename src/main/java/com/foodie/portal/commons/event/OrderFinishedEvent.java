@@ -1,9 +1,9 @@
 package com.foodie.portal.commons.event;
 
 import com.foodie.portal.order.Order;
-import lombok.Data;
+import lombok.Getter;
 
-@Data
+@Getter
 public class OrderFinishedEvent extends DomainEvent{
     private Order order;
 }

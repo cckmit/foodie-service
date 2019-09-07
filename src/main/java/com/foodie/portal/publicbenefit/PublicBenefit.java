@@ -1,4 +1,4 @@
-package com.foodie.portal.public_benefit;
+package com.foodie.portal.publicbenefit;
 
 import cn.hutool.core.util.IdUtil;
 import com.foodie.portal.order.Order;
