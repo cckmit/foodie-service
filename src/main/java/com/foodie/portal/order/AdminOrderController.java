@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @Api(tags = "（管理员）订单管理")
 @RestController
-@RequestMapping("order")
+@RequestMapping("admin/order")
 public class AdminOrderController {
 
     @Autowired

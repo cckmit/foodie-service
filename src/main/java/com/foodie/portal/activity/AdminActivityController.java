@@ -15,8 +15,8 @@ import java.util.Map;
 
 @Api(tags = "（管理员）活动管理")
 @RestController
-@RequestMapping("activities")
-public class ActivityController {
+@RequestMapping("admin/activities")
+public class AdminActivityController {
 
     @Autowired
     private ActivityApplicationService activityApplicationService;

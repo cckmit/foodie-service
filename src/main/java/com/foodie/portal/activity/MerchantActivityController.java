@@ -23,7 +23,7 @@ import javax.validation.Valid;
 @Api(tags = "（商家）活动管理")
 @RestController
 @RequestMapping("merchant/activities")
-public class ActivityMerchantController {
+public class MerchantActivityController {
 
     @Autowired
     private ActivityApplicationService activityApplicationService;

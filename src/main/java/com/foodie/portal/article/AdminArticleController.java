@@ -16,8 +16,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 @Api(tags = "（管理员）文章管理")
 @RestController
-@RequestMapping("articles")
-public class ArticleController {
+@RequestMapping("admin/articles")
+public class AdminArticleController {
 
     @Autowired
     private ArticleApplicationService articleApplicationService;

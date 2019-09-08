@@ -21,7 +21,7 @@ import javax.validation.Valid;
 
 @Api(tags = "（管理员）用户/商家管理")
 @RestController
-@RequestMapping("merchants")
+@RequestMapping("admin/merchants")
 public class AdminMerchantController {
 
     @Autowired

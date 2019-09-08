@@ -9,8 +9,8 @@ import org.springframework.web.bind.annotation.*;
 
 @Api(tags = "（管理员）城市管理")
 @RestController
-@RequestMapping("city")
-public class CityController {
+@RequestMapping("admin/city")
+public class AdminCityController {
 
     @Autowired
     private CityApplicationService cityApplicationService;
