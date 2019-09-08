@@ -9,6 +9,7 @@ import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import java.math.BigDecimal;
 
 @Data
 @Entity
@@ -28,4 +29,5 @@ public class MerchantEntity {
     private String images;
     @Enumerated(EnumType.STRING)
     private MerchantStatus status;
+    private BigDecimal extractRatio;
 }
