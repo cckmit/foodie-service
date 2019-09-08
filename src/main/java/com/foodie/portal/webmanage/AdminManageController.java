@@ -5,6 +5,7 @@ import com.github.jsonzou.jmockdata.JMockData;
 import com.github.jsonzou.jmockdata.TypeReference;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -20,12 +21,9 @@ public class AdminManageController {
 
     List<Banner> banners = JMockData.mock(new TypeReference<List<Banner>>() {
     });
-    List<Activity> topActivities = JMockData.mock(new TypeReference<List<Activity>>() {
-    });
 
-    Map<String, List<String>> recommendActivities = new HashMap<>();
-    List<String> recommendArticles = new ArrayList<>();
-
+    @Autowired
+    private WebManageApplicationService webManageApplicationService;
 
     @ApiOperation("添加banner")
     @PostMapping("banner")
@@ -42,43 +40,33 @@ public class AdminManageController {
         return bannerId;
     }
 
-    @ApiOperation("首页推荐活动")
-    @PostMapping("top")
-    public List<Activity> topActivities(List<Activity> activities) {
-        return topActivities;
-    }
 
-    @ApiOperation("增加城市活动推荐")
+    @ApiOperation("配置城市活动推荐")
     @PostMapping("city-activities-recommend")
-    public void addRecommendActivities(String cityId, List<String> activitiesId) {
-        List<String> activities = recommendActivities.get(cityId);
-        if (Objects.isNull(activities)) {
-            recommendActivities.put(cityId, activitiesId);
-            return;
-        }
-        recommendActivities.get(cityId).addAll(activitiesId);
+    public void configRecommendActivities(Map<String, List<String>> command) {
+        webManageApplicationService.configRecommendActivities(command);
+
     }
 
-    @ApiOperation("删除城市活动推荐")
-    @DeleteMapping("city-activities-recommend")
-    public void removeRecommendActivities(String cityId, String activityId) {
-        List<String> activities = recommendActivities.get(cityId);
-        if (Objects.isNull(activities)) {
-            return;
-        }
-        recommendActivities.get(cityId).remove(activityId);
-    }
-
-    @ApiOperation("增加文章推荐")
-    @PostMapping("article-recommend")
-    public void addRecommendArticle(String articleId) {
-        recommendArticles.add(articleId);
+    @ApiOperation("配置城市文章推荐")
+    @PostMapping("city-article-recommend")
+    public void configRecommendArticle(Map<String, List<String>> command) {
+        webManageApplicationService.configRecommendArticle(command);
     }
 
 
-    @ApiOperation("删除文章推荐")
-    @DeleteMapping("article-recommend")
-    public void removeRecommendArticle(String articleId) {
-        recommendArticles.remove(articleId);
+    @ApiOperation("配置首页活动推荐")
+    @PostMapping("top-activities")
+    public void configTopActivities(List<String> command) {
+        webManageApplicationService.configTopActivities(command);
     }
+
+    @ApiOperation("配置首页文章推荐")
+    @PostMapping("top-articles")
+    public void configTopArticles(List<String> command) {
+        webManageApplicationService.configTopArticles(command);
+    }
+
+
+
 }

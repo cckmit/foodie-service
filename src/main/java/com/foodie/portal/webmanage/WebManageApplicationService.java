@@ -22,7 +22,6 @@ import java.util.Map;
 @Service
 public class WebManageApplicationService {
 
-    private Map<String, List<String>> recommendCityActivities = Maps.newHashMap();
 
     private List<String> recommendArticleIds = Lists.newArrayList();
 
@@ -34,6 +33,9 @@ public class WebManageApplicationService {
     private CityApplicationService cityApplicationService;
     @Autowired
     private ArticleApplicationService articleApplicationService;
+    @Autowired
+    private RecommendRepository recommendRepository;
+
 
 
     /**
@@ -69,26 +71,20 @@ public class WebManageApplicationService {
         return articleApplicationService.findArticleByCityIdAndType(cityId, type, page, size);
     }
 
-    /**
-     * 感兴趣城市
-     * @param cityId
-     * @return
-     */
-    public FeaturedAreasDto featuredAreas(String cityId) {
-        var city = cityApplicationService.retrieve(cityId);
-        var activities = activityApplicationService.fetchActivitiesByIds(recommendCityActivities.get(cityId));
-        return FeaturedAreasDto.toDto(city, activities);
+
+    public void configRecommendActivities(Map<String, List<String>> value) {
+        recommendRepository.saveRecommendCityActivityIds(value);
     }
 
-    /**
-     * 推荐活动
-     * @return
-     */
-    public List<Activity> topRatedActivities() {
-        return activityApplicationService.fetchActivitiesByIds(recommendActivityIds);
+    public void configRecommendArticle(Map<String, List<String>> command) {
+        recommendRepository.saveRecommendCityArticleIds(command);
     }
 
-    public List<Article> recommendFoodGuide() {
-        return articleApplicationService.findArticlesByIds(recommendArticleIds);
+    public void configTopActivities(List<String> command) {
+        recommendRepository.saveTopActivities(command);
+    }
+
+    public void configTopArticles(List<String> command) {
+        recommendRepository.saveTopArticles(command);
     }
 }
