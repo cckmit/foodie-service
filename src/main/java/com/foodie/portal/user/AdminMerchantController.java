@@ -3,6 +3,7 @@ package com.foodie.portal.user;
 import com.foodie.portal.commons.PageCommand;
 import com.foodie.portal.commons.Pagination;
 import com.foodie.portal.user.command.CreateMerchantCommand;
+import com.foodie.portal.user.command.PassMerchantApplyCommand;
 import com.foodie.portal.user.model.Merchant;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -15,6 +16,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import javax.validation.Valid;
 
 @Api(tags = "（管理员）用户/商家管理")
 @RestController
@@ -56,8 +59,8 @@ public class AdminMerchantController {
 
     @ApiOperation("商家审批通过")
     @PostMapping("{id}/pass")
-    public void pass(@PathVariable String id) {
-        merchantApplicationService.pass(id);
+    public void pass(@PathVariable String id, @RequestBody @Valid PassMerchantApplyCommand command) {
+        merchantApplicationService.pass(id, command.getExtractRatio());
     }
 
     @ApiOperation("商家审批拒绝")

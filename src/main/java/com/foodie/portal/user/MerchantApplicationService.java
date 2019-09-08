@@ -7,6 +7,8 @@ import lombok.var;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
+
 @Service
 public class MerchantApplicationService {
 
@@ -39,9 +41,9 @@ public class MerchantApplicationService {
         merchantRepository.delete(id);
     }
 
-    public void pass(String id) {
+    public void pass(String id, BigDecimal extractRatio) {
         Merchant merchant = merchantRepository.findById(id);
-        merchant.pass();
+        merchant.pass(extractRatio);
         merchantRepository.save(merchant);
     }
 
@@ -51,7 +53,7 @@ public class MerchantApplicationService {
         merchantRepository.save(merchant);
     }
 
-    public Pagination<Merchant> waitForApprovedMerchant(int page , int size) {
+    public Pagination<Merchant> waitForApprovedMerchant(int page, int size) {
         return merchantRepository.findNonApprovedMerchant(page - 1, size);
     }
 

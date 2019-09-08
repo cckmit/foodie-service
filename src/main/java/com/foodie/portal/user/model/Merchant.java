@@ -5,6 +5,8 @@ import com.foodie.portal.commons.ErrorCode;
 import com.foodie.portal.commons.RestException;
 import lombok.Data;
 
+import java.math.BigDecimal;
+
 import static com.foodie.portal.user.model.MerchantStatus.PASSED;
 
 @Data
@@ -20,6 +22,7 @@ public class Merchant {
     private String activeDesc;
     private String images;
     private MerchantStatus status;
+    private BigDecimal extractRatio;
 
     public Merchant() {
         this.id = IdUtil.fastSimpleUUID();
@@ -49,7 +52,8 @@ public class Merchant {
         this.images = images;
     }
 
-    public void pass() {
+    public void pass(BigDecimal extractRatio) {
+        this.extractRatio = extractRatio;
         this.status = PASSED;
     }
 
