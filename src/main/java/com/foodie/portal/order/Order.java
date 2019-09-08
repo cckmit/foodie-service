@@ -66,17 +66,26 @@ public class Order {
 
     public void accept(Merchant merchant) {
         checkOrder(merchant);
+        if(status != OrderStatus.PAID) {
+            throw new RestException(ErrorCode.FAILED, "订单未支付");
+        }
         this.status = OrderStatus.ACCEPTED;
     }
 
     public void reject(String reason, Merchant merchant) {
         checkOrder(merchant);
+        if(status != OrderStatus.PAID) {
+            throw new RestException(ErrorCode.FAILED, "订单未支付");
+        }
         this.status = OrderStatus.REJECTED;
         this.rejectReason = reason;
     }
 
     public void startService(String payNo, Merchant merchant) {
         checkOrder(merchant);
+        if(status != OrderStatus.ACCEPTED) {
+            throw new RestException(ErrorCode.FAILED, "订单未通过审核");
+        }
         if (!payNo.equals(this.payNo)) {
             throw new RestException(ErrorCode.FAILED, "消费码不正确");
         }
