@@ -74,7 +74,7 @@ public class AdminManageController {
     }
 
     @ApiOperation("移除活动推荐")
-    @DeleteMapping("activities-recommend")
+    @PostMapping("activities-recommend")
     public void removeRecommendActivities(@RequestBody DeleteRecommendActivityCommand command) {
         webManageApplicationService.removeRecommendActivity(command.getActivityId());
     }
@@ -86,7 +86,7 @@ public class AdminManageController {
     }
 
     @ApiOperation("移除美食指南推荐")
-    @DeleteMapping("food-guide-recommend")
+    @PostMapping("food-guide-recommend")
     public void removeRecommendFoodGuide(@RequestBody DeleteRecommendActivityCommand command) {
         webManageApplicationService.removeRecommendFoodGuide(command.getActivityId());
     }
@@ -99,7 +99,7 @@ public class AdminManageController {
     }
 
     @ApiOperation("移除TOP活动推荐")
-    @DeleteMapping("top-articles")
+    @PostMapping("top-articles")
     public void removeTopArticles(@RequestBody DeleteTopActivityCommand command) {
         webManageApplicationService.removeTopActivity(command.getActivityId());
     }
