@@ -1,98 +1,87 @@
 package com.foodie.portal.webmanage;
 
-import com.fasterxml.jackson.core.type.TypeReference;
-import com.foodie.portal.commons.utils.JsonUtils;
-import com.foodie.portal.webmanage.repository.SysConfigEntity;
-import com.foodie.portal.webmanage.repository.SysConfigRepository;
-import lombok.var;
+import com.foodie.portal.webmanage.repository.RecommendEntity;
+import com.foodie.portal.webmanage.repository.RecommendJpaRepository;
+import com.foodie.portal.webmanage.repository.RecommendType;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
-import java.util.Map;
+import java.util.stream.Collectors;
 
 @Component
 public class RecommendRepository {
 
-    private static final String RECOMMEND_CITY_ACTIVITY_IDS = "RECOMMEND_CITY_ACTIVITY_IDS";
-    private static final String RECOMMEND_CITY_ACTIVITY_IDS_DESC = "首页推荐城市活动配置";
-    private static final String RECOMMEND_CITY_ARTICLE_IDS = "RECOMMEND_CITY_ARTICLE_IDS";
-    private static final String RECOMMEND_CITY_ARTICLE_IDS_DESC = "首页推荐城市文章配置";
-    private static final String TOP_ACTIVITIES = "TOP_ACTIVITIES";
-    private static final String TOP_ACTIVITIES_DESC = "首页推荐活动配置";
-    private static final String TOP_ARTICLES = "TOP_ARTICLES";
-    private static final String TOP_ARTICLES_DESC = "首页推荐文章配置";
-
     @Autowired
-    private SysConfigRepository sysConfigRepository;
+    private RecommendJpaRepository recommendJpaRepository;
 
 
-    public Map<String, List<String>> findRecommendCityActivityIds() {
-        var value = sysConfigRepository.getOne(RECOMMEND_CITY_ACTIVITY_IDS).getConfigValue();
-        return JsonUtils.toBean(value, new TypeReference<Map<String, List<String>>>() {
-        });
+    public List<String> findRecommendActivityIds() {
+        return recommendJpaRepository.findByType(RecommendType.RECOMMEND_ACTIVITIES)
+                .stream().map(RecommendEntity::getId)
+                .collect(Collectors.toList());
     }
 
-    public Map<String, List<String>> findRecommendCityFoodGuideIds() {
-        var value = sysConfigRepository.getOne(RECOMMEND_CITY_ARTICLE_IDS).getConfigValue();
-        return JsonUtils.toBean(value, new TypeReference<Map<String, List<String>>>() {});
+    public List<String> findRecommendFoodGuideIds() {
+        return recommendJpaRepository.findByType(RecommendType.RECOMMEND_FOOD_GUIDE)
+                .stream().map(RecommendEntity::getId)
+                .collect(Collectors.toList());
     }
 
     public List<String> findTopActivityIds() {
-        var value = sysConfigRepository.getOne(TOP_ACTIVITIES).getConfigValue();
-        return JsonUtils.toBean(value, new TypeReference<List<String>>() {
-        });
-    }
-    public List<String> findTopFoodGuideIds() {
-        return sysConfigRepository.findById(TOP_ACTIVITIES)
-                .map(config -> JsonUtils.toBean(config.getConfigValue(), new TypeReference<List<String>>() {
-                })).orElse(null);
-
+        return recommendJpaRepository.findByType(RecommendType.TOP_ACTIVITIES)
+                .stream().map(RecommendEntity::getId)
+                .collect(Collectors.toList());
     }
 
     /**
-     * 保存推荐的城市活动
-     * @param value
+     * 保存推荐的活动
+     *
+     * @param activityIds
      */
-    public void saveRecommendCityActivityIds(Map<String, List<String>> value) {
-        saveConfig(value, RECOMMEND_CITY_ACTIVITY_IDS, RECOMMEND_CITY_ACTIVITY_IDS_DESC);
-
+    public void saveRecommendActivityIds(List<String> activityIds) {
+        recommendJpaRepository.saveAll(activityIds.stream()
+                .map(activityId -> new RecommendEntity(activityId, RecommendType.RECOMMEND_ACTIVITIES))
+                .collect(Collectors.toList()));
     }
 
     /**
-     * 保存推荐的城市文章
-     * @param value
+     * 删除推荐的活动
+     *
+     * @param activityId
      */
-    public void saveRecommendCityArticleIds(Map<String, List<String>> value) {
-        saveConfig(value, RECOMMEND_CITY_ARTICLE_IDS, RECOMMEND_CITY_ARTICLE_IDS_DESC);
+    public void removeRecommendActivity(String activityId) {
+        recommendJpaRepository.delete(new RecommendEntity(activityId, RecommendType.RECOMMEND_ACTIVITIES));
     }
 
     /**
-     * 保存首页的推荐活动
-     * @param value
+     * 保存推荐的美食指南
+     *
+     * @param articleIds
      */
-    public void saveTopActivities(List<String> value) {
-        saveConfig(value, TOP_ACTIVITIES, TOP_ACTIVITIES_DESC);
+    public void saveRecommendCityArticleIds(List<String> articleIds) {
+        recommendJpaRepository.saveAll(articleIds.stream()
+                .map(article -> new RecommendEntity(article, RecommendType.RECOMMEND_FOOD_GUIDE))
+                .collect(Collectors.toList()));
     }
 
     /**
-     * 保存首页的推荐文章
-     * @param value
+     * 删除推荐的美食指南
+     *
+     * @param articleId
      */
-    public void saveTopArticles(List<String> value) {
-        saveConfig(value, TOP_ARTICLES, TOP_ARTICLES_DESC);
+    public void removeRecommendArticle(String articleId) {
+        recommendJpaRepository.delete(new RecommendEntity(articleId, RecommendType.RECOMMEND_FOOD_GUIDE));
     }
 
 
-    private void saveConfig(Object value, String key, String description) {
-        var valueStr = JsonUtils.toJsonStr(value);
-        var entity = sysConfigRepository.findById(key).map(sysConfigEntity -> {
-            sysConfigEntity.setConfigValue(valueStr);
-            return sysConfigEntity;
-        }).orElse(new SysConfigEntity(key, valueStr, description));
-
-        sysConfigRepository.save(entity);
+    public void saveTopActivityIds(List<String> activityIds) {
+        recommendJpaRepository.saveAll(activityIds.stream()
+                .map(article -> new RecommendEntity(article, RecommendType.TOP_ACTIVITIES))
+                .collect(Collectors.toList()));
     }
 
-
+    public void removeTopActivity(String activityId) {
+        recommendJpaRepository.delete(new RecommendEntity(activityId, RecommendType.TOP_ACTIVITIES));
+    }
 }

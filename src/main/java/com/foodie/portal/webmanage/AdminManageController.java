@@ -1,22 +1,30 @@
 package com.foodie.portal.webmanage;
 
 import com.foodie.portal.activity.model.Activity;
+import com.foodie.portal.article.Article;
+import com.foodie.portal.webmanage.command.AddRecommendActivitiesCommand;
+import com.foodie.portal.webmanage.command.AddRecommendArticlesCommand;
+import com.foodie.portal.webmanage.command.AddTopActivitiesCommand;
+import com.foodie.portal.webmanage.command.DeleteRecommendActivityCommand;
+import com.foodie.portal.webmanage.command.DeleteTopActivityCommand;
 import com.github.jsonzou.jmockdata.JMockData;
 import com.github.jsonzou.jmockdata.TypeReference;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.*;
 import java.util.stream.Collectors;
 
-@Api(tags = "网站管理")
+@Api(tags = "（管理员）网站管理")
 @RestController
-@RequestMapping("manage")
+@RequestMapping("admin/manage")
 public class AdminManageController {
 
     List<Banner> banners = JMockData.mock(new TypeReference<List<Banner>>() {
@@ -40,31 +48,60 @@ public class AdminManageController {
         return bannerId;
     }
 
+    @ApiOperation("推荐活动列表")
+    @GetMapping("activities-recommend")
+    public List<Activity> listRecommendActivities() {
+        return webManageApplicationService.listRecommendActivities();
+    }
 
-    @ApiOperation("配置城市活动推荐")
-    @PostMapping("city-activities-recommend")
-    public void configRecommendActivities(Map<String, List<String>> command) {
-        webManageApplicationService.configRecommendActivities(command);
+    @ApiOperation("推荐美食指南列表")
+    @GetMapping("food-guide-recommend")
+    public List<Article> listRecommendFoodGuides() {
+        return webManageApplicationService.listFoodGuides();
+    }
+
+    @ApiOperation("TOP活动列表")
+    @GetMapping("top-activities")
+    public List<Activity> listTopActivities() {
+        return webManageApplicationService.listTopActivities();
+    }
+
+    @ApiOperation("添加活动推荐")
+    @PostMapping("activities-recommend")
+    public void addRecommendActivities(@RequestBody AddRecommendActivitiesCommand command) {
+        webManageApplicationService.addRecommendActivities(command.getActivityIds());
 
     }
 
-    @ApiOperation("配置城市文章推荐")
-    @PostMapping("city-article-recommend")
-    public void configRecommendArticle(Map<String, List<String>> command) {
-        webManageApplicationService.configRecommendArticle(command);
+    @ApiOperation("移除活动推荐")
+    @DeleteMapping("activities-recommend")
+    public void removeRecommendActivities(@RequestBody DeleteRecommendActivityCommand command) {
+        webManageApplicationService.removeRecommendActivity(command.getActivityId());
+    }
+
+    @ApiOperation("添加美食指南推荐")
+    @PostMapping("food-guide-recommend")
+    public void configRecommendArticle(@RequestBody AddRecommendArticlesCommand command) {
+        webManageApplicationService.addRecommendFoodGuides(command.getArticleIds());
+    }
+
+    @ApiOperation("移除美食指南推荐")
+    @DeleteMapping("food-guide-recommend")
+    public void removeRecommendFoodGuide(@RequestBody DeleteRecommendActivityCommand command) {
+        webManageApplicationService.removeRecommendFoodGuide(command.getActivityId());
     }
 
 
-    @ApiOperation("配置首页活动推荐")
+    @ApiOperation("添加TOP活动推荐")
     @PostMapping("top-activities")
-    public void configTopActivities(List<String> command) {
-        webManageApplicationService.configTopActivities(command);
+    public void addTopActivities(@RequestBody AddTopActivitiesCommand command) {
+        webManageApplicationService.addTopActivities(command.getActivityIds());
     }
 
-    @ApiOperation("配置首页文章推荐")
-    @PostMapping("top-articles")
-    public void configTopArticles(List<String> command) {
-        webManageApplicationService.configTopArticles(command);
+    @ApiOperation("移除TOP活动推荐")
+    @DeleteMapping("top-articles")
+    public void removeTopArticles(@RequestBody DeleteTopActivityCommand command) {
+        webManageApplicationService.removeTopActivity(command.getActivityId());
     }
 
 
