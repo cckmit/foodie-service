@@ -10,7 +10,7 @@ usage()
 
 start()
 {
-    java -jar $Jar_Path --spring.profiles.active=sit >$Jar_Path.log &
+    java -jar $Jar_Path --spring.profiles.active=sit --jasypt.encryptor.password=${JASYPT_PASSWORD} >$Jar_Path.log &
 }
 
 stop()
