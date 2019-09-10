@@ -29,10 +29,11 @@ configurations {
 }
 
 dependencies {
+    //springboot
     implementation 'org.springframework.boot:spring-boot-starter-actuator'
     implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
     implementation 'org.springframework.boot:spring-boot-starter-web'
-    implementation("org.springframework.boot:org.springframework.boot")
+    implementation("org.springframework.boot:spring-boot-starter-mail")
 
     implementation('io.springfox:springfox-swagger2:2.9.2')
     implementation('io.springfox:springfox-swagger-ui:2.9.2')
@@ -42,6 +43,7 @@ dependencies {
 //    implementation 'org.springframework.session:spring-session-core'
 
     implementation "com.cuisongliu:kaptcha-spring-boot-starter:1+"
+    implementation("com.github.ulisesbocchio:jasypt-spring-boot-starter:2.1.2")
     implementation ("org.apache.shiro:shiro-spring-boot-web-starter:$shiroVersion")
 
 
@@ -65,6 +67,29 @@ dependencyManagement {
         mavenBom "org.springframework.cloud:spring-cloud-dependencies:${springCloudVersion}"
     }
 }
+
+sourceSets {
+    componentTest {
+        compileClasspath += sourceSets.main.output + sourceSets.test.output
+        runtimeClasspath += sourceSets.main.output + sourceSets.test.output
+    }
+
+}
+
+configurations {
+    componentTestImplementation.extendsFrom testImplementation
+    componentTestRuntimeOnly.extendsFrom testRuntimeOnly
+}
+
+task componentTest(type: Test) {
+    description = 'Run component tests.'
+    group = 'verification'
+    testClassesDirs = sourceSets.componentTest.output.classesDirs
+    classpath = sourceSets.componentTest.runtimeClasspath
+    shouldRunAfter test
+}
+
+apply from: "${rootProject.projectDir}/gradle/idea.gradle"
 
 
 
