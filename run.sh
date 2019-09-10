@@ -1,6 +1,7 @@
 #!/bin/bash
 
-source env.sh
+PWD=$(dirname $0)
+source ${PWD}/env.sh
 Jar_Path=$1
 
 usage()
