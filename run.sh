@@ -1,5 +1,6 @@
 #!/bin/bash
 
+source env.sh
 Jar_Path=$1
 
 usage()
