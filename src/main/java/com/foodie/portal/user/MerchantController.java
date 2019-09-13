@@ -45,7 +45,7 @@ public class MerchantController {
             e.printStackTrace();
             throw new RestException(ErrorCode.NO_RESULT_FOUND.getCode(), "用户名或密码不存在!");
         } catch (LockedAccountException e) {
-            throw new RestException(ErrorCode.FAILED.getCode(), "用户被锁定!");
+            throw new RestException(ErrorCode.FAILED, e.getMessage());
         } catch (DisabledAccountException e) {
             throw new RestException(ErrorCode.FAILED.getCode(), "用户已失效!");
         } catch (ExcessiveAttemptsException e) {
