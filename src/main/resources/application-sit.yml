@@ -4,6 +4,8 @@ spring:
     driverClassName: com.mysql.cj.jdbc.Driver
     username: root
     password: ENC(WVkiUXePgoljkmdvOkWUPg==)
+    druid:
+      connection-properties: druid.stat.mergeSql=true;druid.stat.slowSqlMillis=5000
   jpa:
     hibernate.ddl-auto: none
     show-sql: true

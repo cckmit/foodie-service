@@ -19,7 +19,7 @@ spring:
       max-open-prepared-statements: 20
       max-pool-prepared-statement-per-connection-size: 20
       filters: stat
-      connection-properties: druid.stat.mergeSql=true;druid.stat.slowSqlMillis=5000
+      connection-properties: druid.stat.slowSqlMillis=5000
       use-global-data-source-stat: true
 
   jpa:
