@@ -33,10 +33,10 @@ pipeline {
                 }
             }
         }
-        stage('Deploy') {
-            steps {
-                 sshPut remote:server, from: 'run.sh', into: '.'
-            }
-        }
+//         stage('Deploy') {
+//             steps {
+//                  sshPut remote:server, from: 'run.sh', into: '.'
+//             }
+//         }
     }
 }
