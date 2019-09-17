@@ -21,11 +21,11 @@ pipeline {
                 git 'https://github.com/demonran/foodie-service.git'
             }
         }
-        // stage('Build') {
-        //     steps {
-        //         sh './gradlew clean build'
-        //     }
-        // }
+        stage('Build') {
+            steps {
+                sh './gradlew clean build'
+            }
+        }
         stage('init-server'){
             steps {
                 script {
