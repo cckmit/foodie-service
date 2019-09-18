@@ -4,7 +4,11 @@ import com.foodie.portal.activity.model.Activity;
 import com.foodie.portal.article.Article;
 import com.foodie.portal.city.representation.CitySummaryRepresentation;
 import com.foodie.portal.web.representation.IndexRepresentationService;
+import com.foodie.portal.webmanage.Banner;
 import com.foodie.portal.webmanage.FeaturedAreasDto;
+import com.github.jsonzou.jmockdata.JMockData;
+import com.github.jsonzou.jmockdata.MockConfig;
+import com.github.jsonzou.jmockdata.TypeReference;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,7 +24,18 @@ public class IndexController {
     @Autowired
     private IndexRepresentationService indexRepresentationService;
 
-
+    @ApiOperation("首页banner列表")
+    @GetMapping("banners")
+    public List<Banner> banners() {
+        MockConfig config = MockConfig.newInstance()
+                .subConfig("url")
+                .stringRegex("http://www\\.baidu\\.com/test\\.png")
+                .subConfig("link")
+                .stringRegex("http://www\\.baidu\\.com")
+                .globalConfig();
+        return JMockData.mock(new TypeReference<List<Banner>>() {
+        }, config);
+    }
 
     @ApiOperation("首页推荐城市活动")
     @GetMapping("featured-activity")
