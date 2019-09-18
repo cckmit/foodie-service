@@ -30,6 +30,8 @@ public class Order {
     private String payNo;
     private String rejectReason;
     private Merchant merchant;
+    private BigDecimal extractRatio;
+    private BigDecimal benefitExtractRatio;
     private Instant createdAt;
 
     public Order(Activity activity, int count) {
@@ -41,6 +43,8 @@ public class Order {
         this.status = OrderStatus.CREATED;
         this.payNo = RandomUtil.randomNumbers(6);
         this.merchant = activity.getMerchant();
+        this.extractRatio = merchant.getExtractRatio();
+        this.benefitExtractRatio = merchant.getBenefitExtractRatio();
         this.createdAt = now();
     }
 

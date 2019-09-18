@@ -7,6 +7,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.math.BigDecimal;
+import java.time.Instant;
 import java.util.List;
 
 @Data
@@ -16,31 +17,28 @@ public class PublicBenefit {
     private String id;
     private String title;
     private String content;
-    private BigDecimal extractRatio;
     private BigDecimal totalFoundation;
     private BigDecimal currentFoundation;
     private List<Order> orders;
+    private Instant createdAt;
 
 
-    public PublicBenefit(String title, String content, BigDecimal extractRatio,
-                         BigDecimal totalFoundation) {
+    public PublicBenefit(String title, String content, BigDecimal totalFoundation) {
         this.id = IdUtil.fastSimpleUUID();
         this.title = title;
         this.content = content;
-        this.extractRatio = extractRatio;
         this.totalFoundation = totalFoundation;
         this.currentFoundation = BigDecimal.ZERO;
         this.orders = Lists.newArrayList();
     }
 
-    public static PublicBenefit create(String title, String content, BigDecimal extractRatio,
-                                       BigDecimal totalFoundation) {
-        return new PublicBenefit(title, content, extractRatio, totalFoundation);
+    public static PublicBenefit create(String title, String content, BigDecimal totalFoundation) {
+        return new PublicBenefit(title, content, totalFoundation);
     }
 
     public void extract(Order order) {
         this.orders.add(order);
-        this.currentFoundation = currentFoundation.add(extractRatio.multiply(order.getPrice()));
+        this.currentFoundation = currentFoundation.add(order.getBenefitExtractRatio().multiply(order.getPrice()));
     }
 
 }

@@ -22,9 +22,11 @@ import java.io.Serializable;
 @AllArgsConstructor
 @NoArgsConstructor
 public class RecommendEntity {
+    /**
+     * 推荐的活动、城市等ID
+     */
     @Id
     private String id;
-
     @Id
     @Enumerated(EnumType.STRING)
     private RecommendType type;

@@ -62,4 +62,12 @@ public class Merchant {
         }
         this.status = MerchantStatus.REJECTED;
     }
+
+    public BigDecimal getExtractRatio() {
+        return BigDecimal.valueOf(0.2);
+    };
+
+    public BigDecimal getBenefitExtractRatio() {
+        return BigDecimal.valueOf(0.2).multiply(BigDecimal.valueOf(0.2));
+    };
 }
