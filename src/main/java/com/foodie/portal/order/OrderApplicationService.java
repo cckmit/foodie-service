@@ -25,9 +25,9 @@ public class OrderApplicationService {
     @Autowired
     private ApplicationContext applicationContext;
 
-    public Order create(CreateOrderCommand createOrderCommand, User user) {
-        Activity activity = activityApplicationService.findById(createOrderCommand.getActivityId());
-        var order = Order.create(activity, createOrderCommand.getCount());
+    public Order create(CreateOrderCommand command, User user) {
+        Activity activity = activityApplicationService.findById(command.getActivityId());
+        var order = Order.create(activity, command.getCount(),command.getOrderInfo());
         order.setUser(user);
         orderRepository.save(order);
         applicationContext.publishEvent(new OrderCreatedEvent(order));

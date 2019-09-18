@@ -25,6 +25,7 @@ public class Order {
     private Activity activity;
     private int count;
     private BigDecimal price;
+    private OrderInfo orderInfo;
     private User user;
     private OrderStatus status;
     private String payNo;
@@ -34,7 +35,7 @@ public class Order {
     private BigDecimal benefitExtractRatio;
     private Instant createdAt;
 
-    public Order(Activity activity, int count) {
+    public Order(Activity activity, int count, OrderInfo orderInfo) {
         this.id = IdUtil.fastSimpleUUID();
         this.number = IdUtil.objectId();
         this.activity = activity;
@@ -42,19 +43,20 @@ public class Order {
         this.price = activity.getPrice(count);
         this.status = OrderStatus.CREATED;
         this.payNo = RandomUtil.randomNumbers(6);
+        this.orderInfo = orderInfo;
         this.merchant = activity.getMerchant();
         this.extractRatio = merchant.getExtractRatio();
         this.benefitExtractRatio = merchant.getBenefitExtractRatio();
         this.createdAt = now();
     }
 
-    public static Order create(Activity activity, int count) {
+    public static Order create(Activity activity, int count, OrderInfo orderInfo) {
         if (Objects.isNull(activity)) {
             throw new RestException(ErrorCode.NO_RESULT_FOUND.getCode(), "活动不存在");
         }else if(activity.getStatus() != ActivityStatus.PASSED) {
             throw new RestException(ErrorCode.NO_RESULT_FOUND.getCode(), "活动未审核");
         }
-        return new Order(activity, count);
+        return new Order(activity, count, orderInfo);
     }
 
     public void pay(BigDecimal paidPrice) {
