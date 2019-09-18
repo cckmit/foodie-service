@@ -1,10 +1,13 @@
 package com.foodie.portal.user;
 
+import cn.hutool.core.util.RandomUtil;
 import com.foodie.portal.commons.Pagination;
+import com.foodie.portal.commons.event.MerchantApplyPassedEvent;
 import com.foodie.portal.user.command.CreateMerchantCommand;
 import com.foodie.portal.user.model.Merchant;
 import lombok.var;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
@@ -14,6 +17,8 @@ public class MerchantApplicationService {
 
     @Autowired
     private MerchantRepository merchantRepository;
+    @Autowired
+    private ApplicationContext applicationContext;
 
     public Pagination<Merchant> merchants(int page, int size) {
         return merchantRepository.findByPage(page - 1, size);
@@ -44,6 +49,9 @@ public class MerchantApplicationService {
     public void pass(String id, BigDecimal extractRatio) {
         Merchant merchant = merchantRepository.findById(id);
         merchant.pass(extractRatio);
+        String password = RandomUtil.randomString(10);
+        merchant.setPassword(password);
+        applicationContext.publishEvent(new MerchantApplyPassedEvent(merchant));
         merchantRepository.save(merchant);
     }
 
