@@ -51,6 +51,8 @@ dependencies {
     runtimeOnly 'com.h2database:h2'
     implementation('com.alibaba:druid-spring-boot-starter:1.1.10')
 
+    implementation('com.paypal.sdk:rest-api-sdk:1.14.0')
+
     annotationProcessor 'org.springframework.boot:spring-boot-configuration-processor'
 
     compileOnly 'org.projectlombok:lombok'

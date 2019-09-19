@@ -4,6 +4,7 @@ import com.foodie.portal.commons.ErrorCode;
 import com.foodie.portal.commons.RestException;
 import com.foodie.portal.commons.config.shiro.LoginToken;
 import com.foodie.portal.user.command.MerchantLoginCommand;
+import com.foodie.portal.user.command.UpdateUserInfoCommand;
 import com.foodie.portal.user.command.UserRegisterCommand;
 import com.foodie.portal.user.model.User;
 import io.swagger.annotations.Api;
@@ -62,5 +63,13 @@ public class UserController {
     @GetMapping("user-info")
     public User userInfo() {
         return (User) SecurityUtils.getSubject().getPrincipal();
+    }
+
+    @ApiOperation("更新个人信息")
+    @PostMapping("user-info")
+    public void updateInfo(UpdateUserInfoCommand command) {
+        User user = (User) SecurityUtils.getSubject().getPrincipal();
+        userApplicationService.updateInfo(user.getId(), command);
+
     }
 }

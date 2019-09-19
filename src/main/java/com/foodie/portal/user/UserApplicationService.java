@@ -1,5 +1,6 @@
 package com.foodie.portal.user;
 
+import com.foodie.portal.user.command.UpdateUserInfoCommand;
 import com.foodie.portal.user.command.UserRegisterCommand;
 import com.foodie.portal.user.model.SysUser;
 import com.foodie.portal.user.model.User;
@@ -27,5 +28,13 @@ public class UserApplicationService {
 
     public List<String> selectPermissionByUserName(String username) {
         return null;
+    }
+
+    public void updateInfo(String id, UpdateUserInfoCommand command) {
+        User user = userRepository.findById(id);
+        user.updateInfo(command.getLastName(), command.getFirstName(), command.getNationality(),
+                command.getIdType(), command.getIdNumber());
+        userRepository.save(user);
+
     }
 }

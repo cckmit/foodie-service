@@ -19,4 +19,8 @@ public class UserRepository {
     public User findByEmail(String email) {
         return UserEntityMapper.instance.to(userJpaRepository.findByEmail(email));
     }
+
+    public User findById(String id) {
+        return UserEntityMapper.instance.to(userJpaRepository.findById(id).orElse(null));
+    }
 }

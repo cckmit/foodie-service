@@ -21,7 +21,7 @@ public class Merchant {
     private String activeDesc;
     private String images;
     private MerchantStatus status;
-    private BigDecimal extractRatio;
+    private double extractRatio;
 
     public Merchant() {
         this.id = IdUtil.fastSimpleUUID();
@@ -51,7 +51,7 @@ public class Merchant {
         this.images = images;
     }
 
-    public void pass(BigDecimal extractRatio) {
+    public void pass(double extractRatio) {
         this.extractRatio = extractRatio;
         this.status = PASSED;
     }
@@ -63,11 +63,8 @@ public class Merchant {
         this.status = MerchantStatus.REJECTED;
     }
 
-    public BigDecimal getExtractRatio() {
-        return BigDecimal.valueOf(0.2);
-    };
 
     public BigDecimal getBenefitExtractRatio() {
-        return BigDecimal.valueOf(0.2).multiply(BigDecimal.valueOf(0.2));
+        return BigDecimal.valueOf(extractRatio).multiply(BigDecimal.valueOf(0.2));
     };
 }
