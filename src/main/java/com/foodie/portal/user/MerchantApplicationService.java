@@ -46,7 +46,7 @@ public class MerchantApplicationService {
         merchantRepository.delete(id);
     }
 
-    public void pass(String id, BigDecimal extractRatio) {
+    public void pass(String id, double extractRatio) {
         Merchant merchant = merchantRepository.findById(id);
         merchant.pass(extractRatio);
         String password = RandomUtil.randomString(10);

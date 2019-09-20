@@ -16,6 +16,7 @@ apply plugin: 'io.spring.dependency-management'
 ext {
     set('springCloudVersion', 'Greenwich.SR1')
     shiroVersion = '1.4.1'
+    log4jdbcVersion = '1.16'
 }
 
 
@@ -53,8 +54,11 @@ dependencies {
 
     implementation('com.paypal.sdk:rest-api-sdk:1.14.0')
 
+     //监控sql日志
+    compile("org.bgee.log4jdbc-log4j2:log4jdbc-log4j2-jdbc4.1:${log4jdbcVersion}")
+    //工具包
+    implementation('cn.hutool:hutool-all:4.6.2')
     annotationProcessor 'org.springframework.boot:spring-boot-configuration-processor'
-
     compileOnly 'org.projectlombok:lombok'
     annotationProcessor 'org.projectlombok:lombok'
     compileOnly "org.mapstruct:mapstruct:1.2.0.Final"
@@ -63,7 +67,7 @@ dependencies {
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
 
     implementation 'com.github.jsonzou:jmockdata:4.1.2'
-    implementation 'cn.hutool:hutool-all:4.6.2'
+
 }
 
 dependencyManagement {

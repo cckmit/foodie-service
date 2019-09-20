@@ -31,7 +31,7 @@ public class Order {
     private String payNo;
     private String rejectReason;
     private Merchant merchant;
-    private BigDecimal extractRatio;
+    private double extractRatio;
     private BigDecimal benefitExtractRatio;
     private Instant createdAt;
 

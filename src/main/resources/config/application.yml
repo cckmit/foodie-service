@@ -1,7 +1,7 @@
 spring:
   datasource:
-    url: jdbc:h2:file:~/h2/foodie
-    driverClassName: org.h2.Driver
+    url: jdbc:log4jdbc:h2:file:~/h2/foodie
+    driverClassName: net.sf.log4jdbc.sql.jdbcapi.DriverSpy
     type: com.alibaba.druid.pool.DruidDataSource
     username: sa
     druid:
@@ -55,3 +55,10 @@ spring:
 jasypt:
   encryptor:
     password: ${JASYPT_ENCRYPTOR_PASSWORD:}
+
+application:
+  payment:
+    paypal:
+      client-id: 123
+      client-secret: sdfs
+      mode: sandbox

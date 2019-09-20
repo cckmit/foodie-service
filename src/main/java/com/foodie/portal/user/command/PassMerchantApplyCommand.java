@@ -7,5 +7,5 @@ import java.math.BigDecimal;
 @Data
 public class PassMerchantApplyCommand {
 
-    private BigDecimal extractRatio;
+    private double extractRatio;
 }
