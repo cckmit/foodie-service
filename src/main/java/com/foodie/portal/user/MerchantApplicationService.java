@@ -5,6 +5,7 @@ import com.foodie.portal.commons.Pagination;
 import com.foodie.portal.commons.event.MerchantApplyPassedEvent;
 import com.foodie.portal.user.command.CreateMerchantCommand;
 import com.foodie.portal.user.model.Merchant;
+import com.foodie.portal.web.command.ApplyMerchantCommand;
 import lombok.var;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
@@ -73,5 +74,11 @@ public class MerchantApplicationService {
         var merchantInDb = merchantRepository.findById(merchant.getId());
         merchantInDb.setPassword(password);
         merchantRepository.save(merchantInDb);
+    }
+
+    public void applyMerchant(ApplyMerchantCommand merchantCommand) {
+        var merchant = Merchant.create(merchantCommand.getName(), merchantCommand.getEmail(), merchantCommand.getCity(),
+                merchantCommand.getDescription(), merchantCommand.getActiveDesc(), merchantCommand.getImages());
+        merchantRepository.save(merchant);
     }
 }
