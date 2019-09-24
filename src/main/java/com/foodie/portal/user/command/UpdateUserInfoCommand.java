@@ -5,6 +5,7 @@ import lombok.Data;
 
 @Data
 public class UpdateUserInfoCommand {
+    private String avatar;
     private String lastName;
     private String firstName;
     private String nationality;
