@@ -40,7 +40,7 @@ public class User {
     }
 
     public void changePassword(String oldPassword, String newPassword) {
-        if (password.equals(oldPassword)) {
+        if (!password.equals(oldPassword)) {
             throw new RestException(ErrorCode.FAILED, "密码错误");
         }
         this.password = newPassword;

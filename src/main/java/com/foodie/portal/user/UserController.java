@@ -5,6 +5,7 @@ import com.foodie.portal.commons.RestException;
 import com.foodie.portal.commons.config.shiro.LoginToken;
 import com.foodie.portal.user.command.MerchantLoginCommand;
 import com.foodie.portal.user.command.UpdateUserInfoCommand;
+import com.foodie.portal.user.command.UserChangePasswordCommand;
 import com.foodie.portal.user.command.UserRegisterCommand;
 import com.foodie.portal.user.model.User;
 import io.swagger.annotations.Api;
@@ -67,9 +68,16 @@ public class UserController {
 
     @ApiOperation("更新个人信息")
     @PostMapping("user-info")
-    public void updateInfo(UpdateUserInfoCommand command) {
+    public void updateInfo(@RequestBody UpdateUserInfoCommand command) {
         User user = (User) SecurityUtils.getSubject().getPrincipal();
         userApplicationService.updateInfo(user.getId(), command);
+    }
+
+    @ApiOperation("更新个人信息")
+    @PostMapping("password-change")
+    public void changePassword(@RequestBody UserChangePasswordCommand command) {
+        User user = (User) SecurityUtils.getSubject().getPrincipal();
+        userApplicationService.changePassword(user.getId(), command);
 
     }
 }

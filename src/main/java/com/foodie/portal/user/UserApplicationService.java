@@ -3,6 +3,7 @@ package com.foodie.portal.user;
 import com.foodie.portal.commons.ErrorCode;
 import com.foodie.portal.commons.RestException;
 import com.foodie.portal.user.command.UpdateUserInfoCommand;
+import com.foodie.portal.user.command.UserChangePasswordCommand;
 import com.foodie.portal.user.command.UserRegisterCommand;
 import com.foodie.portal.user.model.SysUser;
 import com.foodie.portal.user.model.User;
@@ -43,5 +44,11 @@ public class UserApplicationService {
                 command.getIdType(), command.getIdNumber());
         userRepository.save(user);
 
+    }
+
+    public void changePassword(String id, UserChangePasswordCommand command) {
+        User user = userRepository.findById(id);
+        user.changePassword(command.getOldPassword(), command.getNewPassword());
+        userRepository.save(user);
     }
 }
