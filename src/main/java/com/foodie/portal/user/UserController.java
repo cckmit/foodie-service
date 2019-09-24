@@ -73,7 +73,7 @@ public class UserController {
         userApplicationService.updateInfo(user.getId(), command);
     }
 
-    @ApiOperation("更新个人信息")
+    @ApiOperation("修改密码")
     @PostMapping("password-change")
     public void changePassword(@RequestBody UserChangePasswordCommand command) {
         User user = (User) SecurityUtils.getSubject().getPrincipal();
