@@ -63,7 +63,7 @@ public class UserController {
     @ApiOperation("用户注册")
     @GetMapping("user-info")
     public User userInfo() {
-        return (User) SecurityUtils.getSubject().getPrincipal();
+        return userApplicationService.userInfo(((User) SecurityUtils.getSubject().getPrincipal()).getId());
     }
 
     @ApiOperation("更新个人信息")

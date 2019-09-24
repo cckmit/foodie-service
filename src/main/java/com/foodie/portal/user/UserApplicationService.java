@@ -51,4 +51,8 @@ public class UserApplicationService {
         user.changePassword(command.getOldPassword(), command.getNewPassword());
         userRepository.save(user);
     }
+
+    public User userInfo(String id) {
+        return userRepository.findById(id);
+    }
 }
