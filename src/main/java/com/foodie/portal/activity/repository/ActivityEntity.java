@@ -1,6 +1,6 @@
 package com.foodie.portal.activity.repository;
 
-import com.foodie.portal.activity.model.ActivityDateTime;
+import com.foodie.portal.activity.model.ServiceScheduling;
 import com.foodie.portal.activity.model.ActivityPrice;
 import com.foodie.portal.activity.model.ActivityStatus;
 import com.foodie.portal.activity.model.ActivityType;
@@ -10,13 +10,16 @@ import lombok.Data;
 import org.hibernate.annotations.NotFound;
 import org.hibernate.annotations.NotFoundAction;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Convert;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import java.util.List;
 
@@ -42,8 +45,9 @@ public class ActivityEntity {
     @Convert(converter = PriceListConverter.class)
     private List<ActivityPrice> priceList;
     @Column(columnDefinition = "text")
-    @Convert(converter = ServiceTimeConverter.class)
-    private List<ActivityDateTime> serviceTime;
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name = "activityId")
+    private List<ServiceSchedulingEntity> serviceSchedulingList;
     @Enumerated(EnumType.STRING)
     private ActivityStatus status;
     @Enumerated(EnumType.STRING)

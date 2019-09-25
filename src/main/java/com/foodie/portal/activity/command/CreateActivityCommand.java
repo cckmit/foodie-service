@@ -1,8 +1,7 @@
-package com.foodie.portal.activity;
+package com.foodie.portal.activity.command;
 
-import com.foodie.portal.activity.model.ActivityDateTime;
+import com.foodie.portal.activity.model.ServiceScheduling;
 import com.foodie.portal.activity.model.ActivityPrice;
-import com.foodie.portal.activity.model.ActivityStatus;
 import com.foodie.portal.activity.model.ActivityType;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
@@ -37,7 +36,7 @@ public class CreateActivityCommand {
     @ApiModelProperty("活动价格列表")
     private List<ActivityPrice> costList;
     @ApiModelProperty("活动时间")
-    private List<ActivityDateTime> dates;
+    private List<ServiceScheduling> dates;
     @ApiModelProperty("活动类型")
     @NotNull
     private ActivityType type;

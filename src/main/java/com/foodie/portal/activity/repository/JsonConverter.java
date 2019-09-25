@@ -7,16 +7,16 @@ import com.foodie.portal.commons.utils.JsonUtils;
 import javax.persistence.AttributeConverter;
 import java.util.List;
 
-public class ServiceTimeConverter implements AttributeConverter<List<ServiceScheduling>, String> {
+public class JsonConverter implements AttributeConverter<List<Object>, String> {
 
     @Override
-    public String convertToDatabaseColumn(List<ServiceScheduling> attribute) {
+    public String convertToDatabaseColumn(List<Object> attribute) {
         return JsonUtils.toJsonStr(attribute);
     }
 
     @Override
-    public List<ServiceScheduling> convertToEntityAttribute(String dbData) {
-        return JsonUtils.toBean(dbData, new TypeReference<List<ServiceScheduling>>() {
+    public List<Object> convertToEntityAttribute(String dbData) {
+        return JsonUtils.toBean(dbData, new TypeReference<List<Object>>() {
         });
     }
 }

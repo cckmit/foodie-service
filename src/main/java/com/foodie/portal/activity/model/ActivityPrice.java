@@ -9,7 +9,7 @@ import java.util.List;
 @Data
 public class ActivityPrice {
 
-    private int count;
+    private int reserveCount;
 
     private BigDecimal price;
 

@@ -1,6 +1,6 @@
 package com.foodie.portal.activity.representation;
 
-import com.foodie.portal.activity.model.ActivityDateTime;
+import com.foodie.portal.activity.model.ServiceScheduling;
 import com.foodie.portal.activity.model.ActivityPrice;
 import com.foodie.portal.activity.model.ActivityStatus;
 import com.foodie.portal.activity.model.ActivityType;
@@ -21,7 +21,7 @@ public class ActivityRepresentation {
     private String cityId;
     private String cityName;
     private List<ActivityPrice> priceList;
-    private List<ActivityDateTime> serviceTime;
+    private List<ServiceScheduling> serviceTime;
     private ActivityStatus status;
     private ActivityType type;
     private String merchantName;

@@ -25,7 +25,7 @@ public class Activity {
     private String address;
     private City city;
     private List<ActivityPrice> priceList;
-    private List<ActivityDateTime> serviceTime;
+    private List<ServiceScheduling> serviceSchedulingList;
     private ActivityStatus status;
     private ActivityType type;
     private Merchant merchant;
@@ -35,9 +35,9 @@ public class Activity {
         status = ActivityStatus.NON_APPROVE;
     }
 
-    public Activity(String title, String subTitle, String desc,  String time, int maxPeopleCount,
+    public Activity(String title, String subTitle, String desc, String time, int maxPeopleCount,
                     String images, String language, String address, City city,
-                    List<ActivityPrice> costList, List<ActivityDateTime> dates, ActivityType type) {
+                    List<ActivityPrice> costList, List<ServiceScheduling> dates, ActivityType type) {
         this();
         this.title = title;
         this.subTitle = subTitle;
@@ -49,13 +49,13 @@ public class Activity {
         this.address = address;
         this.city = city;
         this.priceList = costList;
-        this.serviceTime = dates;
+        this.serviceSchedulingList = dates;
         this.type = type;
     }
 
     public static Activity create(String title, String subTitle, String desc, String duration, int maxPeopleCount,
                                   String images, String language, String address, City city,
-                                  List<ActivityPrice> costList, List<ActivityDateTime> dates, ActivityType type) {
+                                  List<ActivityPrice> costList, List<ServiceScheduling> dates, ActivityType type) {
         if(Objects.isNull(city)) {
             throw new RestException(ErrorCode.FAILED, "所选城市不能存在");
         }
@@ -64,7 +64,7 @@ public class Activity {
 
     public void update(String title, String subTitle, String desc,  String time, int maxPeopleCount,
                        String images, String language, String address,
-                       List<ActivityPrice> costList, List<ActivityDateTime> dates) {
+                       List<ActivityPrice> costList, List<ServiceScheduling> dates) {
         this.title = title;
         this.subTitle = subTitle;
         this.description = desc;
@@ -74,7 +74,7 @@ public class Activity {
         this.language = language;
         this.address = address;
         this.priceList = costList;
-        this.serviceTime = dates;
+        this.serviceSchedulingList = dates;
     }
 
     public void pass() {
@@ -90,10 +90,14 @@ public class Activity {
             return BigDecimal.ZERO;
         }
         for (ActivityPrice activityPrice: priceList) {
-            if (activityPrice.getCount() == count) {
+            if (activityPrice.getReserveCount() == count) {
                 return activityPrice.getPrice();
             }
         }
-        throw new RestException(ErrorCode.REFUSED, "不包含当前人数的价格");
+        throw new RestException(ErrorCode.REFUSED, "当前人数价格未设置");
+    }
+
+    public void updateScheduling(List<ServiceScheduling> serviceSchedulingList) {
+        this.serviceSchedulingList = serviceSchedulingList;
     }
 }

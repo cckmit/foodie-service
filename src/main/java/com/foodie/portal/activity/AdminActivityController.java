@@ -1,17 +1,16 @@
 package com.foodie.portal.activity;
 
+import com.foodie.portal.activity.command.CreateActivityCommand;
+import com.foodie.portal.activity.command.UpdateActivityCommand;
 import com.foodie.portal.activity.model.Activity;
 import com.foodie.portal.commons.PageCommand;
 import com.foodie.portal.commons.Pagination;
-import com.github.jsonzou.jmockdata.JMockData;
-import com.github.jsonzou.jmockdata.TypeReference;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
-import java.util.Map;
 
 @Api(tags = "（管理员）活动管理")
 @RestController

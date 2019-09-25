@@ -1,5 +1,8 @@
 package com.foodie.portal.activity;
 
+import com.foodie.portal.activity.command.CreateActivityCommand;
+import com.foodie.portal.activity.command.UpdateActivityCommand;
+import com.foodie.portal.activity.command.UpdateServiceSchedulingCommand;
 import com.foodie.portal.activity.model.Activity;
 import com.foodie.portal.commons.PageCommand;
 import com.foodie.portal.commons.Pagination;
@@ -19,6 +22,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.validation.Valid;
+import java.util.List;
 
 @Api(tags = "（商家）活动管理")
 @RestController
@@ -58,6 +62,13 @@ public class MerchantActivityController {
     @DeleteMapping("{id}")
     public void deleteActivity(@PathVariable String id) {
         activityApplicationService.delete(id);
+    }
+
+    @ApiOperation("更新排期")
+    @PostMapping("{id}")
+    public void scheduleService(@PathVariable String id, @RequestBody List<UpdateServiceSchedulingCommand> command) {
+        activityApplicationService.updateServiceScheduling(id , command);
+
     }
 
 }

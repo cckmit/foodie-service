@@ -1,7 +1,11 @@
 package com.foodie.portal.activity;
 
+import com.foodie.portal.activity.command.CreateActivityCommand;
+import com.foodie.portal.activity.command.UpdateActivityCommand;
+import com.foodie.portal.activity.command.UpdateServiceSchedulingCommand;
 import com.foodie.portal.activity.model.Activity;
 import com.foodie.portal.activity.model.ActivityType;
+import com.foodie.portal.activity.model.ServiceScheduling;
 import com.foodie.portal.city.CityApplicationService;
 import com.foodie.portal.commons.Pagination;
 import com.foodie.portal.user.model.Merchant;
@@ -10,6 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class ActivityApplicationService {
@@ -87,6 +92,16 @@ public class ActivityApplicationService {
 
     public List<Activity> topCityActivities(String cityId, int limit) {
         return activityRepository.findTopActivityByCityId(cityId, limit);
+    }
+
+    public void updateServiceScheduling(String id, List<UpdateServiceSchedulingCommand> command) {
+        List<ServiceScheduling> serviceSchedulingList = command.stream()
+                .map(item -> ServiceScheduling.create(id, item.getServiceDate(), item.getShifts()))
+                .collect(Collectors.toList());
+        Activity activity = activityRepository.findById(id);
+
+        activity.updateScheduling(serviceSchedulingList);
+        activityRepository.save(activity);
     }
 
 }
