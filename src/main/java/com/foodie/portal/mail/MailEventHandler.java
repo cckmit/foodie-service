@@ -6,6 +6,7 @@ import com.foodie.portal.order.Order;
 import com.foodie.portal.user.model.Merchant;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.event.EventListener;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -14,6 +15,7 @@ public class MailEventHandler {
     @Autowired
     private MailApplicationService mailApplicationService;
 
+    @Async
     @EventListener
     public void sendPayNoMail(OrderCreatedEvent event) {
         Order order = event.getOrder();
@@ -22,6 +24,7 @@ public class MailEventHandler {
         mailApplicationService.send(order.getUser().getEmail(), subject, content);
     }
 
+    @Async
     @EventListener
     public void sendMerchantPassword(MerchantApplyPassedEvent event) {
         Merchant merchant = event.getMerchant();

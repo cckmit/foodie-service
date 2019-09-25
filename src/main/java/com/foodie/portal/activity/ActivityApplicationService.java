@@ -4,7 +4,6 @@ import com.foodie.portal.activity.command.CreateActivityCommand;
 import com.foodie.portal.activity.command.UpdateActivityCommand;
 import com.foodie.portal.activity.command.UpdateServiceSchedulingCommand;
 import com.foodie.portal.activity.model.Activity;
-import com.foodie.portal.activity.model.ActivityType;
 import com.foodie.portal.activity.model.ServiceScheduling;
 import com.foodie.portal.city.CityApplicationService;
 import com.foodie.portal.commons.Pagination;
@@ -13,6 +12,7 @@ import lombok.var;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -86,13 +86,6 @@ public class ActivityApplicationService {
         return activityRepository.findByIds(ids);
     }
 
-    public List<Activity> topCityActivities(String cityId, ActivityType type, int limit) {
-        return activityRepository.findTopActivityByCityIdAndType(cityId, type, limit);
-    }
-
-    public List<Activity> topCityActivities(String cityId, int limit) {
-        return activityRepository.findTopActivityByCityId(cityId, limit);
-    }
 
     public void updateServiceScheduling(String id, List<UpdateServiceSchedulingCommand> command) {
         List<ServiceScheduling> serviceSchedulingList = command.stream()
@@ -101,6 +94,12 @@ public class ActivityApplicationService {
         Activity activity = activityRepository.findById(id);
 
         activity.updateScheduling(serviceSchedulingList);
+        activityRepository.save(activity);
+    }
+
+    public void updateReserve(String id, Date serviceDate, String startTime, int count) {
+        Activity activity = activityRepository.findById(id);
+        activity.updateReserve(serviceDate, startTime, count);
         activityRepository.save(activity);
     }
 

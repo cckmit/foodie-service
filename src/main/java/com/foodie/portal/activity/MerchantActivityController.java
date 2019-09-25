@@ -65,7 +65,7 @@ public class MerchantActivityController {
     }
 
     @ApiOperation("更新排期")
-    @PostMapping("{id}")
+    @PostMapping("{id}/scheduling")
     public void scheduleService(@PathVariable String id, @RequestBody List<UpdateServiceSchedulingCommand> command) {
         activityApplicationService.updateServiceScheduling(id , command);
 

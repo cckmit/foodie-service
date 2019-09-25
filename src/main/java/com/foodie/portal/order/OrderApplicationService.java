@@ -12,6 +12,7 @@ import lombok.var;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.validation.Valid;
 
@@ -25,9 +26,14 @@ public class OrderApplicationService {
     @Autowired
     private ApplicationContext applicationContext;
 
+    @Transactional
     public Order create(CreateOrderCommand command, User user) {
+       //创建订单
         Activity activity = activityApplicationService.findById(command.getActivityId());
         var order = Order.create(activity, command.getCount(),command.getOrderInfo());
+        //更新预定人数
+        activityApplicationService.updateReserve(command.getActivityId(),command.getServiceDate(), command.getStartTime(), command.getCount());
+
         order.setUser(user);
         orderRepository.save(order);
         applicationContext.publishEvent(new OrderCreatedEvent(order));

@@ -8,8 +8,14 @@ import com.foodie.portal.user.model.Merchant;
 import lombok.Data;
 
 import java.math.BigDecimal;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.util.Date;
 import java.util.List;
 import java.util.Objects;
+import java.util.function.Function;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 @Data
 public class Activity {
@@ -56,13 +62,13 @@ public class Activity {
     public static Activity create(String title, String subTitle, String desc, String duration, int maxPeopleCount,
                                   String images, String language, String address, City city,
                                   List<ActivityPrice> costList, List<ServiceScheduling> dates, ActivityType type) {
-        if(Objects.isNull(city)) {
+        if (Objects.isNull(city)) {
             throw new RestException(ErrorCode.FAILED, "所选城市不能存在");
         }
-        return new Activity(title, subTitle, desc, duration, maxPeopleCount, images, language, address, city ,costList, dates, type);
+        return new Activity(title, subTitle, desc, duration, maxPeopleCount, images, language, address, city, costList, dates, type);
     }
 
-    public void update(String title, String subTitle, String desc,  String time, int maxPeopleCount,
+    public void update(String title, String subTitle, String desc, String time, int maxPeopleCount,
                        String images, String language, String address,
                        List<ActivityPrice> costList, List<ServiceScheduling> dates) {
         this.title = title;
@@ -86,10 +92,10 @@ public class Activity {
     }
 
     public BigDecimal getPrice(int count) {
-        if(priceList == null) {
+        if (priceList == null) {
             return BigDecimal.ZERO;
         }
-        for (ActivityPrice activityPrice: priceList) {
+        for (ActivityPrice activityPrice : priceList) {
             if (activityPrice.getReserveCount() == count) {
                 return activityPrice.getPrice();
             }
@@ -99,5 +105,17 @@ public class Activity {
 
     public void updateScheduling(List<ServiceScheduling> serviceSchedulingList) {
         this.serviceSchedulingList = serviceSchedulingList;
+    }
+
+    public void updateReserve(Date serviceDate, String startTime, int count) {
+        ServiceScheduling scheduling = serviceSchedulingList.stream()
+
+                .filter(serviceScheduling ->
+                        LocalDateTime.ofInstant(serviceScheduling.getServiceDate().toInstant(), ZoneId.systemDefault()).toLocalDate()
+                        .equals(LocalDateTime.ofInstant(serviceDate.toInstant(), ZoneId.systemDefault()).toLocalDate()))
+                .findFirst()
+                .orElseThrow(() -> new RestException(ErrorCode.FAILED, "没有排班日期！"));
+
+        scheduling.updateReserve(startTime, count, maxPeopleLimit);
     }
 }

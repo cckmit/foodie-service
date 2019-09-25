@@ -23,6 +23,6 @@ public class ServiceSchedulingEntity implements Serializable {
     /**
      * 班次
      */
-    @Convert(converter = JsonConverter.class)
+    @Convert(converter = ListShiftConverter.class)
     private List<Shift> shifts;
 }
