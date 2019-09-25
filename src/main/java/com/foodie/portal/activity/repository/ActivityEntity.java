@@ -1,11 +1,10 @@
 package com.foodie.portal.activity.repository;
 
-import com.foodie.portal.activity.model.ServiceScheduling;
 import com.foodie.portal.activity.model.ActivityPrice;
 import com.foodie.portal.activity.model.ActivityStatus;
 import com.foodie.portal.activity.model.ActivityType;
 import com.foodie.portal.city.repository.CityEntity;
-import com.foodie.portal.user.repository.*;
+import com.foodie.portal.user.repository.MerchantEntity;
 import lombok.Data;
 import org.hibernate.annotations.NotFound;
 import org.hibernate.annotations.NotFoundAction;
