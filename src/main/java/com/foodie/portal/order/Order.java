@@ -8,6 +8,7 @@ import com.foodie.portal.commons.ErrorCode;
 import com.foodie.portal.commons.RestException;
 import com.foodie.portal.user.model.Merchant;
 import com.foodie.portal.user.model.User;
+import com.foodie.portal.utils.IdGenerator;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -37,7 +38,7 @@ public class Order {
 
     public Order(Activity activity, int count, OrderInfo orderInfo) {
         this.id = IdUtil.fastSimpleUUID();
-        this.number = IdUtil.objectId();
+        this.number = IdGenerator.getTimeId();
         this.activity = activity;
         this.count = count;
         this.price = activity.getPrice(count);
