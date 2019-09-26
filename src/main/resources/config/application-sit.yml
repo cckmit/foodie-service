@@ -11,3 +11,5 @@ spring:
     show-sql: true
 
 
+logging:
+  file: ./log/fooide-sit.log
