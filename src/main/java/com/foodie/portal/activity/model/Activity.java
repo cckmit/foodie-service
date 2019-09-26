@@ -93,7 +93,7 @@ public class Activity {
 
     public BigDecimal getPrice(int count) {
         if (priceList == null) {
-            return BigDecimal.ZERO;
+            throw new RestException(ErrorCode.REFUSED, "活动价格未设定");
         }
         for (ActivityPrice activityPrice : priceList) {
             if (activityPrice.getReserveCount() == count) {
