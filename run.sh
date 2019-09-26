@@ -12,7 +12,7 @@ usage()
 
 start()
 {
-    java -jar $Jar_Path --spring.profiles.active=sit --jasypt.encryptor.password=${JASYPT_PASSWORD} >$Jar_Path.log &
+    java -Djava.security.egd=file:/dev/.urandom -jar $Jar_Path --spring.profiles.active=sit --jasypt.encryptor.password=${JASYPT_PASSWORD} >$Jar_Path.log &
 }
 
 stop()
