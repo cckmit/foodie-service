@@ -4,7 +4,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;
 
-public interface RecommendJpaRepository extends JpaRepository<RecommendEntity, RecommendId> {
-
-    List<RecommendEntity> findByType(RecommendType type);
+public interface RecommendJpaRepository extends JpaRepository<ActivityRecommendEntity, String> {
 }

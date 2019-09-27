@@ -12,7 +12,7 @@ public interface BaseMapper<DM, T> {
 
     List<DM> to(List<T> to);
 
-    List<DM> from(List<DM> from);
+    List<T> from(List<DM> from);
 
     default Pagination<DM> to(Page<T> page) {
         return Pagination.<DM>builder()

@@ -1,5 +1,7 @@
 package com.foodie.portal.webmanage.repository;
 
+import com.foodie.portal.activity.model.ActivityStatus;
+import com.foodie.portal.activity.model.ActivityType;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -17,19 +19,17 @@ import java.io.Serializable;
 
 @Data
 @Entity
-@Table(name = "foodie_recommend")
-@IdClass(RecommendId.class)
-@AllArgsConstructor
-@NoArgsConstructor
-public class RecommendEntity {
-    /**
-     * 推荐的活动、城市等ID
-     */
+@Table(name = "foodie_activity")
+public class ActivityRecommendEntity {
     @Id
     private String id;
-    @Id
-    @Enumerated(EnumType.STRING)
-    private RecommendType type;
-
-
+    private String title;
+    private String subTitle;
+    private String description;
+    private String images;
+    private ActivityStatus status;
+    private ActivityType type;
+    private String merchantName;
+    private boolean interestedRecommend;
+    private boolean topRecommend;
 }
