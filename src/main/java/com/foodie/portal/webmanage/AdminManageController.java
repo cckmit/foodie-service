@@ -1,6 +1,7 @@
 package com.foodie.portal.webmanage;
 
 import com.foodie.portal.webmanage.command.AddBannerCommand;
+import com.foodie.portal.webmanage.model.ActivityRecommend;
 import com.foodie.portal.webmanage.model.Banner;
 import com.foodie.portal.webmanage.representation.RecommendActivityRepresentation;
 import com.foodie.portal.webmanage.representation.WebManagerRepresentationService;
@@ -47,8 +48,8 @@ public class AdminManageController {
 
     @ApiOperation("获取推荐活动列表")
     @GetMapping("activities-recommend")
-    public List<RecommendActivityRepresentation> listRecommendActivities() {
-        return webManagerRepresentationService.listRecommendActivities();
+    public List<ActivityRecommend> listRecommendActivities() {
+        return webManageApplicationService.listInterested();
     }
 
 //    @ApiOperation("推荐美食指南列表")

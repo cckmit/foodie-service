@@ -3,6 +3,7 @@ package com.foodie.portal.webmanage;
 import com.foodie.portal.activity.ActivityApplicationService;
 import com.foodie.portal.article.ArticleApplicationService;
 import com.foodie.portal.webmanage.command.AddBannerCommand;
+import com.foodie.portal.webmanage.model.ActivityRecommend;
 import com.foodie.portal.webmanage.model.Banner;
 import com.google.common.collect.Lists;
 import lombok.var;
@@ -41,6 +42,10 @@ public class WebManageApplicationService {
         var activityRecommend = recommendRepository.findById(activityId);
         activityRecommend.setInterestedRecommend(true);
         recommendRepository.saveActivityInterested(activityRecommend);
+    }
+
+    public List<ActivityRecommend> listInterested() {
+        return recommendRepository.findAllInterested();
     }
 
 //    public void removeRecommendActivity(String activityId) {

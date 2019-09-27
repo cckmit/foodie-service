@@ -27,9 +27,10 @@ public class ActivityRecommendEntity {
     private String subTitle;
     private String description;
     private String images;
+    @Enumerated(EnumType.STRING)
     private ActivityStatus status;
+    @Enumerated(EnumType.STRING)
     private ActivityType type;
-    private String merchantName;
     private boolean interestedRecommend;
     private boolean topRecommend;
 }
