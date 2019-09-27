@@ -26,6 +26,7 @@ public class PaymentApplicationService {
             PaypalPaymentMethod method,
             PaypalPaymentIntent intent,
             String description,
+            String orderId,
             String cancelUrl,
             String successUrl) throws PayPalRESTException {
         Amount amount = new Amount();
@@ -45,6 +46,7 @@ public class PaymentApplicationService {
         Payment payment = new Payment();
         payment.setIntent(intent.toString());
         payment.setPayer(payer);
+        payment.setExperienceProfileId(orderId);
         payment.setTransactions(transactions);
         RedirectUrls redirectUrls = new RedirectUrls();
         redirectUrls.setCancelUrl(cancelUrl);

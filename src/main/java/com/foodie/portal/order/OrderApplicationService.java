@@ -2,12 +2,21 @@ package com.foodie.portal.order;
 
 import com.foodie.portal.activity.model.Activity;
 import com.foodie.portal.activity.ActivityApplicationService;
+import com.foodie.portal.commons.ErrorCode;
 import com.foodie.portal.commons.Pagination;
+import com.foodie.portal.commons.RestException;
 import com.foodie.portal.commons.event.OrderCreatedEvent;
 import com.foodie.portal.order.command.CreateOrderCommand;
 import com.foodie.portal.order.command.PayOrderCommand;
+import com.foodie.portal.payment.PaymentApplicationService;
+import com.foodie.portal.payment.PaypalPaymentIntent;
+import com.foodie.portal.payment.PaypalPaymentMethod;
 import com.foodie.portal.user.model.Merchant;
 import com.foodie.portal.user.model.User;
+import com.paypal.api.payments.Links;
+import com.paypal.api.payments.Payment;
+import com.paypal.base.rest.PayPalRESTException;
+import lombok.extern.slf4j.Slf4j;
 import lombok.var;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
@@ -16,6 +25,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import javax.validation.Valid;
 
+@Slf4j
 @Service
 public class OrderApplicationService {
 
@@ -25,6 +35,8 @@ public class OrderApplicationService {
     private ActivityApplicationService activityApplicationService;
     @Autowired
     private ApplicationContext applicationContext;
+    @Autowired
+    private PaymentApplicationService paymentApplicationService;
 
     @Transactional
     public Order create(CreateOrderCommand command, User user) {
@@ -44,10 +56,26 @@ public class OrderApplicationService {
         return orderRepository.findByPage(page - 1, size);
     }
 
-    public void pay(String id, @Valid PayOrderCommand command) {
+    public String prePay(String id, @Valid PayOrderCommand command, String successUrl, String cancelUrl) {
         var order = orderRepository.byId(id);
-        order.pay(command.getPaidPrice());
+        order.prePay(command.getPaidPrice());
+        Payment payment ;
+        try {
+            payment = paymentApplicationService.createPayment(command.getPaidPrice().doubleValue(),
+                    "USD", PaypalPaymentMethod.paypal,
+                    PaypalPaymentIntent.order, "订单支付", order.getId(),
+                    successUrl, cancelUrl);
+        } catch (PayPalRESTException e) {
+            throw new RestException(ErrorCode.FAILED, "支付失败");
+        }
         orderRepository.save(order);
+
+        for (Links links : payment.getLinks()) {
+            if (links.getRel().equals("approval_url")) {
+                return links.getHref();
+            }
+        }
+        throw new RestException(ErrorCode.FAILED, "没有获取到支付URL");
     }
 
     public Pagination<Order> myOrderList(int page, int size, User user) {
@@ -77,5 +105,22 @@ public class OrderApplicationService {
         order.startService(payNo, merchant);
         orderRepository.save(order);
         return order;
+    }
+
+    public void pay(String paymentId, String payerId) {
+        log.info("支付回调：paymentId: {}, payerId: {}" , paymentId, payerId);
+        try {
+            Payment payment = paymentApplicationService.executePayment(paymentId, payerId);
+            if(payment.getState().equals("approved")){
+                String orderId = payment.getExperienceProfileId();
+                var order = orderRepository.byId(orderId);
+                order.pay();
+                orderRepository.save(order);
+                return;
+            }
+        } catch (PayPalRESTException e) {
+            log.error(e.getMessage());
+        }
+        throw new RestException(ErrorCode.FAILED, "支付失败");
     }
 }

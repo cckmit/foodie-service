@@ -60,11 +60,14 @@ public class Order {
         return new Order(activity, count, orderInfo);
     }
 
-    public void pay(BigDecimal paidPrice) {
+    public void prePay(BigDecimal paidPrice) {
         if(!paidPrice.equals(calculateTotalPrice())) {
             throw new RestException(ErrorCode.FAILED, "支付价格与订单实际价格不符");
         }
-        this.status = OrderStatus.PAID;
+    }
+
+    public void pay() {
+       this.status = OrderStatus.PAID;
     }
 
     private BigDecimal calculateTotalPrice() {
