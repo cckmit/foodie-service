@@ -1,7 +1,7 @@
 package com.foodie.portal.order;
 
-import com.foodie.portal.activity.model.Activity;
 import com.foodie.portal.activity.ActivityApplicationService;
+import com.foodie.portal.activity.model.Activity;
 import com.foodie.portal.commons.ErrorCode;
 import com.foodie.portal.commons.Pagination;
 import com.foodie.portal.commons.RestException;
@@ -41,11 +41,11 @@ public class OrderApplicationService {
 
     @Transactional
     public Order create(CreateOrderCommand command, User user) {
-       //创建订单
+        //创建订单
         Activity activity = activityApplicationService.findById(command.getActivityId());
-        var order = Order.create(activity, command.getCount(),command.getOrderInfo());
+        var order = Order.create(activity, command.getCount(), command.getOrderInfo());
         //更新预定人数
-        activityApplicationService.updateReserve(command.getActivityId(),command.getServiceDate(), command.getStartTime(), command.getCount());
+        activityApplicationService.updateReserve(command.getActivityId(), command.getServiceDate(), command.getStartTime(), command.getCount());
 
         order.setUser(user);
         orderRepository.save(order);
@@ -60,12 +60,12 @@ public class OrderApplicationService {
     public String prePay(String id, @Valid PayOrderCommand command, String successUrl, String cancelUrl) {
         var order = orderRepository.byId(id);
         order.prePay(command.getPaidPrice());
-        Payment payment ;
+        Payment payment;
         try {
             payment = paymentApplicationService.createPayment(command.getPaidPrice().doubleValue(),
                     "USD", PaypalPaymentMethod.paypal,
-                    PaypalPaymentIntent.order, "订单支付",
-                    successUrl, cancelUrl);
+                    PaypalPaymentIntent.sale, "订单支付",
+                    cancelUrl, successUrl);
         } catch (PayPalRESTException e) {
             throw new RestException(ErrorCode.FAILED, "支付失败");
         }
@@ -89,14 +89,14 @@ public class OrderApplicationService {
     }
 
     public Order accept(String id, Merchant merchant) {
-        var order =  orderRepository.byId(id);
+        var order = orderRepository.byId(id);
         order.accept(merchant);
         orderRepository.save(order);
         return order;
     }
 
     public Order reject(String id, String reason, Merchant merchant) {
-        var order =  orderRepository.byId(id);
+        var order = orderRepository.byId(id);
         order.reject(reason, merchant);
         orderRepository.save(order);
         return order;
@@ -110,12 +110,11 @@ public class OrderApplicationService {
     }
 
     public void pay(String paymentId, String payerId) {
-        log.info("支付回调：paymentId: {}, payerId: {}" , paymentId, payerId);
+        log.info("支付回调：paymentId: {}, payerId: {}", paymentId, payerId);
         try {
             Payment payment = paymentApplicationService.executePayment(paymentId, payerId);
-            if(payment.getState().equals("approved")){
-                String orderId = payment.getExperienceProfileId();
-                var order = orderRepository.byPaymentId(orderId);
+            if (payment.getState().equals("approved")) {
+                var order = orderRepository.byPaymentId(paymentId);
                 order.pay();
                 orderRepository.save(order);
                 return;
