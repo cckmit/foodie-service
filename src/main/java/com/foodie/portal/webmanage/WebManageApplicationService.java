@@ -4,6 +4,7 @@ import com.foodie.portal.activity.ActivityApplicationService;
 import com.foodie.portal.article.ArticleApplicationService;
 import com.foodie.portal.webmanage.command.AddBannerCommand;
 import com.foodie.portal.webmanage.model.ActivityRecommend;
+import com.foodie.portal.webmanage.model.ArticleRecommend;
 import com.foodie.portal.webmanage.model.Banner;
 import com.google.common.collect.Lists;
 import lombok.var;
@@ -39,13 +40,13 @@ public class WebManageApplicationService {
     }
 
     public void addRecommendActivity(String activityId) {
-        var activityRecommend = recommendRepository.findById(activityId);
+        var activityRecommend = recommendRepository.findActivityById(activityId);
         activityRecommend.setInterestedRecommend(true);
         recommendRepository.saveActivityRecommend(activityRecommend);
     }
 
     public List<ActivityRecommend> listInterested() {
-        return recommendRepository.findAllInterested();
+        return recommendRepository.findAllInterestedActivities();
     }
 
     public List<ActivityRecommend> listTopActivities() {
@@ -53,9 +54,19 @@ public class WebManageApplicationService {
     }
 
     public void addTopActivity(String activityId) {
-        var activityRecommend = recommendRepository.findById(activityId);
+        var activityRecommend = recommendRepository.findActivityById(activityId);
         activityRecommend.setTopRecommend(true);
         recommendRepository.saveActivityRecommend(activityRecommend);
+    }
+
+    public List<ArticleRecommend> listFoodGuides() {
+        return recommendRepository.findAllInterestedArticles();
+    }
+
+    public void addRecommendFoodGuide(String articleId) {
+        var articleRecommend = recommendRepository.findArticleById(articleId);
+        articleRecommend.setInterestedRecommend(true);
+        recommendRepository.saveArticleRecommend(articleRecommend);
     }
 
 //    public void removeRecommendActivity(String activityId) {

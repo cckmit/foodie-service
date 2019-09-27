@@ -6,7 +6,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;
 
-public interface RecommendJpaRepository extends JpaRepository<ActivityRecommendEntity, String> {
+public interface ActivityRecommendJpaRepository extends JpaRepository<ActivityRecommendEntity, String> {
 
     List<ActivityRecommendEntity> findByInterestedRecommend(boolean interestedRecommend);
 

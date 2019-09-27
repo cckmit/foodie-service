@@ -4,11 +4,8 @@ import com.foodie.portal.activity.model.ActivityStatus;
 import com.foodie.portal.activity.model.ActivityType;
 import lombok.Data;
 
-import javax.persistence.Id;
-
 @Data
 public class ActivityRecommend {
-    @Id
     private String id;
     private String title;
     private String subTitle;
