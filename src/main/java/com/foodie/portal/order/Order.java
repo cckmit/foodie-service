@@ -34,6 +34,7 @@ public class Order {
     private Merchant merchant;
     private double extractRatio;
     private BigDecimal benefitExtractRatio;
+    private String paymentId;
     private Instant createdAt;
 
     public Order(Activity activity, int count, OrderInfo orderInfo) {

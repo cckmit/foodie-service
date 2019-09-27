@@ -39,6 +39,7 @@ public class OrderEntity {
     @ManyToOne
     @NotFound(action = NotFoundAction.IGNORE)
     private MerchantEntity merchant;
+    private String paymentId;
     private Instant createdAt;
 
 }

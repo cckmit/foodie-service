@@ -22,7 +22,7 @@ public class JsonUtils {
     public static <T> T toBean(String jsonStr, TypeReference<T> typeReference) {
         try {
             return objectMapper.readValue(jsonStr, typeReference);
-        } catch (IOException e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
         return null;

@@ -21,10 +21,17 @@ public class OrderRepository {
         return OrderEntityMapper.instance.to(orderJpaRepository.getOne(id));
     }
 
+    public Order byPaymentId(String paymentId) {
+        return OrderEntityMapper.instance.to(orderJpaRepository.findByPaymentId(paymentId));
+    }
+
     public Pagination<Order> findByMerchantId(int page, int size, String merchantId) {
         return OrderEntityMapper.instance.to(orderJpaRepository.findByMerchantId(merchantId, PageRequest.of(page, size)));
     }
 
+    public Pagination<Order> findUserId(int page, int size, String merchantId) {
+        return OrderEntityMapper.instance.to(orderJpaRepository.findByUserId(merchantId, PageRequest.of(page, size)));
+    }
 
     public Pagination<Order> findByPage(int page, int size) {
         return OrderEntityMapper.instance.to(orderJpaRepository.findAll(PageRequest.of(page, size)));

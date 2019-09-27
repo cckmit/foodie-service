@@ -8,6 +8,7 @@ import com.foodie.portal.commons.RestException;
 import com.foodie.portal.commons.event.OrderCreatedEvent;
 import com.foodie.portal.order.command.CreateOrderCommand;
 import com.foodie.portal.order.command.PayOrderCommand;
+import com.foodie.portal.order.representation.OrderSummaryRepresentation;
 import com.foodie.portal.payment.PaymentApplicationService;
 import com.foodie.portal.payment.PaypalPaymentIntent;
 import com.foodie.portal.payment.PaypalPaymentMethod;
@@ -63,11 +64,12 @@ public class OrderApplicationService {
         try {
             payment = paymentApplicationService.createPayment(command.getPaidPrice().doubleValue(),
                     "USD", PaypalPaymentMethod.paypal,
-                    PaypalPaymentIntent.order, "订单支付", order.getId(),
+                    PaypalPaymentIntent.order, "订单支付",
                     successUrl, cancelUrl);
         } catch (PayPalRESTException e) {
             throw new RestException(ErrorCode.FAILED, "支付失败");
         }
+        order.setPaymentId(payment.getId());
         orderRepository.save(order);
 
         for (Links links : payment.getLinks()) {
@@ -78,8 +80,8 @@ public class OrderApplicationService {
         throw new RestException(ErrorCode.FAILED, "没有获取到支付URL");
     }
 
-    public Pagination<Order> myOrderList(int page, int size, User user) {
-        return orderRepository.findByMerchantId(page - 1, size, user.getId());
+    public Pagination<OrderSummaryRepresentation> myOrderList(int page, int size, User user) {
+        return OrderSummaryRepresentation.to(orderRepository.findUserId(page - 1, size, user.getId()));
     }
 
     public Pagination<Order> merchantOrderList(int page, int size, Merchant merchant) {
@@ -113,7 +115,7 @@ public class OrderApplicationService {
             Payment payment = paymentApplicationService.executePayment(paymentId, payerId);
             if(payment.getState().equals("approved")){
                 String orderId = payment.getExperienceProfileId();
-                var order = orderRepository.byId(orderId);
+                var order = orderRepository.byPaymentId(orderId);
                 order.pay();
                 orderRepository.save(order);
                 return;

@@ -23,4 +23,14 @@ public interface BaseMapper<DM, T> {
                 .content(to(page.getContent()))
                 .build();
     }
+
+    default Pagination<T> from(Pagination<DM> page) {
+        return Pagination.<T>builder()
+                .totalPages(page.getTotalPages())
+                .total((int)page.getTotal())
+                .current(page.getCurrent())
+                .pageSize(page.getPageSize())
+                .content(from(page.getContent()))
+                .build();
+    }
 }

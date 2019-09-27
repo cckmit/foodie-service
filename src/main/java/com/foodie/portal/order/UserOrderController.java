@@ -4,6 +4,7 @@ import com.foodie.portal.commons.PageCommand;
 import com.foodie.portal.commons.Pagination;
 import com.foodie.portal.order.command.CreateOrderCommand;
 import com.foodie.portal.order.command.PayOrderCommand;
+import com.foodie.portal.order.representation.OrderSummaryRepresentation;
 import com.foodie.portal.user.model.User;
 import com.paypal.api.payments.Payment;
 import com.paypal.base.rest.PayPalRESTException;
@@ -43,7 +44,7 @@ public class UserOrderController {
 
     @ApiOperation("我的列表")
     @GetMapping("list")
-    public Pagination<Order> orders(PageCommand command) {
+    public Pagination<OrderSummaryRepresentation> orders(PageCommand command) {
         var user = (User) SecurityUtils.getSubject().getPrincipal();
         return orderApplicationService.myOrderList(command.getPage(), command.getSize(), user);
     }

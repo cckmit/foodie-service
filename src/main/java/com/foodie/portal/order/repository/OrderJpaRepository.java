@@ -8,5 +8,9 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface OrderJpaRepository extends JpaRepository<OrderEntity, String> {
 
-    Page<OrderEntity> findByMerchantId(String userId, Pageable pageable);
+    Page<OrderEntity> findByMerchantId(String merchantId, Pageable pageable);
+
+    Page<OrderEntity> findByUserId(String userId, Pageable pageable);
+
+    OrderEntity findByPaymentId(String paymentId);
 }
