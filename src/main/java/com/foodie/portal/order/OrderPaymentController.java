@@ -33,13 +33,15 @@ public class OrderPaymentController {
     @Autowired
     private OrderApplicationService orderApplicationService;
 
+    @ApiOperation("支付成功回调")
     @GetMapping(PAYPAL_SUCCESS_URL)
     public void successPay(@RequestParam("paymentId") String paymentId, @RequestParam("PayerID") String payerId){
         orderApplicationService.pay(paymentId, payerId);
     }
 
+    @ApiOperation("支付取消")
     @GetMapping(PAYPAL_CANCEL_URL)
-    public void cancelPay(@RequestParam("paymentId")  String paymentId){
-        orderApplicationService.cancelPay(paymentId);
+    public void cancelPay(){
+
     }
 }
