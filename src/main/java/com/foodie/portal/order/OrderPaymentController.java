@@ -37,4 +37,9 @@ public class OrderPaymentController {
     public void successPay(@RequestParam("paymentId") String paymentId, @RequestParam("PayerID") String payerId){
         orderApplicationService.pay(paymentId, payerId);
     }
+
+    @GetMapping(PAYPAL_CANCEL_URL)
+    public void cancelPay(@RequestParam("paymentId")  String paymentId){
+        orderApplicationService.cancelPay(paymentId);
+    }
 }

@@ -108,4 +108,8 @@ public class Order {
             throw new RestException(ErrorCode.FAILED, "非本商家订单");
         }
     }
+
+    public void cancelPay() {
+        this.paymentId = null;
+    }
 }

@@ -47,10 +47,7 @@ public class PaymentController {
         return "redirect:/";
     }
 
-    @GetMapping(PAYPAL_CANCEL_URL)
-    public String cancelPay(){
-        return "cancel";
-    }
+
 
 
 

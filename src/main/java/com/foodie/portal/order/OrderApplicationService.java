@@ -124,4 +124,10 @@ public class OrderApplicationService {
         }
         throw new RestException(ErrorCode.FAILED, "支付失败");
     }
+
+    public void cancelPay(String paymentId) {
+        var order = orderRepository.byPaymentId(paymentId);
+        order.cancelPay();
+        orderRepository.save(order);
+    }
 }
