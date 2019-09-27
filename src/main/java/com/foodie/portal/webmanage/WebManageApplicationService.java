@@ -41,11 +41,21 @@ public class WebManageApplicationService {
     public void addRecommendActivity(String activityId) {
         var activityRecommend = recommendRepository.findById(activityId);
         activityRecommend.setInterestedRecommend(true);
-        recommendRepository.saveActivityInterested(activityRecommend);
+        recommendRepository.saveActivityRecommend(activityRecommend);
     }
 
     public List<ActivityRecommend> listInterested() {
         return recommendRepository.findAllInterested();
+    }
+
+    public List<ActivityRecommend> listTopActivities() {
+        return recommendRepository.findAllTopActivities();
+    }
+
+    public void addTopActivity(String activityId) {
+        var activityRecommend = recommendRepository.findById(activityId);
+        activityRecommend.setTopRecommend(true);
+        recommendRepository.saveActivityRecommend(activityRecommend);
     }
 
 //    public void removeRecommendActivity(String activityId) {
@@ -58,10 +68,6 @@ public class WebManageApplicationService {
 //
 //    public void removeRecommendFoodGuide(String articleId) {
 //        recommendRepository.removeRecommendArticle(articleId);
-//    }
-//
-//    public void addTopActivities(List<String> activityIds) {
-//        recommendRepository.saveTopActivityIds(activityIds);
 //    }
 //
 //    public void removeTopActivity(String activityId) {

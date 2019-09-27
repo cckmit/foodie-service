@@ -52,17 +52,25 @@ public class AdminManageController {
         return webManageApplicationService.listInterested();
     }
 
+    @ApiOperation("TOP活动列表")
+    @GetMapping("top-activities")
+    public List<ActivityRecommend> listTopActivities() {
+        return webManageApplicationService.listTopActivities();
+    }
+
+    @ApiOperation("添加TOP活动推荐")
+    @PostMapping("add-top-activities")
+    public void addTopActivities(String activityId) {
+        webManageApplicationService.addTopActivity(activityId);
+    }
+
 //    @ApiOperation("推荐美食指南列表")
 //    @GetMapping("food-guide-recommend")
 //    public List<Article> listRecommendFoodGuides() {
 //        return webManageApplicationService.listFoodGuides();
 //    }
 //
-//    @ApiOperation("TOP活动列表")
-//    @GetMapping("top-activities")
-//    public List<RecommendActivityRepresentation> listTopActivities() {
-//        return webManagerRepresentationService.listTopActivities();
-//    }
+
 //
 //    @ApiOperation("添加活动推荐")
 //    @PostMapping("add-activities-recommend")
@@ -90,11 +98,7 @@ public class AdminManageController {
 //    }
 //
 //
-//    @ApiOperation("添加TOP活动推荐")
-//    @PostMapping("add-top-activities")
-//    public void addTopActivities(@RequestBody AddTopActivitiesCommand command) {
-//        webManageApplicationService.addTopActivities(command.getActivityIds());
-//    }
+
 //
 //    @ApiOperation("移除TOP活动推荐")
 //    @PostMapping("delete-top-articles")

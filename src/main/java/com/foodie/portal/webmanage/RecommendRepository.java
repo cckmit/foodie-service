@@ -21,7 +21,7 @@ public class RecommendRepository {
                 .orElse(null);
     }
 
-    public void saveActivityInterested(ActivityRecommend activityRecommend) {
+    public void saveActivityRecommend(ActivityRecommend activityRecommend) {
         recommendJpaRepository.save(activityRecommendEntityMapper.from(activityRecommend));
     }
 
@@ -29,5 +29,9 @@ public class RecommendRepository {
         return activityRecommendEntityMapper.to(recommendJpaRepository.findByInterestedRecommend(true));
     }
 
+
+    public List<ActivityRecommend> findAllTopActivities() {
+        return activityRecommendEntityMapper.to(recommendJpaRepository.findByTopRecommend(true));
+    }
 
 }
