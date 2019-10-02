@@ -12,6 +12,7 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
+import java.util.List;
 
 @Service
 public class MerchantApplicationService {
@@ -23,6 +24,10 @@ public class MerchantApplicationService {
 
     public Pagination<Merchant> merchants(int page, int size) {
         return merchantRepository.findByPage(page - 1, size);
+    }
+
+    public List<Merchant> merchants() {
+        return merchantRepository.findAll();
     }
 
     public void addMerchant(CreateMerchantCommand merchantCommand) {

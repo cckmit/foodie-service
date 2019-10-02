@@ -8,22 +8,25 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Component;
 
+import java.util.List;
+
 @Component
 public class MerchantRepository {
 
+    private final MerchantEntityMapper merchantEntityMapper = MerchantEntityMapper.instance;
     @Autowired
     private MerchantJpaRepository merchantJpaRepository;
 
     public void save(Merchant merchant) {
-        merchantJpaRepository.save(MerchantEntityMapper.instance.from(merchant));
+        merchantJpaRepository.save(merchantEntityMapper.from(merchant));
     }
 
     public Pagination<Merchant> findByPage(int page, int size) {
-        return MerchantEntityMapper.instance.to(merchantJpaRepository.findAll(PageRequest.of(page, size)));
+        return merchantEntityMapper.to(merchantJpaRepository.findAll(PageRequest.of(page, size)));
     }
 
     public Merchant findById(String id) {
-        return MerchantEntityMapper.instance.to(merchantJpaRepository.getOne(id));
+        return merchantEntityMapper.to(merchantJpaRepository.getOne(id));
     }
 
     public void delete(String id) {
@@ -31,10 +34,14 @@ public class MerchantRepository {
     }
 
     public Pagination<Merchant> findNonApprovedMerchant(int page, int size) {
-        return MerchantEntityMapper.instance.to(merchantJpaRepository.findByStatus(MerchantStatus.NON_APPROVE, PageRequest.of(page, size)));
+        return merchantEntityMapper.to(merchantJpaRepository.findByStatus(MerchantStatus.NON_APPROVE, PageRequest.of(page, size)));
     }
 
     public Merchant findByEmail(String email) {
-        return MerchantEntityMapper.instance.to(merchantJpaRepository.findByEmail(email));
+        return merchantEntityMapper.to(merchantJpaRepository.findByEmail(email));
+    }
+
+    public List<Merchant> findAll() {
+        return merchantEntityMapper.to(merchantJpaRepository.findAll());
     }
 }

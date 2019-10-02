@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.validation.Valid;
+import java.util.List;
 
 @Api(tags = "（管理员）用户/商家管理")
 @RestController
@@ -31,6 +32,12 @@ public class AdminMerchantController {
     @GetMapping
     public Pagination<Merchant> merchants(PageCommand pageCommand) {
         return merchantApplicationService.merchants(pageCommand.getPage(), pageCommand.getSize());
+    }
+
+    @ApiOperation("所有商家列表")
+    @GetMapping
+    public List<Merchant> merchants() {
+        return merchantApplicationService.merchants();
     }
 
     @ApiOperation("添加商家")
