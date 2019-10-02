@@ -7,9 +7,6 @@ plugins {
 group = 'com.foodie'
 version = '0.0.1-SNAPSHOT'
 
-repositories {
-    mavenCentral()
-}
 
 apply plugin: 'io.spring.dependency-management'
 
@@ -20,7 +17,10 @@ ext {
 }
 
 
-
+repositories {
+    maven {url "https://maven.aliyun.com/repository/central"}
+    mavenCentral()
+}
 
 
 configurations {

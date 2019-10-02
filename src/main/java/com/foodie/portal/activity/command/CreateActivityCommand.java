@@ -35,8 +35,6 @@ public class CreateActivityCommand {
     private String cityId;
     @ApiModelProperty("活动价格列表")
     private List<ActivityPrice> costList;
-    @ApiModelProperty("活动时间")
-    private List<ServiceScheduling> dates;
     @ApiModelProperty("活动类型")
     @NotNull
     private ActivityType type;

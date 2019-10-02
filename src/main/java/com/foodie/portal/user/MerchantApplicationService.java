@@ -81,4 +81,8 @@ public class MerchantApplicationService {
                 merchantCommand.getDescription(), merchantCommand.getActiveDesc(), merchantCommand.getImages());
         merchantRepository.save(merchant);
     }
+
+    public Merchant retrieveById(String id) {
+        return merchantRepository.findById(id);
+    }
 }
