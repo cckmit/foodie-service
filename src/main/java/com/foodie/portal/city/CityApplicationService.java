@@ -16,7 +16,7 @@ public class CityApplicationService {
     }
 
     public void addCity(CreateCityCommand cityCommand) {
-        var city = City.create(cityCommand.getName(), cityCommand.getDescription(), cityCommand.getImages());
+        var city = City.create(cityCommand.getName(), cityCommand.getDescription(), cityCommand.getIntroduction(), cityCommand.getImages());
         cityRepository.save(city);
     }
 

@@ -15,5 +15,6 @@ public class CityEntity {
     private String id;
     private String name;
     private String description;
+    private String introduction;
     private String images;
 }
