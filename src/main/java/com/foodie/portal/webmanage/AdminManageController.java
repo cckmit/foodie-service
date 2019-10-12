@@ -96,7 +96,7 @@ public class AdminManageController {
     }
 
     @ApiOperation("删除美食指南推荐")
-    @PostMapping("food-guide-recommend")
+    @DeleteMapping("food-guide-recommend")
     public void deleteRecommendArticle(String articleId) {
         webManageApplicationService.deleteRecommendFoodGuide(articleId);
     }
