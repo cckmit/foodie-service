@@ -1,5 +1,6 @@
 package com.foodie.portal.activity;
 
+import com.foodie.portal.activity.command.AdminCreateActivityCommand;
 import com.foodie.portal.activity.command.CreateActivityCommand;
 import com.foodie.portal.activity.command.UpdateActivityCommand;
 import com.foodie.portal.activity.model.Activity;
@@ -22,7 +23,7 @@ public class AdminActivityController {
 
     @ApiOperation("发布活动")
     @PostMapping
-    public void addActivity(@Valid @RequestBody CreateActivityCommand activityCommand) {
+    public void addActivity(@Valid @RequestBody AdminCreateActivityCommand activityCommand) {
         activityApplicationService.addActivity(activityCommand);
     }
 

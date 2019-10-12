@@ -1,5 +1,6 @@
 package com.foodie.portal.activity;
 
+import com.foodie.portal.activity.command.AdminCreateActivityCommand;
 import com.foodie.portal.activity.command.CreateActivityCommand;
 import com.foodie.portal.activity.command.UpdateActivityCommand;
 import com.foodie.portal.activity.command.UpdateServiceSchedulingCommand;
@@ -8,6 +9,7 @@ import com.foodie.portal.activity.model.ServiceScheduling;
 import com.foodie.portal.activity.model.Shift;
 import com.foodie.portal.city.CityApplicationService;
 import com.foodie.portal.commons.Pagination;
+import com.foodie.portal.user.MerchantApplicationService;
 import com.foodie.portal.user.model.Merchant;
 import lombok.var;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,9 +26,12 @@ public class ActivityApplicationService {
     private ActivityRepository activityRepository;
     @Autowired
     private CityApplicationService cityApplicationService;
+    @Autowired
+    private MerchantApplicationService merchantApplicationService;
 
-    public void addActivity(CreateActivityCommand activityCommand) {
-        addActivity(activityCommand, null);
+    public void addActivity(AdminCreateActivityCommand command) {
+        var merchant = merchantApplicationService.findById(command.getMerchantId());
+        addActivity(command, merchant);
     }
 
     public void addActivity(CreateActivityCommand command, Merchant merchant) {

@@ -42,7 +42,7 @@ public class AdminMerchantController {
     @ApiOperation("商家详情")
     @GetMapping("{id}")
     public Merchant detail(@PathVariable String id) {
-        return merchantApplicationService.detail(id);
+        return merchantApplicationService.findById(id);
     }
 
     @ApiOperation("修改商家信息")
