@@ -48,9 +48,15 @@ public class AdminManageController {
     }
 
     @ApiOperation("添加推荐活动")
-    @PostMapping("add-activity-recommend")
+    @PostMapping("activity-recommend")
     public void addRecommendActivity(String activityId) {
         webManageApplicationService.addRecommendActivity(activityId);
+    }
+
+    @ApiOperation("删除推荐活动")
+    @DeleteMapping("activity-recommend")
+    public void deleteRecommendActivity(String activityId) {
+        webManageApplicationService.deleteRecommendActivity(activityId);
     }
 
     @ApiOperation("获取推荐活动列表")
@@ -66,9 +72,15 @@ public class AdminManageController {
     }
 
     @ApiOperation("添加TOP活动推荐")
-    @PostMapping("add-top-activities")
+    @PostMapping("top-activities")
     public void addTopActivities(String activityId) {
         webManageApplicationService.addTopActivity(activityId);
+    }
+
+    @ApiOperation("删除TOP活动推荐")
+    @DeleteMapping("top-activities")
+    public void deleteTopActivities(String activityId) {
+        webManageApplicationService.deleteTopActivity(activityId);
     }
 
     @ApiOperation("推荐美食指南列表")
@@ -78,11 +90,16 @@ public class AdminManageController {
     }
 
     @ApiOperation("添加美食指南推荐")
-    @PostMapping("add-food-guide-recommend")
-    public void configRecommendArticle(String articleId) {
+    @PostMapping("food-guide-recommend")
+    public void addRecommendArticle(String articleId) {
         webManageApplicationService.addRecommendFoodGuide(articleId);
     }
 
+    @ApiOperation("删除美食指南推荐")
+    @PostMapping("food-guide-recommend")
+    public void deleteRecommendArticle(String articleId) {
+        webManageApplicationService.deleteRecommendFoodGuide(articleId);
+    }
 
 
 //    @ApiOperation("移除活动推荐")
