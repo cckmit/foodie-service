@@ -36,7 +36,7 @@ public class AdminCityController {
     @ApiOperation("修改城市描述和图片")
     @PatchMapping("{id}")
     public City updateCity(@PathVariable String id, @RequestBody UpdateCityCommand updateCityCommand) {
-        return cityApplicationService.updateDescription(id, updateCityCommand);
+        return cityApplicationService.updateCity(id, updateCityCommand);
     }
 
     @ApiOperation("删除城市")

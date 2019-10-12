@@ -24,9 +24,10 @@ public class CityApplicationService {
         return cityRepository.findById(id);
     }
 
-    public City updateDescription(String id, UpdateCityCommand updateCityCommand) {
+    public City updateCity(String id, UpdateCityCommand updateCityCommand) {
         var city = cityRepository.findById(id);
         city.setDescription(updateCityCommand.getDescription());
+        city.setIntroduction(updateCityCommand.getIntroduction());
         city.setImages(updateCityCommand.getImages());
         cityRepository.save(city);
         return city;
