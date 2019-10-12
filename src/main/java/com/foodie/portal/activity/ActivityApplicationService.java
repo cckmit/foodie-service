@@ -34,8 +34,7 @@ public class ActivityApplicationService {
         var activity = Activity.create(command.getTitle(), command.getSubTitle(),
                 command.getDescription(), command.getDuration(),
                 command.getMaxPeopleLimit(), command.getImages(), command.getLanguage(),
-                command.getAddress(), city, command.getCostList(),
-                command.getDates(), command.getType());
+                command.getAddress(), city, command.getCostList(), command.getType());
         activity.setMerchant(merchant);
         activityRepository.save(activity);
     }

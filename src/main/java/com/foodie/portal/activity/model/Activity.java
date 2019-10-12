@@ -43,7 +43,7 @@ public class Activity {
 
     public Activity(String title, String subTitle, String desc, String time, int maxPeopleCount,
                     String images, String language, String address, City city,
-                    List<ActivityPrice> costList, List<ServiceScheduling> dates, ActivityType type) {
+                    List<ActivityPrice> costList, ActivityType type) {
         this();
         this.title = title;
         this.subTitle = subTitle;
@@ -55,17 +55,16 @@ public class Activity {
         this.address = address;
         this.city = city;
         this.priceList = costList;
-        this.serviceSchedulingList = dates;
         this.type = type;
     }
 
     public static Activity create(String title, String subTitle, String desc, String duration, int maxPeopleCount,
                                   String images, String language, String address, City city,
-                                  List<ActivityPrice> costList, List<ServiceScheduling> dates, ActivityType type) {
+                                  List<ActivityPrice> costList, ActivityType type) {
         if (Objects.isNull(city)) {
             throw new RestException(ErrorCode.FAILED, "所选城市不能存在");
         }
-        return new Activity(title, subTitle, desc, duration, maxPeopleCount, images, language, address, city, costList, dates, type);
+        return new Activity(title, subTitle, desc, duration, maxPeopleCount, images, language, address, city, costList, type);
     }
 
     public void update(String title, String subTitle, String desc, String time, int maxPeopleCount,
@@ -112,7 +111,7 @@ public class Activity {
 
                 .filter(serviceScheduling ->
                         LocalDateTime.ofInstant(serviceScheduling.getServiceDate().toInstant(), ZoneId.systemDefault()).toLocalDate()
-                        .equals(LocalDateTime.ofInstant(serviceDate.toInstant(), ZoneId.systemDefault()).toLocalDate()))
+                                .equals(LocalDateTime.ofInstant(serviceDate.toInstant(), ZoneId.systemDefault()).toLocalDate()))
                 .findFirst()
                 .orElseThrow(() -> new RestException(ErrorCode.FAILED, "没有排班日期！"));
 
