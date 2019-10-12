@@ -33,6 +33,12 @@ public class AdminManageController {
         return webManageApplicationService.addBanner(bannerCommand);
     }
 
+    @ApiOperation("添加banner")
+    @GetMapping("banner")
+    public List<Banner> listBanners() {
+        return webManageApplicationService.listBanners();
+    }
+
     @ApiOperation("删除banner")
     @DeleteMapping("banner")
     public String removeBanner(String bannerId) {

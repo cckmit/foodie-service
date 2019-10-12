@@ -69,6 +69,10 @@ public class WebManageApplicationService {
         recommendRepository.saveArticleRecommend(articleRecommend);
     }
 
+    public List<Banner> listBanners() {
+        return webManageRepository.findAllBanners();
+    }
+
 //    public void removeRecommendActivity(String activityId) {
 //        recommendRepository.removeRecommendActivity(activityId);
 //    }

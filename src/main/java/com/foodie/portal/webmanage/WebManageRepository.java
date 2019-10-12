@@ -6,6 +6,8 @@ import com.foodie.portal.webmanage.repository.BannerJpaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import java.util.List;
+
 @Component
 public class WebManageRepository {
 
@@ -19,5 +21,9 @@ public class WebManageRepository {
 
     public void removeBanner(String bannerId) {
         bannerJpaRepository.deleteById(bannerId);
+    }
+
+    public List<Banner> findAllBanners() {
+        return bannerEntityMapper.to(bannerJpaRepository.findAll());
     }
 }
