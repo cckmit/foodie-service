@@ -31,8 +31,8 @@ public class RecommendRepository {
         activityRecommendJpaRepository.save(activityRecommendEntityMapper.from(activityRecommend));
     }
 
-    public List<ActivityRecommend> findAllInterestedActivities() {
-        return activityRecommendEntityMapper.to(activityRecommendJpaRepository.findByInterestedRecommend(true));
+    public List<ActivityRecommend> findAllInterestedActivities(String cityId) {
+        return activityRecommendEntityMapper.to(activityRecommendJpaRepository.findByInterestedRecommendAndCityId(true, cityId));
     }
 
 
@@ -40,8 +40,8 @@ public class RecommendRepository {
         return activityRecommendEntityMapper.to(activityRecommendJpaRepository.findByTopRecommend(true));
     }
 
-    public List<ArticleRecommend> findAllInterestedArticles() {
-        return articleRecommendEntityMapper.to(articleRecommendJpaRepository.findByInterestedRecommend(true));
+    public List<ArticleRecommend> findAllInterestedArticles(String cityId) {
+        return articleRecommendEntityMapper.to(articleRecommendJpaRepository.findByInterestedRecommendAndCityId(true, cityId));
     }
 
     public ArticleRecommend findArticleById(String id){

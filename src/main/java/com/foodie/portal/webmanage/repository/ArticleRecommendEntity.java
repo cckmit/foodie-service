@@ -14,5 +14,6 @@ public class ArticleRecommendEntity {
     private String id;
     private String title;
     private String cover;
+    private String cityId;
     private boolean interestedRecommend;
 }

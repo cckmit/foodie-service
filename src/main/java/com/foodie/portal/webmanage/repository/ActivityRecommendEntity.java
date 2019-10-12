@@ -27,6 +27,7 @@ public class ActivityRecommendEntity {
     private String subTitle;
     private String description;
     private String images;
+    private String cityId;
     @Enumerated(EnumType.STRING)
     private ActivityStatus status;
     @Enumerated(EnumType.STRING)

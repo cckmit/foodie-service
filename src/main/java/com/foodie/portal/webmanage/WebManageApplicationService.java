@@ -52,8 +52,8 @@ public class WebManageApplicationService {
     }
 
 
-    public List<ActivityRecommend> listInterested() {
-        return recommendRepository.findAllInterestedActivities();
+    public List<ActivityRecommend> listInterested(String cityId) {
+        return recommendRepository.findAllInterestedActivities(cityId);
     }
 
     public List<ActivityRecommend> listTopActivities() {
@@ -72,8 +72,8 @@ public class WebManageApplicationService {
         recommendRepository.saveActivityRecommend(activityRecommend);
     }
 
-    public List<ArticleRecommend> listFoodGuides() {
-        return recommendRepository.findAllInterestedArticles();
+    public List<ArticleRecommend> listFoodGuides(String cityId) {
+        return recommendRepository.findAllInterestedArticles(cityId);
     }
 
     public void addRecommendFoodGuide(String articleId) {

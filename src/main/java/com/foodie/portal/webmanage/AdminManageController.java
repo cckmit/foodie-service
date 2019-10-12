@@ -61,8 +61,8 @@ public class AdminManageController {
 
     @ApiOperation("获取推荐活动列表")
     @GetMapping("activities-recommend")
-    public List<ActivityRecommend> listRecommendActivities() {
-        return webManageApplicationService.listInterested();
+    public List<ActivityRecommend> listRecommendActivities(String cityId) {
+        return webManageApplicationService.listInterested(cityId);
     }
 
     @ApiOperation("TOP活动列表")
@@ -85,8 +85,8 @@ public class AdminManageController {
 
     @ApiOperation("推荐美食指南列表")
     @GetMapping("food-guide-recommend")
-    public List<ArticleRecommend> listRecommendFoodGuides() {
-        return webManageApplicationService.listFoodGuides();
+    public List<ArticleRecommend> listRecommendFoodGuides(String cityId) {
+        return webManageApplicationService.listFoodGuides(cityId);
     }
 
     @ApiOperation("添加美食指南推荐")

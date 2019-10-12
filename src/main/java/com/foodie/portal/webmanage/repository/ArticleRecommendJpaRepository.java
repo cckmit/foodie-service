@@ -6,6 +6,6 @@ import java.util.List;
 
 public interface ArticleRecommendJpaRepository extends JpaRepository<ArticleRecommendEntity, String> {
 
-    List<ArticleRecommendEntity> findByInterestedRecommend(boolean interestedRecommend);
+    List<ArticleRecommendEntity> findByInterestedRecommendAndCityId(boolean interestedRecommend, String cityId);
 
 }
