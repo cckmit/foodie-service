@@ -33,7 +33,7 @@ public class AdminManageController {
         return webManageApplicationService.addBanner(bannerCommand);
     }
 
-    @ApiOperation("添加banner")
+    @ApiOperation("查询所有banner")
     @GetMapping("banner")
     public List<Banner> listBanners() {
         return webManageApplicationService.listBanners();
