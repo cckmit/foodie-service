@@ -69,7 +69,7 @@ public class Activity {
 
     public void update(String title, String subTitle, String desc, String time, int maxPeopleCount,
                        String images, String language, String address,
-                       List<ActivityPrice> costList, List<ServiceScheduling> dates) {
+                       List<ActivityPrice> costList) {
         this.title = title;
         this.subTitle = subTitle;
         this.description = desc;
@@ -79,7 +79,6 @@ public class Activity {
         this.language = language;
         this.address = address;
         this.priceList = costList;
-        this.serviceSchedulingList = dates;
     }
 
     public void pass() {

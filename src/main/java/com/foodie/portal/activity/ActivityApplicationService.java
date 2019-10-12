@@ -52,8 +52,7 @@ public class ActivityApplicationService {
         activity.update(command.getTitle(), command.getSubTitle(),
                 command.getDescription(), command.getDuration(),
                 command.getMaxPeopleLimit(), command.getImages(), command.getLanguage(),
-                command.getAddress(), command.getCostList(),
-                command.getDates());
+                command.getAddress(), command.getCostList());
         activityRepository.save(activity);
     }
 
