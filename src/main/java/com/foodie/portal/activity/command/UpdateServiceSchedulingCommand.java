@@ -1,6 +1,5 @@
 package com.foodie.portal.activity.command;
 
-import com.foodie.portal.activity.model.Shift;
 import lombok.Data;
 
 import java.util.Date;
@@ -15,5 +14,10 @@ public class UpdateServiceSchedulingCommand {
      */
     private List<Shift> shifts;
 
+
+    @Data
+    public class Shift {
+        private String startTime;
+    }
 
 }

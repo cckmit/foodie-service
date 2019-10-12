@@ -5,6 +5,7 @@ import com.foodie.portal.activity.command.UpdateActivityCommand;
 import com.foodie.portal.activity.command.UpdateServiceSchedulingCommand;
 import com.foodie.portal.activity.model.Activity;
 import com.foodie.portal.activity.model.ServiceScheduling;
+import com.foodie.portal.activity.model.Shift;
 import com.foodie.portal.city.CityApplicationService;
 import com.foodie.portal.commons.Pagination;
 import com.foodie.portal.user.model.Merchant;
@@ -89,7 +90,8 @@ public class ActivityApplicationService {
 
     public void updateServiceScheduling(String id, List<UpdateServiceSchedulingCommand> command) {
         List<ServiceScheduling> serviceSchedulingList = command.stream()
-                .map(item -> ServiceScheduling.create(id, item.getServiceDate(), item.getShifts()))
+                .map(item -> ServiceScheduling.create(id, item.getServiceDate(),
+                        item.getShifts().stream().map(shift -> Shift.create(shift.getStartTime())).collect(Collectors.toList())))
                 .collect(Collectors.toList());
         Activity activity = activityRepository.findById(id);
 
