@@ -8,7 +8,7 @@ import java.util.List;
 
 public interface ActivityRecommendJpaRepository extends JpaRepository<ActivityRecommendEntity, String> {
 
-    List<ActivityRecommendEntity> findByInterestedRecommend(boolean interestedRecommend);
+    List<ActivityRecommendEntity> findByInterestedRecommendAndCityId(boolean interestedRecommend, String cityId);
 
     List<ActivityRecommendEntity> findByTopRecommend(boolean topRecommend);
 }

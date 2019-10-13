@@ -45,8 +45,15 @@ public class WebManageApplicationService {
         recommendRepository.saveActivityRecommend(activityRecommend);
     }
 
-    public List<ActivityRecommend> listInterested() {
-        return recommendRepository.findAllInterestedActivities();
+    public void deleteRecommendActivity(String activityId) {
+        var activityRecommend = recommendRepository.findActivityById(activityId);
+        activityRecommend.setInterestedRecommend(false);
+        recommendRepository.saveActivityRecommend(activityRecommend);
+    }
+
+
+    public List<ActivityRecommend> listInterested(String cityId) {
+        return recommendRepository.findAllInterestedActivities(cityId);
     }
 
     public List<ActivityRecommend> listTopActivities() {
@@ -59,14 +66,30 @@ public class WebManageApplicationService {
         recommendRepository.saveActivityRecommend(activityRecommend);
     }
 
-    public List<ArticleRecommend> listFoodGuides() {
-        return recommendRepository.findAllInterestedArticles();
+    public void deleteTopActivity(String activityId) {
+        var activityRecommend = recommendRepository.findActivityById(activityId);
+        activityRecommend.setTopRecommend(false);
+        recommendRepository.saveActivityRecommend(activityRecommend);
+    }
+
+    public List<ArticleRecommend> listFoodGuides(String cityId) {
+        return recommendRepository.findAllInterestedArticles(cityId);
     }
 
     public void addRecommendFoodGuide(String articleId) {
         var articleRecommend = recommendRepository.findArticleById(articleId);
         articleRecommend.setInterestedRecommend(true);
         recommendRepository.saveArticleRecommend(articleRecommend);
+    }
+
+    public void deleteRecommendFoodGuide(String articleId) {
+        var articleRecommend = recommendRepository.findArticleById(articleId);
+        articleRecommend.setInterestedRecommend(false);
+        recommendRepository.saveArticleRecommend(articleRecommend);
+    }
+
+    public List<Banner> listBanners() {
+        return webManageRepository.findAllBanners();
     }
 
 //    public void removeRecommendActivity(String activityId) {

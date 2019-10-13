@@ -10,20 +10,22 @@ public class City {
     private String id;
     private String name;
     private String description;
+    private String introduction;
     private String images;
 
     public City() {
         this.id = IdUtil.fastSimpleUUID();
     }
 
-    public City(String name, String desc, String images) {
+    public City(String name, String desc, String introduction, String images) {
         this.id = IdUtil.fastSimpleUUID();
         this.name = name;
+        this.introduction = introduction;
         this.description = desc;
         this.images = images;
     }
 
-    public static City create(String name, String desc, String images) {
-        return new City(name, desc, images);
+    public static City create(String name, String desc,String introduction, String images) {
+        return new City(name, desc, introduction, images);
     }
 }

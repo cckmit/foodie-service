@@ -32,7 +32,5 @@ public class UpdateActivityCommand {
     private String address;
     @ApiModelProperty("活动价格列表")
     private List<ActivityPrice> costList;
-    @ApiModelProperty("活动时间")
-    private List<ServiceScheduling> dates;
 
 }

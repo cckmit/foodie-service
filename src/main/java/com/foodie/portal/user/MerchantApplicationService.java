@@ -36,7 +36,7 @@ public class MerchantApplicationService {
         merchantRepository.save(merchant);
     }
 
-    public Merchant detail(String id) {
+    public Merchant findById(String id) {
         return merchantRepository.findById(id);
     }
 

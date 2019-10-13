@@ -7,15 +7,11 @@ import com.foodie.portal.commons.RestException;
 import com.foodie.portal.user.model.Merchant;
 import lombok.Data;
 
-import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.util.Date;
 import java.util.List;
 import java.util.Objects;
-import java.util.function.Function;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 @Data
 public class Activity {
@@ -43,7 +39,7 @@ public class Activity {
 
     public Activity(String title, String subTitle, String desc, String time, int maxPeopleCount,
                     String images, String language, String address, City city,
-                    List<ActivityPrice> costList,  ActivityType type) {
+                    List<ActivityPrice> costList, ActivityType type) {
         this();
         this.title = title;
         this.subTitle = subTitle;
@@ -60,7 +56,7 @@ public class Activity {
 
     public static Activity create(String title, String subTitle, String desc, String duration, int maxPeopleCount,
                                   String images, String language, String address, City city,
-                                  List<ActivityPrice> costList,  ActivityType type) {
+                                  List<ActivityPrice> costList, ActivityType type) {
         if (Objects.isNull(city)) {
             throw new RestException(ErrorCode.FAILED, "所选城市不能存在");
         }
@@ -69,7 +65,7 @@ public class Activity {
 
     public void update(String title, String subTitle, String desc, String time, int maxPeopleCount,
                        String images, String language, String address,
-                       List<ActivityPrice> costList, List<ServiceScheduling> dates) {
+                       List<ActivityPrice> costList) {
         this.title = title;
         this.subTitle = subTitle;
         this.description = desc;
@@ -79,7 +75,6 @@ public class Activity {
         this.language = language;
         this.address = address;
         this.priceList = costList;
-        this.serviceSchedulingList = dates;
     }
 
     public void pass() {
@@ -111,7 +106,7 @@ public class Activity {
 
                 .filter(serviceScheduling ->
                         LocalDateTime.ofInstant(serviceScheduling.getServiceDate().toInstant(), ZoneId.systemDefault()).toLocalDate()
-                        .equals(LocalDateTime.ofInstant(serviceDate.toInstant(), ZoneId.systemDefault()).toLocalDate()))
+                                .equals(LocalDateTime.ofInstant(serviceDate.toInstant(), ZoneId.systemDefault()).toLocalDate()))
                 .findFirst()
                 .orElseThrow(() -> new RestException(ErrorCode.FAILED, "没有排班日期！"));
 

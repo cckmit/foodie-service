@@ -6,6 +6,7 @@ import com.foodie.portal.activity.command.UpdateActivityCommand;
 import com.foodie.portal.activity.command.UpdateServiceSchedulingCommand;
 import com.foodie.portal.activity.model.Activity;
 import com.foodie.portal.activity.model.ServiceScheduling;
+import com.foodie.portal.activity.model.Shift;
 import com.foodie.portal.city.CityApplicationService;
 import com.foodie.portal.commons.Pagination;
 import com.foodie.portal.user.MerchantApplicationService;
@@ -28,9 +29,9 @@ public class ActivityApplicationService {
     @Autowired
     private MerchantApplicationService merchantApplicationService;
 
-    public void addActivity(AdminCreateActivityCommand activityCommand) {
-        var merchant = merchantApplicationService.retrieveById(activityCommand.getMerchantId());
-        addActivity(activityCommand, merchant);
+    public void addActivity(AdminCreateActivityCommand command) {
+        var merchant = merchantApplicationService.findById(command.getMerchantId());
+        addActivity(command, merchant);
     }
 
     public void addActivity(CreateActivityCommand command, Merchant merchant) {
@@ -38,8 +39,7 @@ public class ActivityApplicationService {
         var activity = Activity.create(command.getTitle(), command.getSubTitle(),
                 command.getDescription(), command.getDuration(),
                 command.getMaxPeopleLimit(), command.getImages(), command.getLanguage(),
-                command.getAddress(), city, command.getCostList(),
-                command.getType());
+                command.getAddress(), city, command.getCostList(), command.getType());
         activity.setMerchant(merchant);
         activityRepository.save(activity);
     }
@@ -57,8 +57,7 @@ public class ActivityApplicationService {
         activity.update(command.getTitle(), command.getSubTitle(),
                 command.getDescription(), command.getDuration(),
                 command.getMaxPeopleLimit(), command.getImages(), command.getLanguage(),
-                command.getAddress(), command.getCostList(),
-                command.getDates());
+                command.getAddress(), command.getCostList());
         activityRepository.save(activity);
     }
 
@@ -94,7 +93,8 @@ public class ActivityApplicationService {
 
     public void updateServiceScheduling(String id, List<UpdateServiceSchedulingCommand> command) {
         List<ServiceScheduling> serviceSchedulingList = command.stream()
-                .map(item -> ServiceScheduling.create(id, item.getServiceDate(), item.getShifts()))
+                .map(item -> ServiceScheduling.create(id, item.getServiceDate(),
+                        item.getShifts().stream().map(shift -> Shift.create(shift.getStartTime())).collect(Collectors.toList())))
                 .collect(Collectors.toList());
         Activity activity = activityRepository.findById(id);
 

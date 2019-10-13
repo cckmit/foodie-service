@@ -7,6 +7,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import javax.persistence.Column;
 import javax.persistence.Embeddable;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
@@ -27,6 +28,8 @@ public class ActivityRecommendEntity {
     private String subTitle;
     private String description;
     private String images;
+    @Column(name = "city_id")
+    private String cityId;
     @Enumerated(EnumType.STRING)
     private ActivityStatus status;
     @Enumerated(EnumType.STRING)
