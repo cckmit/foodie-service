@@ -54,11 +54,12 @@ public class MerchantApplicationService {
 
     public void pass(String id, double extractRatio) {
         Merchant merchant = merchantRepository.findById(id);
-        merchant.pass(extractRatio);
         String password = RandomUtil.randomString(10);
-        merchant.setPassword(password);
-        applicationContext.publishEvent(new MerchantApplyPassedEvent(merchant));
+        merchant.pass(extractRatio, password);
+
         merchantRepository.save(merchant);
+        //发送邮件通知
+        applicationContext.publishEvent(new MerchantApplyPassedEvent(merchant));
     }
 
     public void reject(String id) {

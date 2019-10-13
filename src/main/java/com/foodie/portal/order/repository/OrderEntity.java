@@ -28,7 +28,7 @@ public class OrderEntity {
     @ManyToOne
     private ActivityEntity activity;
     private int count;
-    private BigDecimal price;
+    private double price;
     @ManyToOne
     @NotFound(action = NotFoundAction.IGNORE)
     private UserEntity user;
@@ -39,6 +39,8 @@ public class OrderEntity {
     @ManyToOne
     @NotFound(action = NotFoundAction.IGNORE)
     private MerchantEntity merchant;
+    private double totalExtract;
+    private double benefitExtract;
     private String paymentId;
     private Instant createdAt;
 

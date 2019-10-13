@@ -35,7 +35,7 @@ public class AdminMerchantController {
     }
 
     @ApiOperation("所有商家列表")
-    @GetMapping
+    @GetMapping("all")
     public List<Merchant> merchants() {
         return merchantApplicationService.merchants();
     }

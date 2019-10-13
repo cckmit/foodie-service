@@ -1,6 +1,7 @@
 package com.foodie.portal.order;
 
 import cn.hutool.core.util.IdUtil;
+import cn.hutool.core.util.NumberUtil;
 import cn.hutool.core.util.RandomUtil;
 import com.foodie.portal.activity.model.Activity;
 import com.foodie.portal.activity.model.ActivityStatus;
@@ -12,7 +13,6 @@ import com.foodie.portal.utils.IdGenerator;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.math.BigDecimal;
 import java.time.Instant;
 import java.util.Objects;
 
@@ -25,15 +25,15 @@ public class Order {
     private String number;
     private Activity activity;
     private int count;
-    private BigDecimal price;
+    private double price;
     private OrderInfo orderInfo;
     private User user;
     private OrderStatus status;
     private String payNo;
     private String rejectReason;
     private Merchant merchant;
-    private double extractRatio;
-    private BigDecimal benefitExtractRatio;
+    private double totalExtract;
+    private double benefitExtract;
     private String paymentId;
     private Instant createdAt;
 
@@ -42,42 +42,39 @@ public class Order {
         this.number = IdGenerator.getTimeId();
         this.activity = activity;
         this.count = count;
-        this.price = activity.getPrice(count);
+        this.price = NumberUtil.mul(activity.getPrice(count), count);
         this.status = OrderStatus.CREATED;
         this.payNo = RandomUtil.randomNumbers(6);
         this.orderInfo = orderInfo;
         this.merchant = activity.getMerchant();
-        this.extractRatio = merchant.getExtractRatio();
-        this.benefitExtractRatio = merchant.getBenefitExtractRatio();
+        this.totalExtract = NumberUtil.mul(price, merchant.getExtractRatio());
+        this.benefitExtract = NumberUtil.mul(price, merchant.getBenefitExtractRatio());
         this.createdAt = now();
     }
 
     public static Order create(Activity activity, int count, OrderInfo orderInfo) {
         if (Objects.isNull(activity)) {
             throw new RestException(ErrorCode.NO_RESULT_FOUND.getCode(), "活动不存在");
-        }else if(activity.getStatus() != ActivityStatus.PASSED) {
+        } else if (activity.getStatus() != ActivityStatus.PASSED) {
             throw new RestException(ErrorCode.NO_RESULT_FOUND.getCode(), "活动未审核");
         }
         return new Order(activity, count, orderInfo);
     }
 
-    public void prePay(BigDecimal paidPrice) {
-        if(!paidPrice.equals(calculateTotalPrice())) {
+    public void prePay(double paidPrice) {
+        if (paidPrice != price) {
             throw new RestException(ErrorCode.FAILED, "支付价格与订单实际价格不符");
         }
     }
 
     public void pay() {
-       this.status = OrderStatus.PAID;
+        this.status = OrderStatus.PAID;
     }
 
-    private BigDecimal calculateTotalPrice() {
-        return price.multiply(BigDecimal.valueOf(count));
-    }
 
     public void accept(Merchant merchant) {
         checkOrder(merchant);
-        if(status != OrderStatus.PAID) {
+        if (status != OrderStatus.PAID) {
             throw new RestException(ErrorCode.FAILED, "订单未支付");
         }
         this.status = OrderStatus.ACCEPTED;
@@ -85,7 +82,7 @@ public class Order {
 
     public void reject(String reason, Merchant merchant) {
         checkOrder(merchant);
-        if(status != OrderStatus.PAID) {
+        if (status != OrderStatus.PAID) {
             throw new RestException(ErrorCode.FAILED, "订单未支付");
         }
         this.status = OrderStatus.REJECTED;
@@ -94,7 +91,7 @@ public class Order {
 
     public void startService(String payNo, Merchant merchant) {
         checkOrder(merchant);
-        if(status != OrderStatus.ACCEPTED) {
+        if (status != OrderStatus.ACCEPTED) {
             throw new RestException(ErrorCode.FAILED, "订单未通过审核");
         }
         if (!payNo.equals(this.payNo)) {
@@ -109,7 +106,4 @@ public class Order {
         }
     }
 
-    public void cancelPay() {
-        this.paymentId = null;
-    }
 }

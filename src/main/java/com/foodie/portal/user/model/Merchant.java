@@ -1,6 +1,7 @@
 package com.foodie.portal.user.model;
 
 import cn.hutool.core.util.IdUtil;
+import cn.hutool.core.util.NumberUtil;
 import com.foodie.portal.commons.ErrorCode;
 import com.foodie.portal.commons.RestException;
 import lombok.Data;
@@ -51,8 +52,9 @@ public class Merchant {
         this.images = images;
     }
 
-    public void pass(double extractRatio) {
+    public void pass(double extractRatio, String password) {
         this.extractRatio = extractRatio;
+        this.password = password;
         this.status = PASSED;
     }
 
@@ -64,7 +66,7 @@ public class Merchant {
     }
 
 
-    public BigDecimal getBenefitExtractRatio() {
-        return BigDecimal.valueOf(extractRatio).multiply(BigDecimal.valueOf(0.2));
-    };
+    public double getBenefitExtractRatio() {
+        return NumberUtil.mul(extractRatio, 0.2);
+    }
 }

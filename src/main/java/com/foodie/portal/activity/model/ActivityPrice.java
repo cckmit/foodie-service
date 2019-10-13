@@ -11,6 +11,6 @@ public class ActivityPrice {
 
     private int reserveCount;
 
-    private BigDecimal price;
+    private double price;
 
 }

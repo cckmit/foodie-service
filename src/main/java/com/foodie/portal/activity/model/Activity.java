@@ -90,7 +90,7 @@ public class Activity {
         this.status = ActivityStatus.REJECTED;
     }
 
-    public BigDecimal getPrice(int count) {
+    public double getPrice(int count) {
         if (priceList == null) {
             throw new RestException(ErrorCode.REFUSED, "活动价格未设定");
         }

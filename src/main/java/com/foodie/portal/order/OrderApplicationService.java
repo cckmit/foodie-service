@@ -62,7 +62,7 @@ public class OrderApplicationService {
         order.prePay(command.getPaidPrice());
         Payment payment;
         try {
-            payment = paymentApplicationService.createPayment(command.getPaidPrice().doubleValue(),
+            payment = paymentApplicationService.createPayment(command.getPaidPrice(),
                     "USD", PaypalPaymentMethod.paypal,
                     PaypalPaymentIntent.sale, "订单支付",
                     cancelUrl, successUrl);

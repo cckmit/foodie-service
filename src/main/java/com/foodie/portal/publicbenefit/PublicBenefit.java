@@ -1,6 +1,7 @@
 package com.foodie.portal.publicbenefit;
 
 import cn.hutool.core.util.IdUtil;
+import cn.hutool.core.util.NumberUtil;
 import com.foodie.portal.order.Order;
 import com.google.common.collect.Lists;
 import lombok.Data;
@@ -18,7 +19,7 @@ public class PublicBenefit {
     private String title;
     private String content;
     private BigDecimal totalFoundation;
-    private BigDecimal currentFoundation;
+    private double currentFoundation;
     private List<Order> orders;
     private Instant createdAt;
 
@@ -28,7 +29,7 @@ public class PublicBenefit {
         this.title = title;
         this.content = content;
         this.totalFoundation = totalFoundation;
-        this.currentFoundation = BigDecimal.ZERO;
+        this.currentFoundation = 0;
         this.orders = Lists.newArrayList();
     }
 
@@ -38,7 +39,7 @@ public class PublicBenefit {
 
     public void extract(Order order) {
         this.orders.add(order);
-        this.currentFoundation = currentFoundation.add(order.getBenefitExtractRatio().multiply(order.getPrice()));
+        this.currentFoundation = NumberUtil.add(currentFoundation,order.getBenefitExtract());
     }
 
 }
