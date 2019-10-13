@@ -1,5 +1,6 @@
 package com.foodie.portal.wallet;
 
+import cn.hutool.core.util.NumberUtil;
 import com.foodie.portal.order.Order;
 import com.foodie.portal.user.model.Merchant;
 import lombok.Data;
@@ -11,10 +12,10 @@ import java.util.List;
 public class MerchantWallet {
     private Merchant merchant;
     private List<Order> orders;
-    private BigDecimal balance;
+    private double balance;
 
     public void increase(Order order) {
         orders.add(order);
-        balance = balance.add(order.getPrice().multiply(BigDecimal.valueOf(1 - merchant.getExtractRatio())));
+        balance = NumberUtil.add(balance, NumberUtil.mul(order.getPrice(),1 - merchant.getExtractRatio()));
     }
 }
