@@ -12,6 +12,7 @@ import com.foodie.portal.commons.Pagination;
 import com.foodie.portal.user.MerchantApplicationService;
 import com.foodie.portal.user.model.Merchant;
 import lombok.var;
+import org.apache.logging.log4j.util.Strings;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -45,7 +46,16 @@ public class ActivityApplicationService {
     }
 
     public Pagination<Activity> find(int page, int size) {
-        return activityRepository.find(page - 1, size);
+        return find(page, size, null);
+    }
+
+    public Pagination<Activity> find(int page, int size, String cityId) {
+        if(Strings.isBlank(cityId)) {
+            return activityRepository.find(page - 1, size);
+        }else {
+            return activityRepository.findByCityId(page-1, size, cityId);
+        }
+
     }
 
     public Activity findById(String id) {

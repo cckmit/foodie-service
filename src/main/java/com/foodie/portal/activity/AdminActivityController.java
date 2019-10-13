@@ -29,8 +29,8 @@ public class AdminActivityController {
 
     @ApiOperation("所有活动")
     @GetMapping
-    public Pagination<Activity> activities(PageCommand pageCommand) {
-        return  activityApplicationService.find(pageCommand.getPage(), pageCommand.getSize());
+    public Pagination<Activity> activities(PageCommand pageCommand, String cityId) {
+        return  activityApplicationService.find(pageCommand.getPage(), pageCommand.getSize(), cityId);
     }
 
     @ApiOperation("活动详情")
