@@ -13,6 +13,9 @@ public class MerchantWallet {
     private Merchant merchant;
     private List<Order> orders;
     private double balance;
+    //未结算
+    private double openAccount;
+    //余额
 
     public void increase(Order order) {
         orders.add(order);

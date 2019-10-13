@@ -6,14 +6,15 @@ import com.foodie.portal.commons.event.MerchantApplyPassedEvent;
 import com.foodie.portal.user.command.CreateMerchantCommand;
 import com.foodie.portal.user.model.Merchant;
 import com.foodie.portal.web.command.ApplyMerchantCommand;
+import lombok.extern.slf4j.Slf4j;
 import lombok.var;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Service;
 
-import java.math.BigDecimal;
 import java.util.List;
 
+@Slf4j
 @Service
 public class MerchantApplicationService {
 
@@ -88,7 +89,4 @@ public class MerchantApplicationService {
         merchantRepository.save(merchant);
     }
 
-    public Merchant retrieveById(String id) {
-        return merchantRepository.findById(id);
-    }
 }

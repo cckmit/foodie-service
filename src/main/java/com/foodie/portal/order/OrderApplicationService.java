@@ -3,6 +3,7 @@ package com.foodie.portal.order;
 import com.foodie.portal.activity.ActivityApplicationService;
 import com.foodie.portal.activity.model.Activity;
 import com.foodie.portal.commons.ErrorCode;
+import com.foodie.portal.commons.EventPublisher;
 import com.foodie.portal.commons.Pagination;
 import com.foodie.portal.commons.RestException;
 import com.foodie.portal.commons.event.OrderCreatedEvent;
@@ -35,7 +36,7 @@ public class OrderApplicationService {
     @Autowired
     private ActivityApplicationService activityApplicationService;
     @Autowired
-    private ApplicationContext applicationContext;
+    private EventPublisher eventPublisher;
     @Autowired
     private PaymentApplicationService paymentApplicationService;
 
@@ -49,7 +50,7 @@ public class OrderApplicationService {
 
         order.setUser(user);
         orderRepository.save(order);
-        applicationContext.publishEvent(new OrderCreatedEvent(order));
+        eventPublisher.publish(new OrderCreatedEvent(order));
         return order;
     }
 
@@ -92,6 +93,8 @@ public class OrderApplicationService {
         var order = orderRepository.byId(id);
         order.accept(merchant);
         orderRepository.save(order);
+
+        eventPublisher.publish(new OrderCreatedEvent(order));
         return order;
     }
 
