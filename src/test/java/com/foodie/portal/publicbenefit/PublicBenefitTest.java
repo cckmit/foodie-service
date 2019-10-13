@@ -17,9 +17,9 @@ public class PublicBenefitTest {
     public void should_extract_from_order() {
         PublicBenefit publicBenefit = PublicBenefit.create("", "", BigDecimal.TEN);
         Order order = spy(new Order());
-        order.setBenefitExtractRatio(BigDecimal.valueOf(0.03));
-        given(order.getPrice()).willReturn(BigDecimal.valueOf(10));
+        order.setBenefitExtract(0.3);
+        given(order.getPrice()).willReturn(10.0);
         publicBenefit.extract(order);
-        assertEquals(BigDecimal.valueOf(0.3).doubleValue(), publicBenefit.getCurrentFoundation().doubleValue(),0.01);
+        assertEquals(BigDecimal.valueOf(0.3).doubleValue(), publicBenefit.getCurrentFoundation(),0.01);
     }
 }
