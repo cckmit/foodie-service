@@ -47,5 +47,11 @@ public class PublicBenefit {
     }
 
 
-
+    public void update(String title, String image, String description, String content, double totalFoundation) {
+        this.title = title;
+        this.image = image;
+        this.description = description;
+        this.content = content;
+        this.totalFoundation = totalFoundation;
+    }
 }
