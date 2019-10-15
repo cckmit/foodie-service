@@ -10,6 +10,7 @@ public class ActivityRecommend {
     private String title;
     private String subTitle;
     private String description;
+    private String cityId;
     private String images;
     private ActivityStatus status;
     private ActivityType type;

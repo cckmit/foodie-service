@@ -8,6 +8,7 @@ public class ArticleRecommend {
     private String title;
     private String cover;
     private String content;
+    private String cityId;
     private boolean interestedRecommend;
 
 }
