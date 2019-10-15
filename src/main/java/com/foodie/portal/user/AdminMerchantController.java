@@ -5,6 +5,7 @@ import com.foodie.portal.commons.Pagination;
 import com.foodie.portal.user.command.CreateMerchantCommand;
 import com.foodie.portal.user.command.PassMerchantApplyCommand;
 import com.foodie.portal.user.model.Merchant;
+import com.foodie.portal.user.model.User;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,64 +23,72 @@ import java.util.List;
 
 @Api(tags = "（管理员）用户/商家管理")
 @RestController
-@RequestMapping("admin/merchants")
+@RequestMapping("admin")
 public class AdminMerchantController {
 
     @Autowired
     private MerchantApplicationService merchantApplicationService;
+    @Autowired
+    private UserApplicationService userApplicationService;
 
     @ApiOperation("商家列表")
-    @GetMapping
+    @GetMapping("merchants")
     public Pagination<Merchant> merchants(PageCommand pageCommand) {
         return merchantApplicationService.merchants(pageCommand.getPage(), pageCommand.getSize());
     }
 
     @ApiOperation("所有商家列表")
-    @GetMapping("all")
+    @GetMapping("merchants/all")
     public List<Merchant> merchants() {
         return merchantApplicationService.merchants();
     }
 
     @ApiOperation("添加商家")
-    @PostMapping
+    @PostMapping("merchants")
     public void addMerchant(@RequestBody CreateMerchantCommand merchantCommand) {
         merchantApplicationService.addMerchant(merchantCommand);
     }
 
     @ApiOperation("商家详情")
-    @GetMapping("{id}")
+    @GetMapping("merchants/{id}")
     public Merchant detail(@PathVariable String id) {
         return merchantApplicationService.findById(id);
     }
 
     @ApiOperation("修改商家信息")
-    @PatchMapping("{id}")
+    @PatchMapping("merchants/{id}")
     public Merchant updateMerchant(@PathVariable String id, @RequestBody CreateMerchantCommand merchantCommand) {
         return merchantApplicationService.updateMerchant(id, merchantCommand);
     }
 
     @ApiOperation("删除商家")
-    @DeleteMapping("{id}")
+    @DeleteMapping("merchants/{id}")
     public void deleteMerchant(@PathVariable String id) {
         merchantApplicationService.deleteMerchant(id);
     }
 
     @ApiOperation("商家审批通过")
-    @PostMapping("{id}/pass")
+    @PostMapping("merchants/{id}/pass")
     public void pass(@PathVariable String id, @RequestBody @Valid PassMerchantApplyCommand command) {
         merchantApplicationService.pass(id, command.getExtractRatio());
     }
 
     @ApiOperation("商家审批拒绝")
-    @PostMapping("{id}/reject")
+    @PostMapping("merchants/{id}/reject")
     public void reject(@PathVariable String id) {
         merchantApplicationService.reject(id);
     }
 
     @ApiOperation("待审核商家列表")
-    @GetMapping("non-approval")
+    @GetMapping("merchants/non-approval")
     public Pagination<Merchant> waitForApprovedMerchant(PageCommand pageCommand) {
         return merchantApplicationService.waitForApprovedMerchant(pageCommand.getPage(), pageCommand.getSize());
+    }
+
+    @ApiOperation("用户列表")
+    @GetMapping("user")
+    public Pagination<User> listUser(PageCommand pageCommand) {
+        return userApplicationService.list(pageCommand.getPage(), pageCommand.getSize());
     }
 }
 

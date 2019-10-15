@@ -1,9 +1,11 @@
 package com.foodie.portal.user;
 
+import com.foodie.portal.commons.Pagination;
 import com.foodie.portal.user.model.User;
 import com.foodie.portal.user.repository.UserEntityMapper;
 import com.foodie.portal.user.repository.UserJpaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -22,5 +24,9 @@ public class UserRepository {
 
     public User findById(String id) {
         return UserEntityMapper.instance.to(userJpaRepository.findById(id).orElse(null));
+    }
+
+    public Pagination<User> findAll(int page, int size) {
+        return UserEntityMapper.instance.to(userJpaRepository.findAll(PageRequest.of(page,size)));
     }
 }

@@ -1,10 +1,12 @@
 package com.foodie.portal.user;
 
 import com.foodie.portal.commons.ErrorCode;
+import com.foodie.portal.commons.Pagination;
 import com.foodie.portal.commons.RestException;
 import com.foodie.portal.user.command.UpdateUserInfoCommand;
 import com.foodie.portal.user.command.UserChangePasswordCommand;
 import com.foodie.portal.user.command.UserRegisterCommand;
+import com.foodie.portal.user.model.Merchant;
 import com.foodie.portal.user.model.SysUser;
 import com.foodie.portal.user.model.User;
 import lombok.var;
@@ -54,5 +56,9 @@ public class UserApplicationService {
 
     public User userInfo(String id) {
         return userRepository.findById(id);
+    }
+
+    public Pagination<User> list(int page, int size) {
+        return userRepository.findAll(page - 1, size);
     }
 }
