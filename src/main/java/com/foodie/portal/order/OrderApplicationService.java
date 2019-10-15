@@ -54,9 +54,7 @@ public class OrderApplicationService {
         return order;
     }
 
-    public Pagination<Order> orderList(int page, int size) {
-        return orderRepository.findByPage(page - 1, size);
-    }
+
 
     public String prePay(String id, @Valid PayOrderCommand command, String successUrl, String cancelUrl) {
         var order = orderRepository.byId(id);
@@ -81,9 +79,6 @@ public class OrderApplicationService {
         throw new RestException(ErrorCode.FAILED, "没有获取到支付URL");
     }
 
-    public Pagination<OrderSummaryRepresentation> myOrderList(int page, int size, User user) {
-        return OrderSummaryRepresentation.to(orderRepository.findUserId(page - 1, size, user.getId()));
-    }
 
     public Pagination<Order> merchantOrderList(int page, int size, Merchant merchant) {
         return orderRepository.findByMerchantId(page - 1, size, merchant.getId());

@@ -4,6 +4,8 @@ import com.foodie.portal.commons.PageCommand;
 import com.foodie.portal.commons.Pagination;
 import com.foodie.portal.order.Order;
 import com.foodie.portal.order.OrderApplicationService;
+import com.foodie.portal.order.representation.OrderRepresentationService;
+import com.foodie.portal.order.representation.OrderSummaryRepresentation;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,12 +19,12 @@ import org.springframework.web.bind.annotation.RestController;
 public class AdminOrderController {
 
     @Autowired
-    private OrderApplicationService orderApplicationService;
+    private OrderRepresentationService orderRepresentationService;
 
     @ApiOperation("订单列表")
     @GetMapping
-    public Pagination<Order> orders(PageCommand command) {
-        return orderApplicationService.orderList(command.getPage(), command.getSize());
+    public Pagination<OrderSummaryRepresentation> orders(PageCommand command) {
+        return orderRepresentationService.orderList(command.getPage(), command.getSize());
     }
 
 }

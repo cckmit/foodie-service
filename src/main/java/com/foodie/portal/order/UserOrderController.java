@@ -4,6 +4,7 @@ import com.foodie.portal.commons.PageCommand;
 import com.foodie.portal.commons.Pagination;
 import com.foodie.portal.order.command.CreateOrderCommand;
 import com.foodie.portal.order.command.PayOrderCommand;
+import com.foodie.portal.order.representation.OrderRepresentationService;
 import com.foodie.portal.order.representation.OrderSummaryRepresentation;
 import com.foodie.portal.user.model.User;
 import com.paypal.api.payments.Payment;
@@ -34,6 +35,8 @@ public class UserOrderController {
 
     @Autowired
     private OrderApplicationService orderApplicationService;
+    @Autowired
+    private OrderRepresentationService orderRepresentationService;
 
     @ApiOperation("用户下单")
     @PostMapping
@@ -46,7 +49,7 @@ public class UserOrderController {
     @GetMapping("list")
     public Pagination<OrderSummaryRepresentation> orders(PageCommand command) {
         var user = (User) SecurityUtils.getSubject().getPrincipal();
-        return orderApplicationService.myOrderList(command.getPage(), command.getSize(), user);
+        return orderRepresentationService.myOrderList(command.getPage(), command.getSize(), user);
     }
 
     @ApiOperation("用户付款")
