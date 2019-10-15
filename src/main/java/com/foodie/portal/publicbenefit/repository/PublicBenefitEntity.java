@@ -23,6 +23,8 @@ public class PublicBenefitEntity {
     @Id
     private String id;
     private String title;
+    private String image;
+    private String description;
     private String content;
     private BigDecimal totalFoundation;
     private BigDecimal currentFoundation;

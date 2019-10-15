@@ -17,6 +17,8 @@ public class PublicBenefit {
 
     private String id;
     private String title;
+    private String image;
+    private String description;
     private String content;
     private double totalFoundation;
     private double currentFoundation;
