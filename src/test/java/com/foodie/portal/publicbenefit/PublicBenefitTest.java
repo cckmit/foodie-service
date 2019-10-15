@@ -15,7 +15,7 @@ public class PublicBenefitTest {
 
     @Test
     public void should_extract_from_order() {
-        PublicBenefit publicBenefit = PublicBenefit.create("", "", BigDecimal.TEN);
+        PublicBenefit publicBenefit = PublicBenefit.create("", "", 10);
         Order order = spy(new Order());
         order.setBenefitExtract(0.3);
         given(order.getPrice()).willReturn(10.0);

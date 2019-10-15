@@ -1,6 +1,7 @@
 package com.foodie.portal.order.repository;
 
 import com.foodie.portal.activity.repository.ActivityEntity;
+import com.foodie.portal.order.OrderInfo;
 import com.foodie.portal.order.OrderStatus;
 import com.foodie.portal.user.model.Merchant;
 import com.foodie.portal.user.repository.MerchantEntity;
@@ -29,6 +30,7 @@ public class OrderEntity {
     private ActivityEntity activity;
     private int count;
     private double price;
+    private String orderInfo;
     @ManyToOne
     @NotFound(action = NotFoundAction.IGNORE)
     private UserEntity user;
