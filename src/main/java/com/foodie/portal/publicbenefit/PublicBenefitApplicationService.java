@@ -21,8 +21,9 @@ public class PublicBenefitApplicationService {
     }
 
     public void extract(Order order) {
-        PublicBenefit publicBenefit = new PublicBenefit();
+        PublicBenefit publicBenefit = repository.findActivated();
         publicBenefit.extract(order);
+        repository.save(publicBenefit);
     }
 
 
