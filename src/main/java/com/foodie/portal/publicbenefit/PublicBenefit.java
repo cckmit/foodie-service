@@ -18,22 +18,24 @@ public class PublicBenefit {
     private String id;
     private String title;
     private String content;
-    private BigDecimal totalFoundation;
+    private double totalFoundation;
     private double currentFoundation;
     private List<Order> orders;
+    private PublicBenefitStatus status;
     private Instant createdAt;
 
 
-    public PublicBenefit(String title, String content, BigDecimal totalFoundation) {
+    public PublicBenefit(String title, String content, double totalFoundation) {
         this.id = IdUtil.fastSimpleUUID();
         this.title = title;
         this.content = content;
         this.totalFoundation = totalFoundation;
         this.currentFoundation = 0;
         this.orders = Lists.newArrayList();
+        this.status = PublicBenefitStatus.CREATED;
     }
 
-    public static PublicBenefit create(String title, String content, BigDecimal totalFoundation) {
+    public static PublicBenefit create(String title, String content, double totalFoundation) {
         return new PublicBenefit(title, content, totalFoundation);
     }
 
@@ -41,5 +43,7 @@ public class PublicBenefit {
         this.orders.add(order);
         this.currentFoundation = NumberUtil.add(currentFoundation,order.getBenefitExtract());
     }
+
+
 
 }

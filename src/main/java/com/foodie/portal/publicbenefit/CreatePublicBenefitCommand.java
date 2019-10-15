@@ -16,5 +16,5 @@ public class CreatePublicBenefitCommand {
 
     private String title;
     private String content;
-    private BigDecimal totalFoundation;
+    private double totalFoundation;
 }

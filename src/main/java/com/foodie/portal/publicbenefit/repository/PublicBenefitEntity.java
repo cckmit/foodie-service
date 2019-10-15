@@ -2,9 +2,12 @@ package com.foodie.portal.publicbenefit.repository;
 
 import com.foodie.portal.order.Order;
 import com.foodie.portal.order.repository.OrderEntity;
+import com.foodie.portal.publicbenefit.PublicBenefitStatus;
 import lombok.Data;
 
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
@@ -26,5 +29,7 @@ public class PublicBenefitEntity {
     @OneToMany
     @JoinColumn(name = "public_benefit_id")
     private List<OrderEntity> orders;
+    @Enumerated(EnumType.STRING)
+    private PublicBenefitStatus status;
     private Instant createdAt;
 }
