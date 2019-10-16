@@ -25,7 +25,7 @@ public class AdminPublicBenefitController {
 
     @ApiOperation("创建公益")
     @PostMapping
-    public PublicBenefit create(CreatePublicBenefitCommand command) {
+    public PublicBenefit create(@RequestBody CreatePublicBenefitCommand command) {
         return publicBenefitApplicationService.create(command.getTitle(), command.getContent(), command.getTotalFoundation());
     }
 
