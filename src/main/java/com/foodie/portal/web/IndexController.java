@@ -36,10 +36,6 @@ public class IndexController {
 //        return indexRepresentationService.featuredCityFoodGuide();
 //    }
 //
-//    @ApiOperation("首页推荐活动")
-//    @GetMapping("top-rated-activities")
-//    public List<Activity> topRatedActivities() {
-//        return indexRepresentationService.topRatedActivities();
-//    }
+
 
 }

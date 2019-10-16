@@ -2,6 +2,7 @@ package com.foodie.portal.activity.repository;
 
 import com.foodie.portal.activity.model.ActivityStatus;
 import com.foodie.portal.activity.model.ActivityType;
+import com.foodie.portal.webmanage.repository.ActivityRecommendEntity;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -15,8 +16,6 @@ public interface ActivityJpaRepository extends JpaRepository<ActivityEntity, Str
     Page<ActivityEntity> findByMerchantId(String merchantId, Pageable pageable);
 
     List<ActivityEntity> findByIdIn(List<String> ids);
-
-    Page<ActivityEntity> findByCityIdAndType (String cityId, ActivityType type, Pageable pageable);
 
     Page<ActivityEntity> findByCityId (String cityId, Pageable pageable);
 }

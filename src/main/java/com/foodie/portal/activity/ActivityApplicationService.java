@@ -117,5 +117,4 @@ public class ActivityApplicationService {
         activity.updateReserve(serviceDate, startTime, count);
         activityRepository.save(activity);
     }
-
 }

@@ -4,9 +4,11 @@ import com.foodie.portal.activity.model.ServiceScheduling;
 import com.foodie.portal.activity.model.ActivityPrice;
 import com.foodie.portal.activity.model.ActivityStatus;
 import com.foodie.portal.activity.model.ActivityType;
+import lombok.Data;
 
 import java.util.List;
 
+@Data
 public class ActivityRepresentation {
 
     private String id;
@@ -20,8 +22,6 @@ public class ActivityRepresentation {
     private String address;
     private String cityId;
     private String cityName;
-    private List<ActivityPrice> priceList;
-    private List<ServiceScheduling> serviceTime;
     private ActivityStatus status;
     private ActivityType type;
     private String merchantName;

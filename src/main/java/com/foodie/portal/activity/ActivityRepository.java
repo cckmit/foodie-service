@@ -52,13 +52,6 @@ public class ActivityRepository {
         return ActivityEntityMapper.instance.to(activityJpaRepository.findByIdIn(ids));
     }
 
-    public List<Activity> findTopActivityByCityIdAndType(String cityId, ActivityType type, int limit) {
-        return ActivityEntityMapper.instance.to(
-                activityJpaRepository.findByCityIdAndType(cityId, type, PageRequest.of(0, limit))
-                        .getContent());
-    }
-
-
     public Pagination<Activity> findByCityId(int page, int size, String cityId) {
         return ActivityEntityMapper.instance.to(
                 activityJpaRepository.findByCityId(cityId, PageRequest.of(page, size)));
