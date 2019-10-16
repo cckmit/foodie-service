@@ -25,6 +25,10 @@ public class PublicBenefitRepository {
         publicBenefitJpaRepository.save(publicBenefitMapper.from(publicBenefit));
     }
 
+    public void save(List<PublicBenefit> publicBenefits) {
+        publicBenefitJpaRepository.saveAll(publicBenefitMapper.from(publicBenefits));
+    }
+
     public Pagination<PublicBenefit> findAll(int page, int size) {
         return publicBenefitMapper.to(publicBenefitJpaRepository.findAll(PageRequest.of(page, size)));
     }

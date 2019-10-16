@@ -3,6 +3,8 @@ package com.foodie.portal.publicbenefit;
 import com.foodie.portal.commons.Pagination;
 import com.foodie.portal.order.Order;
 import com.foodie.portal.publicbenefit.command.UpdatePublicBenefitCommand;
+import com.google.common.collect.ImmutableList;
+import lombok.var;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -41,5 +43,15 @@ public class PublicBenefitApplicationService {
                 command.getContent(), command.getTotalFoundation());
         repository.save(publicBenefit);
         return publicBenefit;
+    }
+
+    public void activate(String id) {
+        var publicBenefit = repository.byId(id);
+        publicBenefit.activate();
+        var activatedPublicBenefit = repository.findActivated();
+        activatedPublicBenefit.pending();
+
+        repository.save(ImmutableList.of(publicBenefit, activatedPublicBenefit));
+
     }
 }

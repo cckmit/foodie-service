@@ -54,4 +54,12 @@ public class PublicBenefit {
         this.content = content;
         this.totalFoundation = totalFoundation;
     }
+
+    public void activate() {
+        this.status = PublicBenefitStatus.ACTIVATED;
+    }
+
+    public void pending() {
+        this.status = PublicBenefitStatus.PENDING;
+    }
 }

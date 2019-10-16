@@ -46,4 +46,10 @@ public class AdminPublicBenefitController {
     public PublicBenefit update(@PathVariable String id, @RequestBody UpdatePublicBenefitCommand command) {
         return publicBenefitApplicationService.update(id, command);
     }
+
+    @ApiOperation("激活公益")
+    @PostMapping("{id}/activate")
+    public void activate(@PathVariable String id) {
+        publicBenefitApplicationService.activate(id);
+    }
 }
