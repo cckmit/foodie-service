@@ -1,4 +1,4 @@
-package com.foodie.portal.activity.representation;
+package com.foodie.portal.web.activity.representation;
 
 import com.foodie.portal.activity.model.Activity;
 import com.foodie.portal.commons.BaseMapper;

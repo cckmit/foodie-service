@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
-@Api(tags = "用户首页接口")
+@Api(tags = "用户页面接口")
 @RestController
 public class IndexController {
 

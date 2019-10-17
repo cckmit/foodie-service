@@ -1,12 +1,8 @@
-package com.foodie.portal.activity.representation;
+package com.foodie.portal.web.activity.representation;
 
-import com.foodie.portal.activity.model.ServiceScheduling;
-import com.foodie.portal.activity.model.ActivityPrice;
 import com.foodie.portal.activity.model.ActivityStatus;
 import com.foodie.portal.activity.model.ActivityType;
 import lombok.Data;
-
-import java.util.List;
 
 @Data
 public class ActivityRepresentation {
