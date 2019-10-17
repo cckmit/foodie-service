@@ -14,7 +14,8 @@ public class ActivityRepresentationRepository {
     private JdbcTemplate jdbcTemplate;
 
     public List<ActivityRepresentation> findTopActivity() {
-        String sql = "select * from FOODIE_ACTIVITY where TOP_RECOMMEND = true";
+        String sql = "select a.* , m.NAME as merchant_name, c.NAME as city_name from FOODIE_ACTIVITY a left join FOODIE_MERCHANT m on a.MERCHANT_ID=m.ID " +
+                "left join FOODIE_CITY c on a.CITY_ID=c.ID where TOP_RECOMMEND = 1";
         return jdbcTemplate.query(sql, new BeanPropertyRowMapper<>(ActivityRepresentation.class));
     }
 }
