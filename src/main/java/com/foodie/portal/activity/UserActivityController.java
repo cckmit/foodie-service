@@ -37,7 +37,7 @@ public class UserActivityController {
         return activityApplicationService.findById(id);
     }
 
-    @ApiOperation("首页推荐活动")
+    @ApiOperation(value = "首页推荐活动", tags = "用户首页接口")
     @GetMapping("top-rated-activities")
     public List<ActivityRepresentation> topRatedActivities() {
         return activityRepresentationService.topRatedActivities();
