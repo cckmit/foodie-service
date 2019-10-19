@@ -39,9 +39,11 @@ public class PublicBenefitRepository {
 
     public PublicBenefit findActivated() {
         List<PublicBenefitEntity> publicBenefits = publicBenefitJpaRepository.findByStatus(PublicBenefitStatus.ACTIVATED);
-        if (publicBenefits.size() != 1) {
-            log.error("激活公益只能有1个，实际有{}个; content: {}", publicBenefits.size(), publicBenefits);
+        if (publicBenefits.size() > 1) {
+            log.error("激活公益最多只有1个，实际有{}个; content: {}", publicBenefits.size(), publicBenefits);
             throw new RestException(ErrorCode.REFUSED, "激活公益不对");
+        }else if(publicBenefits.isEmpty()) {
+            return null;
         }
         return publicBenefitMapper.to(publicBenefits.get(0));
     }

@@ -5,8 +5,10 @@ import com.foodie.portal.article.ArticleApplicationService;
 import com.foodie.portal.city.CityApplicationService;
 import com.foodie.portal.city.repository.CityJpaRepository;
 import com.foodie.portal.web.model.ActivityRepresentation;
+import com.foodie.portal.web.model.ArticleRepresentation;
 import com.foodie.portal.web.model.CityRepresentation;
 import com.foodie.portal.web.model.InterestedCityActivities;
+import com.foodie.portal.web.model.PublicBenefitSummaryRepresentation;
 import com.foodie.portal.webmanage.model.Banner;
 import com.foodie.portal.webmanage.RecommendRepository;
 import com.foodie.portal.webmanage.repository.BannerEntityMapper;
@@ -19,6 +21,8 @@ import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+
+import static com.foodie.portal.publicbenefit.PublicBenefitStatus.ACTIVATED;
 
 @Service
 public class IndexRepresentationService {
@@ -34,6 +38,7 @@ public class IndexRepresentationService {
 
     /**
      * 获取首页banner列表
+     *
      * @return
      */
     public List<Banner> listBanner() {
@@ -63,16 +68,26 @@ public class IndexRepresentationService {
 //        return activityApplicationService.fetchActivitiesByIds(recommendRepository.findTopActivityIds());
 //    }
 
-    public InterestedCityActivities findByInterestedByCityId(String cityId) {
+    public InterestedCityActivities findInterestedActivityByCityId(String cityId) {
 
-       var city =  cityJpaRepository.getOne(cityId);
+        var city = cityJpaRepository.getOne(cityId);
 
         String sql = "select a.* , m.NAME as merchant_name, c.NAME as city_name from FOODIE_ACTIVITY a left join FOODIE_MERCHANT m on a.MERCHANT_ID=m.ID " +
                 "left join FOODIE_CITY c on a.CITY_ID=c.ID where INTERESTED_RECOMMEND = 1 and a.CITY_ID=:cityId";
-        List<ActivityRepresentation> activities =  jdbcTemplate.query(sql, ImmutableMap.of("cityId", cityId), new BeanPropertyRowMapper<>(ActivityRepresentation.class));
+        List<ActivityRepresentation> activities = jdbcTemplate.query(sql, ImmutableMap.of("cityId", cityId), new BeanPropertyRowMapper<>(ActivityRepresentation.class));
 
-        return InterestedCityActivities.of(city.getName(), city.getIntroduction(), city.getImages(),activities );
+        return InterestedCityActivities.of(city.getName(), city.getIntroduction(), city.getImages(), activities);
     }
 
 
+    public List<ArticleRepresentation> findInterestedFoodGuideByCityId(String cityId) {
+        String sql = "select a.* , c.NAME as city_name from FOODIE_ARTICLE a " +
+                "left join FOODIE_CITY c on a.CITY_ID=c.ID where INTERESTED_RECOMMEND = 1 and a.CITY_ID=:cityId";
+        return jdbcTemplate.query(sql, ImmutableMap.of("cityId", cityId), new BeanPropertyRowMapper<>(ArticleRepresentation.class));
+    }
+
+    public PublicBenefitSummaryRepresentation findActivatedPublicBenefit() {
+        String sql = "select * from FOODIE_PUBLIC_BENEFIT p where p.STATUS=:status";
+        return jdbcTemplate.queryForObject(sql, ImmutableMap.of("status", ACTIVATED.name()), new BeanPropertyRowMapper<>(PublicBenefitSummaryRepresentation.class));
+    }
 }

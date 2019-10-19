@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
+import java.util.Objects;
 
 @Service
 public class PublicBenefitApplicationService {
@@ -49,9 +50,14 @@ public class PublicBenefitApplicationService {
         var publicBenefit = repository.byId(id);
         publicBenefit.activate();
         var activatedPublicBenefit = repository.findActivated();
-        activatedPublicBenefit.pending();
+        if(Objects.nonNull(activatedPublicBenefit)) {
+            activatedPublicBenefit.pending();
+            repository.save(ImmutableList.of(publicBenefit, activatedPublicBenefit));
+        }else {
+            repository.save(ImmutableList.of(publicBenefit));
+        }
 
-        repository.save(ImmutableList.of(publicBenefit, activatedPublicBenefit));
+
 
     }
 }
