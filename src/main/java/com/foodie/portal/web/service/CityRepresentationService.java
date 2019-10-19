@@ -1,16 +1,15 @@
-package com.foodie.portal.web.city;
+package com.foodie.portal.web.service;
 
-import com.foodie.portal.city.representation.CitySummaryRepresentation;
-import com.foodie.portal.commons.Pagination;
+import com.foodie.portal.city.repository.CityJpaRepository;
+import com.foodie.portal.web.model.CityDetailRepresentation;
+import com.foodie.portal.web.model.CityRepresentation;
+import lombok.var;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
-import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Set;
-import java.util.stream.Collectors;
 
 import static com.google.common.collect.Maps.newHashMap;
 
@@ -22,6 +21,8 @@ public class CityRepresentationService {
 
     @Autowired
     private  NamedParameterJdbcTemplate jdbcTemplate;
+    @Autowired
+    private CityJpaRepository cityJpaRepository;
 
     public List<CityRepresentation> listCities() {
         String sql = "SELECT * FROM FOODIE_CITY";
@@ -29,4 +30,8 @@ public class CityRepresentationService {
 
     }
 
+    public CityDetailRepresentation detail(String id) {
+        var city = cityJpaRepository.getOne(id);
+        return CityDetailRepresentation.from(city);
+    }
 }

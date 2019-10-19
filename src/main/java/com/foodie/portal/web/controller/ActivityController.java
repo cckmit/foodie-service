@@ -1,11 +1,10 @@
-package com.foodie.portal.web.activity;
+package com.foodie.portal.web.controller;
 
 
-import com.foodie.portal.activity.model.Activity;
 import com.foodie.portal.commons.PageCommand;
 import com.foodie.portal.commons.Pagination;
-import com.foodie.portal.web.activity.representation.ActivityRepresentation;
-import com.foodie.portal.web.activity.representation.ActivityRepresentationService;
+import com.foodie.portal.web.model.ActivityRepresentation;
+import com.foodie.portal.web.service.ActivityRepresentationService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,11 +26,7 @@ public class ActivityController {
         return activityRepresentationService.findTopActivity();
     }
 
-    @ApiOperation("感兴趣活动")
-    @GetMapping("interested-activities")
-    public List<ActivityRepresentation> listCityInterestedActivities(String cityId) {
-        return activityRepresentationService.findByInterestedByCityId(cityId);
-    }
+
 
     @ApiOperation("所有活动")
     @GetMapping("activities")

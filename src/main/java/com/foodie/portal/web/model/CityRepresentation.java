@@ -1,5 +1,6 @@
-package com.foodie.portal.web.city;
+package com.foodie.portal.web.model;
 
+import com.foodie.portal.city.repository.CityEntity;
 import lombok.Data;
 
 @Data

@@ -1,6 +1,8 @@
-package com.foodie.portal.web;
+package com.foodie.portal.web.controller;
 
-import com.foodie.portal.web.representation.IndexRepresentationService;
+import com.foodie.portal.web.model.ActivityRepresentation;
+import com.foodie.portal.web.model.InterestedCityActivities;
+import com.foodie.portal.web.service.IndexRepresentationService;
 import com.foodie.portal.webmanage.model.Banner;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -36,6 +38,12 @@ public class IndexController {
 //        return indexRepresentationService.featuredCityFoodGuide();
 //    }
 //
+
+    @ApiOperation("感兴趣活动")
+    @GetMapping("interested-activities")
+    public InterestedCityActivities listCityInterestedActivities(String cityId) {
+        return indexRepresentationService.findByInterestedByCityId(cityId);
+    }
 
 
 }

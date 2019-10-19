@@ -1,4 +1,4 @@
-package com.foodie.portal.web.activity.representation;
+package com.foodie.portal.web.model;
 
 import com.foodie.portal.activity.model.ActivityStatus;
 import com.foodie.portal.activity.model.ActivityType;
