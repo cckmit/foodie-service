@@ -1,8 +1,15 @@
 package com.foodie.portal.web.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.foodie.portal.activity.model.ActivityPrice;
 import com.foodie.portal.activity.model.ActivityStatus;
 import com.foodie.portal.activity.model.ActivityType;
+import com.foodie.portal.commons.utils.JsonUtils;
 import lombok.Data;
+
+import java.util.List;
+import java.util.Objects;
 
 @Data
 public class ActivityRepresentation {
@@ -13,6 +20,8 @@ public class ActivityRepresentation {
     private String description;
     private String duration;
     private int maxPeopleLimit;
+    @JsonIgnore
+    private String priceListStr;
     private String images;
     private String language;
     private String address;
@@ -21,4 +30,12 @@ public class ActivityRepresentation {
     private ActivityStatus status;
     private ActivityType type;
     private String merchantName;
+
+    public double getPrice() {
+        List<ActivityPrice> list = JsonUtils.toBean(priceListStr, new TypeReference<List<ActivityPrice>>() {});
+        if(Objects.isNull(list)) {
+            return 0;
+        }
+        return list.stream().mapToDouble(ActivityPrice::getPrice).min().getAsDouble();
+    }
 }
