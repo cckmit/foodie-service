@@ -112,7 +112,7 @@ public class ActivityApplicationService {
         activityRepository.save(activity);
     }
 
-    public void updateReserve(String id, Date serviceDate, String startTime, int count) {
+    public void updateReserve(String id, String serviceDate, String startTime, int count) {
         Activity activity = activityRepository.findById(id);
         activity.updateReserve(serviceDate, startTime, count);
         activityRepository.save(activity);

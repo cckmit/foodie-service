@@ -55,7 +55,7 @@ spring:
 
 
   jackson:
-    date-format: yyyy-MM-dd HH:mm:ss
+    date-format: yyyy-MM-dd
     timeZone: Asia/Shanghai
 jasypt:
   encryptor:

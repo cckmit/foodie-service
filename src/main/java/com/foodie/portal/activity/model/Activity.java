@@ -1,5 +1,6 @@
 package com.foodie.portal.activity.model;
 
+import cn.hutool.core.date.DateUtil;
 import cn.hutool.core.util.IdUtil;
 import com.foodie.portal.city.City;
 import com.foodie.portal.commons.ErrorCode;
@@ -7,9 +8,6 @@ import com.foodie.portal.commons.RestException;
 import com.foodie.portal.user.model.Merchant;
 import lombok.Data;
 
-import java.time.LocalDateTime;
-import java.time.ZoneId;
-import java.util.Date;
 import java.util.List;
 import java.util.Objects;
 
@@ -101,12 +99,11 @@ public class Activity {
         this.serviceSchedulingList = serviceSchedulingList;
     }
 
-    public void updateReserve(Date serviceDate, String startTime, int count) {
+    public void updateReserve(String serviceDate, String startTime, int count) {
         ServiceScheduling scheduling = serviceSchedulingList.stream()
 
                 .filter(serviceScheduling ->
-                        LocalDateTime.ofInstant(serviceScheduling.getServiceDate().toInstant(), ZoneId.systemDefault()).toLocalDate()
-                                .equals(LocalDateTime.ofInstant(serviceDate.toInstant(), ZoneId.systemDefault()).toLocalDate()))
+                                DateUtil.format(serviceScheduling.getServiceDate(),"yyyy-MM-dd").equals(serviceDate))
                 .findFirst()
                 .orElseThrow(() -> new RestException(ErrorCode.FAILED, "没有排班日期！"));
 

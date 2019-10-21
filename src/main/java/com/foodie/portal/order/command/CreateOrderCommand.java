@@ -8,7 +8,7 @@ import java.util.Date;
 @Data
 public class CreateOrderCommand {
     private String activityId;
-    private Date serviceDate;
+    private String serviceDate;
     private String startTime;
     private int count;
     private OrderInfo orderInfo;
