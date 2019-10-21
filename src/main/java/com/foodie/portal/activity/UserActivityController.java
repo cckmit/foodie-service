@@ -26,10 +26,6 @@ public class UserActivityController {
         return  activityApplicationService.find(pageCommand.getPage(), pageCommand.getSize());
     }
 
-    @ApiOperation("活动详情")
-    @GetMapping("{id}")
-    public Activity detail(@PathVariable String id) {
-        return activityApplicationService.findById(id);
-    }
+
 
 }

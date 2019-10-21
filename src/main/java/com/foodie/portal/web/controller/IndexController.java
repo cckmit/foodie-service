@@ -1,7 +1,9 @@
 package com.foodie.portal.web.controller;
 
+import com.foodie.portal.activity.model.Activity;
 import com.foodie.portal.web.model.ArticleRepresentation;
 import com.foodie.portal.web.model.InterestedCityActivities;
+import com.foodie.portal.web.model.PublicBenefitRepresentation;
 import com.foodie.portal.web.model.PublicBenefitSummaryRepresentation;
 import com.foodie.portal.web.service.IndexRepresentationService;
 import com.foodie.portal.webmanage.model.Banner;
@@ -9,6 +11,7 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
@@ -50,6 +53,12 @@ public class IndexController {
     @GetMapping("public-benefit")
     public PublicBenefitSummaryRepresentation getPublicBenefit() {
         return indexRepresentationService.findActivatedPublicBenefit();
+    }
+
+    @ApiOperation("获取公益活动详情")
+    @GetMapping("public-benefit/detail")
+    public PublicBenefitRepresentation getPublicBenefitDetail() {
+        return indexRepresentationService.findActivatedPublicBenefitDetail();
     }
 
 

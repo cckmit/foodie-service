@@ -8,6 +8,7 @@ import com.foodie.portal.web.model.ActivityRepresentation;
 import com.foodie.portal.web.model.ArticleRepresentation;
 import com.foodie.portal.web.model.CityRepresentation;
 import com.foodie.portal.web.model.InterestedCityActivities;
+import com.foodie.portal.web.model.PublicBenefitRepresentation;
 import com.foodie.portal.web.model.PublicBenefitSummaryRepresentation;
 import com.foodie.portal.webmanage.model.Banner;
 import com.foodie.portal.webmanage.RecommendRepository;
@@ -89,5 +90,10 @@ public class IndexRepresentationService {
     public PublicBenefitSummaryRepresentation findActivatedPublicBenefit() {
         String sql = "select * from FOODIE_PUBLIC_BENEFIT p where p.STATUS=:status";
         return jdbcTemplate.queryForObject(sql, ImmutableMap.of("status", ACTIVATED.name()), new BeanPropertyRowMapper<>(PublicBenefitSummaryRepresentation.class));
+    }
+
+    public PublicBenefitRepresentation findActivatedPublicBenefitDetail() {
+        String sql = "select * from FOODIE_PUBLIC_BENEFIT p where p.STATUS=:status";
+        return jdbcTemplate.queryForObject(sql, ImmutableMap.of("status", ACTIVATED.name()), new BeanPropertyRowMapper<>(PublicBenefitRepresentation.class));
     }
 }

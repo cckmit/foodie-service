@@ -1,7 +1,10 @@
 package com.foodie.portal.web.service;
 
+import com.foodie.portal.activity.model.Activity;
 import com.foodie.portal.activity.model.ActivityType;
+import com.foodie.portal.activity.repository.ActivityJpaRepository;
 import com.foodie.portal.commons.Pagination;
+import com.foodie.portal.web.model.ActivityDetailRepresentation;
 import com.foodie.portal.web.model.ActivityRepresentation;
 import com.google.common.collect.ImmutableMap;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +21,8 @@ public class ActivityRepresentationService {
 
     @Autowired
     private NamedParameterJdbcTemplate jdbcTemplate;
+    @Autowired
+    private ActivityJpaRepository activityJpaRepository;
 
     public List<ActivityRepresentation> findTopActivity() {
         String sql = "select a.* , m.NAME as merchant_name, c.NAME as city_name from FOODIE_ACTIVITY a left join FOODIE_MERCHANT m on a.MERCHANT_ID=m.ID " +
@@ -53,5 +58,10 @@ public class ActivityRepresentationService {
                 ImmutableMap.of("cityId", cityId, "type", type.name()), Integer.class);
 
         return Pagination.of(total, page, size, activityRepresentations);
+    }
+
+    public ActivityDetailRepresentation findActivityDetail(String id) {
+        return activityJpaRepository.findById(id).map(ActivityDetailRepresentation::from)
+                .orElse(null);
     }
 }
