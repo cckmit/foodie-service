@@ -52,6 +52,11 @@ spring:
       kaptcha.textproducer.char.length: "4"
       kaptcha.textproducer.font.names: 宋体,楷体,微软雅黑
     suffix: suffix
+
+
+  jackson:
+    date-format: yyyy-MM-dd HH:mm:ss
+    timeZone: Asia/Shanghai
 jasypt:
   encryptor:
     password: ${JASYPT_ENCRYPTOR_PASSWORD:}
