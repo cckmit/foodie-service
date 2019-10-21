@@ -19,6 +19,7 @@ public interface ActivityDetailRepresentationMapper extends BaseMapper<ActivityE
     ActivityDetailRepresentationMapper INSTANCE = Mappers.getMapper(ActivityDetailRepresentationMapper.class);
 
     @Override
+    @Mapping(target = "cityName", source = "city.name")
     @Mapping(target = "price" ,source = "priceList", qualifiedByName = "toPrice")
     ActivityDetailRepresentation from(ActivityEntity from);
 

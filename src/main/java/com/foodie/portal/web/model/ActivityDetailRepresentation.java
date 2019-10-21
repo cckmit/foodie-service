@@ -5,6 +5,7 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import com.foodie.portal.activity.model.ActivityPrice;
 import com.foodie.portal.activity.model.ActivityStatus;
 import com.foodie.portal.activity.model.ActivityType;
+import com.foodie.portal.activity.model.ServiceScheduling;
 import com.foodie.portal.activity.repository.ActivityEntity;
 import com.foodie.portal.commons.utils.JsonUtils;
 import lombok.Data;
@@ -27,6 +28,8 @@ public class ActivityDetailRepresentation {
     private String address;
     private String cityId;
     private String cityName;
+    private List<ActivityPrice> priceList;
+    private List<ServiceScheduling> serviceSchedulingList;
     private ActivityType type;
     private String merchantName;
 
