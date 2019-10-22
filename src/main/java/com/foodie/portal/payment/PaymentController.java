@@ -18,26 +18,18 @@ import javax.servlet.http.HttpServletRequest;
 @RestController
 public class PaymentController {
 
-    public static final String PAYPAL_SUCCESS_URL = "pay/success";
-    public static final String PAYPAL_CANCEL_URL = "pay/cancel";
-
     @Autowired
     private PaymentApplicationService paymentApplicationService;
 
     @PostMapping("pay")
-    public String pay(HttpServletRequest request) {
-        String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + request.getContextPath() + "/";
-        String cancelUrl = basePath + PAYPAL_CANCEL_URL;
-        String successUrl = basePath + PAYPAL_SUCCESS_URL;
+    public String pay() {
         try {
             Payment payment = paymentApplicationService.createPayment(
                     500.00,
                     "USD",
                     PaypalPaymentMethod.paypal,
                     PaypalPaymentIntent.sale,
-                    "payment description",
-                    cancelUrl,
-                    successUrl);
+                    "payment description","12323434232");
             for (Links links : payment.getLinks()) {
                 if (links.getRel().equals("approval_url")) {
                     return links.getHref();

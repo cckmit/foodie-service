@@ -18,6 +18,7 @@ import com.foodie.portal.user.model.User;
 import com.paypal.api.payments.Links;
 import com.paypal.api.payments.Payment;
 import com.paypal.base.rest.PayPalRESTException;
+import com.sun.corba.se.spi.transport.CorbaResponseWaitingRoom;
 import lombok.extern.slf4j.Slf4j;
 import lombok.var;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -56,15 +57,14 @@ public class OrderApplicationService {
 
 
 
-    public String prePay(String id, @Valid PayOrderCommand command, String successUrl, String cancelUrl) {
+    public String prePay(String id, @Valid PayOrderCommand command) {
         var order = orderRepository.byId(id);
         order.prePay(command.getPaidPrice());
         Payment payment;
         try {
             payment = paymentApplicationService.createPayment(command.getPaidPrice(),
                     "USD", PaypalPaymentMethod.paypal,
-                    PaypalPaymentIntent.sale, "订单支付",
-                    cancelUrl, successUrl);
+                    PaypalPaymentIntent.sale, "订单支付", order.getNumber());
         } catch (PayPalRESTException e) {
             throw new RestException(ErrorCode.FAILED, "支付失败");
         }
@@ -107,7 +107,7 @@ public class OrderApplicationService {
         return order;
     }
 
-    public void pay(String paymentId, String payerId) {
+    public Order pay(String paymentId, String payerId) {
         log.info("支付回调：paymentId: {}, payerId: {}", paymentId, payerId);
         try {
             Payment payment = paymentApplicationService.executePayment(paymentId, payerId);
@@ -115,7 +115,7 @@ public class OrderApplicationService {
                 var order = orderRepository.byPaymentId(paymentId);
                 order.pay();
                 orderRepository.save(order);
-                return;
+                return order;
             }
         } catch (PayPalRESTException e) {
             log.error(e.getMessage());
@@ -124,4 +124,10 @@ public class OrderApplicationService {
     }
 
 
+    public Order cancel(String orderNo) {
+        var order = orderRepository.byOrderNo(orderNo);
+        order.cancel();
+        orderRepository.save(order);
+        return order;
+    }
 }

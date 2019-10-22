@@ -30,9 +30,6 @@ import javax.validation.Valid;
 @RequestMapping("user/order")
 public class UserOrderController {
 
-    public static final String PAYPAL_SUCCESS_URL = "pay/success";
-    public static final String PAYPAL_CANCEL_URL = "pay/cancel";
-
     @Autowired
     private OrderApplicationService orderApplicationService;
     @Autowired
@@ -54,11 +51,22 @@ public class UserOrderController {
 
     @ApiOperation("用户付款")
     @PostMapping("/{id}/payment")
-    public String pay(@PathVariable(name = "id") String id, @RequestBody @Valid PayOrderCommand command, HttpServletRequest request) {
-        String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + request.getContextPath() + "/";
-        String cancelUrl = basePath + PAYPAL_CANCEL_URL;
-        String successUrl = basePath + PAYPAL_SUCCESS_URL;
-        return orderApplicationService.prePay(id, command, successUrl, cancelUrl);
+    public String pay(@PathVariable(name = "id") String id, @RequestBody @Valid PayOrderCommand command) {
+        var user = (User) SecurityUtils.getSubject().getPrincipal();
+        return orderApplicationService.prePay(id, command);
     }
 
+    @ApiOperation("支付成功回调")
+    @GetMapping("pay/success")
+    public void successPay(@RequestParam("paymentId") String paymentId,
+                           @RequestParam("PayerID") String payerId,
+                           String orderNo){
+        orderApplicationService.pay(paymentId, payerId);
+    }
+
+    @ApiOperation("支付取消")
+    @GetMapping("pay/cancel")
+    public Order cancelPay(String orderNo){
+        return orderApplicationService.cancel(orderNo);
+    }
 }

@@ -67,8 +67,11 @@ application:
       client-id: ASgMRT2a5ZkDHd_PZUWGjjG7V40kFIFpmvefEpwfe8z94aBPyzwLHq1WCKNogfINQSDv5DhrVno11r6N
       client-secret: EKsOmilFgiYw15f3_6zXhkQnPtETUsgeael94E_D4awn3fTh7IzE_WWPqVQtG36hF5hOGZXusK1YCAoS
       mode: sandbox
+      success-url: http://39.97.242.98/#/mian/success?orderno=%s
+      cancel-url: http://39.97.242.98/#/mian/cancel?orderno=%s
 
 logging:
   pattern:
     console: "%date{yyyy-MM-dd HH:mm:ss.SSS,Asia/Shanghai} %X{clientIp}-%X{requestId}-%X{userId} %highlight(%-5level) [%t] %logger{36} : %m%n%wEx"
     file: "%date{yyyy-MM-dd HH:mm:ss.SSS,Asia/Shanghai} %X{clientIp}-%X{requestId}-%X{userId} %highlight(%-5level) [%t] %logger{36} : %m%n%wEx"
+

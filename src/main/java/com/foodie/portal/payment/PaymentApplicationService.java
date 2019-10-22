@@ -19,15 +19,15 @@ public class PaymentApplicationService {
 
     @Autowired
     private APIContext apiContext;
+    @Autowired
+    private PaymentProperties properties;
 
     public Payment createPayment(
             Double total,
             String currency,
             PaypalPaymentMethod method,
             PaypalPaymentIntent intent,
-            String description,
-            String cancelUrl,
-            String successUrl) throws PayPalRESTException {
+            String description,String orderNo) throws PayPalRESTException {
         Amount amount = new Amount();
         amount.setCurrency(currency);
         amount.setTotal(String.format("%.2f", total));
@@ -47,8 +47,8 @@ public class PaymentApplicationService {
         payment.setPayer(payer);
         payment.setTransactions(transactions);
         RedirectUrls redirectUrls = new RedirectUrls();
-        redirectUrls.setCancelUrl(cancelUrl);
-        redirectUrls.setReturnUrl(successUrl);
+        redirectUrls.setCancelUrl(String.format(properties.getPaypal().getCancelUrl(),orderNo));
+        redirectUrls.setReturnUrl(String.format(properties.getPaypal().getSuccessUrl(),orderNo));
         payment.setRedirectUrls(redirectUrls);
 
         return payment.create(apiContext);

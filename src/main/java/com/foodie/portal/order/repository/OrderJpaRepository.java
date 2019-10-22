@@ -13,4 +13,6 @@ public interface OrderJpaRepository extends JpaRepository<OrderEntity, String> {
     Page<OrderEntity> findByUserId(String userId, Pageable pageable);
 
     OrderEntity findByPaymentId(String paymentId);
+
+    OrderEntity findByNumber(String number);
 }

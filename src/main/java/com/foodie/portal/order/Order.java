@@ -106,4 +106,10 @@ public class Order {
         }
     }
 
+    public void cancel() {
+        if(status == OrderStatus.CREATED) {
+            this.status = OrderStatus.CANCEL;
+        }
+       throw new RestException(ErrorCode.FAILED, "状态异常");
+    }
 }
