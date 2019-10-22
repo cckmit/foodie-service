@@ -3,6 +3,8 @@ package com.foodie.portal.order;
 import com.foodie.portal.commons.PageCommand;
 import com.foodie.portal.commons.Pagination;
 import com.foodie.portal.order.command.CreateOrderCommand;
+import com.foodie.portal.order.command.OrderPayCancelCommand;
+import com.foodie.portal.order.command.OrderPaySuccessCommand;
 import com.foodie.portal.order.command.PayOrderCommand;
 import com.foodie.portal.order.representation.OrderRepresentationService;
 import com.foodie.portal.order.representation.OrderSummaryRepresentation;
@@ -56,17 +58,15 @@ public class UserOrderController {
         return orderApplicationService.prePay(id, command);
     }
 
-    @ApiOperation("支付成功回调")
-    @GetMapping("pay/success")
-    public void successPay(@RequestParam("paymentId") String paymentId,
-                           @RequestParam("PayerID") String payerId,
-                           String orderNo){
-        orderApplicationService.pay(paymentId, payerId);
+    @ApiOperation("支付成功")
+    @PostMapping("pay/success")
+    public void successPay(@RequestBody OrderPaySuccessCommand command){
+        orderApplicationService.pay(command.getPaymentId(), command.getPayerId());
     }
 
     @ApiOperation("支付取消")
-    @GetMapping("pay/cancel")
-    public Order cancelPay(String orderNo){
-        return orderApplicationService.cancel(orderNo);
+    @PostMapping("pay/cancel")
+    public Order cancelPay(@RequestBody OrderPayCancelCommand command){
+        return orderApplicationService.cancel(command.getOrderNo());
     }
 }
