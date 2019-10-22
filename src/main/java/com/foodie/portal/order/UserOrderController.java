@@ -60,8 +60,8 @@ public class UserOrderController {
 
     @ApiOperation("支付成功")
     @PostMapping("pay/success")
-    public void successPay(@RequestBody OrderPaySuccessCommand command){
-        orderApplicationService.pay(command.getPaymentId(), command.getPayerId());
+    public Order successPay(@RequestBody OrderPaySuccessCommand command){
+        return orderApplicationService.pay(command.getPaymentId(), command.getPayerId());
     }
 
     @ApiOperation("支付取消")
