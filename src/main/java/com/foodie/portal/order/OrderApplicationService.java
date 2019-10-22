@@ -9,7 +9,6 @@ import com.foodie.portal.commons.RestException;
 import com.foodie.portal.commons.event.OrderCreatedEvent;
 import com.foodie.portal.order.command.CreateOrderCommand;
 import com.foodie.portal.order.command.PayOrderCommand;
-import com.foodie.portal.order.representation.OrderSummaryRepresentation;
 import com.foodie.portal.payment.PaymentApplicationService;
 import com.foodie.portal.payment.PaypalPaymentIntent;
 import com.foodie.portal.payment.PaypalPaymentMethod;
@@ -18,11 +17,9 @@ import com.foodie.portal.user.model.User;
 import com.paypal.api.payments.Links;
 import com.paypal.api.payments.Payment;
 import com.paypal.base.rest.PayPalRESTException;
-import com.sun.corba.se.spi.transport.CorbaResponseWaitingRoom;
 import lombok.extern.slf4j.Slf4j;
 import lombok.var;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -45,7 +42,7 @@ public class OrderApplicationService {
     public Order create(CreateOrderCommand command, User user) {
         //创建订单
         Activity activity = activityApplicationService.findById(command.getActivityId());
-        var order = Order.create(activity, command.getCount(), command.getOrderInfo());
+        var order = Order.create(activity, command.getCount(), command.getServiceDate(), command.getStartTime(), command.getOrderInfo());
         //更新预定人数
         activityApplicationService.updateReserve(command.getActivityId(), command.getServiceDate(), command.getStartTime(), command.getCount());
 

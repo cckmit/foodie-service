@@ -30,6 +30,8 @@ public class OrderEntity {
     private ActivityEntity activity;
     private int count;
     private double price;
+    private String serviceDate;
+    private String startTime;
     private String orderInfo;
     @ManyToOne
     @NotFound(action = NotFoundAction.IGNORE)

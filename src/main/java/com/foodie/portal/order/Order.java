@@ -26,6 +26,8 @@ public class Order {
     private Activity activity;
     private int count;
     private double price;
+    private String serviceDate;
+    private String startTime;
     private OrderInfo orderInfo;
     private User user;
     private OrderStatus status;
@@ -37,11 +39,13 @@ public class Order {
     private String paymentId;
     private Instant createdAt;
 
-    public Order(Activity activity, int count, OrderInfo orderInfo) {
+    public Order(Activity activity, int count, String serviceDate, String startTime, OrderInfo orderInfo) {
         this.id = IdUtil.fastSimpleUUID();
         this.number = IdGenerator.getTimeId();
         this.activity = activity;
         this.count = count;
+        this.serviceDate = serviceDate;
+        this.startTime = startTime;
         this.price = NumberUtil.mul(activity.getPrice(count), count);
         this.status = OrderStatus.CREATED;
         this.payNo = RandomUtil.randomNumbers(6);
@@ -52,13 +56,13 @@ public class Order {
         this.createdAt = now();
     }
 
-    public static Order create(Activity activity, int count, OrderInfo orderInfo) {
+    public static Order create(Activity activity, int count, String serviceDate, String startTime, OrderInfo orderInfo) {
         if (Objects.isNull(activity)) {
             throw new RestException(ErrorCode.NO_RESULT_FOUND.getCode(), "活动不存在");
         } else if (activity.getStatus() != ActivityStatus.PASSED) {
             throw new RestException(ErrorCode.NO_RESULT_FOUND.getCode(), "活动未审核");
         }
-        return new Order(activity, count, orderInfo);
+        return new Order(activity, count, serviceDate, startTime, orderInfo);
     }
 
     public void prePay(double paidPrice) {
