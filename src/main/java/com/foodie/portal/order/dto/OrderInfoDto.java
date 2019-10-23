@@ -1,5 +1,6 @@
 package com.foodie.portal.order.dto;
 
+import com.foodie.portal.activity.model.ActivityType;
 import com.foodie.portal.order.Order;
 import lombok.Data;
 
@@ -8,8 +9,10 @@ public class OrderInfoDto {
 
     private String activityImages;
     private String activityTitle;
+    private ActivityType activityType;
     private int count;
     private double price;
+    private double unitPrice;
     private String serviceDate;
     private String startTime;
     private String number;

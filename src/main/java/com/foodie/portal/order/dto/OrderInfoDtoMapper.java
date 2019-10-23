@@ -14,6 +14,7 @@ public interface OrderInfoDtoMapper extends BaseMapper<Order, OrderInfoDto> {
     @Override
     @Mapping(target = "activityTitle", source = "activity.title")
     @Mapping(target = "activityImages", source = "activity.images")
+    @Mapping(target = "activityType", source = "activity.type")
     @Mapping(target = "email", source = "user.email")
     OrderInfoDto from(Order from);
 }

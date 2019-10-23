@@ -42,10 +42,10 @@ public class OrderApplicationService {
     public Order create(CreateOrderCommand command, User user) {
         //创建订单
         Activity activity = activityApplicationService.findById(command.getActivityId());
-        var order = Order.create(activity, command.getCount(), command.getServiceDate(), command.getStartTime(), command.getOrderInfo());
         //更新预定人数
         activityApplicationService.updateReserve(command.getActivityId(), command.getServiceDate(), command.getStartTime(), command.getCount());
-
+        var order = Order.create(activity, command.getCount(), command.getServiceDate(),
+                command.getStartTime(), command.getOrderInfo());
         order.setUser(user);
         orderRepository.save(order);
         eventPublisher.publish(new OrderCreatedEvent(order));

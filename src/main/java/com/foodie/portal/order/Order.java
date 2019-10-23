@@ -26,6 +26,7 @@ public class Order {
     private Activity activity;
     private int count;
     private double price;
+    private double unitPrice;
     private String serviceDate;
     private String startTime;
     private OrderInfo orderInfo;
@@ -46,6 +47,7 @@ public class Order {
         this.count = count;
         this.serviceDate = serviceDate;
         this.startTime = startTime;
+        this.unitPrice = activity.getPrice(count);
         this.price = NumberUtil.mul(activity.getPrice(count), count);
         this.status = OrderStatus.CREATED;
         this.payNo = RandomUtil.randomNumbers(6);

@@ -30,6 +30,7 @@ public class OrderEntity {
     private ActivityEntity activity;
     private int count;
     private double price;
+    private double unitPrice;
     private String serviceDate;
     private String startTime;
     private String orderInfo;
