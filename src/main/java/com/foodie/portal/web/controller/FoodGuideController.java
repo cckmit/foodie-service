@@ -2,6 +2,7 @@ package com.foodie.portal.web.controller;
 
 import com.foodie.portal.commons.PageCommand;
 import com.foodie.portal.commons.Pagination;
+import com.foodie.portal.web.model.ArticleDetailRepresentation;
 import com.foodie.portal.web.model.ArticleRepresentation;
 import com.foodie.portal.web.service.FoodGuideRepresentationService;
 import io.swagger.annotations.Api;
@@ -18,15 +19,15 @@ public class FoodGuideController {
     @Autowired
     private FoodGuideRepresentationService foodGuideRepresentationService;
 
-    @ApiOperation("所有活动")
+    @ApiOperation("所有美食指南")
     @GetMapping("food-guide")
     public Pagination<ArticleRepresentation> foodGuide(PageCommand pageCommand, String cityId) {
         return foodGuideRepresentationService.findAllByCity(pageCommand.getPage(), pageCommand.getSize(), cityId);
     }
 
-    @ApiOperation("活动详情")
-    @GetMapping("cities/{id}")
-    public ArticleRepresentation detail(@PathVariable String id) {
+    @ApiOperation("美食指南详情")
+    @GetMapping("food-guide/{id}")
+    public ArticleDetailRepresentation detail(@PathVariable String id) {
         return foodGuideRepresentationService.detail(id);
     }
 }
