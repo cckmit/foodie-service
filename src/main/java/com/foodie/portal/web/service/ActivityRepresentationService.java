@@ -25,7 +25,7 @@ public class ActivityRepresentationService {
     private ActivityJpaRepository activityJpaRepository;
 
     public List<ActivityRepresentation> findTopActivity() {
-        String sql = "select a.* , m.NAME as merchant_name, c.NAME as city_name from FOODIE_ACTIVITY a left join FOODIE_MERCHANT m on a.MERCHANT_ID=m.ID " +
+        String sql = "select a.* ,a.PRICE_LIST as priceListStr , m.NAME as merchant_name, c.NAME as city_name from FOODIE_ACTIVITY a left join FOODIE_MERCHANT m on a.MERCHANT_ID=m.ID " +
                 "left join FOODIE_CITY c on a.CITY_ID=c.ID where TOP_RECOMMEND = 1";
         return jdbcTemplate.query(sql, new BeanPropertyRowMapper<>(ActivityRepresentation.class));
     }
@@ -33,7 +33,7 @@ public class ActivityRepresentationService {
 
     public Pagination<ActivityRepresentation> findAllByCityId(int page, int size, String cityId) {
 
-        String sql = "select a.* , m.NAME as merchant_name, c.NAME as city_name from FOODIE_ACTIVITY a left join FOODIE_MERCHANT m on a.MERCHANT_ID=m.ID " +
+        String sql = "select a.* ,a.PRICE_LIST as priceListStr, m.NAME as merchant_name, c.NAME as city_name from FOODIE_ACTIVITY a left join FOODIE_MERCHANT m on a.MERCHANT_ID=m.ID " +
                 "left join FOODIE_CITY c on a.CITY_ID=c.ID where a.CITY_ID = :cityId limit :size offset :offset";
         List<ActivityRepresentation> activityRepresentations = jdbcTemplate.query(sql,
                 ImmutableMap.of("cityId", cityId, "offset", (page - 1) * size, "size", size),
