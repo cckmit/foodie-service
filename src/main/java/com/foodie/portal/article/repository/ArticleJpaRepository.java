@@ -15,4 +15,6 @@ public interface ArticleJpaRepository extends JpaRepository<ArticleEntity, Strin
     List<ArticleEntity> findByIdIn(List<String> ids);
 
     Page<ArticleEntity> findByCityIdAndType(String cityId, ArticleType type, Pageable pageable);
+
+    Page<ArticleEntity> findByCityId(String cityId, Pageable pageable);
 }
