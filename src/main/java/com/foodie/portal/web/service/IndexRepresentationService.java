@@ -73,7 +73,7 @@ public class IndexRepresentationService {
 
         var city = cityJpaRepository.getOne(cityId);
 
-        String sql = "select a.* , m.NAME as merchant_name, c.NAME as city_name from FOODIE_ACTIVITY a left join FOODIE_MERCHANT m on a.MERCHANT_ID=m.ID " +
+        String sql = "select a.*, a.PRICE_LIST as priceListStr , m.NAME as merchant_name, c.NAME as city_name from FOODIE_ACTIVITY a left join FOODIE_MERCHANT m on a.MERCHANT_ID=m.ID " +
                 "left join FOODIE_CITY c on a.CITY_ID=c.ID where INTERESTED_RECOMMEND = 1 and a.CITY_ID=:cityId";
         List<ActivityRepresentation> activities = jdbcTemplate.query(sql, ImmutableMap.of("cityId", cityId), new BeanPropertyRowMapper<>(ActivityRepresentation.class));
 
