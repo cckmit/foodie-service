@@ -24,4 +24,9 @@ public class OrderRepresentationService {
 
         return PaginationUtils.map(orders, order -> OrderSummaryRepresentation.to(order));
     }
+
+    public OrderDetailRepresentation findById(String id) {
+        Order order = orderRepository.byId(id);
+        return OrderDetailRepresentationMapper.instance.from(order);
+    }
 }

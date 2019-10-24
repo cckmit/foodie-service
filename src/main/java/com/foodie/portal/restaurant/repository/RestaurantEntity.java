@@ -23,7 +23,7 @@ public class RestaurantEntity {
     private String subTitle;
     private String images;
     private String content;
-    private double price;
+    private Double price;
     @ManyToOne
     @NotFound(action = NotFoundAction.IGNORE)
     private CityEntity city;
