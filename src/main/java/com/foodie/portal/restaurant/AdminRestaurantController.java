@@ -4,6 +4,8 @@ import com.foodie.portal.commons.PageCommand;
 import com.foodie.portal.commons.Pagination;
 import com.foodie.portal.restaurant.command.CreateRestaurantCommand;
 import com.foodie.portal.restaurant.command.UpdateRestaurantCommand;
+import com.foodie.portal.restaurant.dto.RestaurantDto;
+import com.foodie.portal.utils.PaginationUtils;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,22 +29,22 @@ public class AdminRestaurantController {
 
     @ApiOperation("发布餐厅")
     @PostMapping
-    public Restaurant createRestaurant(@RequestBody CreateRestaurantCommand command) {
-        return restaurantApplicationService.create(command);
-
+    public void createRestaurant(@RequestBody CreateRestaurantCommand command) {
+        restaurantApplicationService.create(command);
     }
 
     @ApiOperation("餐厅详情")
     @GetMapping("{id}")
-    public Restaurant detail(@PathVariable String id) {
-        return restaurantApplicationService.findById(id);
+    public RestaurantDto detail(@PathVariable String id) {
+        return RestaurantDto.from(restaurantApplicationService.findById(id));
 
     }
 
     @ApiOperation("餐厅列表")
     @GetMapping
-    public Pagination<Restaurant> list(PageCommand command) {
-        return restaurantApplicationService.list(command.getPage(), command.getSize());
+    public Pagination<RestaurantDto> list(PageCommand command) {
+        return PaginationUtils.map(restaurantApplicationService.list(command.getPage(), command.getSize()),
+                RestaurantDto::from);
 
     }
 
