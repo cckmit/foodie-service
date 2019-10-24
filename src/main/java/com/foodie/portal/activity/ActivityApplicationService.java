@@ -64,10 +64,11 @@ public class ActivityApplicationService {
 
     public void updateActivity(String id, UpdateActivityCommand command) {
         Activity activity = activityRepository.findById(id);
+        var city = cityApplicationService.retrieve(command.getCityId());
         activity.update(command.getTitle(), command.getSubTitle(),
                 command.getDescription(), command.getDuration(),
                 command.getMaxPeopleLimit(), command.getImages(), command.getLanguage(),
-                command.getAddress(), command.getCostList());
+                command.getAddress(), command.getCostList(), city);
         activityRepository.save(activity);
     }
 

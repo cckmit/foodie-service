@@ -26,6 +26,8 @@ public class UpdateActivityCommand {
     private int maxPeopleLimit;
     @ApiModelProperty("活动图片")
     private String images;
+    @ApiModelProperty("服务所在城市ID")
+    private String cityId;
     @ApiModelProperty("活动语言")
     private String language;
     @ApiModelProperty("服务地点")
