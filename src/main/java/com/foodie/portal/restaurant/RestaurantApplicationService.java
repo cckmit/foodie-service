@@ -3,6 +3,7 @@ package com.foodie.portal.restaurant;
 import com.foodie.portal.city.CityApplicationService;
 import com.foodie.portal.commons.Pagination;
 import com.foodie.portal.restaurant.command.CreateRestaurantCommand;
+import com.foodie.portal.restaurant.command.UpdateRestaurantCommand;
 import lombok.var;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -35,10 +36,11 @@ public class RestaurantApplicationService {
         restaurantRepository.deleteById(id);
     }
 
-    public void update(String id, CreateRestaurantCommand command) {
+    public void update(String id, UpdateRestaurantCommand command) {
+        var city = cityApplicationService.retrieve(command.getCityId());
         var restaurant = restaurantRepository.byId(id);
         restaurant.update(command.getTitle(), command.getSubTitle(), command.getImages(),
-                command.getContent(), command.getPrice());
+                command.getContent(), command.getPrice(), city);
         restaurantRepository.save(restaurant);
     }
 }
