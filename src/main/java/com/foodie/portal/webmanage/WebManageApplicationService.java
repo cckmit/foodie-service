@@ -6,6 +6,7 @@ import com.foodie.portal.webmanage.command.AddBannerCommand;
 import com.foodie.portal.webmanage.model.ActivityRecommend;
 import com.foodie.portal.webmanage.model.ArticleRecommend;
 import com.foodie.portal.webmanage.model.Banner;
+import com.foodie.portal.webmanage.model.RestaurantRecommend;
 import com.google.common.collect.Lists;
 import lombok.var;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -92,22 +93,20 @@ public class WebManageApplicationService {
         return webManageRepository.findAllBanners();
     }
 
-//    public void removeRecommendActivity(String activityId) {
-//        recommendRepository.removeRecommendActivity(activityId);
-//    }
-//
-//    public void addRecommendFoodGuides(List<String> articleIds) {
-//        recommendRepository.saveRecommendCityArticleIds(articleIds);
-//    }
-//
-//    public void removeRecommendFoodGuide(String articleId) {
-//        recommendRepository.removeRecommendArticle(articleId);
-//    }
-//
-//    public void removeTopActivity(String activityId) {
-//        recommendRepository.removeTopActivity(activityId);
-//    }
+    public void addRecommendRestaurant(String restaurantId) {
+        var restaurantRecommend = recommendRepository.findRestaurantById(restaurantId);
+        restaurantRecommend.setInterestedRecommend(true);
+        recommendRepository.saveRestaurantRecommend(restaurantRecommend);
+    }
 
 
+    public void deleteRecommendRestaurant(String restaurantId) {
+        var restaurantRecommend = recommendRepository.findRestaurantById(restaurantId);
+        restaurantRecommend.setInterestedRecommend(false);
+        recommendRepository.saveRestaurantRecommend(restaurantRecommend);
+    }
 
+    public List<RestaurantRecommend> listInterestedRestaurant(String cityId) {
+        return recommendRepository.findAllInterestedRestaurant(cityId);
+    }
 }

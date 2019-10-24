@@ -4,7 +4,7 @@ import com.foodie.portal.webmanage.command.AddBannerCommand;
 import com.foodie.portal.webmanage.model.ActivityRecommend;
 import com.foodie.portal.webmanage.model.ArticleRecommend;
 import com.foodie.portal.webmanage.model.Banner;
-import com.foodie.portal.webmanage.representation.WebManagerRepresentationService;
+import com.foodie.portal.webmanage.model.RestaurantRecommend;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,8 +25,6 @@ public class AdminManageController {
 
     @Autowired
     private WebManageApplicationService webManageApplicationService;
-    @Autowired
-    private WebManagerRepresentationService webManagerRepresentationService;
 
     @ApiOperation("添加banner")
     @PostMapping("banner")
@@ -101,30 +99,22 @@ public class AdminManageController {
         webManageApplicationService.deleteRecommendFoodGuide(articleId);
     }
 
+    @ApiOperation("添加推荐餐厅")
+    @PostMapping("restaurant-recommend")
+    public void addRecommendRestaurant(String restaurantId) {
+        webManageApplicationService.addRecommendRestaurant(restaurantId);
+    }
 
-//    @ApiOperation("移除活动推荐")
-//    @PostMapping("delete-activities-recommend")
-//    public void removeRecommendActivities(@RequestBody DeleteRecommendActivityCommand command) {
-//        webManageApplicationService.removeRecommendActivity(command.getActivityId());
-//    }
-//
+    @ApiOperation("删除推荐餐厅")
+    @DeleteMapping("restaurant-recommend")
+    public void deleteRecommendRestaurant(String restaurantId) {
+        webManageApplicationService.deleteRecommendRestaurant(restaurantId);
+    }
 
-//
-//    @ApiOperation("移除美食指南推荐")
-//    @PostMapping("delete-food-guide-recommend")
-//    public void removeRecommendFoodGuide(@RequestBody DeleteRecommendActivityCommand command) {
-//        webManageApplicationService.removeRecommendFoodGuide(command.getActivityId());
-//    }
-//
-//
-
-//
-//    @ApiOperation("移除TOP活动推荐")
-//    @PostMapping("delete-top-articles")
-//    public void removeTopArticles(@RequestBody DeleteTopActivityCommand command) {
-//        webManageApplicationService.removeTopActivity(command.getActivityId());
-//    }
-
-
+    @ApiOperation("获取推荐餐厅列表")
+    @GetMapping("restaurants-recommend")
+    public List<RestaurantRecommend> listRecommendRestaurants(String cityId) {
+        return webManageApplicationService.listInterestedRestaurant(cityId);
+    }
 
 }
