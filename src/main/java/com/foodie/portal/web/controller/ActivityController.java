@@ -26,11 +26,6 @@ public class ActivityController {
     @Autowired
     private ActivityRepresentationService activityRepresentationService;
 
-    @ApiOperation(value = "首页推荐活动")
-    @GetMapping("top-rated-activities")
-    public List<ActivityRepresentation> topRatedActivities() {
-        return activityRepresentationService.findTopActivity();
-    }
 
 
     @ApiOperation("所有活动")

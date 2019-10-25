@@ -10,6 +10,7 @@ import com.foodie.portal.web.model.CityRepresentation;
 import com.foodie.portal.web.model.InterestedCityActivities;
 import com.foodie.portal.web.model.PublicBenefitRepresentation;
 import com.foodie.portal.web.model.PublicBenefitSummaryRepresentation;
+import com.foodie.portal.web.model.RestaurantRepresentation;
 import com.foodie.portal.webmanage.model.Banner;
 import com.foodie.portal.webmanage.RecommendRepository;
 import com.foodie.portal.webmanage.repository.BannerEntityMapper;
@@ -46,28 +47,6 @@ public class IndexRepresentationService {
         return bannerEntityMapper.to(bannerJpaRepository.findAll());
     }
 
-//    /**
-//     * 推荐活动
-//     * @return
-//     */
-//    public List<FeaturedAreasDto> featuredActivity() {
-//        var activities = activityApplicationService.fetchActivitiesByIds(recommendRepository.findRecommendActivityIds());
-//       return  activities.stream().collect(Collectors.groupingBy(Activity::getCity)).entrySet().stream()
-//                .map(entry -> FeaturedAreasDto.toDto(entry.getKey(), entry.getValue()))
-//               .collect(Collectors.toList());
-//    }
-//
-//    public List<Article> featuredCityFoodGuide() {
-//        return articleApplicationService.findArticlesByIds(recommendRepository.findRecommendActivityIds());
-//    }
-//
-//    /**
-//     * 推荐活动
-//     * @return
-//     */
-//    public List<Activity> topRatedActivities() {
-//        return activityApplicationService.fetchActivitiesByIds(recommendRepository.findTopActivityIds());
-//    }
 
     public InterestedCityActivities findInterestedActivityByCityId(String cityId) {
 
@@ -80,11 +59,17 @@ public class IndexRepresentationService {
         return InterestedCityActivities.of(city.getName(), city.getIntroduction(), city.getImages(), activities);
     }
 
+    public List<ActivityRepresentation> findTopActivity() {
+        String sql = "select a.* ,a.PRICE_LIST as priceListStr , m.NAME as merchant_name, c.NAME as city_name from FOODIE_ACTIVITY a left join FOODIE_MERCHANT m on a.MERCHANT_ID=m.ID " +
+                "left join FOODIE_CITY c on a.CITY_ID=c.ID where TOP_RECOMMEND = 1";
+        return jdbcTemplate.query(sql, new BeanPropertyRowMapper<>(ActivityRepresentation.class));
+    }
 
-    public List<ArticleRepresentation> findInterestedFoodGuideByCityId(String cityId) {
+
+    public List<ArticleRepresentation> findInterestedFoodGuide() {
         String sql = "select a.* , c.NAME as city_name from FOODIE_ARTICLE a " +
-                "left join FOODIE_CITY c on a.CITY_ID=c.ID where INTERESTED_RECOMMEND = 1 and a.CITY_ID=:cityId";
-        return jdbcTemplate.query(sql, ImmutableMap.of("cityId", cityId), new BeanPropertyRowMapper<>(ArticleRepresentation.class));
+                "left join FOODIE_CITY c on a.CITY_ID=c.ID where INTERESTED_RECOMMEND = 1";
+        return jdbcTemplate.query(sql, new BeanPropertyRowMapper<>(ArticleRepresentation.class));
     }
 
     public PublicBenefitSummaryRepresentation findActivatedPublicBenefit() {
@@ -95,5 +80,12 @@ public class IndexRepresentationService {
     public PublicBenefitRepresentation findActivatedPublicBenefitDetail() {
         String sql = "select * from FOODIE_PUBLIC_BENEFIT p where p.STATUS=:status";
         return jdbcTemplate.queryForObject(sql, ImmutableMap.of("status", ACTIVATED.name()), new BeanPropertyRowMapper<>(PublicBenefitRepresentation.class));
+    }
+
+    public List<RestaurantRepresentation> findInterestedRestaurantByCityId(String cityId) {
+        String sql = "select r.* , c.NAME as city_name from FOODIE_RESTAURANT r " +
+                "left join FOODIE_CITY c on r.CITY_ID=c.ID where r.INTERESTED_RECOMMEND = 1 and r.CITY_ID=:cityId";
+        return jdbcTemplate.query(sql, ImmutableMap.of("cityId", cityId), new BeanPropertyRowMapper<>(RestaurantRepresentation.class));
+
     }
 }
