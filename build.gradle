@@ -97,6 +97,13 @@ task componentTest(type: Test) {
     shouldRunAfter test
 }
 
+tasks.withType(JavaCompile) {
+    options.encoding= 'UTF-8'
+    options.compilerArgs = [
+        '-Amapstruct.unmmappedTargetPolicy=IGNORE'
+    ]
+}
+
 apply from: "${rootProject.projectDir}/gradle/idea.gradle"
 
 
