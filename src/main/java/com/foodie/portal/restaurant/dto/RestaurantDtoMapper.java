@@ -13,5 +13,6 @@ public interface RestaurantDtoMapper extends BaseMapper<Restaurant, RestaurantDt
 
     @Override
     @Mapping(target = "cityName", source = "city.name")
+    @Mapping(target = "cityId", source = "city.id")
     RestaurantDto from(Restaurant from);
 }

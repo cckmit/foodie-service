@@ -18,6 +18,7 @@ public class RestaurantDto {
     private String content;
     private double price;
     private String cityName;
+    private String cityId;
     private Date createdAt;
 
     public static RestaurantDto from(Restaurant restaurant) {
