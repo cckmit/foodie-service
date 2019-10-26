@@ -61,8 +61,8 @@ public class MerchantOrderController {
     }
 
     @ApiOperation("我的服务详情")
-    @GetMapping("list")
-    public OrderDetailRepresentation detail(String id) {
+    @GetMapping("{id}")
+    public OrderDetailRepresentation detail(@PathVariable String id) {
         var merchant = (Merchant) SecurityUtils.getSubject().getPrincipal();
         return orderRepresentationService.findByIdAndMerchantId(id, merchant.getId());
     }
