@@ -7,6 +7,7 @@ import com.foodie.portal.order.command.OrderPayCancelCommand;
 import com.foodie.portal.order.command.OrderPaySuccessCommand;
 import com.foodie.portal.order.command.PayOrderCommand;
 import com.foodie.portal.order.dto.OrderInfoDto;
+import com.foodie.portal.order.representation.OrderDetailRepresentation;
 import com.foodie.portal.order.representation.OrderRepresentationService;
 import com.foodie.portal.order.representation.OrderSummaryRepresentation;
 import com.foodie.portal.user.model.User;
@@ -50,6 +51,13 @@ public class UserOrderController {
     public Pagination<OrderSummaryRepresentation> orders(PageCommand command) {
         var user = (User) SecurityUtils.getSubject().getPrincipal();
         return orderRepresentationService.myOrderList(command.getPage(), command.getSize(), user);
+    }
+
+    @ApiOperation("我的订单详情")
+    @GetMapping("{id}")
+    public OrderDetailRepresentation detail(@PathVariable String id) {
+        var user = (User) SecurityUtils.getSubject().getPrincipal();
+        return orderRepresentationService.findByIdAndUserId(id, user.getId());
     }
 
     @ApiOperation("用户付款")

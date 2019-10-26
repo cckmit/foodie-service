@@ -33,6 +33,15 @@ public class OrderRepository {
         return OrderEntityMapper.instance.to(orderJpaRepository.findByMerchantId(merchantId, PageRequest.of(page, size)));
     }
 
+    public Order findByIdAndMerchantId(String id, String merchantId) {
+        return OrderEntityMapper.instance.to(orderJpaRepository.findByIdAndMerchantId(id, merchantId));
+    }
+
+    public Order findByIdAndUserId(String id, String userId) {
+        return OrderEntityMapper.instance.to(orderJpaRepository.findByIdAndUserId(id, userId));
+    }
+
+
     public Pagination<Order> findUserId(int page, int size, String merchantId) {
         return OrderEntityMapper.instance.to(orderJpaRepository.findByUserId(merchantId, PageRequest.of(page, size)));
     }

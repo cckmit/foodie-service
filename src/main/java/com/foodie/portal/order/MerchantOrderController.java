@@ -4,6 +4,8 @@ import com.foodie.portal.commons.PageCommand;
 import com.foodie.portal.commons.Pagination;
 import com.foodie.portal.order.command.RejectOrderCommand;
 import com.foodie.portal.order.command.StartServiceCommand;
+import com.foodie.portal.order.representation.OrderDetailRepresentation;
+import com.foodie.portal.order.representation.OrderRepresentationService;
 import com.foodie.portal.user.model.Merchant;
 import com.foodie.portal.user.model.User;
 import io.swagger.annotations.Api;
@@ -27,6 +29,8 @@ public class MerchantOrderController {
 
     @Autowired
     private OrderApplicationService orderApplicationService;
+    @Autowired
+    private OrderRepresentationService orderRepresentationService;
 
     @ApiOperation("接受服务")
     @PostMapping("{id}/accepting")
@@ -54,6 +58,13 @@ public class MerchantOrderController {
     public Pagination<Order> orders(PageCommand command) {
         var merchant = (Merchant) SecurityUtils.getSubject().getPrincipal();
         return orderApplicationService.merchantOrderList(command.getPage(), command.getSize(), merchant);
+    }
+
+    @ApiOperation("我的服务详情")
+    @GetMapping("list")
+    public OrderDetailRepresentation detail(String id) {
+        var merchant = (Merchant) SecurityUtils.getSubject().getPrincipal();
+        return orderRepresentationService.findByIdAndMerchantId(id, merchant.getId());
     }
 
 }
