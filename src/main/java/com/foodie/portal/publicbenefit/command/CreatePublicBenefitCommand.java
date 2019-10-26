@@ -15,6 +15,8 @@ import java.util.List;
 public class CreatePublicBenefitCommand {
 
     private String title;
+    private String image;
+    private String description;
     private String content;
     private double totalFoundation;
 }

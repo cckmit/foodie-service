@@ -2,6 +2,7 @@ package com.foodie.portal.publicbenefit;
 
 import com.foodie.portal.commons.Pagination;
 import com.foodie.portal.order.Order;
+import com.foodie.portal.publicbenefit.command.CreatePublicBenefitCommand;
 import com.foodie.portal.publicbenefit.command.UpdatePublicBenefitCommand;
 import com.google.common.collect.ImmutableList;
 import lombok.var;
@@ -17,8 +18,9 @@ public class PublicBenefitApplicationService {
     @Autowired
     private PublicBenefitRepository repository;
 
-    public PublicBenefit create(String title, String content, double totalFoundation) {
-        PublicBenefit publicBenefit = PublicBenefit.create(title, content, totalFoundation);
+    public PublicBenefit create(CreatePublicBenefitCommand command) {
+        PublicBenefit publicBenefit = PublicBenefit.create(command.getTitle(), command.getImage(), command.getDescription(),
+                command.getContent(), command.getTotalFoundation());
         repository.save(publicBenefit);
         return publicBenefit;
     }

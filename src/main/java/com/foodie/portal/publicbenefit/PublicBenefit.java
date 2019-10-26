@@ -7,7 +7,6 @@ import com.google.common.collect.Lists;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.math.BigDecimal;
 import java.time.Instant;
 import java.util.List;
 
@@ -27,9 +26,11 @@ public class PublicBenefit {
     private Instant createdAt;
 
 
-    public PublicBenefit(String title, String content, double totalFoundation) {
+    public PublicBenefit(String title, String image, String description, String content, double totalFoundation) {
         this.id = IdUtil.fastSimpleUUID();
         this.title = title;
+        this.image = image;
+        this.description = description;
         this.content = content;
         this.totalFoundation = totalFoundation;
         this.currentFoundation = 0;
@@ -37,8 +38,8 @@ public class PublicBenefit {
         this.status = PublicBenefitStatus.CREATED;
     }
 
-    public static PublicBenefit create(String title, String content, double totalFoundation) {
-        return new PublicBenefit(title, content, totalFoundation);
+    public static PublicBenefit create(String title, String image, String description, String content, double totalFoundation) {
+        return new PublicBenefit(title, image, description, content, totalFoundation);
     }
 
     public void extract(Order order) {
