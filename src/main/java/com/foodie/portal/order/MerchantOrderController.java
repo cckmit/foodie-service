@@ -7,6 +7,7 @@ import com.foodie.portal.order.command.StartServiceCommand;
 import com.foodie.portal.order.model.Order;
 import com.foodie.portal.order.representation.OrderDetailRepresentation;
 import com.foodie.portal.order.representation.OrderRepresentationService;
+import com.foodie.portal.order.representation.OrderSummaryRepresentation;
 import com.foodie.portal.user.model.Merchant;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -55,9 +56,9 @@ public class MerchantOrderController {
 
     @ApiOperation("我的服务列表")
     @GetMapping("list")
-    public Pagination<Order> orders(PageCommand command) {
+    public Pagination<OrderSummaryRepresentation> orders(PageCommand command) {
         var merchant = (Merchant) SecurityUtils.getSubject().getPrincipal();
-        return orderApplicationService.merchantOrderList(command.getPage(), command.getSize(), merchant);
+        return orderRepresentationService.merchantOrderList(command.getPage(), command.getSize(), merchant);
     }
 
     @ApiOperation("我的服务详情")

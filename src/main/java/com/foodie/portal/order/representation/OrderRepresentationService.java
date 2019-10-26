@@ -3,6 +3,7 @@ package com.foodie.portal.order.representation;
 import com.foodie.portal.commons.Pagination;
 import com.foodie.portal.order.model.Order;
 import com.foodie.portal.order.OrderRepository;
+import com.foodie.portal.user.model.Merchant;
 import com.foodie.portal.user.model.User;
 import com.foodie.portal.utils.PaginationUtils;
 import lombok.var;
@@ -16,6 +17,10 @@ public class OrderRepresentationService {
 
     public Pagination<OrderSummaryRepresentation> myOrderList(int page, int size, User user) {
         return OrderSummaryRepresentation.from(orderRepository.findUserId(page - 1, size, user.getId()));
+    }
+
+    public Pagination<OrderSummaryRepresentation> merchantOrderList(int page, int size, Merchant merchant) {
+        return OrderSummaryRepresentation.from(orderRepository.findByMerchantId(page - 1, size, merchant.getId()));
     }
 
     public Pagination<OrderSummaryRepresentation> orderList(int page, int size) {

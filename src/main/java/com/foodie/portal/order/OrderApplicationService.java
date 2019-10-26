@@ -78,9 +78,6 @@ public class OrderApplicationService {
     }
 
 
-    public Pagination<Order> merchantOrderList(int page, int size, Merchant merchant) {
-        return orderRepository.findByMerchantId(page - 1, size, merchant.getId());
-    }
 
     public Order accept(String id, Merchant merchant) {
         var order = orderRepository.byId(id);
