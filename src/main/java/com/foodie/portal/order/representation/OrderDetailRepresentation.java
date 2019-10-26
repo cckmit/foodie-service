@@ -1,10 +1,7 @@
 package com.foodie.portal.order.representation;
 
-import com.foodie.portal.activity.model.Activity;
 import com.foodie.portal.order.OrderInfo;
 import com.foodie.portal.order.OrderStatus;
-import com.foodie.portal.user.model.Merchant;
-import com.foodie.portal.user.model.User;
 import lombok.Data;
 
 import java.time.Instant;
@@ -14,6 +11,7 @@ public class OrderDetailRepresentation {
 
     private String id;
     private String number;
+    private String activityImages;
     private String activityTitle;
     private String activityAddress;
     private String activityLanguage;

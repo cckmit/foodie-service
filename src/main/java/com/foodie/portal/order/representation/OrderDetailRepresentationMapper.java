@@ -13,6 +13,7 @@ public interface OrderDetailRepresentationMapper extends BaseMapper<Order, Order
 
     @Override
     @Mapping(source = "activity.title", target = "activityTitle")
+    @Mapping(source = "activity.images", target = "activityImages")
     @Mapping(source = "merchant.name", target = "merchantName")
     @Mapping(source = "activity.address", target = "activityAddress")
     @Mapping(source = "activity.language", target = "activityLanguage")
