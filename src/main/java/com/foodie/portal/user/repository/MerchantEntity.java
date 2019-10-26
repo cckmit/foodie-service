@@ -19,6 +19,7 @@ public class MerchantEntity {
     @Id
     private String id;
     private String name;
+    private String avatar;
     private String username;
     private String password;
     private String email;
@@ -30,4 +31,8 @@ public class MerchantEntity {
     @Enumerated(EnumType.STRING)
     private MerchantStatus status;
     private BigDecimal extractRatio;
+    //余额
+    private Double balance;
+    //未结算
+    private Double openAccount;
 }

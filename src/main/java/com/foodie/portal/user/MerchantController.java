@@ -7,6 +7,8 @@ import com.foodie.portal.user.command.ChangeMerchantPasswordCommand;
 import com.foodie.portal.user.command.MerchantDto;
 import com.foodie.portal.user.command.MerchantLoginCommand;
 import com.foodie.portal.user.model.Merchant;
+import com.foodie.portal.user.representation.MerchantInfoRepresentation;
+import com.foodie.portal.user.representation.MerchantRepresentationService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.var;
@@ -32,6 +34,8 @@ public class MerchantController {
 
     @Autowired
     private MerchantApplicationService merchantApplicationService;
+    @Autowired
+    private MerchantRepresentationService merchantRepresentationService;
 
     @ApiOperation("商家登陆")
     @PostMapping("login")
@@ -57,9 +61,9 @@ public class MerchantController {
 
     @ApiOperation("商家个人信息")
     @GetMapping("user-info")
-    public MerchantDto merchantInfo() {
-        Subject subject = SecurityUtils.getSubject();
-        return MerchantDto.toDto((Merchant) subject.getPrincipal());
+    public MerchantInfoRepresentation merchantInfo() {
+        var merchant = (Merchant)SecurityUtils.getSubject();
+        return merchantRepresentationService.info(merchant.getId());
     }
 
     @ApiOperation("修改商家密码")

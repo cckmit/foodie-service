@@ -2,6 +2,7 @@ package com.foodie.portal.restaurant.dto;
 
 import com.foodie.portal.city.City;
 import com.foodie.portal.restaurant.Restaurant;
+import com.foodie.portal.restaurant.RestaurantType;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -19,6 +20,7 @@ public class RestaurantDto {
     private double price;
     private String cityName;
     private String cityId;
+    private RestaurantType type;
     private Date createdAt;
 
     public static RestaurantDto from(Restaurant restaurant) {
