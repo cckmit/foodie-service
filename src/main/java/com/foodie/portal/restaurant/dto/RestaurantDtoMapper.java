@@ -1,8 +1,7 @@
 package com.foodie.portal.restaurant.dto;
 
 import com.foodie.portal.commons.BaseMapper;
-import com.foodie.portal.restaurant.Restaurant;
-import com.foodie.portal.restaurant.repository.RestaurantEntity;
+import com.foodie.portal.restaurant.model.Restaurant;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.factory.Mappers;

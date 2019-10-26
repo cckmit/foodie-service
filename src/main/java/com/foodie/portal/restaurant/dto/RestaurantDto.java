@@ -1,8 +1,7 @@
 package com.foodie.portal.restaurant.dto;
 
-import com.foodie.portal.city.City;
-import com.foodie.portal.restaurant.Restaurant;
-import com.foodie.portal.restaurant.RestaurantType;
+import com.foodie.portal.restaurant.model.Restaurant;
+import com.foodie.portal.restaurant.model.RestaurantType;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 

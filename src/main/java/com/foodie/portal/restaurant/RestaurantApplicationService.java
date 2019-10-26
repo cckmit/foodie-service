@@ -4,6 +4,7 @@ import com.foodie.portal.city.CityApplicationService;
 import com.foodie.portal.commons.Pagination;
 import com.foodie.portal.restaurant.command.CreateRestaurantCommand;
 import com.foodie.portal.restaurant.command.UpdateRestaurantCommand;
+import com.foodie.portal.restaurant.model.Restaurant;
 import lombok.var;
 import org.apache.logging.log4j.util.Strings;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,7 +20,8 @@ public class RestaurantApplicationService {
     public Restaurant create(CreateRestaurantCommand command) {
         var city = cityApplicationService.retrieve(command.getCityId());
         var restaurant = Restaurant.create(command.getTitle(), command.getSubTitle(), command.getImages(),
-                command.getContent(), command.getPrice(), city, command.getType());
+                command.getContent(), command.getPrice(), city, command.getType(),
+                command.getSetMeals());
 
         restaurantRepository.save(restaurant);
         return restaurant;
@@ -44,7 +46,8 @@ public class RestaurantApplicationService {
         var city = cityApplicationService.retrieve(command.getCityId());
         var restaurant = restaurantRepository.byId(id);
         restaurant.update(command.getTitle(), command.getSubTitle(), command.getImages(),
-                command.getContent(), command.getPrice(), city, command.getType());
+                command.getContent(), command.getPrice(), city, command.getType(),
+                command.getSetMeals());
         restaurantRepository.save(restaurant);
     }
 }

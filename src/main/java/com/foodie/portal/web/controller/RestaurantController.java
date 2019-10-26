@@ -2,7 +2,7 @@ package com.foodie.portal.web.controller;
 
 import com.foodie.portal.commons.PageCommand;
 import com.foodie.portal.commons.Pagination;
-import com.foodie.portal.restaurant.RestaurantType;
+import com.foodie.portal.restaurant.model.RestaurantType;
 import com.foodie.portal.web.model.RestaurantRepresentation;
 import com.foodie.portal.web.service.RestaurantRepresentationService;
 import io.swagger.annotations.Api;

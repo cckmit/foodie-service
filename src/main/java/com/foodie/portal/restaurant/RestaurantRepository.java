@@ -1,13 +1,12 @@
 package com.foodie.portal.restaurant;
 
 import com.foodie.portal.commons.Pagination;
+import com.foodie.portal.restaurant.model.Restaurant;
 import com.foodie.portal.restaurant.repository.RestaurantEntityMapper;
 import com.foodie.portal.restaurant.repository.RestaurantJpaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Component;
-
-import java.util.List;
 
 @Component
 public class RestaurantRepository {

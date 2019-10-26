@@ -1,12 +1,9 @@
 package com.foodie.portal.web.service;
 
-import com.foodie.portal.article.repository.ArticleJpaRepository;
 import com.foodie.portal.commons.Pagination;
-import com.foodie.portal.restaurant.RestaurantType;
+import com.foodie.portal.restaurant.model.RestaurantType;
 import com.foodie.portal.restaurant.repository.RestaurantJpaRepository;
 import com.foodie.portal.utils.PaginationUtils;
-import com.foodie.portal.web.model.ArticleDetailRepresentation;
-import com.foodie.portal.web.model.ArticleRepresentation;
 import com.foodie.portal.web.model.RestaurantRepresentation;
 import com.google.common.collect.ImmutableMap;
 import lombok.var;

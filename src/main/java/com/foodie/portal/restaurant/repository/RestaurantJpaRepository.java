@@ -1,6 +1,6 @@
 package com.foodie.portal.restaurant.repository;
 
-import com.foodie.portal.restaurant.RestaurantType;
+import com.foodie.portal.restaurant.model.RestaurantType;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
