@@ -62,7 +62,7 @@ public class MerchantController {
     @ApiOperation("商家个人信息")
     @GetMapping("user-info")
     public MerchantInfoRepresentation merchantInfo() {
-        var merchant = (Merchant)SecurityUtils.getSubject();
+        var merchant = (Merchant)SecurityUtils.getSubject().getPrincipal();
         return merchantRepresentationService.info(merchant.getId());
     }
 
