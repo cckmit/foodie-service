@@ -1,9 +1,7 @@
 package com.foodie.portal.order.command;
 
-import com.foodie.portal.order.OrderInfo;
+import com.foodie.portal.order.model.OrderInfo;
 import lombok.Data;
-
-import java.util.Date;
 
 @Data
 public class CreateOrderCommand {

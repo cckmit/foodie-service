@@ -2,7 +2,7 @@ package com.foodie.portal.publicbenefit;
 
 import cn.hutool.core.util.IdUtil;
 import cn.hutool.core.util.NumberUtil;
-import com.foodie.portal.order.Order;
+import com.foodie.portal.order.model.Order;
 import com.google.common.collect.Lists;
 import lombok.Data;
 import lombok.NoArgsConstructor;

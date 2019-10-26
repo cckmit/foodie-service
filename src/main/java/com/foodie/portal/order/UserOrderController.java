@@ -7,12 +7,11 @@ import com.foodie.portal.order.command.OrderPayCancelCommand;
 import com.foodie.portal.order.command.OrderPaySuccessCommand;
 import com.foodie.portal.order.command.PayOrderCommand;
 import com.foodie.portal.order.dto.OrderInfoDto;
+import com.foodie.portal.order.model.Order;
 import com.foodie.portal.order.representation.OrderDetailRepresentation;
 import com.foodie.portal.order.representation.OrderRepresentationService;
 import com.foodie.portal.order.representation.OrderSummaryRepresentation;
 import com.foodie.portal.user.model.User;
-import com.paypal.api.payments.Payment;
-import com.paypal.base.rest.PayPalRESTException;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.var;
@@ -23,10 +22,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
 @Api(tags = "（用户）订单功能")

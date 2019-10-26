@@ -2,7 +2,7 @@ package com.foodie.portal.mail;
 
 import com.foodie.portal.commons.event.MerchantApplyPassedEvent;
 import com.foodie.portal.commons.event.OrderCreatedEvent;
-import com.foodie.portal.order.Order;
+import com.foodie.portal.order.model.Order;
 import com.foodie.portal.user.model.Merchant;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.event.EventListener;

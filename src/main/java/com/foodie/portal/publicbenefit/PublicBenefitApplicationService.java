@@ -1,7 +1,7 @@
 package com.foodie.portal.publicbenefit;
 
 import com.foodie.portal.commons.Pagination;
-import com.foodie.portal.order.Order;
+import com.foodie.portal.order.model.Order;
 import com.foodie.portal.publicbenefit.command.CreatePublicBenefitCommand;
 import com.foodie.portal.publicbenefit.command.UpdatePublicBenefitCommand;
 import com.google.common.collect.ImmutableList;
@@ -9,7 +9,6 @@ import lombok.var;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.math.BigDecimal;
 import java.util.Objects;
 
 @Service

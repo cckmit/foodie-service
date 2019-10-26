@@ -2,10 +2,9 @@ package com.foodie.portal.publicbenefit.repository;
 
 import com.foodie.portal.commons.BaseMapper;
 import com.foodie.portal.commons.utils.JsonUtils;
-import com.foodie.portal.order.OrderInfo;
+import com.foodie.portal.order.model.OrderInfo;
 import com.foodie.portal.publicbenefit.PublicBenefit;
 import org.mapstruct.Mapper;
-import org.mapstruct.Named;
 import org.mapstruct.factory.Mappers;
 
 @Mapper

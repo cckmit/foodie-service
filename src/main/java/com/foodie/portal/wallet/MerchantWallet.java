@@ -1,12 +1,11 @@
 package com.foodie.portal.wallet;
 
 import cn.hutool.core.util.NumberUtil;
-import com.foodie.portal.order.Order;
+import com.foodie.portal.order.model.Order;
 import com.foodie.portal.user.model.Merchant;
 import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
 
-import java.math.BigDecimal;
 import java.util.List;
 
 @Slf4j

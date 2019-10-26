@@ -1,6 +1,5 @@
 package com.foodie.portal.publicbenefit.repository;
 
-import com.foodie.portal.order.Order;
 import com.foodie.portal.order.repository.OrderEntity;
 import com.foodie.portal.publicbenefit.PublicBenefitStatus;
 import lombok.Data;

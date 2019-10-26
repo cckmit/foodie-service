@@ -1,7 +1,6 @@
 package com.foodie.portal.wallet;
 
-import com.foodie.portal.order.Order;
-import com.foodie.portal.user.model.Merchant;
+import com.foodie.portal.order.model.Order;
 import lombok.extern.slf4j.Slf4j;
 import lombok.var;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -1,4 +1,4 @@
-package com.foodie.portal.order;
+package com.foodie.portal.order.model;
 
 public enum OrderStatus {
     CREATED,

@@ -2,8 +2,6 @@ package com.foodie.portal.order;
 
 import com.foodie.portal.commons.PageCommand;
 import com.foodie.portal.commons.Pagination;
-import com.foodie.portal.order.Order;
-import com.foodie.portal.order.OrderApplicationService;
 import com.foodie.portal.order.representation.OrderDetailRepresentation;
 import com.foodie.portal.order.representation.OrderRepresentationService;
 import com.foodie.portal.order.representation.OrderSummaryRepresentation;

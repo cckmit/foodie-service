@@ -1,4 +1,4 @@
-package com.foodie.portal.order;
+package com.foodie.portal.order.model;
 
 import cn.hutool.core.util.IdUtil;
 import cn.hutool.core.util.NumberUtil;

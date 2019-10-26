@@ -1,4 +1,4 @@
-package com.foodie.portal.order;
+package com.foodie.portal.order.model;
 
 import com.foodie.portal.commons.model.IdType;
 import lombok.Data;

@@ -1,9 +1,8 @@
 package com.foodie.portal.order.representation;
 
 import com.foodie.portal.commons.Pagination;
-import com.foodie.portal.order.Order;
+import com.foodie.portal.order.model.Order;
 import com.foodie.portal.order.OrderRepository;
-import com.foodie.portal.user.model.Merchant;
 import com.foodie.portal.user.model.User;
 import com.foodie.portal.utils.PaginationUtils;
 import lombok.var;

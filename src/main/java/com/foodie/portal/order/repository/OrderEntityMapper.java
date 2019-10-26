@@ -2,8 +2,8 @@ package com.foodie.portal.order.repository;
 
 import com.foodie.portal.commons.BaseMapper;
 import com.foodie.portal.commons.utils.JsonUtils;
-import com.foodie.portal.order.Order;
-import com.foodie.portal.order.OrderInfo;
+import com.foodie.portal.order.model.Order;
+import com.foodie.portal.order.model.OrderInfo;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.Named;

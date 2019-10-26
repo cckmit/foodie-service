@@ -9,6 +9,7 @@ import com.foodie.portal.commons.RestException;
 import com.foodie.portal.commons.event.OrderCreatedEvent;
 import com.foodie.portal.order.command.CreateOrderCommand;
 import com.foodie.portal.order.command.PayOrderCommand;
+import com.foodie.portal.order.model.Order;
 import com.foodie.portal.payment.PaymentApplicationService;
 import com.foodie.portal.payment.PaypalPaymentIntent;
 import com.foodie.portal.payment.PaypalPaymentMethod;

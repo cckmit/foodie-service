@@ -1,7 +1,7 @@
 package com.foodie.portal.order.representation;
 
-import com.foodie.portal.order.OrderInfo;
-import com.foodie.portal.order.OrderStatus;
+import com.foodie.portal.order.model.OrderInfo;
+import com.foodie.portal.order.model.OrderStatus;
 import lombok.Data;
 
 import java.time.Instant;

@@ -1,6 +1,7 @@
 package com.foodie.portal.order;
 
 import com.foodie.portal.commons.Pagination;
+import com.foodie.portal.order.model.Order;
 import com.foodie.portal.order.repository.OrderEntityMapper;
 import com.foodie.portal.order.repository.OrderJpaRepository;
 import org.springframework.beans.factory.annotation.Autowired;

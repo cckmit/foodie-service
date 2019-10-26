@@ -1,9 +1,7 @@
 package com.foodie.portal.order.repository;
 
 import com.foodie.portal.activity.repository.ActivityEntity;
-import com.foodie.portal.order.OrderInfo;
-import com.foodie.portal.order.OrderStatus;
-import com.foodie.portal.user.model.Merchant;
+import com.foodie.portal.order.model.OrderStatus;
 import com.foodie.portal.user.repository.MerchantEntity;
 import com.foodie.portal.user.repository.UserEntity;
 import lombok.Data;
@@ -16,7 +14,6 @@ import javax.persistence.Enumerated;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
-import java.math.BigDecimal;
 import java.time.Instant;
 
 @Data

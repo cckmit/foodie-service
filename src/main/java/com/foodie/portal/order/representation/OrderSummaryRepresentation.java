@@ -1,12 +1,9 @@
 package com.foodie.portal.order.representation;
 
-import com.foodie.portal.activity.model.Activity;
 import com.foodie.portal.commons.Pagination;
-import com.foodie.portal.order.Order;
-import com.foodie.portal.order.OrderInfo;
-import com.foodie.portal.order.OrderStatus;
-import com.foodie.portal.user.model.Merchant;
-import com.foodie.portal.user.model.User;
+import com.foodie.portal.order.model.Order;
+import com.foodie.portal.order.model.OrderInfo;
+import com.foodie.portal.order.model.OrderStatus;
 import lombok.Data;
 import lombok.experimental.Accessors;
 

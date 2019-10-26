@@ -1,8 +1,7 @@
 package com.foodie.portal.order.dto;
 
 import com.foodie.portal.commons.BaseMapper;
-import com.foodie.portal.order.Order;
-import lombok.var;
+import com.foodie.portal.order.model.Order;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.factory.Mappers;
