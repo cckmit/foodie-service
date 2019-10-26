@@ -19,6 +19,10 @@ public class OrderSummaryRepresentation {
     private String id;
     private String number;
     private String activityTitle;
+    private String activityAddress;
+    private String activityLanguage;
+    private String serviceDate;
+    private String startTime;
     private int count;
     private BigDecimal price;
     private OrderInfo orderInfo;
@@ -31,11 +35,11 @@ public class OrderSummaryRepresentation {
     private String paymentId;
     private Instant createdAt;
 
-    public static OrderSummaryRepresentation to(Order order){
+    public static OrderSummaryRepresentation from(Order order){
         return OrderRepresentationMapper.instance.from(order);
     }
 
-    public static Pagination<OrderSummaryRepresentation> to(Pagination<Order> orders) {
+    public static Pagination<OrderSummaryRepresentation> from(Pagination<Order> orders) {
         return OrderRepresentationMapper.instance.from(orders);
     }
 }
