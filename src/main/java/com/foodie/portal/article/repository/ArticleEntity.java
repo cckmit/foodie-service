@@ -22,6 +22,7 @@ public class ArticleEntity {
     @Id
     private String id;
     private String title;
+    private String subTitle;
     private String cover;
     private String content;
     @ManyToOne

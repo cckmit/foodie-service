@@ -6,6 +6,7 @@ import com.foodie.portal.commons.ErrorCode;
 import com.foodie.portal.commons.RestException;
 import lombok.Data;
 
+import javax.validation.constraints.NotNull;
 import java.time.Instant;
 import java.util.Objects;
 
@@ -16,6 +17,7 @@ public class Article {
 
     private String id;
     private String title;
+    private String subTitle;
     private String cover;
     private String content;
     private City city;
@@ -27,20 +29,21 @@ public class Article {
         createdAt = now();
     }
 
-    public Article(String title, String cover, String content, City city, ArticleType type) {
+    public Article(String title, String subTitle, String cover, String content, City city, ArticleType type) {
         this();
         this.title = title;
+        this.subTitle = subTitle;
         this.cover = cover;
         this.content = content;
         this.city = city;
         this.type = type;
     }
 
-    public static Article create(String title, String cover, String content, City city, ArticleType type) {
+    public static Article create( String title,String subTitle, String cover, String content, City city, ArticleType type) {
         if(Objects.isNull(city)) {
             throw new RestException(ErrorCode.FAILED, "所选城市不存在");
         }
-        return new Article(title, cover, content, city, type);
+        return new Article(title, subTitle, cover, content, city, type);
     }
 
 }

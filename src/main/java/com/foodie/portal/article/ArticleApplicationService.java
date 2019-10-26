@@ -24,7 +24,7 @@ public class ArticleApplicationService {
 
     public void addArticle(CreateArticleCommand command) {
         var city = cityApplicationService.retrieve(command.getCityId());
-        var article = Article.create(command.getTitle(), command.getCover(),
+        var article = Article.create(command.getTitle(), command.getSubTitle(), command.getCover(),
                 command.getContent(), city, command.getType());
         articleRepository.save(article);
     }
@@ -34,6 +34,7 @@ public class ArticleApplicationService {
         article.setContent(articleCommand.getContent());
         article.setCover(articleCommand.getCover());
         article.setTitle(articleCommand.getTitle());
+        article.setSubTitle(articleCommand.getSubTitle());
         articleRepository.save(article);
         return article;
     }

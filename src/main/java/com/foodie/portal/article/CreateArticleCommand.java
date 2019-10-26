@@ -12,6 +12,8 @@ public class CreateArticleCommand {
     @ApiModelProperty("主标题")
     @NotNull(message = "标题不能为空")
     private String title;
+    @ApiModelProperty("副标题")
+    private String subTitle;
     @ApiModelProperty("文章封面")
     private String cover;
     @ApiModelProperty("文章内容")
