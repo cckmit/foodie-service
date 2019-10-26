@@ -24,10 +24,6 @@ public class Merchant {
     private String images;
     private MerchantStatus status;
     private double extractRatio;
-    //余额
-    private Double balance;
-    //未结算
-    private Double openAccount;
 
     public Merchant() {
         this.id = IdUtil.fastSimpleUUID();

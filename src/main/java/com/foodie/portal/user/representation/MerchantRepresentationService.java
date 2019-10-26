@@ -6,6 +6,7 @@ import com.foodie.portal.user.repository.MerchantJpaRepository;
 import com.google.common.collect.ImmutableMap;
 import lombok.var;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.stereotype.Service;
 
@@ -13,16 +14,15 @@ import org.springframework.stereotype.Service;
 public class MerchantRepresentationService {
 
     @Autowired
-    private MerchantJpaRepository merchantJpaRepository;
-    @Autowired
     private NamedParameterJdbcTemplate jdbcTemplate;
 
     public MerchantInfoRepresentation info(String id) {
-        var merchantEntity = merchantJpaRepository.findById(id).orElse(null);
+        String merchantSql = "select COUNT(1) from FOODIE_ORDER where MERCHANT_ID=:merchantId";
+        var merchantInfoRepresentation = jdbcTemplate.queryForObject(merchantSql, ImmutableMap.of("merchantId", id), new BeanPropertyRowMapper<>(MerchantInfoRepresentation.class));
 
         String sql = "select COUNT(1) from FOODIE_ORDER where MERCHANT_ID=:merchantId";
         var orderCount = jdbcTemplate.queryForObject(sql, ImmutableMap.of("merchantId", id), Integer.class);
-        return MerchantInfoRepresentation.from(merchantEntity, orderCount);
+        return merchantInfoRepresentation.setOrderCount(orderCount);
     }
 
 }

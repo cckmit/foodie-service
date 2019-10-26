@@ -16,6 +16,8 @@ public class MerchantWallet {
     private double balance;
     //未结算
     private double openAccount;
+    //累计收益
+    private double accumulatedEarnings;
 
 
     public void increase(Order order) {
