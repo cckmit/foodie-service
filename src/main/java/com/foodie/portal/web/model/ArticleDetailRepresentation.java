@@ -7,6 +7,7 @@ import lombok.Data;
 public class ArticleDetailRepresentation {
     private String id;
     private String title;
+    private String subTitle;
     private String cover;
     private String cityName;
     private String content;
