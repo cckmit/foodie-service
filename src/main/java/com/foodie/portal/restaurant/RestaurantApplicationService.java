@@ -5,6 +5,7 @@ import com.foodie.portal.commons.Pagination;
 import com.foodie.portal.restaurant.command.CreateRestaurantCommand;
 import com.foodie.portal.restaurant.command.UpdateRestaurantCommand;
 import lombok.var;
+import org.apache.logging.log4j.util.Strings;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -28,8 +29,11 @@ public class RestaurantApplicationService {
         return restaurantRepository.byId(id);
     }
 
-    public Pagination<Restaurant> list(int page, int size) {
-        return restaurantRepository.findAll(page - 1, size);
+    public Pagination<Restaurant> list(int page, int size, String cityId) {
+        if(Strings.isBlank(cityId)) {
+            return restaurantRepository.findAll(page - 1, size);
+        }
+        return restaurantRepository.findAll(cityId,page - 1, size);
     }
 
     public void deleteById(String id) {

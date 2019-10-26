@@ -42,10 +42,9 @@ public class AdminRestaurantController {
 
     @ApiOperation("餐厅列表")
     @GetMapping
-    public Pagination<RestaurantDto> list(PageCommand command) {
-        return PaginationUtils.map(restaurantApplicationService.list(command.getPage(), command.getSize()),
+    public Pagination<RestaurantDto> list(PageCommand command,String cityId) {
+        return PaginationUtils.map(restaurantApplicationService.list(command.getPage(), command.getSize(), cityId),
                 RestaurantDto::from);
-
     }
 
     @ApiOperation("删除餐厅")

@@ -30,6 +30,10 @@ public class RestaurantRepository {
         return INSTANCE.to(restaurantJpaRepository.findAll(PageRequest.of(page, size)));
     }
 
+    public Pagination<Restaurant> findAll(String cityId, int page, int size) {
+        return INSTANCE.to(restaurantJpaRepository.findByCityId(cityId, PageRequest.of(page, size)));
+    }
+
     public void deleteById(String id) {
         restaurantJpaRepository.deleteById(id);
     }
