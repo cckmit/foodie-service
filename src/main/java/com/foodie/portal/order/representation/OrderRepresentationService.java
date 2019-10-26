@@ -3,12 +3,15 @@ package com.foodie.portal.order.representation;
 import com.foodie.portal.commons.Pagination;
 import com.foodie.portal.order.model.Order;
 import com.foodie.portal.order.OrderRepository;
+import com.foodie.portal.order.model.OrderStatus;
 import com.foodie.portal.user.model.Merchant;
 import com.foodie.portal.user.model.User;
 import com.foodie.portal.utils.PaginationUtils;
 import lombok.var;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.Objects;
 
 @Service
 public class OrderRepresentationService {
@@ -19,9 +22,14 @@ public class OrderRepresentationService {
         return OrderSummaryRepresentation.from(orderRepository.findUserId(page - 1, size, user.getId()));
     }
 
-    public Pagination<OrderSummaryRepresentation> merchantOrderList(int page, int size, Merchant merchant) {
-        return OrderSummaryRepresentation.from(orderRepository.findByMerchantId(page - 1, size, merchant.getId()));
+    public Pagination<OrderSummaryRepresentation> merchantOrderList(int page, int size, Merchant merchant, OrderStatus status) {
+        if(Objects.isNull(status)) {
+            return OrderSummaryRepresentation.from(orderRepository.findByMerchantId(page - 1, size, merchant.getId()));
+
+        }
+        return OrderSummaryRepresentation.from(orderRepository.findByMerchantId(page - 1, size, merchant.getId(),status));
     }
+
 
     public Pagination<OrderSummaryRepresentation> orderList(int page, int size) {
         Pagination<Order> orders = orderRepository.findByPage(page - 1, size);
