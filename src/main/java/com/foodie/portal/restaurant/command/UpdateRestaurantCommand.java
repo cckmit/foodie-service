@@ -1,6 +1,9 @@
 package com.foodie.portal.restaurant.command;
 
+import com.foodie.portal.restaurant.RestaurantType;
 import lombok.Data;
+
+import javax.validation.constraints.NotNull;
 
 @Data
 public class UpdateRestaurantCommand {
@@ -10,4 +13,6 @@ public class UpdateRestaurantCommand {
     private String content;
     private double price;
     private String cityId;
+    @NotNull
+    private RestaurantType type;
 }

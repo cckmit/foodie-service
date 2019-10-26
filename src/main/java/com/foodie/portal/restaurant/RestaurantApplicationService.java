@@ -19,7 +19,7 @@ public class RestaurantApplicationService {
     public Restaurant create(CreateRestaurantCommand command) {
         var city = cityApplicationService.retrieve(command.getCityId());
         var restaurant = Restaurant.create(command.getTitle(), command.getSubTitle(), command.getImages(),
-                command.getContent(), command.getPrice(), city);
+                command.getContent(), command.getPrice(), city, command.getType());
 
         restaurantRepository.save(restaurant);
         return restaurant;
@@ -44,7 +44,7 @@ public class RestaurantApplicationService {
         var city = cityApplicationService.retrieve(command.getCityId());
         var restaurant = restaurantRepository.byId(id);
         restaurant.update(command.getTitle(), command.getSubTitle(), command.getImages(),
-                command.getContent(), command.getPrice(), city);
+                command.getContent(), command.getPrice(), city, command.getType());
         restaurantRepository.save(restaurant);
     }
 }

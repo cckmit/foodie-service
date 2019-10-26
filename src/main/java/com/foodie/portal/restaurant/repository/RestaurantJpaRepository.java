@@ -1,5 +1,6 @@
 package com.foodie.portal.restaurant.repository;
 
+import com.foodie.portal.restaurant.RestaurantType;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -9,4 +10,6 @@ import org.springframework.stereotype.Repository;
 public interface RestaurantJpaRepository extends JpaRepository<RestaurantEntity, String> {
 
     Page<RestaurantEntity> findByCityId(String cityId, Pageable page);
+
+    Page<RestaurantEntity> findByCityIdAndType(String cityId, RestaurantType type,  Pageable page);
 }

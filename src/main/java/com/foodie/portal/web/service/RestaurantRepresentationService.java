@@ -2,6 +2,7 @@ package com.foodie.portal.web.service;
 
 import com.foodie.portal.article.repository.ArticleJpaRepository;
 import com.foodie.portal.commons.Pagination;
+import com.foodie.portal.restaurant.RestaurantType;
 import com.foodie.portal.restaurant.repository.RestaurantJpaRepository;
 import com.foodie.portal.utils.PaginationUtils;
 import com.foodie.portal.web.model.ArticleDetailRepresentation;
@@ -23,8 +24,8 @@ public class RestaurantRepresentationService {
     @Autowired
     private RestaurantJpaRepository restaurantJpaRepository;
 
-    public Pagination<RestaurantRepresentation> findAllByCity(int page, int size, String cityId) {
-        var entities = restaurantJpaRepository.findByCityId(cityId, PageRequest.of(page - 1, size));
+    public Pagination<RestaurantRepresentation> findAllByCityAndType(int page, int size, String cityId, RestaurantType type) {
+        var entities = restaurantJpaRepository.findByCityIdAndType(cityId, type, PageRequest.of(page - 1, size));
         return PaginationUtils.map(entities, RestaurantRepresentation::from);
     }
 
