@@ -30,11 +30,13 @@ public class ArticleApplicationService {
     }
 
     public Article updateArticle(String id, CreateArticleCommand articleCommand) {
+        var city = cityApplicationService.retrieve(articleCommand.getCityId());
         var article = articleRepository.findById(id);
         article.setContent(articleCommand.getContent());
         article.setCover(articleCommand.getCover());
         article.setTitle(articleCommand.getTitle());
         article.setSubTitle(articleCommand.getSubTitle());
+        article.setCity(city);
         articleRepository.save(article);
         return article;
     }
@@ -47,11 +49,4 @@ public class ArticleApplicationService {
         return articleRepository.find(page - 1, size);
     }
 
-    public List<Article> findArticlesByIds(List<String> ids) {
-        return articleRepository.findActivitiesByIds(ids);
-    }
-
-    public Pagination<Article> findArticleByCityIdAndType(String cityId, ArticleType type, int page, int size) {
-        return articleRepository.findByCityIdAndType(cityId, type, page - 1, size);
-    }
 }
