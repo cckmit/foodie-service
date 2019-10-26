@@ -15,6 +15,8 @@ public class OrderDetailRepresentation {
     private String id;
     private String number;
     private String activityTitle;
+    private String activityAddress;
+    private String activityLanguage;
     private int count;
     private double price;
     private double unitPrice;
