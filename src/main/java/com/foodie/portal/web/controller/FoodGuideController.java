@@ -1,5 +1,6 @@
 package com.foodie.portal.web.controller;
 
+import com.foodie.portal.article.ArticleType;
 import com.foodie.portal.commons.PageCommand;
 import com.foodie.portal.commons.Pagination;
 import com.foodie.portal.web.model.ArticleDetailRepresentation;
@@ -21,8 +22,8 @@ public class FoodGuideController {
 
     @ApiOperation("所有美食指南")
     @GetMapping("food-guide")
-    public Pagination<ArticleRepresentation> foodGuide(PageCommand pageCommand, String cityId) {
-        return foodGuideRepresentationService.findAllByCity(pageCommand.getPage(), pageCommand.getSize(), cityId);
+    public Pagination<ArticleRepresentation> foodGuide(PageCommand pageCommand, String cityId, ArticleType type) {
+        return foodGuideRepresentationService.findAllByCityAndType(pageCommand.getPage(), pageCommand.getSize(), cityId, type);
     }
 
     @ApiOperation("美食指南详情")
