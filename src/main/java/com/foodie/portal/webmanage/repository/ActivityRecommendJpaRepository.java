@@ -10,5 +10,7 @@ public interface ActivityRecommendJpaRepository extends JpaRepository<ActivityRe
 
     List<ActivityRecommendEntity> findByInterestedRecommendAndCityId(boolean interestedRecommend, String cityId);
 
+    List<ActivityRecommendEntity> findByInterestedRecommend(boolean interestedRecommend);
+
     List<ActivityRecommendEntity> findByTopRecommend(boolean topRecommend);
 }

@@ -9,6 +9,7 @@ import com.foodie.portal.webmanage.repository.ArticleRecommendEntityMapper;
 import com.foodie.portal.webmanage.repository.ArticleRecommendJpaRepository;
 import com.foodie.portal.webmanage.repository.RestaurantRecommendEntityMapper;
 import com.foodie.portal.webmanage.repository.RestaurantRecommendJpaRepository;
+import org.apache.logging.log4j.util.Strings;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -38,6 +39,9 @@ public class RecommendRepository {
     }
 
     public List<ActivityRecommend> findAllInterestedActivities(String cityId) {
+        if(Strings.isBlank(cityId)) {
+            return activityRecommendEntityMapper.to(activityRecommendJpaRepository.findByInterestedRecommend(true));
+        }
         return activityRecommendEntityMapper.to(activityRecommendJpaRepository.findByInterestedRecommendAndCityId(true, cityId));
     }
 
@@ -47,6 +51,9 @@ public class RecommendRepository {
     }
 
     public List<ArticleRecommend> findAllInterestedArticles(String cityId) {
+        if(Strings.isBlank(cityId)) {
+            return articleRecommendEntityMapper.to(articleRecommendJpaRepository.findByInterestedRecommend(true));
+        }
         return articleRecommendEntityMapper.to(articleRecommendJpaRepository.findByInterestedRecommendAndCityId(true, cityId));
     }
 
