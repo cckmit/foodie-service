@@ -16,5 +16,6 @@ public interface OrderRepresentationMapper extends BaseMapper<Order, OrderSummar
     @Mapping(source = "merchant.name", target = "merchantName")
     @Mapping(source = "activity.address", target = "activityAddress")
     @Mapping(source = "activity.language", target = "activityLanguage")
+    @Mapping(source = "activity.images", target = "activityImages")
     OrderSummaryRepresentation from(Order from);
 }

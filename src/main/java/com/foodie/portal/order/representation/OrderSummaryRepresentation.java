@@ -16,6 +16,7 @@ public class OrderSummaryRepresentation {
     private String id;
     private String number;
     private String activityTitle;
+    private String activityImages;
     private String activityAddress;
     private String activityLanguage;
     private String serviceDate;
@@ -27,9 +28,6 @@ public class OrderSummaryRepresentation {
     private String payNo;
     private String rejectReason;
     private String merchantName;
-    private double extractRatio;
-    private BigDecimal benefitExtractRatio;
-    private String paymentId;
     private Instant createdAt;
 
     public static OrderSummaryRepresentation from(Order order){
