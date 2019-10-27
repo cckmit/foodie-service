@@ -79,6 +79,9 @@ public class RecommendRepository {
     }
 
     public List<RestaurantRecommend> findAllInterestedRestaurant(String cityId) {
+        if (Strings.isBlank(cityId)) {
+            return restaurantRecommendEntityMapper.to(restaurantRecommendJpaRepository.findByInterestedRecommend(true));
+        }
         return restaurantRecommendEntityMapper.to(restaurantRecommendJpaRepository.findByInterestedRecommendAndCityId(true, cityId));
 
     }

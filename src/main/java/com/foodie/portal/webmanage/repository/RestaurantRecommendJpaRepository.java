@@ -8,6 +8,8 @@ import java.util.List;
 @Repository
 public interface RestaurantRecommendJpaRepository extends JpaRepository<RestaurantRecommendEntity, String> {
 
+    List<RestaurantRecommendEntity> findByInterestedRecommend(boolean interestedRecommend);
+
     List<RestaurantRecommendEntity> findByInterestedRecommendAndCityId(boolean interestedRecommend, String cityId);
 
 }
