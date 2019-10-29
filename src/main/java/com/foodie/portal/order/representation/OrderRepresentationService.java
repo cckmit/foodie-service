@@ -35,13 +35,13 @@ public class OrderRepresentationService {
     }
 
 
-    public Pagination<OrderSummaryRepresentation> orderList(int page, int size) {
-        Pagination<Order> orders = orderRepository.findByPage(page - 1, size);
+    public Pagination<OrderSummaryRepresentation> activityOrderList(int page, int size) {
+        Pagination<Order> orders = orderRepository.findActivityOrdersByPage(page - 1, size);
 
         return PaginationUtils.map(orders, order -> OrderSummaryRepresentation.from(order));
     }
 
-    public OrderDetailRepresentation findById(String id) {
+    public OrderDetailRepresentation findActivityOrderById(String id) {
         Order order = orderRepository.byId(id);
         return OrderDetailRepresentationMapper.instance.from(order);
     }
@@ -54,5 +54,16 @@ public class OrderRepresentationService {
     public OrderDetailRepresentation findByIdAndUserId(String id,String userId) {
         var order = orderRepository.findByIdAndUserId(id, userId);
         return OrderDetailRepresentationMapper.instance.from(order);
+    }
+
+    public Pagination<RestaurantOrderSummaryRepresentation> restaurantOrderList(int page, int size) {
+        var orders = orderRepository.findRestaurantOrdersByPage(page - 1, size);
+
+        return PaginationUtils.map(orders, order -> RestaurantOrderSummaryRepresentation.from(order));
+    }
+
+    public RestaurantOrderDetailRepresentation findRestaurantOrderById(String id) {
+        var order = orderRepository.findRestaurantOrderById(id);
+        return RestaurantOrderDetailRepresentationMapper.instance.from(order);
     }
 }

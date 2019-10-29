@@ -5,6 +5,8 @@ import com.foodie.portal.commons.Pagination;
 import com.foodie.portal.order.representation.OrderDetailRepresentation;
 import com.foodie.portal.order.representation.OrderRepresentationService;
 import com.foodie.portal.order.representation.OrderSummaryRepresentation;
+import com.foodie.portal.order.representation.RestaurantOrderDetailRepresentation;
+import com.foodie.portal.order.representation.RestaurantOrderSummaryRepresentation;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,16 +23,28 @@ public class AdminOrderController {
     @Autowired
     private OrderRepresentationService orderRepresentationService;
 
-    @ApiOperation("订单列表")
-    @GetMapping
-    public Pagination<OrderSummaryRepresentation> orders(PageCommand command) {
-        return orderRepresentationService.orderList(command.getPage(), command.getSize());
+    @ApiOperation("活动订单列表")
+    @GetMapping("activity/list")
+    public Pagination<OrderSummaryRepresentation> activityOrders(PageCommand command) {
+        return orderRepresentationService.activityOrderList(command.getPage(), command.getSize());
     }
 
-    @ApiOperation("订单详情")
-    @GetMapping("{id}")
-    public OrderDetailRepresentation detail(@PathVariable String id) {
-        return orderRepresentationService.findById(id);
+    @ApiOperation("活动订单详情")
+    @GetMapping("activity/{id}")
+    public OrderDetailRepresentation activityOrderDetail(@PathVariable String id) {
+        return orderRepresentationService.findActivityOrderById(id);
+    }
+
+    @ApiOperation("餐厅订单列表")
+    @GetMapping("restaurant/list")
+    public Pagination<RestaurantOrderSummaryRepresentation> restaurantOrders(PageCommand command) {
+        return orderRepresentationService.restaurantOrderList(command.getPage(), command.getSize());
+    }
+
+    @ApiOperation("餐厅订单详情")
+    @GetMapping("restaurant/{id}")
+    public RestaurantOrderDetailRepresentation restaurantOrderDetail(@PathVariable String id) {
+        return orderRepresentationService.findRestaurantOrderById(id);
     }
 
 }

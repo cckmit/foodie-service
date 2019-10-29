@@ -32,7 +32,7 @@ public class OrderRepository {
         return OrderEntityMapper.instance.to(orderJpaRepository.getOne(id));
     }
 
-    public Order findRestaurantOrderById(String id) {
+    public RestaurantOrder findRestaurantOrderById(String id) {
         return RestaurantOrderEntityMapper.instance.to(restaurantOrderJpaRepository.getOne(id));
     }
 
@@ -69,7 +69,11 @@ public class OrderRepository {
         return RestaurantOrderEntityMapper.instance.to(restaurantOrderJpaRepository.findByUserId(merchantId, PageRequest.of(page, size)));
     }
 
-    public Pagination<Order> findByPage(int page, int size) {
+    public Pagination<Order> findActivityOrdersByPage(int page, int size) {
         return OrderEntityMapper.instance.to(orderJpaRepository.findAll(PageRequest.of(page, size)));
+    }
+
+    public Pagination<RestaurantOrder> findRestaurantOrdersByPage(int page, int size) {
+        return RestaurantOrderEntityMapper.instance.to(restaurantOrderJpaRepository.findAll(PageRequest.of(page, size)));
     }
 }
