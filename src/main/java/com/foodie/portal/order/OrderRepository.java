@@ -61,8 +61,12 @@ public class OrderRepository {
     }
 
 
-    public Pagination<Order> findUserId(int page, int size, String merchantId) {
+    public Pagination<Order> findActivityOrderByUserId(int page, int size, String merchantId) {
         return OrderEntityMapper.instance.to(orderJpaRepository.findByUserId(merchantId, PageRequest.of(page, size)));
+    }
+
+    public Pagination<RestaurantOrder> findRestaurantOrderByUserId(int page, int size, String merchantId) {
+        return RestaurantOrderEntityMapper.instance.to(restaurantOrderJpaRepository.findByUserId(merchantId, PageRequest.of(page, size)));
     }
 
     public Pagination<Order> findByPage(int page, int size) {

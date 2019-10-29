@@ -30,8 +30,8 @@ import javax.validation.Valid;
 
 @Api(tags = "（用户）订单功能")
 @RestController
-@RequestMapping("user/order")
-public class UserOrderController {
+@RequestMapping("user/order/activity")
+public class UserActivityOrderController {
 
     @Autowired
     private OrderApplicationService orderApplicationService;
@@ -39,35 +39,23 @@ public class UserOrderController {
     private OrderRepresentationService orderRepresentationService;
 
     @ApiOperation("用户活动下单")
-    @PostMapping("activity")
+    @PostMapping
     public Order createActivityOrder(@RequestBody CreateOrderCommand command) {
         var user = (User) SecurityUtils.getSubject().getPrincipal();
         return orderApplicationService.create(command, user);
     }
 
-    @ApiOperation("用户餐馆下单")
-    @PostMapping("restaurant")
-    public RestaurantOrder createRestaurantOrder(@RequestBody CreateRestaurantOrderCommand command) {
-        var user = (User) SecurityUtils.getSubject().getPrincipal();
-        return orderApplicationService.createRestaurantOrder(command, user);
-    }
 
     @ApiOperation("我的活动订单列表")
-    @GetMapping("/activity/list")
+    @GetMapping("list")
     public Pagination<OrderSummaryRepresentation> activityOrders(PageCommand command) {
         var user = (User) SecurityUtils.getSubject().getPrincipal();
         return orderRepresentationService.myOrderList(command.getPage(), command.getSize(), user);
     }
 
-    @ApiOperation("我的活动订单列表")
-    @GetMapping("/restaurant/list")
-    public Pagination<OrderSummaryRepresentation> restaurantOrders(PageCommand command) {
-        var user = (User) SecurityUtils.getSubject().getPrincipal();
-        return orderRepresentationService.myOrderList(command.getPage(), command.getSize(), user);
-    }
 
     @ApiOperation("我的订单详情")
-    @GetMapping("activity/{id}")
+    @GetMapping("{id}")
     public OrderDetailRepresentation detail(@PathVariable String id) {
         var user = (User) SecurityUtils.getSubject().getPrincipal();
         return orderRepresentationService.findByIdAndUserId(id, user.getId());

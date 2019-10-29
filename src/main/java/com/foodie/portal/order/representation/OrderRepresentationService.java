@@ -19,7 +19,11 @@ public class OrderRepresentationService {
     private OrderRepository orderRepository;
 
     public Pagination<OrderSummaryRepresentation> myOrderList(int page, int size, User user) {
-        return OrderSummaryRepresentation.from(orderRepository.findUserId(page - 1, size, user.getId()));
+        return OrderSummaryRepresentation.from(orderRepository.findActivityOrderByUserId(page - 1, size, user.getId()));
+    }
+
+    public Pagination<RestaurantOrderSummaryRepresentation> myRestaurantOrderList(int page, int size, User user) {
+        return RestaurantOrderSummaryRepresentation.from(orderRepository.findRestaurantOrderByUserId(page - 1, size, user.getId()));
     }
 
     public Pagination<OrderSummaryRepresentation> merchantOrderList(int page, int size, Merchant merchant, OrderStatus status) {
