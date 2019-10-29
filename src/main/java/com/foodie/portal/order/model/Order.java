@@ -19,43 +19,46 @@ import java.util.Objects;
 import static java.time.Instant.now;
 
 @Data
-@NoArgsConstructor
 public class Order {
-    private String id;
-    private String number;
-    private Activity activity;
-    private int count;
-    private double price;
-    private double unitPrice;
-    private String serviceDate;
-    private String startTime;
-    private OrderInfo orderInfo;
-    private User user;
-    private OrderStatus status;
-    private String payNo;
-    private String rejectReason;
-    private Merchant merchant;
-    private double totalExtract;
-    private double benefitExtract;
-    private String paymentId;
-    private Instant createdAt;
+    protected String id;
+    protected String number;
+    protected Activity activity;
+    protected int count;
+    protected double price;
+    protected double unitPrice;
+    protected String serviceDate;
+    protected String startTime;
+    protected OrderInfo orderInfo;
+    protected User user;
+    protected OrderStatus status;
+    protected String payNo;
+    protected String rejectReason;
+    protected Merchant merchant;
+    protected double totalExtract;
+    protected double benefitExtract;
+    protected String paymentId;
+    protected Instant createdAt;
 
-    public Order(Activity activity, int count, String serviceDate, String startTime, OrderInfo orderInfo) {
+    public Order() {
         this.id = IdUtil.fastSimpleUUID();
         this.number = IdGenerator.getTimeId();
+        this.status = OrderStatus.CREATED;
+        this.createdAt = now();
+        this.payNo = RandomUtil.randomNumbers(6);
+    }
+
+    public Order(Activity activity, int count, String serviceDate, String startTime, OrderInfo orderInfo) {
+        this();
         this.activity = activity;
         this.count = count;
         this.serviceDate = serviceDate;
         this.startTime = startTime;
         this.unitPrice = activity.getPrice(count);
         this.price = NumberUtil.mul(activity.getPrice(count), count);
-        this.status = OrderStatus.CREATED;
-        this.payNo = RandomUtil.randomNumbers(6);
         this.orderInfo = orderInfo;
         this.merchant = activity.getMerchant();
         this.totalExtract = NumberUtil.mul(price, merchant.getExtractRatio());
         this.benefitExtract = NumberUtil.mul(price, merchant.getBenefitExtractRatio());
-        this.createdAt = now();
     }
 
     public static Order create(Activity activity, int count, String serviceDate, String startTime, OrderInfo orderInfo) {

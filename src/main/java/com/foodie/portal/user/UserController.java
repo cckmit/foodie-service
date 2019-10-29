@@ -3,9 +3,9 @@ package com.foodie.portal.user;
 import com.foodie.portal.commons.ErrorCode;
 import com.foodie.portal.commons.RestException;
 import com.foodie.portal.commons.config.shiro.LoginToken;
-import com.foodie.portal.user.command.MerchantLoginCommand;
 import com.foodie.portal.user.command.UpdateUserInfoCommand;
 import com.foodie.portal.user.command.UserChangePasswordCommand;
+import com.foodie.portal.user.command.UserLoginCommand;
 import com.foodie.portal.user.command.UserRegisterCommand;
 import com.foodie.portal.user.model.User;
 import io.swagger.annotations.Api;
@@ -35,7 +35,7 @@ public class UserController {
 
     @ApiOperation("用户登陆")
     @PostMapping("login")
-    public User userLogin(@RequestBody MerchantLoginCommand user) {
+    public User userLogin(@RequestBody UserLoginCommand user) {
         Subject subject = SecurityUtils.getSubject();
 
         UsernamePasswordToken token = new LoginToken(user.getEmail(), user.getPassword(), LoginToken.LoginType.USER);

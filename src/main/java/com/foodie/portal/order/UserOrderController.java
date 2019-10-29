@@ -3,11 +3,13 @@ package com.foodie.portal.order;
 import com.foodie.portal.commons.PageCommand;
 import com.foodie.portal.commons.Pagination;
 import com.foodie.portal.order.command.CreateOrderCommand;
+import com.foodie.portal.order.command.CreateRestaurantOrderCommand;
 import com.foodie.portal.order.command.OrderPayCancelCommand;
 import com.foodie.portal.order.command.OrderPaySuccessCommand;
 import com.foodie.portal.order.command.PayOrderCommand;
 import com.foodie.portal.order.dto.OrderInfoDto;
 import com.foodie.portal.order.model.Order;
+import com.foodie.portal.order.model.RestaurantOrder;
 import com.foodie.portal.order.representation.OrderDetailRepresentation;
 import com.foodie.portal.order.representation.OrderRepresentationService;
 import com.foodie.portal.order.representation.OrderSummaryRepresentation;
@@ -36,22 +38,36 @@ public class UserOrderController {
     @Autowired
     private OrderRepresentationService orderRepresentationService;
 
-    @ApiOperation("用户下单")
-    @PostMapping
-    public Order createOrder(@RequestBody CreateOrderCommand command) {
+    @ApiOperation("用户活动下单")
+    @PostMapping("activity")
+    public Order createActivityOrder(@RequestBody CreateOrderCommand command) {
         var user = (User) SecurityUtils.getSubject().getPrincipal();
         return orderApplicationService.create(command, user);
     }
 
-    @ApiOperation("我的订单列表")
-    @GetMapping("list")
-    public Pagination<OrderSummaryRepresentation> orders(PageCommand command) {
+    @ApiOperation("用户餐馆下单")
+    @PostMapping("restaurant")
+    public RestaurantOrder createRestaurantOrder(@RequestBody CreateRestaurantOrderCommand command) {
+        var user = (User) SecurityUtils.getSubject().getPrincipal();
+        return orderApplicationService.createRestaurantOrder(command, user);
+    }
+
+    @ApiOperation("我的活动订单列表")
+    @GetMapping("/activity/list")
+    public Pagination<OrderSummaryRepresentation> activityOrders(PageCommand command) {
+        var user = (User) SecurityUtils.getSubject().getPrincipal();
+        return orderRepresentationService.myOrderList(command.getPage(), command.getSize(), user);
+    }
+
+    @ApiOperation("我的活动订单列表")
+    @GetMapping("/restaurant/list")
+    public Pagination<OrderSummaryRepresentation> restaurantOrders(PageCommand command) {
         var user = (User) SecurityUtils.getSubject().getPrincipal();
         return orderRepresentationService.myOrderList(command.getPage(), command.getSize(), user);
     }
 
     @ApiOperation("我的订单详情")
-    @GetMapping("{id}")
+    @GetMapping("activity/{id}")
     public OrderDetailRepresentation detail(@PathVariable String id) {
         var user = (User) SecurityUtils.getSubject().getPrincipal();
         return orderRepresentationService.findByIdAndUserId(id, user.getId());

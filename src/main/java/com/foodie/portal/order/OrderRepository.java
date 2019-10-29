@@ -3,8 +3,11 @@ package com.foodie.portal.order;
 import com.foodie.portal.commons.Pagination;
 import com.foodie.portal.order.model.Order;
 import com.foodie.portal.order.model.OrderStatus;
+import com.foodie.portal.order.model.RestaurantOrder;
 import com.foodie.portal.order.repository.OrderEntityMapper;
 import com.foodie.portal.order.repository.OrderJpaRepository;
+import com.foodie.portal.order.repository.RestaurantOrderEntityMapper;
+import com.foodie.portal.order.repository.RestaurantOrderJpaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Component;
@@ -14,13 +17,23 @@ public class OrderRepository {
 
     @Autowired
     private OrderJpaRepository orderJpaRepository;
+    @Autowired
+    private RestaurantOrderJpaRepository restaurantOrderJpaRepository;
 
     public void save(Order order) {
         orderJpaRepository.save(OrderEntityMapper.instance.from(order));
     }
 
+    public void save(RestaurantOrder order) {
+        restaurantOrderJpaRepository.save(RestaurantOrderEntityMapper.instance.from(order));
+    }
+
     public Order byId(String id) {
         return OrderEntityMapper.instance.to(orderJpaRepository.getOne(id));
+    }
+
+    public Order findRestaurantOrderById(String id) {
+        return RestaurantOrderEntityMapper.instance.to(restaurantOrderJpaRepository.getOne(id));
     }
 
     public Order byPaymentId(String paymentId) {

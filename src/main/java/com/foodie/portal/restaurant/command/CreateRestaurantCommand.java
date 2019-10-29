@@ -13,7 +13,6 @@ public class CreateRestaurantCommand {
     private String subTitle;
     private String images;
     private String content;
-    private double price;
     private String cityId;
     private List<SetMeal> setMeals;
     @NotNull

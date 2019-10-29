@@ -4,15 +4,17 @@ import com.foodie.portal.activity.ActivityApplicationService;
 import com.foodie.portal.activity.model.Activity;
 import com.foodie.portal.commons.ErrorCode;
 import com.foodie.portal.commons.EventPublisher;
-import com.foodie.portal.commons.Pagination;
 import com.foodie.portal.commons.RestException;
 import com.foodie.portal.commons.event.OrderCreatedEvent;
 import com.foodie.portal.order.command.CreateOrderCommand;
+import com.foodie.portal.order.command.CreateRestaurantOrderCommand;
 import com.foodie.portal.order.command.PayOrderCommand;
 import com.foodie.portal.order.model.Order;
+import com.foodie.portal.order.model.RestaurantOrder;
 import com.foodie.portal.payment.PaymentApplicationService;
 import com.foodie.portal.payment.PaypalPaymentIntent;
 import com.foodie.portal.payment.PaypalPaymentMethod;
+import com.foodie.portal.restaurant.RestaurantApplicationService;
 import com.foodie.portal.user.model.Merchant;
 import com.foodie.portal.user.model.User;
 import com.paypal.api.payments.Links;
@@ -35,21 +37,35 @@ public class OrderApplicationService {
     @Autowired
     private ActivityApplicationService activityApplicationService;
     @Autowired
+    private RestaurantApplicationService restaurantApplicationService;
+    @Autowired
     private EventPublisher eventPublisher;
     @Autowired
     private PaymentApplicationService paymentApplicationService;
 
     @Transactional
     public Order create(CreateOrderCommand command, User user) {
-        //创建订单
+
         Activity activity = activityApplicationService.findById(command.getActivityId());
         //更新预定人数
         activityApplicationService.updateReserve(command.getActivityId(), command.getServiceDate(), command.getStartTime(), command.getCount());
+        //创建订单
         var order = Order.create(activity, command.getCount(), command.getServiceDate(),
                 command.getStartTime(), command.getOrderInfo());
         order.setUser(user);
         orderRepository.save(order);
         eventPublisher.publish(new OrderCreatedEvent(order));
+        return order;
+    }
+
+    @Transactional
+    public RestaurantOrder createRestaurantOrder(CreateRestaurantOrderCommand command, User user) {
+        //创建订单
+        var restaurant = restaurantApplicationService.findById(command.getRestaurantId());
+        var order = RestaurantOrder.create(restaurant,command.getSetMealName(), command.getCount(), command.getReserveDate(),
+                 command.getOrderInfo(), user);
+        orderRepository.save(order);
+//        eventPublisher.publish(new OrderCreatedEvent(order));
         return order;
     }
 

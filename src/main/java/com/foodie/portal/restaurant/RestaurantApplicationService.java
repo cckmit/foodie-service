@@ -20,7 +20,7 @@ public class RestaurantApplicationService {
     public Restaurant create(CreateRestaurantCommand command) {
         var city = cityApplicationService.retrieve(command.getCityId());
         var restaurant = Restaurant.create(command.getTitle(), command.getSubTitle(), command.getImages(),
-                command.getContent(), command.getPrice(), city, command.getType(),
+                command.getContent(), city, command.getType(),
                 command.getSetMeals());
 
         restaurantRepository.save(restaurant);
@@ -32,10 +32,10 @@ public class RestaurantApplicationService {
     }
 
     public Pagination<Restaurant> list(int page, int size, String cityId) {
-        if(Strings.isBlank(cityId)) {
+        if (Strings.isBlank(cityId)) {
             return restaurantRepository.findAll(page - 1, size);
         }
-        return restaurantRepository.findAll(cityId,page - 1, size);
+        return restaurantRepository.findAll(cityId, page - 1, size);
     }
 
     public void deleteById(String id) {
@@ -46,7 +46,7 @@ public class RestaurantApplicationService {
         var city = cityApplicationService.retrieve(command.getCityId());
         var restaurant = restaurantRepository.byId(id);
         restaurant.update(command.getTitle(), command.getSubTitle(), command.getImages(),
-                command.getContent(), command.getPrice(), city, command.getType(),
+                command.getContent(), city, command.getType(),
                 command.getSetMeals());
         restaurantRepository.save(restaurant);
     }
