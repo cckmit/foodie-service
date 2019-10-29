@@ -12,7 +12,7 @@ create table FOODIE_RESTAURANT_ORDER
     CREATED_AT    TIMESTAMP comment '创建时间',
     USER_ID       VARCHAR(32) comment '用户ID',
     PAYMENT_ID    VARCHAR(100),
-    ORDER_INFO    CLOB comment '下单信息',
+    ORDER_INFO    TEXT comment '下单信息',
     RESERVE_DATE  VARCHAR(50) comment '预定日期'
 );
 
