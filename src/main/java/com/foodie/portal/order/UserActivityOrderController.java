@@ -3,13 +3,11 @@ package com.foodie.portal.order;
 import com.foodie.portal.commons.PageCommand;
 import com.foodie.portal.commons.Pagination;
 import com.foodie.portal.order.command.CreateOrderCommand;
-import com.foodie.portal.order.command.CreateRestaurantOrderCommand;
 import com.foodie.portal.order.command.OrderPayCancelCommand;
 import com.foodie.portal.order.command.OrderPaySuccessCommand;
 import com.foodie.portal.order.command.PayOrderCommand;
 import com.foodie.portal.order.dto.OrderInfoDto;
 import com.foodie.portal.order.model.Order;
-import com.foodie.portal.order.model.RestaurantOrder;
 import com.foodie.portal.order.representation.OrderDetailRepresentation;
 import com.foodie.portal.order.representation.OrderRepresentationService;
 import com.foodie.portal.order.representation.OrderSummaryRepresentation;
@@ -65,7 +63,7 @@ public class UserActivityOrderController {
     @PostMapping("/{id}/payment")
     public String pay(@PathVariable(name = "id") String id, @RequestBody @Valid PayOrderCommand command) {
         var user = (User) SecurityUtils.getSubject().getPrincipal();
-        return orderApplicationService.prePay(id, command);
+        return orderApplicationService.prePayActivityOrder(id, command);
     }
 
     @ApiOperation("支付成功")
@@ -77,6 +75,6 @@ public class UserActivityOrderController {
     @ApiOperation("支付取消")
     @PostMapping("pay/cancel")
     public OrderInfoDto cancelPay(@RequestBody OrderPayCancelCommand command){
-        return OrderInfoDto.from(orderApplicationService.cancel(command.getOrderNo()));
+        return OrderInfoDto.from(orderApplicationService.cancelActivityOrder(command.getOrderNo()));
     }
 }

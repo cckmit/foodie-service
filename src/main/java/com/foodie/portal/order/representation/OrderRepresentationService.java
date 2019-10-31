@@ -42,7 +42,7 @@ public class OrderRepresentationService {
     }
 
     public OrderDetailRepresentation findActivityOrderById(String id) {
-        Order order = orderRepository.byId(id);
+        Order order = orderRepository.findActivityOrderById(id);
         return OrderDetailRepresentationMapper.instance.from(order);
     }
 

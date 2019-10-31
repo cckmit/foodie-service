@@ -24,7 +24,7 @@ public class Order {
     protected String number;
     protected Activity activity;
     protected int count;
-    protected double price;
+    private double price;
     protected double unitPrice;
     protected String serviceDate;
     protected String startTime;

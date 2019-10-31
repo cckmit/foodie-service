@@ -2,17 +2,13 @@ package com.foodie.portal.order;
 
 import com.foodie.portal.commons.PageCommand;
 import com.foodie.portal.commons.Pagination;
-import com.foodie.portal.order.command.CreateOrderCommand;
 import com.foodie.portal.order.command.CreateRestaurantOrderCommand;
 import com.foodie.portal.order.command.OrderPayCancelCommand;
 import com.foodie.portal.order.command.OrderPaySuccessCommand;
 import com.foodie.portal.order.command.PayOrderCommand;
 import com.foodie.portal.order.dto.OrderInfoDto;
-import com.foodie.portal.order.model.Order;
 import com.foodie.portal.order.model.RestaurantOrder;
-import com.foodie.portal.order.representation.OrderDetailRepresentation;
 import com.foodie.portal.order.representation.OrderRepresentationService;
-import com.foodie.portal.order.representation.OrderSummaryRepresentation;
 import com.foodie.portal.order.representation.RestaurantOrderSummaryRepresentation;
 import com.foodie.portal.user.model.User;
 import io.swagger.annotations.Api;
@@ -52,6 +48,25 @@ public class UserRestaurantOrderController {
     public Pagination<RestaurantOrderSummaryRepresentation> restaurantOrders(PageCommand command) {
         var user = (User) SecurityUtils.getSubject().getPrincipal();
         return orderRepresentationService.myRestaurantOrderList(command.getPage(), command.getSize(), user);
+    }
+
+    @ApiOperation("用户付款")
+    @PostMapping("/{id}/payment")
+    public String pay(@PathVariable(name = "id") String id, @RequestBody @Valid PayOrderCommand command) {
+        var user = (User) SecurityUtils.getSubject().getPrincipal();
+        return orderApplicationService.prePayRestaurantOrder(id, command);
+    }
+
+    @ApiOperation("支付成功")
+    @PostMapping("pay/success")
+    public OrderInfoDto successPay(@RequestBody OrderPaySuccessCommand command){
+        return OrderInfoDto.from(orderApplicationService.payRestaurantOrder(command.getPaymentId(), command.getPayerId()));
+    }
+
+    @ApiOperation("支付取消")
+    @PostMapping("pay/cancel")
+    public OrderInfoDto cancelPay(@RequestBody OrderPayCancelCommand command){
+        return OrderInfoDto.from(orderApplicationService.cancelRestaurantOrder(command.getOrderNo()));
     }
 
 }

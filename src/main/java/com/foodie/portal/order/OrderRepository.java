@@ -28,9 +28,10 @@ public class OrderRepository {
         restaurantOrderJpaRepository.save(RestaurantOrderEntityMapper.instance.from(order));
     }
 
-    public Order byId(String id) {
+    public Order findActivityOrderById(String id) {
         return OrderEntityMapper.instance.to(orderJpaRepository.getOne(id));
     }
+
 
     public RestaurantOrder findRestaurantOrderById(String id) {
         return RestaurantOrderEntityMapper.instance.to(restaurantOrderJpaRepository.getOne(id));
@@ -40,8 +41,16 @@ public class OrderRepository {
         return OrderEntityMapper.instance.to(orderJpaRepository.findByPaymentId(paymentId));
     }
 
-    public Order byOrderNo(String orderNo) {
+    public RestaurantOrder findRestaurantOrderByPaymentId(String paymentId) {
+        return RestaurantOrderEntityMapper.instance.to(restaurantOrderJpaRepository.findByPaymentId(paymentId));
+    }
+
+    public Order findActivityOrderByOrderNo(String orderNo) {
         return OrderEntityMapper.instance.to(orderJpaRepository.findByNumber(orderNo));
+    }
+
+    public RestaurantOrder findRestaurantOrderByOrderNo(String orderNo) {
+        return RestaurantOrderEntityMapper.instance.to(restaurantOrderJpaRepository.findByNumber(orderNo));
     }
 
     public Pagination<Order> findByMerchantId(int page, int size, String merchantId) {

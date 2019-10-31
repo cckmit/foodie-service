@@ -30,7 +30,6 @@ public class RestaurantOrder extends Order {
                 .orElseThrow(() -> new RestException(ErrorCode.FAILED, "没有这个套餐"))
                 .getPrice();
         this.totalPrice = NumberUtil.mul(this.itemPrice, count);
-        this.totalPrice = price;
         this.reserveDate = reserveDate;
         this.orderInfo = orderInfo;
         this.user = user;
@@ -38,5 +37,11 @@ public class RestaurantOrder extends Order {
 
     public static RestaurantOrder create(Restaurant restaurant, String setMealName, int count, String reserveDate, OrderInfo orderInfo, User user) {
         return new RestaurantOrder(restaurant, setMealName, count, reserveDate, orderInfo, user);
+    }
+
+    public void prePay(double paidPrice) {
+        if (paidPrice != totalPrice) {
+            throw new RestException(ErrorCode.FAILED, "支付价格与订单实际价格不符");
+        }
     }
 }

@@ -71,8 +71,8 @@ public class OrderApplicationService {
 
 
 
-    public String prePay(String id, @Valid PayOrderCommand command) {
-        var order = orderRepository.byId(id);
+    public String prePayActivityOrder(String id, @Valid PayOrderCommand command) {
+        var order = orderRepository.findActivityOrderById(id);
         order.prePay(command.getPaidPrice());
         Payment payment;
         try {
@@ -96,7 +96,7 @@ public class OrderApplicationService {
 
 
     public Order accept(String id, Merchant merchant) {
-        var order = orderRepository.byId(id);
+        var order = orderRepository.findActivityOrderById(id);
         order.accept(merchant);
         orderRepository.save(order);
 
@@ -105,14 +105,14 @@ public class OrderApplicationService {
     }
 
     public Order reject(String id, String reason, Merchant merchant) {
-        var order = orderRepository.byId(id);
+        var order = orderRepository.findActivityOrderById(id);
         order.reject(reason, merchant);
         orderRepository.save(order);
         return order;
     }
 
     public Order startService(String id, String payNo, Merchant merchant) {
-        var order = orderRepository.byId(id);
+        var order = orderRepository.findActivityOrderById(id);
         order.startService(payNo, merchant);
         orderRepository.save(order);
         return order;
@@ -135,11 +135,56 @@ public class OrderApplicationService {
     }
 
 
-    public Order cancel(String orderNo) {
-        var order = orderRepository.byOrderNo(orderNo);
+    public Order cancelActivityOrder(String orderNo) {
+        var order = orderRepository.findActivityOrderByOrderNo(orderNo);
         order.cancel();
         orderRepository.save(order);
         return order;
+    }
+
+    public String prePayRestaurantOrder(String id, @Valid PayOrderCommand command) {
+        var order = orderRepository.findRestaurantOrderById(id);
+        order.prePay(command.getPaidPrice());
+        Payment payment;
+        try {
+            payment = paymentApplicationService.createPayment(command.getPaidPrice(),
+                    "USD", PaypalPaymentMethod.paypal,
+                    PaypalPaymentIntent.sale, "餐厅订单支付", order.getNumber());
+        } catch (PayPalRESTException e) {
+            throw new RestException(ErrorCode.FAILED, "支付失败");
+        }
+        order.setPaymentId(payment.getId());
+        orderRepository.save(order);
+
+        for (Links links : payment.getLinks()) {
+            if (links.getRel().equals("approval_url")) {
+                return links.getHref();
+            }
+        }
+        throw new RestException(ErrorCode.FAILED, "没有获取到支付URL");
+    }
+
+    public RestaurantOrder cancelRestaurantOrder(String orderNo) {
+        var order = orderRepository.findRestaurantOrderByOrderNo(orderNo);
+        order.cancel();
+        orderRepository.save(order);
+        return order;
+    }
+
+    public Order payRestaurantOrder(String paymentId, String payerId) {
+        log.info("支付回调：paymentId: {}, payerId: {}", paymentId, payerId);
+        try {
+            Payment payment = paymentApplicationService.executePayment(paymentId, payerId);
+            if (payment.getState().equals("approved")) {
+                var order = orderRepository.findRestaurantOrderByPaymentId(paymentId);
+                order.pay();
+                orderRepository.save(order);
+                return order;
+            }
+        } catch (PayPalRESTException e) {
+            log.error(e.getMessage());
+        }
+        throw new RestException(ErrorCode.FAILED, "支付失败");
     }
 
 }
