@@ -1,7 +1,8 @@
 package com.foodie.portal.web.model;
 
-import com.foodie.portal.article.repository.ArticleEntity;
 import lombok.Data;
+
+import java.time.Instant;
 
 @Data
 public class ArticleDetailRepresentation {
@@ -11,4 +12,5 @@ public class ArticleDetailRepresentation {
     private String cover;
     private String cityName;
     private String content;
+    private Instant createdAt;
 }
