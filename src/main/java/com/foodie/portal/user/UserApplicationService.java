@@ -61,4 +61,7 @@ public class UserApplicationService {
     public Pagination<User> list(int page, int size) {
         return userRepository.findAll(page - 1, size);
     }
+
+    public void collectActivity(String activityId, User user) {
+    }
 }
