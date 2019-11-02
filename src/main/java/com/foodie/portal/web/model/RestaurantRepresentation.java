@@ -10,8 +10,9 @@ public class RestaurantRepresentation {
     private String subTitle;
     private String images;
     private String content;
-    private double price;
+    private Double price;
     private String cityName;
+    private boolean favourite;
 
     public static RestaurantRepresentation from(RestaurantEntity entity) {
         return RestaurantRepresentationMapper.INSTANCE.from(entity);

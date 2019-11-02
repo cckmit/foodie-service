@@ -4,6 +4,8 @@ import com.foodie.portal.article.ArticleType;
 import com.foodie.portal.article.repository.ArticleEntity;
 import com.foodie.portal.article.repository.ArticleJpaRepository;
 import com.foodie.portal.commons.Pagination;
+import com.foodie.portal.favourite.FavouriteType;
+import com.foodie.portal.user.model.User;
 import com.foodie.portal.utils.PaginationUtils;
 import com.foodie.portal.web.model.ArticleDetailRepresentation;
 import com.foodie.portal.web.model.ArticleRepresentation;
@@ -36,8 +38,17 @@ public class FoodGuideRepresentationService {
         return PaginationUtils.map(entities, ArticleRepresentation::from);
     }
 
-    public ArticleDetailRepresentation detail(String id) {
+    public ArticleDetailRepresentation detail(String id, User user) {
         String sql = "select * from FOODIE_ARTICLE t where t.id=:id";
-        return jdbcTemplate.queryForObject(sql, ImmutableMap.of("id",id), new BeanPropertyRowMapper<>(ArticleDetailRepresentation.class));
+        ArticleDetailRepresentation representation = jdbcTemplate.queryForObject(sql, ImmutableMap.of("id", id), new BeanPropertyRowMapper<>(ArticleDetailRepresentation.class));
+
+        String favouriteSql = "select count(1) a from FOODIE_FAVOURITE f where f.OBJECT_ID=:id and f.TYPE=:type and f.USER_ID=:userId";
+        Integer count = jdbcTemplate.queryForObject(favouriteSql, ImmutableMap.of("id", id, "type", FavouriteType.FOOD_GUIDE.name(), "userId", user.getId()), Integer.class);
+        if (count > 0) {
+            representation.setFavourite(true);
+        }
+        return representation;
     }
+
+
 }

@@ -4,6 +4,9 @@ import com.foodie.portal.activity.model.Activity;
 import com.foodie.portal.activity.model.ActivityType;
 import com.foodie.portal.activity.repository.ActivityJpaRepository;
 import com.foodie.portal.commons.Pagination;
+import com.foodie.portal.favourite.FavouriteType;
+import com.foodie.portal.favourite.repository.FavouriteJpaRepository;
+import com.foodie.portal.user.model.User;
 import com.foodie.portal.web.model.ActivityDetailRepresentation;
 import com.foodie.portal.web.model.ActivityRepresentation;
 import com.google.common.collect.ImmutableMap;
@@ -13,6 +16,8 @@ import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Objects;
+import java.util.Optional;
 
 import static com.google.common.collect.Maps.newHashMap;
 
@@ -23,6 +28,8 @@ public class ActivityRepresentationService {
     private NamedParameterJdbcTemplate jdbcTemplate;
     @Autowired
     private ActivityJpaRepository activityJpaRepository;
+    @Autowired
+    private FavouriteJpaRepository favouriteJpaRepository;
 
 
     public Pagination<ActivityRepresentation> findAllByCityId(int page, int size, String cityId) {
@@ -54,8 +61,17 @@ public class ActivityRepresentationService {
         return Pagination.of(total, page, size, activityRepresentations);
     }
 
-    public ActivityDetailRepresentation findActivityDetail(String id) {
-        return activityJpaRepository.findById(id).map(ActivityDetailRepresentation::from)
+    public ActivityDetailRepresentation findActivityDetail(String id, User user) {
+        return activityJpaRepository.findById(id)
+                .map(ActivityDetailRepresentation::from)
+                .map(rep -> {
+                    Optional.ofNullable(user)
+                            .map(it -> favouriteJpaRepository.findByObjectIdAndTypeAndUserId(id, FavouriteType.ACTIVITY, it.getId()))
+                            .ifPresent(it -> rep.setFavourite(true));
+                    return rep;
+                })
                 .orElse(null);
+
+
     }
 }

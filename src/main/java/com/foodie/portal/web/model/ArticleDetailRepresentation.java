@@ -13,4 +13,5 @@ public class ArticleDetailRepresentation {
     private String cityName;
     private String content;
     private Instant createdAt;
+    private boolean favourite;
 }

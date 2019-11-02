@@ -1,8 +1,10 @@
 package com.foodie.portal.web.service;
 
 import com.foodie.portal.commons.Pagination;
+import com.foodie.portal.favourite.FavouriteType;
 import com.foodie.portal.restaurant.model.RestaurantType;
 import com.foodie.portal.restaurant.repository.RestaurantJpaRepository;
+import com.foodie.portal.user.model.User;
 import com.foodie.portal.utils.PaginationUtils;
 import com.foodie.portal.web.model.RestaurantRepresentation;
 import com.google.common.collect.ImmutableMap;
@@ -26,8 +28,17 @@ public class RestaurantRepresentationService {
         return PaginationUtils.map(entities, RestaurantRepresentation::from);
     }
 
-    public RestaurantRepresentation detail(String id) {
+    public RestaurantRepresentation detail(String id, User user) {
         String sql = "select * from FOODIE_RESTAURANT t where t.id=:id";
-        return jdbcTemplate.queryForObject(sql, ImmutableMap.of("id",id), new BeanPropertyRowMapper<>(RestaurantRepresentation.class));
+        RestaurantRepresentation restaurantRepresentation = jdbcTemplate.queryForObject(sql,
+                ImmutableMap.of("id", id),
+                new BeanPropertyRowMapper<>(RestaurantRepresentation.class));
+
+        String favouriteSql = "select count(1) a from FOODIE_FAVOURITE f where f.OBJECT_ID=:id and f.TYPE=:type and f.USER_ID=:userId";
+        Integer count = jdbcTemplate.queryForObject(favouriteSql, ImmutableMap.of("id", id, "type", FavouriteType.RESTAURANT.name(), "userId", user.getId()), Integer.class);
+        if (count > 0) {
+            restaurantRepresentation.setFavourite(true);
+        }
+        return restaurantRepresentation;
     }
 }

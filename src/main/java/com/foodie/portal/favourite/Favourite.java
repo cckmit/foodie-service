@@ -34,6 +34,6 @@ public class Favourite {
     }
 
     public static Favourite createFoodGuideFavourite(String foodieGuideId, User user) {
-        return new Favourite(foodieGuideId, user, FavouriteType.RESTAURANT);
+        return new Favourite(foodieGuideId, user, FavouriteType.FOOD_GUIDE);
     }
 }

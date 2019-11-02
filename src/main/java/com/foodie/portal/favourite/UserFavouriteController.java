@@ -1,6 +1,7 @@
 package com.foodie.portal.favourite;
 
 import com.foodie.portal.user.model.User;
+import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.var;
 import org.apache.shiro.SecurityUtils;
@@ -9,6 +10,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+@Api(tags = "（用户）收藏")
 @RestController
 @RequestMapping("user/favourite")
 public class UserFavouriteController {
