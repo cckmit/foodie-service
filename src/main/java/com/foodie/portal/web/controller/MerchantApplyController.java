@@ -1,4 +1,4 @@
-package com.foodie.portal.web;
+package com.foodie.portal.web.controller;
 
 import com.foodie.portal.user.MerchantApplicationService;
 import com.foodie.portal.web.command.ApplyMerchantCommand;
@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
-@Api(tags = "web功能接口")
+@Api(tags = "用户页面接口")
 @RestController
 public class MerchantApplyController {
 
