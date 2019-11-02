@@ -19,4 +19,10 @@ public class WalletApplicationService {
         merchantWallet.increaseOpenAccount(order);
         repository.save(merchantWallet);
     }
+
+    public void addMerchantBalance(Order order) {
+        var merchantWallet = repository.byId(order.getMerchant().getId());
+        merchantWallet.increaseBalance(order);
+        repository.save(merchantWallet);
+    }
 }

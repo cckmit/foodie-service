@@ -11,6 +11,7 @@ import com.foodie.portal.web.model.InterestedCityActivities;
 import com.foodie.portal.web.model.PublicBenefitRepresentation;
 import com.foodie.portal.web.model.PublicBenefitSummaryRepresentation;
 import com.foodie.portal.web.model.RestaurantRepresentation;
+import com.foodie.portal.web.po.RestaurantRepresentationPo;
 import com.foodie.portal.webmanage.model.Banner;
 import com.foodie.portal.webmanage.RecommendRepository;
 import com.foodie.portal.webmanage.repository.BannerEntityMapper;
@@ -23,6 +24,7 @@ import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 import static com.foodie.portal.publicbenefit.PublicBenefitStatus.ACTIVATED;
 
@@ -85,7 +87,10 @@ public class IndexRepresentationService {
     public List<RestaurantRepresentation> findInterestedRestaurantByCityId(String cityId) {
         String sql = "select r.* , c.NAME as city_name from FOODIE_RESTAURANT r " +
                 "left join FOODIE_CITY c on r.CITY_ID=c.ID where r.INTERESTED_RECOMMEND = 1 and r.CITY_ID=:cityId";
-        return jdbcTemplate.query(sql, ImmutableMap.of("cityId", cityId), new BeanPropertyRowMapper<>(RestaurantRepresentation.class));
+        return jdbcTemplate.query(sql, ImmutableMap.of("cityId", cityId), new BeanPropertyRowMapper<>(RestaurantRepresentationPo.class))
+                .stream()
+                .map(RestaurantRepresentation::from)
+                .collect(Collectors.toList());
 
     }
 }
