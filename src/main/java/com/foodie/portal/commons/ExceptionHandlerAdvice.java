@@ -20,13 +20,21 @@ public class ExceptionHandlerAdvice {
      * @return
      */
     @ExceptionHandler(RestException.class)
-    public Map<String, Object> restError(HttpServletRequest request, HttpServletResponse response, Exception ex) {
-        RestException restException = (RestException) ex;
+    public Map<String, Object> restError(HttpServletRequest request, HttpServletResponse response, RestException restException) {
         Map<String, Object> map = new HashMap<>();
         //map.put("exception", null != restException.getT() ? restException.getT() : restException);
         map.put("errorMessage", restException.getMessage());
         map.put("url", request.getRequestURL());
         map.put("statusCode", restException.getCode());
+        return map;
+    }
+
+    @ExceptionHandler(Exception.class)
+    public Map<String, Object> exception(HttpServletRequest request, HttpServletResponse response, Exception ex) {
+        Map<String, Object> map = new HashMap<>();
+        map.put("errorMessage", ex.getMessage());
+        map.put("url", request.getRequestURL());
+        map.put("statusCode", 500);
         return map;
     }
 }
