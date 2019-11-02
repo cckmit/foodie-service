@@ -1,5 +1,6 @@
 package com.foodie.portal.web.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.foodie.portal.commons.utils.JsonUtils;
 import com.foodie.portal.restaurant.model.SetMeal;
@@ -13,14 +14,21 @@ public class RestaurantRepresentation {
     private String id;
     private String title;
     private String subTitle;
-    private String setMeals;
+    private List<SetMeal> setMeals;
+    @JsonIgnore
+    private String setMealsStr;
     private String images;
     private String content;
     private String cityName;
+    private String address;
     private boolean favourite;
 
+    public List<SetMeal> getSetMeals() {
+        return JsonUtils.toBean(this.setMealsStr, new TypeReference<List<SetMeal>>() {});
+    }
+
     public Double getPrice() {
-        List<SetMeal> setMeals = JsonUtils.toBean(this.setMeals, new TypeReference<List<SetMeal>>() {
+       this.setMeals = JsonUtils.toBean(this.setMealsStr, new TypeReference<List<SetMeal>>() {
         });
         return setMeals.stream().mapToDouble(SetMeal::getPrice).min().getAsDouble();
     }

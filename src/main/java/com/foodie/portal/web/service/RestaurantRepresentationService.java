@@ -31,7 +31,7 @@ public class RestaurantRepresentationService {
     }
 
     public RestaurantRepresentation detail(String id, User user) {
-        String sql = "select * from FOODIE_RESTAURANT t where t.id=:id";
+        String sql = "select *, SET_MEALS as setMealsStr from FOODIE_RESTAURANT t where t.id=:id";
         RestaurantRepresentation restaurantRepresentation = jdbcTemplate.queryForObject(sql,
                 ImmutableMap.of("id", id),
                 new BeanPropertyRowMapper<>(RestaurantRepresentation.class));
