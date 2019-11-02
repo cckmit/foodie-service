@@ -7,6 +7,7 @@ import com.foodie.portal.restaurant.repository.RestaurantJpaRepository;
 import com.foodie.portal.user.model.User;
 import com.foodie.portal.utils.PaginationUtils;
 import com.foodie.portal.web.model.RestaurantRepresentation;
+import com.foodie.portal.web.po.RestaurantRepresentationPo;
 import com.google.common.collect.ImmutableMap;
 import lombok.var;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,10 +32,10 @@ public class RestaurantRepresentationService {
     }
 
     public RestaurantRepresentation detail(String id, User user) {
-        String sql = "select *, SET_MEALS as setMealsStr from FOODIE_RESTAURANT t where t.id=:id";
-        RestaurantRepresentation restaurantRepresentation = jdbcTemplate.queryForObject(sql,
+        String sql = "select * from FOODIE_RESTAURANT t where t.id=:id";
+        var restaurantRepresentation = RestaurantRepresentation.from(jdbcTemplate.queryForObject(sql,
                 ImmutableMap.of("id", id),
-                new BeanPropertyRowMapper<>(RestaurantRepresentation.class));
+                new BeanPropertyRowMapper<>(RestaurantRepresentationPo.class)));
 
         if (Objects.isNull(user)) {
             return restaurantRepresentation;
