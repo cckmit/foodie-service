@@ -15,7 +15,9 @@ public class PaymentProperties {
         private String clientId;
         private String clientSecret;
         private String mode;
-        private String successUrl;
-        private String cancelUrl;
+        private String activitySuccessUrl;
+        private String activityCancelUrl;
+        private String restaurantSuccessUrl;
+        private String restaurantCancelUrl;
     }
 }

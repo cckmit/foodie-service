@@ -22,12 +22,41 @@ public class PaymentApplicationService {
     @Autowired
     private PaymentProperties properties;
 
-    public Payment createPayment(
+    public Payment createActivityPayment(
             Double total,
             String currency,
             PaypalPaymentMethod method,
             PaypalPaymentIntent intent,
-            String description,String orderNo) throws PayPalRESTException {
+            String description, String orderNo) throws PayPalRESTException {
+
+        Payment payment = getPayment(total, currency, method, intent, description);
+
+        RedirectUrls redirectUrls = new RedirectUrls();
+        redirectUrls.setCancelUrl(String.format(properties.getPaypal().getActivityCancelUrl(), orderNo));
+        redirectUrls.setReturnUrl(String.format(properties.getPaypal().getActivitySuccessUrl(), orderNo));
+        payment.setRedirectUrls(redirectUrls);
+
+        return payment.create(apiContext);
+    }
+
+    public Payment createRestaurantPayment(
+            Double total,
+            String currency,
+            PaypalPaymentMethod method,
+            PaypalPaymentIntent intent,
+            String description, String orderNo) throws PayPalRESTException {
+
+        Payment payment = getPayment(total, currency, method, intent, description);
+
+        RedirectUrls redirectUrls = new RedirectUrls();
+        redirectUrls.setCancelUrl(String.format(properties.getPaypal().getRestaurantCancelUrl(), orderNo));
+        redirectUrls.setReturnUrl(String.format(properties.getPaypal().getRestaurantSuccessUrl(), orderNo));
+        payment.setRedirectUrls(redirectUrls);
+
+        return payment.create(apiContext);
+    }
+
+    private Payment getPayment(Double total, String currency, PaypalPaymentMethod method, PaypalPaymentIntent intent, String description) {
         Amount amount = new Amount();
         amount.setCurrency(currency);
         amount.setTotal(String.format("%.2f", total));
@@ -46,15 +75,10 @@ public class PaymentApplicationService {
         payment.setIntent(intent.toString());
         payment.setPayer(payer);
         payment.setTransactions(transactions);
-        RedirectUrls redirectUrls = new RedirectUrls();
-        redirectUrls.setCancelUrl(String.format(properties.getPaypal().getCancelUrl(),orderNo));
-        redirectUrls.setReturnUrl(String.format(properties.getPaypal().getSuccessUrl(),orderNo));
-        payment.setRedirectUrls(redirectUrls);
-
-        return payment.create(apiContext);
+        return payment;
     }
 
-    public Payment executePayment(String paymentId, String payerId) throws PayPalRESTException{
+    public Payment executePayment(String paymentId, String payerId) throws PayPalRESTException {
         Payment payment = new Payment();
         payment.setId(paymentId);
         PaymentExecution paymentExecute = new PaymentExecution();

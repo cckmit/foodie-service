@@ -21,5 +21,7 @@ application:
       client-id: ASgMRT2a5ZkDHd_PZUWGjjG7V40kFIFpmvefEpwfe8z94aBPyzwLHq1WCKNogfINQSDv5DhrVno11r6N
       client-secret: EKsOmilFgiYw15f3_6zXhkQnPtETUsgeael94E_D4awn3fTh7IzE_WWPqVQtG36hF5hOGZXusK1YCAoS
       mode: sandbox
-      success-url: http://39.97.242.98/#/main/success?orderno=%s
-      cancel-url: http://39.97.242.98/#/main/cancelActivityOrder?orderno=%s
+      activity-success-url: http://39.97.242.98/#/main/activity/success?orderno=%s
+      activity-cancel-url: http://39.97.242.98/#/main/activity/cancel?orderno=%s
+      restaurant-success-url: http://39.97.242.98/#/main/activity/success?orderno=%s
+      restaurant-cancel-url: http://39.97.242.98/#/main/activity/cancel?orderno=%s

@@ -1,12 +1,9 @@
 package com.foodie.portal.order;
 
 import com.foodie.portal.activity.ActivityApplicationService;
-import com.foodie.portal.activity.model.Activity;
 import com.foodie.portal.commons.ErrorCode;
 import com.foodie.portal.commons.EventPublisher;
 import com.foodie.portal.commons.RestException;
-import com.foodie.portal.commons.event.OrderCreatedEvent;
-import com.foodie.portal.order.command.CreateOrderCommand;
 import com.foodie.portal.order.command.CreateRestaurantOrderCommand;
 import com.foodie.portal.order.command.PayOrderCommand;
 import com.foodie.portal.order.model.Order;
@@ -15,7 +12,6 @@ import com.foodie.portal.payment.PaymentApplicationService;
 import com.foodie.portal.payment.PaypalPaymentIntent;
 import com.foodie.portal.payment.PaypalPaymentMethod;
 import com.foodie.portal.restaurant.RestaurantApplicationService;
-import com.foodie.portal.user.model.Merchant;
 import com.foodie.portal.user.model.User;
 import com.paypal.api.payments.Links;
 import com.paypal.api.payments.Payment;
@@ -61,7 +57,7 @@ public class RestaurantOrderApplicationService {
         order.prePay(command.getPaidPrice());
         Payment payment;
         try {
-            payment = paymentApplicationService.createPayment(command.getPaidPrice(),
+            payment = paymentApplicationService.createRestaurantPayment(command.getPaidPrice(),
                     "USD", PaypalPaymentMethod.paypal,
                     PaypalPaymentIntent.sale, "餐厅订单支付", order.getNumber());
         } catch (PayPalRESTException e) {
