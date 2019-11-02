@@ -1,7 +1,7 @@
 language: java
 jdk: openjdk8
 install:
-  - scp -r * root@${remote_host}:/tmp/foodie/
+  - ssh root@${remote_host} git clone --depth=50 --branch=master https://github.com/demonran/foodie-service.git /tmp/foodie"
 script:
 - echo "${remote_host}"
 before_install:
@@ -12,6 +12,6 @@ addons:
   ssh_known_hosts: 39.97.242.98
 after_success:
 - ssh root@${remote_host} "cd /tmp/foodie && ./gradlew clean build -x test"
-- ssh root@${remote_host} "cp /tmp/foodie/build/libs/*.jar /opt"
-- ssh root@${remote_host} "cp /tmp/foodie/run.sh /opt"
+- ssh root@${remote_host} "\cp /tmp/foodie/build/libs/*.jar /opt"
+- ssh root@${remote_host} "\cp /tmp/foodie/run.sh /opt"
 - ssh root@${remote_host} "bash /opt/run.sh /opt/foodie-service-0.0.1-SNAPSHOT.jar restart"
