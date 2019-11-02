@@ -1,5 +1,6 @@
 language: java
 jdk: openjdk8
+install: false
 script:
 - echo "${remote_host}"
 before_install:
