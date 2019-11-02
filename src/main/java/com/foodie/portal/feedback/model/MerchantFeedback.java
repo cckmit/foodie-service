@@ -1,10 +1,12 @@
-package com.foodie.portal.feedback;
+package com.foodie.portal.feedback.model;
 
 import cn.hutool.core.util.IdUtil;
 import com.foodie.portal.user.model.Merchant;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
+@NoArgsConstructor
 public class MerchantFeedback extends Feedback {
     private Merchant merchant;
 

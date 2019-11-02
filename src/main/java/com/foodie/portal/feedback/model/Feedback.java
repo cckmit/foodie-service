@@ -1,4 +1,4 @@
-package com.foodie.portal.feedback;
+package com.foodie.portal.feedback.model;
 
 import lombok.Data;
 
