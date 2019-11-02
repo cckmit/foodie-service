@@ -1,6 +1,6 @@
-package com.foodie.portal.feedback.repository;
+package com.foodie.portal.feedback.dto;
 
-import com.foodie.portal.user.repository.MerchantEntity;
+import com.foodie.portal.user.repository.UserEntity;
 import lombok.Data;
 
 import javax.persistence.Entity;
@@ -10,14 +10,11 @@ import javax.persistence.Table;
 import java.time.Instant;
 
 @Data
-@Entity
-@Table(name = "foodie_merchant_feedback")
-public class MerchantFeedbackEntity {
-    @Id
+public class UserFeedbackDto {
     private String id;
     private String title;
     private String content;
-    @ManyToOne
-    private MerchantEntity merchant;
+    private String name;
+    private String email;
     private Instant createdAt;
 }

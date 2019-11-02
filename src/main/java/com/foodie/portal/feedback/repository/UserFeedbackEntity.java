@@ -8,6 +8,7 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import java.time.Instant;
 
 @Data
 @Entity
@@ -21,4 +22,5 @@ public class UserFeedbackEntity {
     private String email;
     @ManyToOne
     private UserEntity user;
+    private Instant createdAt;
 }
