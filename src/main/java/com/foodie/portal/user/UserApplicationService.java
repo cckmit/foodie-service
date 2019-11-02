@@ -63,5 +63,6 @@ public class UserApplicationService {
     }
 
     public void collectActivity(String activityId, User user) {
+
     }
 }

@@ -18,5 +18,6 @@ public class Feedback {
         this.id = IdUtil.fastSimpleUUID();
         this.title = title;
         this.content = content;
+        this.createdAt = Instant.now();
     }
 }

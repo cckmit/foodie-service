@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-@Api(tags = "（管理端）反馈")
+@Api(tags = "（管理端）反馈管理")
 @RestController
 @RequestMapping("admin/feedback")
 public class AdminFeedbackController {
