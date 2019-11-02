@@ -42,6 +42,9 @@ public class FoodGuideRepresentationService {
         String sql = "select * from FOODIE_ARTICLE t where t.id=:id";
         ArticleDetailRepresentation representation = jdbcTemplate.queryForObject(sql, ImmutableMap.of("id", id), new BeanPropertyRowMapper<>(ArticleDetailRepresentation.class));
 
+        if (Objects.isNull(user)) {
+            return representation;
+        }
         String favouriteSql = "select count(1) a from FOODIE_FAVOURITE f where f.OBJECT_ID=:id and f.TYPE=:type and f.USER_ID=:userId";
         Integer count = jdbcTemplate.queryForObject(favouriteSql, ImmutableMap.of("id", id, "type", FavouriteType.FOOD_GUIDE.name(), "userId", user.getId()), Integer.class);
         if (count > 0) {

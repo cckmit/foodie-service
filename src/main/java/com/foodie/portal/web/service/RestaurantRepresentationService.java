@@ -15,6 +15,8 @@ import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.stereotype.Service;
 
+import java.util.Objects;
+
 @Service
 public class RestaurantRepresentationService {
 
@@ -34,6 +36,9 @@ public class RestaurantRepresentationService {
                 ImmutableMap.of("id", id),
                 new BeanPropertyRowMapper<>(RestaurantRepresentation.class));
 
+        if (Objects.isNull(user)) {
+            return restaurantRepresentation;
+        }
         String favouriteSql = "select count(1) a from FOODIE_FAVOURITE f where f.OBJECT_ID=:id and f.TYPE=:type and f.USER_ID=:userId";
         Integer count = jdbcTemplate.queryForObject(favouriteSql, ImmutableMap.of("id", id, "type", FavouriteType.RESTAURANT.name(), "userId", user.getId()), Integer.class);
         if (count > 0) {
