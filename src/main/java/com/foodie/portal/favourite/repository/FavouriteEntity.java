@@ -2,11 +2,13 @@ package com.foodie.portal.favourite.repository;
 
 import com.foodie.portal.favourite.FavouriteType;
 import com.foodie.portal.user.model.User;
+import com.foodie.portal.user.repository.UserEntity;
 import lombok.Data;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import java.time.Instant;
@@ -21,7 +23,8 @@ public class FavouriteEntity {
     @GeneratedValue(strategy = IDENTITY )
     private Long id;
     private String objectId;
-    private User user;
+    @ManyToOne
+    private UserEntity user;
     private FavouriteType type;
     private Instant createdAt;
 }
