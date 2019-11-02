@@ -32,7 +32,7 @@ import javax.validation.Valid;
 public class UserActivityOrderController {
 
     @Autowired
-    private OrderApplicationService orderApplicationService;
+    private ActivityOrderApplicationService orderApplicationService;
     @Autowired
     private OrderRepresentationService orderRepresentationService;
 
@@ -63,7 +63,7 @@ public class UserActivityOrderController {
     @PostMapping("/{id}/payment")
     public String pay(@PathVariable(name = "id") String id, @RequestBody @Valid PayOrderCommand command) {
         var user = (User) SecurityUtils.getSubject().getPrincipal();
-        return orderApplicationService.prePayActivityOrder(id, command);
+        return orderApplicationService.prePay(id, command);
     }
 
     @ApiOperation("支付成功")
@@ -75,6 +75,6 @@ public class UserActivityOrderController {
     @ApiOperation("支付取消")
     @PostMapping("pay/cancel")
     public OrderInfoDto cancelPay(@RequestBody OrderPayCancelCommand command){
-        return OrderInfoDto.from(orderApplicationService.cancelActivityOrder(command.getOrderNo()));
+        return OrderInfoDto.from(orderApplicationService.cancel(command.getOrderNo()));
     }
 }

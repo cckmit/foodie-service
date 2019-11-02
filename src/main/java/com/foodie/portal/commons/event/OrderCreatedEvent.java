@@ -6,6 +6,6 @@ import lombok.Getter;
 
 @Getter
 @AllArgsConstructor
-public class OrderCreatedEvent {
+public class OrderCreatedEvent extends DomainEvent {
     private Order order;
 }

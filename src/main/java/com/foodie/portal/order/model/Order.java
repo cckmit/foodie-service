@@ -121,4 +121,12 @@ public class Order {
         }
        throw new RestException(ErrorCode.FAILED, "状态异常");
     }
+
+    public void endService(Merchant merchant) {
+        checkOrder(merchant);
+        if (status != OrderStatus.SERVICING) {
+            throw new RestException(ErrorCode.FAILED, "订单未开始");
+        }
+        this.status = OrderStatus.FINISHED;
+    }
 }

@@ -31,7 +31,7 @@ import javax.validation.Valid;
 public class UserRestaurantOrderController {
 
     @Autowired
-    private OrderApplicationService orderApplicationService;
+    private RestaurantOrderApplicationService orderApplicationService;
     @Autowired
     private OrderRepresentationService orderRepresentationService;
 
@@ -40,7 +40,7 @@ public class UserRestaurantOrderController {
     @PostMapping
     public RestaurantOrder createRestaurantOrder(@RequestBody CreateRestaurantOrderCommand command) {
         var user = (User) SecurityUtils.getSubject().getPrincipal();
-        return orderApplicationService.createRestaurantOrder(command, user);
+        return orderApplicationService.create(command, user);
     }
 
     @ApiOperation("我的餐馆订单列表")
@@ -54,19 +54,19 @@ public class UserRestaurantOrderController {
     @PostMapping("/{id}/payment")
     public String pay(@PathVariable(name = "id") String id, @RequestBody @Valid PayOrderCommand command) {
         var user = (User) SecurityUtils.getSubject().getPrincipal();
-        return orderApplicationService.prePayRestaurantOrder(id, command);
+        return orderApplicationService.prePay(id, command);
     }
 
     @ApiOperation("支付成功")
     @PostMapping("pay/success")
     public OrderInfoDto successPay(@RequestBody OrderPaySuccessCommand command){
-        return OrderInfoDto.from(orderApplicationService.payRestaurantOrder(command.getPaymentId(), command.getPayerId()));
+        return OrderInfoDto.from(orderApplicationService.pay(command.getPaymentId(), command.getPayerId()));
     }
 
     @ApiOperation("支付取消")
     @PostMapping("pay/cancel")
     public OrderInfoDto cancelPay(@RequestBody OrderPayCancelCommand command){
-        return OrderInfoDto.from(orderApplicationService.cancelRestaurantOrder(command.getOrderNo()));
+        return OrderInfoDto.from(orderApplicationService.cancel(command.getOrderNo()));
     }
 
 }

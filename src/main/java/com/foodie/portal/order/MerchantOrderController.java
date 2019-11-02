@@ -30,36 +30,44 @@ import javax.validation.Valid;
 public class MerchantOrderController {
 
     @Autowired
-    private OrderApplicationService orderApplicationService;
+    private ActivityOrderApplicationService orderApplicationService;
     @Autowired
     private OrderRepresentationService orderRepresentationService;
 
     @ApiOperation("接受服务")
     @PostMapping("{id}/accepting")
-    public Order accept(@PathVariable String id) {
+    public void accept(@PathVariable String id) {
         var merchant = (Merchant) SecurityUtils.getSubject().getPrincipal();
-        return orderApplicationService.accept(id, merchant);
+        orderApplicationService.accept(id, merchant);
     }
 
     @ApiOperation("拒绝服务")
     @PostMapping("{id}/rejecting")
-    public Order reject(@PathVariable String id, @Valid @RequestBody RejectOrderCommand command) {
+    public void reject(@PathVariable String id, @Valid @RequestBody RejectOrderCommand command) {
         var merchant = (Merchant) SecurityUtils.getSubject().getPrincipal();
-        return orderApplicationService.reject(id, command.getReason(), merchant);
+        orderApplicationService.reject(id, command.getReason(), merchant);
     }
 
     @ApiOperation("开始服务")
     @PostMapping("{id}/starting")
-    public Order startService(@PathVariable String id, @Valid @RequestBody StartServiceCommand command) {
+    public void startService(@PathVariable String id, @Valid @RequestBody StartServiceCommand command) {
         var merchant = (Merchant) SecurityUtils.getSubject().getPrincipal();
-        return orderApplicationService.startService(id, command.getPayNo(), merchant);
+        orderApplicationService.startService(id, command.getPayNo(), merchant);
     }
+
+    @ApiOperation("结束服务")
+    @PostMapping("{id}/ending")
+    public void startService(@PathVariable String id) {
+        var merchant = (Merchant) SecurityUtils.getSubject().getPrincipal();
+        orderApplicationService.endService(id, merchant);
+    }
+
 
     @ApiOperation("我的服务列表")
     @GetMapping("list")
     public Pagination<OrderSummaryRepresentation> orders(PageCommand command, OrderStatus status) {
         var merchant = (Merchant) SecurityUtils.getSubject().getPrincipal();
-        return orderRepresentationService.merchantOrderList(command.getPage(), command.getSize(), merchant,status);
+        return orderRepresentationService.merchantOrderList(command.getPage(), command.getSize(), merchant, status);
     }
 
     @ApiOperation("我的服务详情")
