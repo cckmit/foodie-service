@@ -1,7 +1,7 @@
 spring:
   datasource:
-    url: jdbc:mysql://39.97.242.98:3306/foodie_mysql?allowMultiQueries=true&useUnicode=true&characterEncoding=UTF-8&connectionCollation=utf8mb4_bin&useServerPrepStmts=false&rewriteBatchedStatements=true
-    driverClassName: com.mysql.cj.jdbc.Driver
+    url: jdbc:log4jdbc:mysql://39.97.242.98:3306/foodie_mysql?allowMultiQueries=true&useUnicode=true&characterEncoding=UTF-8&connectionCollation=utf8mb4_bin&useServerPrepStmts=false&rewriteBatchedStatements=true
+    driverClassName: net.sf.log4jdbc.sql.jdbcapi.DriverSpy
     username: root
     password: ENC(WVkiUXePgoljkmdvOkWUPg==)
   jpa:

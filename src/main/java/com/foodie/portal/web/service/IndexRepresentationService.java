@@ -85,7 +85,7 @@ public class IndexRepresentationService {
     }
 
     public List<RestaurantRepresentation> findInterestedRestaurantByCityId(String cityId) {
-        String sql = "select r.* , c.NAME as city_name from FOODIE_RESTAURANT r " +
+        String sql = "select r.* , c.NAME as cityName from FOODIE_RESTAURANT r " +
                 "left join FOODIE_CITY c on r.CITY_ID=c.ID where r.INTERESTED_RECOMMEND = 1 and r.CITY_ID=:cityId";
         return jdbcTemplate.query(sql, ImmutableMap.of("cityId", cityId), new BeanPropertyRowMapper<>(RestaurantRepresentationPo.class))
                 .stream()
