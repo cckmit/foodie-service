@@ -4,6 +4,7 @@ import cn.hutool.core.util.RandomUtil;
 import com.foodie.portal.commons.Pagination;
 import com.foodie.portal.commons.event.MerchantApplyPassedEvent;
 import com.foodie.portal.user.command.CreateMerchantCommand;
+import com.foodie.portal.user.command.UpdateMerchantInfoCommand;
 import com.foodie.portal.user.model.Merchant;
 import com.foodie.portal.web.command.ApplyMerchantCommand;
 import lombok.extern.slf4j.Slf4j;
@@ -89,4 +90,9 @@ public class MerchantApplicationService {
         merchantRepository.save(merchant);
     }
 
+    public void updateInfo(String id, UpdateMerchantInfoCommand command) {
+        var merchant = merchantRepository.findById(id);
+        merchant.update(command.getName(), command.getAvatar(), command.getDescription());
+        merchantRepository.save(merchant);
+    }
 }

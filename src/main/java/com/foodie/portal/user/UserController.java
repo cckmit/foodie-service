@@ -80,9 +80,4 @@ public class UserController {
         userApplicationService.changePassword(user.getId(), command);
 
     }
-
-    public void collectActivity(String activityId) {
-        User user = (User) SecurityUtils.getSubject().getPrincipal();
-        userApplicationService.collectActivity(activityId, user);
-    }
 }

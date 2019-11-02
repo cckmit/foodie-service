@@ -10,7 +10,7 @@ before_install:
 addons:
   ssh_known_hosts: 39.97.242.98
 after_success:
-- scp -r * /tmp/foodie/
+- scp -r * root@${remote_host}:/tmp/foodie/
 - ssh root@${remote_host} "/tmp/foodie/gradlew clean build -x test"
 - ssh root@${remote_host} "cp /tmp/foodie/build/libs/*.jar /opt"
 - ssh root@${remote_host} "cp /tmp/foodie/run.sh /opt"

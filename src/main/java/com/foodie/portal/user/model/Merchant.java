@@ -70,4 +70,10 @@ public class Merchant {
     public double getBenefitExtractRatio() {
         return NumberUtil.mul(extractRatio, 0.2);
     }
+
+    public void update(String name, String avatar, String description) {
+        this.name = name;
+        this.avatar = avatar;
+        this.description = description;
+    }
 }
