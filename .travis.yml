@@ -1,7 +1,8 @@
 language: java
 jdk: openjdk8
 install:
-  - ssh root@${remote_host} git clone --depth=50 --branch=master https://github.com/demonran/foodie-service.git /tmp/foodie"
+  - ssh root@${remote_host} "rm -rf /tmp/foodie"
+  - ssh root@${remote_host} "git clone --depth=50 --branch=master https://github.com/demonran/foodie-service.git /tmp/foodie"
 script:
 - echo "${remote_host}"
 before_install:
