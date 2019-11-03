@@ -3,6 +3,11 @@
 PWD=$(dirname $0)
 source ${PWD}/env.sh
 Jar_Path=$1
+profiles=$3
+
+if [ "$profiles" == "x" ] then
+  profiles = 'sit'
+endif
 
 usage()
 {
@@ -13,7 +18,7 @@ usage()
 start()
 {
     echo "start $Jar_Path"
-    nohup java -Djava.security.egd=file:/dev/.urandom -jar $Jar_Path --spring.profiles.active=sit --jasypt.encryptor.password=${JASYPT_PASSWORD} >$Jar_Path.log &
+    nohup java -Djava.security.egd=file:/dev/.urandom -jar $Jar_Path --spring.profiles.active=${profiles} --jasypt.encryptor.password=${JASYPT_PASSWORD} >$Jar_Path.${profiles}.log &
     sleep 5
     ps -ef | grep java | grep -w $Jar_Path
 }

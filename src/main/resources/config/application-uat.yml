@@ -1,0 +1,30 @@
+server:
+  port: 7000
+spring:
+  datasource:
+    url: jdbc:mysql://rm-2ze2b8l4g2174473e90130.mysql.rds.aliyuncs.com:3306/foodie_mysql?allowMultiQueries=true&useUnicode=true&characterEncoding=UTF-8&connectionCollation=utf8mb4_bin&useServerPrepStmts=false&rewriteBatchedStatements=true
+    driverClassName: com.mysql.cj.jdbc.Driver
+    username: foodie
+    password: ENC(WVkiUXePgoljkmdvOkWUPg==)
+    druid:
+      connection-properties: druid.stat.mergeSql=true;druid.stat.slowSqlMillis=5000
+  jpa:
+    hibernate.ddl-auto: none
+    show-sql: true
+
+
+logging:
+  file: ./logs/fooide-sit.log
+
+
+application:
+  payment:
+    paypal:
+      client-id: ASgMRT2a5ZkDHd_PZUWGjjG7V40kFIFpmvefEpwfe8z94aBPyzwLHq1WCKNogfINQSDv5DhrVno11r6N
+      client-secret: EKsOmilFgiYw15f3_6zXhkQnPtETUsgeael94E_D4awn3fTh7IzE_WWPqVQtG36hF5hOGZXusK1YCAoS
+      mode: sandbox
+      activity-success-url: http://39.97.242.98/#/main/activity/success?orderno=%s
+      activity-cancel-url: http://39.97.242.98/#/main/activity/cancel?orderno=%s
+      restaurant-success-url: http://39.97.242.98/#/main/restaurant/success?orderno=%s
+      restaurant-cancel-url: http://39.97.242.98/#/main/restaurant/cancel?orderno=%s
+
