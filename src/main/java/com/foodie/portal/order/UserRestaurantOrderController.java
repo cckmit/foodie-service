@@ -7,6 +7,7 @@ import com.foodie.portal.order.command.OrderPayCancelCommand;
 import com.foodie.portal.order.command.OrderPaySuccessCommand;
 import com.foodie.portal.order.command.PayOrderCommand;
 import com.foodie.portal.order.dto.OrderInfoDto;
+import com.foodie.portal.order.dto.RestaurantOrderInfoDto;
 import com.foodie.portal.order.model.RestaurantOrder;
 import com.foodie.portal.order.representation.OrderRepresentationService;
 import com.foodie.portal.order.representation.RestaurantOrderSummaryRepresentation;
@@ -59,14 +60,14 @@ public class UserRestaurantOrderController {
 
     @ApiOperation("支付成功")
     @PostMapping("pay/success")
-    public OrderInfoDto successPay(@RequestBody OrderPaySuccessCommand command){
-        return OrderInfoDto.from(orderApplicationService.pay(command.getPaymentId(), command.getPayerId()));
+    public RestaurantOrderInfoDto successPay(@RequestBody OrderPaySuccessCommand command){
+        return RestaurantOrderInfoDto.from(orderApplicationService.pay(command.getPaymentId(), command.getPayerId()));
     }
 
     @ApiOperation("支付取消")
     @PostMapping("pay/cancel")
-    public OrderInfoDto cancelPay(@RequestBody OrderPayCancelCommand command){
-        return OrderInfoDto.from(orderApplicationService.cancel(command.getOrderNo()));
+    public RestaurantOrderInfoDto cancelPay(@RequestBody OrderPayCancelCommand command){
+        return RestaurantOrderInfoDto.from(orderApplicationService.cancel(command.getOrderNo()));
     }
 
 }

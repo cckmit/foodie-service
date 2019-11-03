@@ -81,7 +81,7 @@ public class RestaurantOrderApplicationService {
         return order;
     }
 
-    public Order pay(String paymentId, String payerId) {
+    public RestaurantOrder pay(String paymentId, String payerId) {
         log.info("支付回调：paymentId: {}, payerId: {}", paymentId, payerId);
         try {
             Payment payment = paymentApplicationService.executePayment(paymentId, payerId);

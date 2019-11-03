@@ -1,11 +1,13 @@
 package com.foodie.portal.favourite;
 
+import com.foodie.portal.favourite.representaion.FavouriteRepresentationService;
 import com.foodie.portal.user.model.User;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.var;
 import org.apache.shiro.SecurityUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -17,8 +19,17 @@ public class UserFavouriteController {
 
     @Autowired
     private FavouriteApplicationService favouriteApplicationService;
+    @Autowired
+    private FavouriteRepresentationService favouriteRepresentationService;
 
-    @ApiOperation("收藏活动")
+    @ApiOperation("我的收藏活动")
+    @GetMapping("activity")
+    public void getFavouriteActivity() {
+        var user = (User) SecurityUtils.getSubject().getPrincipal();
+        favouriteRepresentationService.findFavouriteActivityByUserId(user.getId());
+    }
+
+    @ApiOperation("添加收藏活动")
     @PostMapping("activity")
     public void favouriteActivity(String activityId) {
         var user = (User) SecurityUtils.getSubject().getPrincipal();
