@@ -2,8 +2,9 @@ package com.foodie.portal.user.security;
 
 import com.foodie.portal.commons.config.shiro.LoginToken;
 import com.foodie.portal.commons.utils.EncryptUtils;
-import com.foodie.portal.user.model.SysUser;
+import com.foodie.portal.user.SysUserApplicationService;
 import com.foodie.portal.user.UserApplicationService;
+import com.foodie.portal.user.model.SysUser;
 import com.foodie.portal.user.model.User;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.shiro.authc.AuthenticationException;
@@ -24,15 +25,17 @@ import org.springframework.beans.factory.annotation.Autowired;
 import java.util.List;
 
 @Slf4j
-public class UserRealm extends AuthorizingRealm {
+public class SysUserRealm extends AuthorizingRealm {
 
     @Autowired
     private UserApplicationService userApplicationService;
+    @Autowired
+    private SysUserApplicationService sysUserApplicationService;
 
 
     @Override
     public boolean supports(AuthenticationToken token) {
-        return ((LoginToken)token).getLoginType() == LoginToken.LoginType.USER;
+        return ((LoginToken)token).getLoginType() == LoginToken.LoginType.ADMIN;
     }
 
     /**
@@ -62,12 +65,12 @@ public class UserRealm extends AuthorizingRealm {
     @Override
     protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken authenticationToken) throws AuthenticationException {
         UsernamePasswordToken token = (UsernamePasswordToken) authenticationToken;
-        User user = userApplicationService.findByEmail(token.getUsername());
+        SysUser user = sysUserApplicationService.findByUsername(token.getUsername());
         if (user == null) {
             return null;
         }
         log.info("doGetAuthenticationInfo-userRealm");
-        ByteSource saltSource = new Md5Hash(user.getEmail());
+        ByteSource saltSource = new Md5Hash(user.getUsername());
         return new SimpleAuthenticationInfo(
                 user, //用户
                 user.getPassword(), //密码

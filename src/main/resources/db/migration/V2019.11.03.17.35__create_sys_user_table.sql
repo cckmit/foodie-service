@@ -1,0 +1,10 @@
+CREATE TABLE FOODIE_SYS_USER
+(
+    ID         VARCHAR(32) NOT NULL COMMENT 'ID' PRIMARY KEY,
+    USERNAME   VARCHAR(50) COMMENT '用户名',
+    PASSWORD   VARCHAR(100) COMMENT '密码',
+    CREATED_AT TIMESTAMP COMMENT '创建时间',
+    unique index idx_username(USERNAME)
+);
+
+insert into FOODIE_SYS_USER values('97bd79dfb4304068933ef2439c177dde', 'admin', '4793df73eb7a636b002dacd543cc663e', sysdate);

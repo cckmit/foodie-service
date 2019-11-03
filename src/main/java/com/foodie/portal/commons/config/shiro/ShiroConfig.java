@@ -1,6 +1,8 @@
 package com.foodie.portal.commons.config.shiro;
 
+import com.foodie.portal.commons.utils.EncryptUtils;
 import com.foodie.portal.user.security.MerchantRealm;
+import com.foodie.portal.user.security.SysUserRealm;
 import com.foodie.portal.user.security.UserRealm;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Maps;
@@ -38,8 +40,8 @@ public class ShiroConfig {
     public HashedCredentialsMatcher hashedCredentialsMatcher() {
         HashedCredentialsMatcher hashedCredentialsMatcher = new HashedCredentialsMatcher();
         //md5加密1次
-        hashedCredentialsMatcher.setHashAlgorithmName("md5");
-        hashedCredentialsMatcher.setHashIterations(1);
+        hashedCredentialsMatcher.setHashAlgorithmName(EncryptUtils.hashAlgorithmName);
+        hashedCredentialsMatcher.setHashIterations(EncryptUtils.hashIterations);
         return hashedCredentialsMatcher;
     }
 
@@ -51,15 +53,22 @@ public class ShiroConfig {
     @Bean
     public UserRealm userRealm() {
         UserRealm userRealm = new UserRealm();
-//        userRealm.setCredentialsMatcher(hashedCredentialsMatcher());
+        userRealm.setCredentialsMatcher(hashedCredentialsMatcher());
         return userRealm;
     }
 
     @Bean
     public MerchantRealm merchantRealm() {
         MerchantRealm merchantRealm = new MerchantRealm();
-//        userRealm.setCredentialsMatcher(hashedCredentialsMatcher());
+        merchantRealm.setCredentialsMatcher(hashedCredentialsMatcher());
         return merchantRealm;
+    }
+
+    @Bean
+    public SysUserRealm sysUserRealm() {
+        SysUserRealm sysUserRealm = new SysUserRealm();
+        sysUserRealm.setCredentialsMatcher(hashedCredentialsMatcher());
+        return sysUserRealm;
     }
 
     /**
@@ -71,18 +80,18 @@ public class ShiroConfig {
     @Bean
     public DefaultWebSecurityManager securityManager() {
         DefaultWebSecurityManager securityManager = new DefaultWebSecurityManager();
-        securityManager.setAuthenticator(new ModularRealmAuthenticator(){
+        securityManager.setAuthenticator(new ModularRealmAuthenticator() {
             @Override
             protected AuthenticationInfo doMultiRealmAuthentication(Collection<Realm> realms, AuthenticationToken token) {
-                for (Realm realm: realms) {
-                    if(realm.supports(token)) {
+                for (Realm realm : realms) {
+                    if (realm.supports(token)) {
                         return doSingleRealmAuthentication(realm, token);
                     }
                 }
                 return super.doMultiRealmAuthentication(realms, token);
             }
         });
-        securityManager.setRealms(ImmutableList.of(userRealm(), merchantRealm()));
+        securityManager.setRealms(ImmutableList.of(userRealm(), merchantRealm(), sysUserRealm()));
 
         return securityManager;
     }
@@ -125,6 +134,7 @@ public class ShiroConfig {
         filterChainDefinitionMap.put("/favicon.ico", "anon");
         filterChainDefinitionMap.put("/merchant/**", "user");
         filterChainDefinitionMap.put("/user/**", "user");
+        filterChainDefinitionMap.put("/admin/**", "user");
 
         shiroFilterFactoryBean.setFilterChainDefinitionMap(filterChainDefinitionMap);
         return shiroFilterFactoryBean;
