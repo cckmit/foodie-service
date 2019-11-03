@@ -7,11 +7,9 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
-import org.springframework.test.context.web.WebAppConfiguration;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
-@WebAppConfiguration
 public class EncryptorTest {
 
     @Autowired
@@ -25,5 +23,10 @@ public class EncryptorTest {
         System.out.println("mail: " + encryptMail);
         System.out.println("mail decrypt: " + encryptor.decrypt(encryptMail));
         Assert.assertTrue(name.length() > 0);
+    }
+
+    @Test
+    public void decrypt() {
+        System.out.println(encryptor.decrypt("WVkiUXePgoljkmdvOkWUPg=="));
     }
 }

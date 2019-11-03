@@ -5,7 +5,7 @@ spring:
     url: jdbc:mysql://rm-2ze2b8l4g2174473e90130.mysql.rds.aliyuncs.com:3306/foodie_mysql?allowMultiQueries=true&useUnicode=true&characterEncoding=UTF-8&connectionCollation=utf8mb4_bin&useServerPrepStmts=false&rewriteBatchedStatements=true
     driverClassName: com.mysql.cj.jdbc.Driver
     username: foodie
-    password: foodie_123
+    password: ENC(IBjIOLt7v0tapxkJ0lDLIa4jnnEQjq07)
     druid:
       connection-properties: druid.stat.mergeSql=true;druid.stat.slowSqlMillis=5000
   jpa:
