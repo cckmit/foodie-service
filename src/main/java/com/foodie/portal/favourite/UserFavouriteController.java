@@ -1,5 +1,6 @@
 package com.foodie.portal.favourite;
 
+import com.foodie.portal.favourite.representaion.ActivityRepresentation;
 import com.foodie.portal.favourite.representaion.FavouriteRepresentationService;
 import com.foodie.portal.user.model.User;
 import io.swagger.annotations.Api;
@@ -11,6 +12,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.List;
 
 @Api(tags = "（用户）收藏")
 @RestController
@@ -24,9 +27,9 @@ public class UserFavouriteController {
 
     @ApiOperation("我的收藏活动")
     @GetMapping("activity")
-    public void getFavouriteActivity() {
+    public List<ActivityRepresentation> getFavouriteActivity() {
         var user = (User) SecurityUtils.getSubject().getPrincipal();
-        favouriteRepresentationService.findFavouriteActivityByUserId(user.getId());
+        return favouriteRepresentationService.findFavouriteActivityByUserId(user.getId());
     }
 
     @ApiOperation("添加收藏活动")
