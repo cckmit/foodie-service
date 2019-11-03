@@ -10,9 +10,8 @@ def getHost(){
 }
 pipeline {
     agent {
-        docker {
-            image 'openjdk:8'
-            label 'docker-local'
+        node {
+            label 'host-local'
         }
     }
     stages {
