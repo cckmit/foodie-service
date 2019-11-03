@@ -23,5 +23,5 @@ application:
       mode: sandbox
       activity-success-url: http://39.97.242.98/#/main/activity/success?orderno=%s
       activity-cancel-url: http://39.97.242.98/#/main/activity/cancel?orderno=%s
-      restaurant-success-url: http://39.97.242.98/#/main/activity/success?orderno=%s
-      restaurant-cancel-url: http://39.97.242.98/#/main/activity/cancel?orderno=%s
+      restaurant-success-url: http://39.97.242.98/#/main/restaurant/success?orderno=%s
+      restaurant-cancel-url: http://39.97.242.98/#/main/restaurant/cancel?orderno=%s
