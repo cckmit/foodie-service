@@ -23,12 +23,13 @@ public class MerchantWallet {
 
     public void increaseBalance(Order order) {
         orders.add(order);
-        openAccount = NumberUtil.sub(openAccount, order.getTotalExtract());
-        balance = NumberUtil.add(balance, order.getTotalExtract());
+        double account = NumberUtil.sub(order.getPrice(), order.getTotalExtract());
+        openAccount = NumberUtil.sub(openAccount, account);
+        balance = NumberUtil.add(balance, account);
     }
 
     public void increaseOpenAccount(Order order) {
-        double willOpenAccount = order.getTotalExtract();
+        double willOpenAccount = NumberUtil.sub(order.getPrice(), order.getTotalExtract());
         log.info("商家:{}, 增加未结算金额：{}" ,order.getMerchant().getId(), willOpenAccount);
         openAccount = NumberUtil.add(openAccount, willOpenAccount);
     }
