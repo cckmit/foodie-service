@@ -26,8 +26,8 @@ start()
 stop()
 {
     echo "stop $Jar_Path ........"
-    ps -ef | grep java | grep ${profiles} | grep -w $Jar_Path
-    num=`ps -ef | grep java | grep -w $Jar_Path | wc -l`
+    ps -ef | grep java | grep -w $Jar_Path | grep ${profiles}
+    num=`ps -ef | grep java | grep -w $Jar_Path | grep ${profiles} | wc -l`
     echo $num
     if [ $num -ne 0 ];then
         pid=`ps -ef | grep java | grep -w $Jar_Path | awk '{print $2}'`
