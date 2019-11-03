@@ -15,7 +15,7 @@ start()
     echo "start $Jar_Path"
     java -Djava.security.egd=file:/dev/.urandom -jar $Jar_Path --spring.profiles.active=sit --jasypt.encryptor.password=${JASYPT_PASSWORD} >$Jar_Path.log &
     sleep 5
-    echo $?
+    ps -ef | grep java | grep -w $Jar_Path
 }
 
 stop()

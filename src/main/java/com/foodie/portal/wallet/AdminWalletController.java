@@ -4,6 +4,7 @@ import com.foodie.portal.commons.PageCommand;
 import com.foodie.portal.commons.Pagination;
 import com.foodie.portal.wallet.command.WithdrawCommand;
 import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -20,11 +21,13 @@ public class AdminWalletController {
     @Autowired
     private WalletApplicationService walletApplicationService;
 
-    @GetMapping()
+    @ApiOperation("获取商家提现列表")
+    @GetMapping
     public Pagination<MerchantWallet> list(PageCommand command) {
         return walletApplicationService.list(command.getPage(), command.getSize());
     }
 
+    @ApiOperation("商家提现")
     @PostMapping("{merchantId}/withdrawal")
     public void withdrawal(@PathVariable String merchantId, @RequestBody WithdrawCommand command) {
         walletApplicationService.withdraw(merchantId, command.getAmount());
