@@ -21,7 +21,10 @@ public class WalletRepresentationService {
                 new BeanPropertyRowMapper<>(IncomeItemRepresentation.class));
     }
 
-    public List<IncomeItemRepresentation> listWithdrawal(String id) {
-        return null;
+    public List<WithdrawalRepresentation> listWithdrawal(String merchantId) {
+        String sql = "select * from FOODIE_WITHDRAWAL_ITEM where MERCHANT_ID=:merchantId";
+        return jdbcTemplate.query(sql,
+                ImmutableMap.of("merchantId" ,merchantId),
+                new BeanPropertyRowMapper<>(WithdrawalRepresentation.class));
     }
 }
