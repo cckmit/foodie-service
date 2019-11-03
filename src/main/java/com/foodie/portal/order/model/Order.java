@@ -9,9 +9,8 @@ import com.foodie.portal.commons.ErrorCode;
 import com.foodie.portal.commons.RestException;
 import com.foodie.portal.user.model.Merchant;
 import com.foodie.portal.user.model.User;
-import com.foodie.portal.utils.IdGenerator;
+import com.foodie.portal.commons.utils.IdGenerator;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 
 import java.time.Instant;
 import java.util.Objects;

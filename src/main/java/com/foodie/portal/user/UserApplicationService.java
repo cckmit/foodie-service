@@ -3,6 +3,7 @@ package com.foodie.portal.user;
 import com.foodie.portal.commons.ErrorCode;
 import com.foodie.portal.commons.Pagination;
 import com.foodie.portal.commons.RestException;
+import com.foodie.portal.commons.utils.EncryptUtils;
 import com.foodie.portal.user.command.UpdateUserInfoCommand;
 import com.foodie.portal.user.command.UserChangePasswordCommand;
 import com.foodie.portal.user.command.UserRegisterCommand;
@@ -30,7 +31,8 @@ public class UserApplicationService {
         if (Objects.nonNull(userRepository.findByEmail(command.getEmail())) ) {
             throw new RestException(ErrorCode.FAILED, "用户已存在");
         }
-        var user = User.create(command.getEmail(), command.getPassword());
+        String password = EncryptUtils.getPassword(command.getPassword(), command.getEmail());
+        var user = User.create(command.getEmail(), password);
         userRepository.save(user);
         return user;
     }

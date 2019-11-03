@@ -1,4 +1,4 @@
-package com.foodie.portal.utils;
+package com.foodie.portal.commons.utils;
 
 import cn.hutool.core.util.IdUtil;
 

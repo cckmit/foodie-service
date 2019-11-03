@@ -5,7 +5,7 @@ import com.foodie.portal.favourite.FavouriteType;
 import com.foodie.portal.restaurant.model.RestaurantType;
 import com.foodie.portal.restaurant.repository.RestaurantJpaRepository;
 import com.foodie.portal.user.model.User;
-import com.foodie.portal.utils.PaginationUtils;
+import com.foodie.portal.commons.utils.PaginationUtils;
 import com.foodie.portal.web.model.RestaurantRepresentation;
 import com.foodie.portal.web.po.RestaurantRepresentationPo;
 import com.google.common.collect.ImmutableMap;

@@ -6,7 +6,7 @@ import com.foodie.portal.order.OrderRepository;
 import com.foodie.portal.order.model.OrderStatus;
 import com.foodie.portal.user.model.Merchant;
 import com.foodie.portal.user.model.User;
-import com.foodie.portal.utils.PaginationUtils;
+import com.foodie.portal.commons.utils.PaginationUtils;
 import lombok.var;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

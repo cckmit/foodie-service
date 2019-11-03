@@ -1,4 +1,4 @@
-package com.foodie.portal.utils;
+package com.foodie.portal.commons.utils;
 
 import com.foodie.portal.article.repository.ArticleEntity;
 import com.foodie.portal.commons.Pagination;

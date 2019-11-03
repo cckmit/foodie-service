@@ -1,6 +1,7 @@
 package com.foodie.portal.user.security;
 
 import com.foodie.portal.commons.config.shiro.LoginToken;
+import com.foodie.portal.commons.utils.EncryptUtils;
 import com.foodie.portal.user.model.SysUser;
 import com.foodie.portal.user.UserApplicationService;
 import com.foodie.portal.user.model.User;
@@ -10,6 +11,8 @@ import org.apache.shiro.authc.AuthenticationInfo;
 import org.apache.shiro.authc.AuthenticationToken;
 import org.apache.shiro.authc.SimpleAuthenticationInfo;
 import org.apache.shiro.authc.UsernamePasswordToken;
+import org.apache.shiro.authc.credential.CredentialsMatcher;
+import org.apache.shiro.authc.credential.HashedCredentialsMatcher;
 import org.apache.shiro.authz.AuthorizationInfo;
 import org.apache.shiro.authz.SimpleAuthorizationInfo;
 import org.apache.shiro.crypto.hash.Md5Hash;
@@ -68,8 +71,19 @@ public class UserRealm extends AuthorizingRealm {
         return new SimpleAuthenticationInfo(
                 user, //用户
                 user.getPassword(), //密码
-//                saltSource,//salt=username+salt
+                saltSource,
                 this.getName());
+    }
+
+    /**
+     * 设置认证加密方式（经过测试，在项目启动时会加载登录认证加密方式，这里的加密需要和修改密码时加密算法一致）
+     */
+    @Override
+    public void setCredentialsMatcher(CredentialsMatcher credentialsMatcher) {
+        HashedCredentialsMatcher md5CredentialsMatcher = new HashedCredentialsMatcher();
+        md5CredentialsMatcher.setHashAlgorithmName(EncryptUtils.hashAlgorithmName);
+        md5CredentialsMatcher.setHashIterations(EncryptUtils.hashIterations);
+        super.setCredentialsMatcher(md5CredentialsMatcher);
     }
 
 }

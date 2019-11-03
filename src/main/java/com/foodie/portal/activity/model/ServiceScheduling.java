@@ -2,7 +2,7 @@ package com.foodie.portal.activity.model;
 
 import com.foodie.portal.commons.ErrorCode;
 import com.foodie.portal.commons.RestException;
-import com.foodie.portal.utils.IdGenerator;
+import com.foodie.portal.commons.utils.IdGenerator;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 

@@ -1,8 +1,6 @@
 package com.foodie.portal.web.model;
 
 import com.foodie.portal.article.repository.ArticleEntity;
-import com.foodie.portal.commons.Pagination;
-import com.foodie.portal.utils.PaginationUtils;
 import lombok.Data;
 
 @Data
