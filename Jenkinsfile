@@ -30,7 +30,9 @@ pipeline {
             steps {
                  sh '\\cp ./build/libs/*.jar /opt/'
                  sh '\\cp ./run.sh /opt/'
-                 sh '/opt/run.sh /opt/foodie-service-0.0.1-SNAPSHOT.jar restart'
+                 withEnv(['JENKINS_NODE_COOKIE=dontkillme']) {
+                    sh '/opt/run.sh /opt/foodie-service-0.0.1-SNAPSHOT.jar restart'
+                 }
             }
         }
     }
