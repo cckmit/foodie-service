@@ -8,6 +8,6 @@ public class EncryptUtilsTest {
 
     @Test
     public void getPassword() {
-        System.out.println(EncryptUtils.getPassword("foodie_admin_123", "admin"));
+        System.out.println(EncryptUtils.getPassword("123456", "邮箱3"));
     }
 }

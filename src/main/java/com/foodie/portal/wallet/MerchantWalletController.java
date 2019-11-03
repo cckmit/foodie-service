@@ -3,6 +3,7 @@ package com.foodie.portal.wallet;
 import com.foodie.portal.user.model.Merchant;
 import com.foodie.portal.wallet.representation.IncomeItemRepresentation;
 import com.foodie.portal.wallet.representation.WalletRepresentationService;
+import com.foodie.portal.wallet.representation.WithdrawalRepresentation;
 import io.swagger.annotations.Api;
 import lombok.var;
 import org.apache.shiro.SecurityUtils;
@@ -28,7 +29,7 @@ public class MerchantWalletController {
     }
 
     @GetMapping("withdrawal")
-    public List<IncomeItemRepresentation> listWithdrawal() {
+    public List<WithdrawalRepresentation> listWithdrawal() {
         var merchant = (Merchant) SecurityUtils.getSubject().getPrincipal();
         return walletRepresentationService.listWithdrawal(merchant.getId());
     }

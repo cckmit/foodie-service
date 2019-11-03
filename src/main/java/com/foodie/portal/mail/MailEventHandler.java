@@ -29,7 +29,7 @@ public class MailEventHandler {
     public void sendMerchantPassword(MerchantApplyPassedEvent event) {
         Merchant merchant = event.getMerchant();
         String subject = String.format("商家申请成功：%s", merchant.getEmail());
-        String content = String.format("您的登录密码为: %s ", merchant.getPassword());
+        String content = String.format("您的登录密码为: %s ", event.getPassword());
         mailApplicationService.send(merchant.getEmail(), subject, content);
     }
 }

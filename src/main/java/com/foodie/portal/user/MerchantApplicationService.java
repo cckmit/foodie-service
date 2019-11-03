@@ -61,7 +61,7 @@ public class MerchantApplicationService {
 
         merchantRepository.save(merchant);
         //发送邮件通知
-        applicationContext.publishEvent(new MerchantApplyPassedEvent(merchant));
+        applicationContext.publishEvent(new MerchantApplyPassedEvent(merchant, password));
     }
 
     public void reject(String id) {

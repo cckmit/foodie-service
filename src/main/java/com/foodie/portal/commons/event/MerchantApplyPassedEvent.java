@@ -8,4 +8,5 @@ import lombok.Getter;
 @Getter
 public class MerchantApplyPassedEvent {
     private Merchant merchant;
+    private String password;
 }

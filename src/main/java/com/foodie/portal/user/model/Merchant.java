@@ -4,6 +4,7 @@ import cn.hutool.core.util.IdUtil;
 import cn.hutool.core.util.NumberUtil;
 import com.foodie.portal.commons.ErrorCode;
 import com.foodie.portal.commons.RestException;
+import com.foodie.portal.commons.utils.EncryptUtils;
 import lombok.Data;
 
 import java.math.BigDecimal;
@@ -55,7 +56,7 @@ public class Merchant {
 
     public void pass(double extractRatio, String password) {
         this.extractRatio = extractRatio;
-        this.password = password;
+        this.password = EncryptUtils.getPassword(password, email);
         this.status = PASSED;
     }
 

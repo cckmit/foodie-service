@@ -15,8 +15,10 @@ import org.apache.shiro.authc.SimpleAuthenticationInfo;
 import org.apache.shiro.authc.UsernamePasswordToken;
 import org.apache.shiro.authz.AuthorizationInfo;
 import org.apache.shiro.authz.SimpleAuthorizationInfo;
+import org.apache.shiro.crypto.hash.Md5Hash;
 import org.apache.shiro.realm.AuthorizingRealm;
 import org.apache.shiro.subject.PrincipalCollection;
+import org.apache.shiro.util.ByteSource;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;
@@ -69,10 +71,11 @@ public class MerchantRealm extends AuthorizingRealm {
             throw new LockedAccountException("商家未通过审核");
         }
         log.info("doGetAuthenticationInfo");
+        ByteSource saltSource = new Md5Hash(user.getEmail());
         return new SimpleAuthenticationInfo(
                 user, //用户
                 user.getPassword(), //密码
-//                saltSource,//salt=username+salt
+                saltSource,//salt=email
                 this.getName());
     }
 
