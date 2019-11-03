@@ -25,17 +25,12 @@ pipeline {
                 sh './gradlew clean build'
             }
         }
-        stage('init-server'){
+
+        stage('Deploy') {
             steps {
-                script {
-                   server = getHost()
-                }
+                 sh '\cp ./build/libs/*.jar /opt/'
+                 sh '/opt/run.sh /opt/foodie-service-0.0.1-SNAPSHOT.jar restart'
             }
         }
-//         stage('Deploy') {
-//             steps {
-//                  sshPut remote:server, from: 'run.sh', into: '.'
-//             }
-//         }
     }
 }
