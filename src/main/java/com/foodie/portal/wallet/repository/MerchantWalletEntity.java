@@ -12,6 +12,7 @@ import javax.persistence.Table;
 public class MerchantWalletEntity {
     @Id
     private String id;
+    private String name;
     private Double extractRatio;
     //余额
     private Double balance;
