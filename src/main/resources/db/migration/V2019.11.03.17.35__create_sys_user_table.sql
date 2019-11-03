@@ -7,4 +7,4 @@ CREATE TABLE FOODIE_SYS_USER
     unique index idx_username(USERNAME)
 );
 
-insert into FOODIE_SYS_USER values('97bd79dfb4304068933ef2439c177dde', 'admin', '4793df73eb7a636b002dacd543cc663e', sysdate);
+insert into FOODIE_SYS_USER values('97bd79dfb4304068933ef2439c177dde', 'admin', '4793df73eb7a636b002dacd543cc663e', sysdate());
