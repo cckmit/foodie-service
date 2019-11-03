@@ -1,7 +1,9 @@
 package com.foodie.portal.favourite;
 
 import com.foodie.portal.favourite.representaion.ActivityRepresentation;
+import com.foodie.portal.favourite.representaion.ArticleRepresentation;
 import com.foodie.portal.favourite.representaion.FavouriteRepresentationService;
+import com.foodie.portal.favourite.representaion.RestaurantRepresentation;
 import com.foodie.portal.user.model.User;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -39,14 +41,28 @@ public class UserFavouriteController {
         favouriteApplicationService.favouriteActivity(activityId, user);
     }
 
-    @ApiOperation("收藏餐厅")
+    @ApiOperation("我的收藏活动")
+    @GetMapping("restaurant")
+    public List<RestaurantRepresentation> getFavouriteRestaurant() {
+        var user = (User) SecurityUtils.getSubject().getPrincipal();
+        return favouriteRepresentationService.findFavouriteRestaurantByUserId(user.getId());
+    }
+
+    @ApiOperation("添加收藏餐厅")
     @PostMapping("restaurant")
     public void favouriteRestaurant(String restaurantId) {
         var user = (User) SecurityUtils.getSubject().getPrincipal();
         favouriteApplicationService.favouriteRestaurant(restaurantId, user);
     }
 
-    @ApiOperation("收藏美食指南")
+    @ApiOperation("我的收藏活动")
+    @GetMapping("food-guide")
+    public List<ArticleRepresentation> getFavouriteFoodGuide() {
+        var user = (User) SecurityUtils.getSubject().getPrincipal();
+        return favouriteRepresentationService.findFavouriteFoodGuideByUserId(user.getId());
+    }
+
+    @ApiOperation("添加收藏美食指南")
     @PostMapping("food-guide")
     public void favouriteFoodGuide(String articleId) {
         var user = (User) SecurityUtils.getSubject().getPrincipal();

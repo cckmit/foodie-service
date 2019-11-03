@@ -11,10 +11,10 @@ public class RestaurantOrderInfoDto {
     private String restaurantTitle;
     private RestaurantType restaurantType;
     private int count;
-    private double price;
-    private double unitPrice;
-    private String serviceDate;
-    private String startTime;
+    private String setMealName;
+    private double totalPrice;
+    private double itemPrice;
+    private String reserveDate;
     private String number;
     private String payNo;
     private String email;

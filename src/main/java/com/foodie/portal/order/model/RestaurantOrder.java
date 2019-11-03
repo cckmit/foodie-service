@@ -15,7 +15,7 @@ public class RestaurantOrder extends Order {
     private Restaurant restaurant;
     private String setMealName;
     private double totalPrice;
-    protected double itemPrice;
+    private double itemPrice;
     private String reserveDate;
     private int count;
 
