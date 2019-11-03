@@ -14,7 +14,7 @@ spring:
 
 
 logging:
-  file: ./logs/fooide-sit.log
+  file: ./logs/fooide-uat.log
 
 
 application:
