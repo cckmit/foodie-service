@@ -100,7 +100,7 @@ task componentTest(type: Test) {
 tasks.withType(JavaCompile) {
     options.encoding= 'UTF-8'
     options.compilerArgs = [
-        '-Amapstruct.unmmappedTargetPolicy=IGNORE'
+        '-Amapstruct.unmappedTargetPolicy=IGNORE'
     ]
 }
 
