@@ -1,0 +1,17 @@
+pipeline {
+    agent {
+        node {
+            label 'host-local'
+        }
+    }
+    stages {
+
+        stage('Deploy') {
+            steps {
+                 withEnv(['JENKINS_NODE_COOKIE=dontkillme']) {
+                    sh '/opt/run.sh /opt/foodie-service-0.0.1-SNAPSHOT.jar restart prd'
+                 }
+            }
+        }
+    }
+}

@@ -1,11 +1,11 @@
 server:
-  port: 8807
+  port: 7010
 spring:
   datasource:
-    url: jdbc:mysql://rm-bp16zx0gpyu731d4z90130.mysql.rds.aliyuncs.com:3306/foodie_mysql?allowMultiQueries=true&useUnicode=true&characterEncoding=UTF-8&connectionCollation=utf8mb4_bin&useServerPrepStmts=false&rewriteBatchedStatements=true
+    url: jdbc:mysql://rm-bp16zx0gpyu731d4z90130.mysql.rds.aliyuncs.com:3306/foodie_mysql_prd?allowMultiQueries=true&useUnicode=true&characterEncoding=UTF-8&connectionCollation=utf8mb4_bin&useServerPrepStmts=false&rewriteBatchedStatements=true
     driverClassName: com.mysql.cj.jdbc.Driver
     username: foodie
-    password: ENC(3XCbRyXpOqxgOeXYs89tQ1QmbpLRiGwg)
+    password: ENC(WVkiUXePgoljkmdvOkWUPg==)
     druid:
       connection-properties: druid.stat.mergeSql=true;druid.stat.slowSqlMillis=5000
   jpa:

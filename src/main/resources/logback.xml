@@ -35,7 +35,7 @@
         <appender-ref ref="console" />
     </logger>
 
-    <logger name="jdbc.resultset" level="ERROR" additivity="false">
+    <logger name="jdbc.resultset" level="ERROR" additivity="fal se">
         <appender-ref ref="console" />
     </logger>
 
