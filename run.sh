@@ -5,9 +5,9 @@ source ${PWD}/env.sh
 Jar_Path=$1
 profiles=$3
 
-if [ "$profiles" == "x" ] then
+if [ -z "$profiles" ]; then
   profiles = 'sit'
-endif
+fi
 
 usage()
 {
@@ -26,7 +26,7 @@ start()
 stop()
 {
     echo "stop $Jar_Path ........"
-    ps -ef | grep java | grep -w $Jar_Path
+    ps -ef | grep java | grep ${profiles} | grep -w $Jar_Path
     num=`ps -ef | grep java | grep -w $Jar_Path | wc -l`
     echo $num
     if [ $num -ne 0 ];then
