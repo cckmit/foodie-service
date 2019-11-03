@@ -6,7 +6,7 @@ Jar_Path=$1
 profiles=$3
 
 if [ -z "$profiles" ]; then
-  profiles = 'sit'
+  profiles='sit'
 fi
 
 usage()
