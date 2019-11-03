@@ -28,7 +28,7 @@ pipeline {
 
         stage('Deploy') {
             steps {
-                 sh '\cp ./build/libs/*.jar /opt/'
+                 sh '\\cp ./build/libs/*.jar /opt/'
                  sh '/opt/run.sh /opt/foodie-service-0.0.1-SNAPSHOT.jar restart'
             }
         }
