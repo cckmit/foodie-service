@@ -31,8 +31,7 @@ public class UserApplicationService {
         if (Objects.nonNull(userRepository.findByEmail(command.getEmail())) ) {
             throw new RestException(ErrorCode.FAILED, "用户已存在");
         }
-        String password = EncryptUtils.getPassword(command.getPassword(), command.getEmail());
-        var user = User.create(command.getEmail(), password);
+        var user = User.create(command.getEmail(), command.getPassword());
         userRepository.save(user);
         return user;
     }
@@ -64,7 +63,4 @@ public class UserApplicationService {
         return userRepository.findAll(page - 1, size);
     }
 
-    public void collectActivity(String activityId, User user) {
-
-    }
 }
