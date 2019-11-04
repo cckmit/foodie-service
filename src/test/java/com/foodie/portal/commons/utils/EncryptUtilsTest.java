@@ -8,6 +8,6 @@ public class EncryptUtilsTest {
 
     @Test
     public void getPassword() {
-        System.out.println(EncryptUtils.getPassword("123456", "445999306@qq.com"));
+        System.out.println(EncryptUtils.getPassword("123", "liwei@infish.cn"));
     }
 }
