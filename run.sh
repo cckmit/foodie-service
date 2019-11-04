@@ -18,7 +18,7 @@ usage()
 start()
 {
     echo "start $Jar_Path"
-    nohup java -Djava.security.egd=file:/dev/.urandom -jar $Jar_Path --spring.profiles.active=${profiles} --jasypt.encryptor.password=${JASYPT_PASSWORD} >$Jar_Path.${profiles}.log &
+    nohup java -Djava.security.egd=file:/dev/.urandom -jar $Jar_Path --spring.profiles.active=${profiles} --jasypt.encryptor.password=${JASYPT_PASSWORD} >$Jar_Path.log &
     sleep 5
     ps -ef | grep java | grep -w $Jar_Path
 }
@@ -26,8 +26,8 @@ start()
 stop()
 {
     echo "stop $Jar_Path ........"
-    ps -ef | grep java | grep -w $Jar_Path | grep ${profiles}
-    num=`ps -ef | grep java | grep -w $Jar_Path | grep ${profiles} | wc -l`
+    ps -ef | grep java | grep -w $Jar_Path
+    num=`ps -ef | grep java | grep -w $Jar_Path| wc -l`
     echo $num
     if [ $num -ne 0 ];then
         pid=`ps -ef | grep java | grep -w $Jar_Path | awk '{print $2}'`

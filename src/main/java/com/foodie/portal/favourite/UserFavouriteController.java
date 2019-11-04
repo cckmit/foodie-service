@@ -1,5 +1,7 @@
 package com.foodie.portal.favourite;
 
+import com.foodie.portal.commons.PageCommand;
+import com.foodie.portal.commons.Pagination;
 import com.foodie.portal.favourite.representaion.ActivityRepresentation;
 import com.foodie.portal.favourite.representaion.ArticleRepresentation;
 import com.foodie.portal.favourite.representaion.FavouriteRepresentationService;
@@ -29,9 +31,9 @@ public class UserFavouriteController {
 
     @ApiOperation("我的收藏活动")
     @GetMapping("activity")
-    public List<ActivityRepresentation> getFavouriteActivity() {
+    public Pagination<ActivityRepresentation> getFavouriteActivity(PageCommand command) {
         var user = (User) SecurityUtils.getSubject().getPrincipal();
-        return favouriteRepresentationService.findFavouriteActivityByUserId(user.getId());
+        return favouriteRepresentationService.findFavouriteActivityByUserId(user.getId(), command.getPage(), command.getSize());
     }
 
     @ApiOperation("添加收藏活动")
@@ -43,9 +45,9 @@ public class UserFavouriteController {
 
     @ApiOperation("我的收藏活动")
     @GetMapping("restaurant")
-    public List<RestaurantRepresentation> getFavouriteRestaurant() {
+    public Pagination<RestaurantRepresentation> getFavouriteRestaurant(PageCommand command) {
         var user = (User) SecurityUtils.getSubject().getPrincipal();
-        return favouriteRepresentationService.findFavouriteRestaurantByUserId(user.getId());
+        return favouriteRepresentationService.findFavouriteRestaurantByUserId(user.getId(),command.getPage(), command.getSize());
     }
 
     @ApiOperation("添加收藏餐厅")
@@ -57,9 +59,9 @@ public class UserFavouriteController {
 
     @ApiOperation("我的收藏活动")
     @GetMapping("food-guide")
-    public List<ArticleRepresentation> getFavouriteFoodGuide() {
+    public Pagination<ArticleRepresentation> getFavouriteFoodGuide(PageCommand command) {
         var user = (User) SecurityUtils.getSubject().getPrincipal();
-        return favouriteRepresentationService.findFavouriteFoodGuideByUserId(user.getId());
+        return favouriteRepresentationService.findFavouriteFoodGuideByUserId(user.getId(), command.getPage(),command.getSize());
     }
 
     @ApiOperation("添加收藏美食指南")

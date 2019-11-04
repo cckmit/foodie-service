@@ -6,10 +6,15 @@ pipeline {
     }
     stages {
 
+        stage('Copy') {
+            steps {
+                sh '\\cp /opt/foodie-service-0.0.1-SNAPSHOT.jar /opt/foodie-service-0.0.1-SNAPSHOT.uat.jar'
+            }
+        }
         stage('Deploy') {
             steps {
                  withEnv(['JENKINS_NODE_COOKIE=dontkillme']) {
-                    sh '/opt/run.sh /opt/foodie-service-0.0.1-SNAPSHOT.jar restart uat'
+                    sh '/opt/run.sh /opt/foodie-service-0.0.1-SNAPSHOT.uat.jar restart uat'
                  }
             }
         }
