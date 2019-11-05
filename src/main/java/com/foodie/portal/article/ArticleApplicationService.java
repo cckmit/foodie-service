@@ -36,6 +36,7 @@ public class ArticleApplicationService {
         article.setCover(articleCommand.getCover());
         article.setTitle(articleCommand.getTitle());
         article.setSubTitle(articleCommand.getSubTitle());
+        article.setType(articleCommand.getType());
         article.setCity(city);
         articleRepository.save(article);
         return article;
