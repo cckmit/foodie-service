@@ -4,6 +4,7 @@ import com.foodie.portal.activity.ActivityApplicationService;
 import com.foodie.portal.commons.ErrorCode;
 import com.foodie.portal.commons.EventPublisher;
 import com.foodie.portal.commons.RestException;
+import com.foodie.portal.commons.event.OrderPaidEvent;
 import com.foodie.portal.order.command.CreateRestaurantOrderCommand;
 import com.foodie.portal.order.command.PayOrderCommand;
 import com.foodie.portal.order.model.Order;
@@ -47,7 +48,7 @@ public class RestaurantOrderApplicationService {
         var order = RestaurantOrder.create(restaurant,command.getSetMealName(), command.getCount(), command.getReserveDate(),
                  command.getOrderInfo(), user);
         orderRepository.save(order);
-//        eventPublisher.publish(new OrderCreatedEvent(order));
+
         return order;
     }
 
@@ -89,6 +90,7 @@ public class RestaurantOrderApplicationService {
                 var order = orderRepository.findRestaurantOrderByPaymentId(paymentId);
                 order.pay();
                 orderRepository.save(order);
+                eventPublisher.publish(new OrderPaidEvent(order));
                 return order;
             }
         } catch (PayPalRESTException e) {
