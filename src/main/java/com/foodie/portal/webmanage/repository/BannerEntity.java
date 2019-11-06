@@ -14,6 +14,7 @@ public class BannerEntity {
     @Id
     private String id;
     private String title;
+    private String subTitle;
     private String url;
     private String link;
     private Instant createdAt;

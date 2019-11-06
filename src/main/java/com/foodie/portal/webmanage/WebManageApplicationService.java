@@ -31,7 +31,7 @@ public class WebManageApplicationService {
     private RecommendRepository recommendRepository;
 
     public Banner addBanner(AddBannerCommand command) {
-        Banner banner = Banner.create(command.getTitle(), command.getUrl(), command.getLink());
+        Banner banner = Banner.create(command.getTitle(), command.getSubTitle(), command.getUrl(), command.getLink());
         webManageRepository.addBanner(banner);
         return banner;
     }
