@@ -18,6 +18,8 @@ public class MerchantWallet {
     private double openAccount;
     //累计收益
     private double accumulatedEarnings;
+    private String withdrawAccount;
+    private String withdrawName;
 
 
     public void increaseBalance(Order order) {
@@ -39,5 +41,10 @@ public class MerchantWallet {
         }
         balance = NumberUtil.sub(balance, amount);
         log.info("商家:{}, 提现：{}", id, amount);
+    }
+
+    public void updateWithdrawInfo(String account, String name) {
+        this.withdrawAccount = account;
+        this.withdrawName = name;
     }
 }

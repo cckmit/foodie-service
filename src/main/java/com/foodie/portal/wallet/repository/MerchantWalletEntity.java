@@ -20,5 +20,7 @@ public class MerchantWalletEntity {
     private Double openAccount;
     //累计收益
     private Double accumulatedEarnings;
+    private String withdrawAccount;
+    private String withdrawName;
 
 }

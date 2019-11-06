@@ -27,4 +27,8 @@ public class WalletRepresentationService {
                 ImmutableMap.of("merchantId" ,merchantId),
                 new BeanPropertyRowMapper<>(WithdrawalRepresentation.class));
     }
+
+    public void updateWithdrawInfo() {
+
+    }
 }

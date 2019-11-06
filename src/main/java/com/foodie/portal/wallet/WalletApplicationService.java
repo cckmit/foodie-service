@@ -2,6 +2,7 @@ package com.foodie.portal.wallet;
 
 import com.foodie.portal.commons.Pagination;
 import com.foodie.portal.order.model.Order;
+import com.foodie.portal.wallet.command.UpdateWithdrawInfoCommand;
 import com.foodie.portal.wallet.model.IncomeItem;
 import com.foodie.portal.wallet.model.WithdrawalItem;
 import lombok.extern.slf4j.Slf4j;
@@ -52,5 +53,11 @@ public class WalletApplicationService {
         //保存提现明细
         WithdrawalItem withdrawalItem = WithdrawalItem.create(merchantId, amount);
         withdrawalRepository.save(withdrawalItem);
+    }
+
+    public void updateWithdrawInfo(String id, UpdateWithdrawInfoCommand command) {
+        var merchantWallet = walletRepository.byId(id);
+        merchantWallet.updateWithdrawInfo(command.getAccount(), command.getName());
+        walletRepository.save(merchantWallet);
     }
 }

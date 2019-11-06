@@ -8,7 +8,10 @@ import lombok.experimental.Accessors;
 public class MerchantInfoRepresentation {
     private String avatar;
     private String name;
+    private String description;
     private Double balance;
+    private String withdrawAccount;
+    private String withdrawName;
     private int orderCount;
 
 }
