@@ -5,8 +5,10 @@ import com.foodie.portal.activity.model.Activity;
 import com.foodie.portal.commons.ErrorCode;
 import com.foodie.portal.commons.EventPublisher;
 import com.foodie.portal.commons.RestException;
+import com.foodie.portal.commons.event.OrderAcceptedEvent;
 import com.foodie.portal.commons.event.OrderPaidEvent;
 import com.foodie.portal.commons.event.OrderFinishedEvent;
+import com.foodie.portal.commons.event.OrderRejectedEvent;
 import com.foodie.portal.order.command.CreateOrderCommand;
 import com.foodie.portal.order.command.PayOrderCommand;
 import com.foodie.portal.order.model.Order;
@@ -84,7 +86,7 @@ public class ActivityOrderApplicationService {
         order.accept(merchant);
         orderRepository.save(order);
 
-        eventPublisher.publish(new OrderPaidEvent(order));
+        eventPublisher.publish(new OrderAcceptedEvent(order));
         return order;
     }
 
@@ -92,6 +94,9 @@ public class ActivityOrderApplicationService {
         var order = orderRepository.findActivityOrderById(id);
         order.reject(reason, merchant);
         orderRepository.save(order);
+
+        paymentApplicationService.refundSale(order.getPaymentId(), order.getPrice(), "USD", reason);
+        eventPublisher.publish(new OrderRejectedEvent(order));
         return order;
     }
 

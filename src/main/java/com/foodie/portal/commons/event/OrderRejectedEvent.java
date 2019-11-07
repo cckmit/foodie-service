@@ -2,10 +2,11 @@ package com.foodie.portal.commons.event;
 
 import com.foodie.portal.order.model.Order;
 import lombok.AllArgsConstructor;
-import lombok.Getter;
+import lombok.Data;
 
-@Getter
+@Data
 @AllArgsConstructor
-public class OrderAcceptedEvent extends DomainEvent{
+public class OrderRejectedEvent extends DomainEvent {
     private Order order;
+
 }
