@@ -43,7 +43,6 @@ public class Order {
         this.number = IdGenerator.getTimeId();
         this.status = OrderStatus.CREATED;
         this.createdAt = now();
-        this.payNo = RandomUtil.randomNumbers(6);
     }
 
     public Order(Activity activity, int count, String serviceDate, String startTime, OrderInfo orderInfo) {
@@ -85,7 +84,12 @@ public class Order {
         if (status != OrderStatus.PAID) {
             throw new RestException(ErrorCode.FAILED, "订单未支付");
         }
+        generatePayNo();
         this.status = OrderStatus.ACCEPTED;
+    }
+
+    protected void generatePayNo() {
+        this.payNo = RandomUtil.randomNumbers(6);
     }
 
     public void reject(String reason, Merchant merchant) {

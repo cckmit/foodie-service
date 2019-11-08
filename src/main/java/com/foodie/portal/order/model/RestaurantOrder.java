@@ -44,4 +44,9 @@ public class RestaurantOrder extends Order {
             throw new RestException(ErrorCode.FAILED, "支付价格与订单实际价格不符");
         }
     }
+
+    public void pay() {
+        generatePayNo();
+        this.status = OrderStatus.PAID;
+    }
 }
