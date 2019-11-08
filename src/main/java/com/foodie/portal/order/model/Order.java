@@ -115,10 +115,10 @@ public class Order {
     }
 
     public void cancel() {
-        if(status == OrderStatus.CREATED) {
-            this.status = OrderStatus.CANCEL;
+        if(status != OrderStatus.CREATED) {
+            throw new RestException(ErrorCode.FAILED, "状态异常");
         }
-       throw new RestException(ErrorCode.FAILED, "状态异常");
+        this.status = OrderStatus.CANCEL;
     }
 
     public void endService(Merchant merchant) {
