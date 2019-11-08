@@ -4,14 +4,13 @@ import com.foodie.portal.commons.Pagination;
 import com.foodie.portal.order.model.Order;
 import com.foodie.portal.wallet.command.UpdateWithdrawInfoCommand;
 import com.foodie.portal.wallet.model.IncomeItem;
+import com.foodie.portal.wallet.model.MerchantWallet;
 import com.foodie.portal.wallet.model.WithdrawalItem;
 import lombok.extern.slf4j.Slf4j;
 import lombok.var;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
-import java.util.List;
 
 @Slf4j
 @Service

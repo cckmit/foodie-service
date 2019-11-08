@@ -1,4 +1,4 @@
-package com.foodie.portal.wallet;
+package com.foodie.portal.wallet.model;
 
 import cn.hutool.core.util.NumberUtil;
 import com.foodie.portal.commons.ErrorCode;

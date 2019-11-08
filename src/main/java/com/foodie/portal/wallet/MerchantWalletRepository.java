@@ -1,13 +1,12 @@
 package com.foodie.portal.wallet;
 
 import com.foodie.portal.commons.Pagination;
+import com.foodie.portal.wallet.model.MerchantWallet;
 import com.foodie.portal.wallet.repository.MerchantWalletEntityMapper;
 import com.foodie.portal.wallet.repository.MerchantWalletJpaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Component;
-
-import java.util.List;
 
 @Component
 public class MerchantWalletRepository {
