@@ -97,14 +97,9 @@ public class ActivityApplicationService {
         return activityRepository.findByMerchantId(merchantId, page - 1, size);
     }
 
-    public List<Activity> fetchActivitiesByIds(List<String> ids) {
-        return activityRepository.findByIds(ids);
-    }
-
-
     public void updateServiceScheduling(String id, List<UpdateServiceSchedulingCommand> command) {
         List<ServiceScheduling> serviceSchedulingList = command.stream()
-                .map(item -> ServiceScheduling.create(id, item.getServiceDate(),
+                .map(item -> ServiceScheduling.create(item.getId(), id, item.getServiceDate(),
                         item.getShifts().stream().map(shift -> Shift.create(shift.getStartTime())).collect(Collectors.toList())))
                 .collect(Collectors.toList());
         Activity activity = activityRepository.findById(id);

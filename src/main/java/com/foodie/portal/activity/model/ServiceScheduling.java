@@ -8,6 +8,7 @@ import lombok.NoArgsConstructor;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Objects;
 
 @Data
 @NoArgsConstructor
@@ -21,22 +22,22 @@ public class ServiceScheduling {
      */
     private List<Shift> shifts;
 
-    private ServiceScheduling(String activityId, Date serviceDate, List<Shift> shifts) {
-        this.id = IdGenerator.getId();
+    private ServiceScheduling(String id, String activityId, Date serviceDate, List<Shift> shifts) {
+        this.id = Objects.isNull(id) ? IdGenerator.getId() : id;
         this.activityId = activityId;
         this.serviceDate = serviceDate;
         this.shifts = shifts;
     }
 
-    public static ServiceScheduling create(String activityId, Date serviceDate, List<Shift> shifts) {
-        return new ServiceScheduling(activityId, serviceDate, shifts);
+    public static ServiceScheduling create(String id, String activityId, Date serviceDate, List<Shift> shifts) {
+        return new ServiceScheduling(id, activityId, serviceDate, shifts);
     }
 
     public void updateReserve(String startTime, int count, int maxPeopleLimit) {
         Shift shift = shifts.stream().filter(item -> item.getStartTime().equals(startTime))
                 .findFirst()
                 .orElseThrow(() -> new RestException(ErrorCode.FAILED, "没有排班时间段！"));
-        if(shift.getReserveCount() + count > maxPeopleLimit) {
+        if (shift.getReserveCount() + count > maxPeopleLimit) {
             throw new RestException(ErrorCode.FAILED, "超过最大人数限制");
         }
         shift.addReserveCount(count);

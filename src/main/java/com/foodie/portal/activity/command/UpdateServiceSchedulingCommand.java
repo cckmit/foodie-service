@@ -11,6 +11,7 @@ import java.util.List;
 @ApiModel
 public class UpdateServiceSchedulingCommand {
 
+    private String id;
     private Date serviceDate;
     /**
      * 班次
