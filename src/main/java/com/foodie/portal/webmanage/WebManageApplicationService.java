@@ -24,7 +24,7 @@ public class WebManageApplicationService {
     @Autowired
     private ActivityApplicationService activityApplicationService;
     @Autowired
-    private WebManageRepository webManageRepository;
+    private BannerRepository bannerRepository;
     @Autowired
     private ArticleApplicationService articleApplicationService;
     @Autowired
@@ -32,12 +32,22 @@ public class WebManageApplicationService {
 
     public Banner addBanner(AddBannerCommand command) {
         Banner banner = Banner.create(command.getTitle(), command.getSubTitle(), command.getUrl(), command.getLink());
-        webManageRepository.addBanner(banner);
+        bannerRepository.save(banner);
         return banner;
     }
 
     public void removeBanner(String bannerId) {
-        webManageRepository.removeBanner(bannerId);
+        bannerRepository.removeBanner(bannerId);
+    }
+
+    public void updateBanner(String bannerId, AddBannerCommand command) {
+        var banner = bannerRepository.byId(bannerId);
+        banner.update(command.getTitle(), command.getSubTitle(), command.getUrl(), command.getLink());
+        bannerRepository.save(banner);
+    }
+
+    public Banner detailBanner(String id) {
+        return bannerRepository.byId(id);
     }
 
     public void addRecommendActivity(String activityId) {
@@ -90,7 +100,7 @@ public class WebManageApplicationService {
     }
 
     public List<Banner> listBanners() {
-        return webManageRepository.findAllBanners();
+        return bannerRepository.findAllBanners();
     }
 
     public void addRecommendRestaurant(String restaurantId) {
@@ -109,4 +119,7 @@ public class WebManageApplicationService {
     public List<RestaurantRecommend> listInterestedRestaurant(String cityId) {
         return recommendRepository.findAllInterestedRestaurant(cityId);
     }
+
+
+
 }

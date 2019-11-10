@@ -9,13 +9,13 @@ import org.springframework.stereotype.Component;
 import java.util.List;
 
 @Component
-public class WebManageRepository {
+public class BannerRepository {
 
     @Autowired
     private BannerJpaRepository bannerJpaRepository;
     private BannerEntityMapper bannerEntityMapper = BannerEntityMapper.instance;
 
-    public void addBanner(Banner banner) {
+    public void save(Banner banner) {
         bannerJpaRepository.save(bannerEntityMapper.from(banner));
     }
 
@@ -25,5 +25,11 @@ public class WebManageRepository {
 
     public List<Banner> findAllBanners() {
         return bannerEntityMapper.to(bannerJpaRepository.findAll());
+    }
+
+    public Banner byId(String id) {
+        return bannerJpaRepository.findById(id)
+                .map(bannerEntityMapper::to)
+                .orElse(null);
     }
 }

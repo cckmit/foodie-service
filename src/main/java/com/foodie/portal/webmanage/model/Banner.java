@@ -29,4 +29,11 @@ public class Banner {
     public static Banner create(String title, String subTitle, String url, String link) {
         return new Banner(title, subTitle, url, link);
     }
+
+    public void update(String title, String subTitle, String url, String link) {
+        this.title = title;
+        this.subTitle = subTitle;
+        this.url = url;
+        this.link = link;
+    }
 }

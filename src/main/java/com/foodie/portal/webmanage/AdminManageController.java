@@ -10,6 +10,7 @@ import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -43,6 +44,17 @@ public class AdminManageController {
     public String removeBanner(String bannerId) {
         webManageApplicationService.removeBanner(bannerId);
         return bannerId;
+    }
+    @ApiOperation("修改banner")
+    @PostMapping("banner/{id}")
+    public void updateBanner(@PathVariable String id,@RequestBody AddBannerCommand bannerCommand) {
+        webManageApplicationService.updateBanner(id, bannerCommand);
+    }
+
+    @ApiOperation("查询banner")
+    @GetMapping("banner/{id}")
+    public Banner detailBanner(@PathVariable String id) {
+        return webManageApplicationService.detailBanner(id);
     }
 
     @ApiOperation("添加推荐活动")
