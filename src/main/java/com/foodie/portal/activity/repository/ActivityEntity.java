@@ -20,6 +20,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import java.time.Instant;
 import java.util.List;
 
 @Data
@@ -55,4 +56,6 @@ public class ActivityEntity {
     @ManyToOne
     @NotFound(action = NotFoundAction.IGNORE)
     private MerchantEntity merchant;
+    private Long sort;
+    private Instant createdAt;
 }

@@ -31,6 +31,8 @@ import static com.foodie.portal.publicbenefit.PublicBenefitStatus.ACTIVATED;
 @Service
 public class IndexRepresentationService {
 
+    private final static String SORT_SQL = " order by sort";
+
     @Autowired
     private NamedParameterJdbcTemplate jdbcTemplate;
 
@@ -64,6 +66,7 @@ public class IndexRepresentationService {
     public List<ActivityRepresentation> findTopActivity() {
         String sql = "select a.* ,a.PRICE_LIST as priceListStr , m.NAME as merchant_name, c.NAME as city_name from FOODIE_ACTIVITY a left join FOODIE_MERCHANT m on a.MERCHANT_ID=m.ID " +
                 "left join FOODIE_CITY c on a.CITY_ID=c.ID where TOP_RECOMMEND = 1";
+        sql = sql.concat(SORT_SQL);
         return jdbcTemplate.query(sql, new BeanPropertyRowMapper<>(ActivityRepresentation.class));
     }
 
@@ -71,6 +74,7 @@ public class IndexRepresentationService {
     public List<ArticleRepresentation> findInterestedFoodGuide() {
         String sql = "select a.* , c.NAME as city_name from FOODIE_ARTICLE a " +
                 "left join FOODIE_CITY c on a.CITY_ID=c.ID where INTERESTED_RECOMMEND = 1";
+        sql = sql.concat(SORT_SQL);
         return jdbcTemplate.query(sql, new BeanPropertyRowMapper<>(ArticleRepresentation.class));
     }
 
@@ -87,6 +91,7 @@ public class IndexRepresentationService {
     public List<RestaurantRepresentation> findInterestedRestaurantByCityId(String cityId) {
         String sql = "select r.* , c.NAME as cityName from FOODIE_RESTAURANT r " +
                 "left join FOODIE_CITY c on r.CITY_ID=c.ID where r.INTERESTED_RECOMMEND = 1 and r.CITY_ID=:cityId";
+        sql = sql.concat(SORT_SQL);
         return jdbcTemplate.query(sql, ImmutableMap.of("cityId", cityId), new BeanPropertyRowMapper<>(RestaurantRepresentationPo.class))
                 .stream()
                 .map(RestaurantRepresentation::from)

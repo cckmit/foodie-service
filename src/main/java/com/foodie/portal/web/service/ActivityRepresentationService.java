@@ -24,6 +24,9 @@ import static com.google.common.collect.Maps.newHashMap;
 @Service
 public class ActivityRepresentationService {
 
+    private final static String LIMIT_SQL = " limit :size offset :offset";
+    private final static String SORT_SQL = " order by sort";
+
     @Autowired
     private NamedParameterJdbcTemplate jdbcTemplate;
     @Autowired
@@ -32,10 +35,12 @@ public class ActivityRepresentationService {
     private FavouriteJpaRepository favouriteJpaRepository;
 
 
+
     public Pagination<ActivityRepresentation> findAllByCityId(int page, int size, String cityId) {
 
         String sql = "select a.* ,a.PRICE_LIST as priceListStr, m.NAME as merchant_name, c.NAME as city_name from FOODIE_ACTIVITY a left join FOODIE_MERCHANT m on a.MERCHANT_ID=m.ID " +
-                "left join FOODIE_CITY c on a.CITY_ID=c.ID where a.CITY_ID = :cityId limit :size offset :offset";
+                "left join FOODIE_CITY c on a.CITY_ID=c.ID where a.CITY_ID = :cityId";
+         sql = sql.concat(SORT_SQL).concat(LIMIT_SQL);
         List<ActivityRepresentation> activityRepresentations = jdbcTemplate.query(sql,
                 ImmutableMap.of("cityId", cityId, "offset", (page - 1) * size, "size", size),
                 new BeanPropertyRowMapper<>(ActivityRepresentation.class));
@@ -48,7 +53,8 @@ public class ActivityRepresentationService {
 
     public Pagination<ActivityRepresentation> findAllByCityIdAndType(int page, int size, String cityId, ActivityType type) {
         String sql = "select a.* ,a.PRICE_LIST as priceListStr, m.NAME as merchant_name, c.NAME as city_name from FOODIE_ACTIVITY a left join FOODIE_MERCHANT m on a.MERCHANT_ID=m.ID " +
-                "left join FOODIE_CITY c on a.CITY_ID=c.ID where a.CITY_ID = :cityId and a.TYPE=:type limit :size offset :offset";
+                "left join FOODIE_CITY c on a.CITY_ID=c.ID where a.CITY_ID = :cityId and a.TYPE=:type";
+        sql = sql.concat(SORT_SQL).concat(LIMIT_SQL);
         List<ActivityRepresentation> activityRepresentations = jdbcTemplate.query(sql,
                 ImmutableMap.of("cityId", cityId, "offset", (page - 1) * size,
                         "size", size, "type", type.name()),

@@ -8,6 +8,7 @@ import com.foodie.portal.commons.RestException;
 import com.foodie.portal.user.model.Merchant;
 import lombok.Data;
 
+import java.time.Instant;
 import java.util.List;
 import java.util.Objects;
 
@@ -30,10 +31,14 @@ public class Activity {
     private ActivityStatus status;
     private ActivityType type;
     private Merchant merchant;
+    private Long sort;
+    private Instant createdAt;
 
     public Activity() {
         this.id = IdUtil.fastSimpleUUID();
         status = ActivityStatus.NON_APPROVE;
+        sort = 999L;
+        createdAt = Instant.now();
     }
 
     public Activity(String title, String subTitle, String desc, String time, int maxPeopleCount,
