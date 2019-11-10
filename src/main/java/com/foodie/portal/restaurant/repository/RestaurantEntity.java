@@ -11,7 +11,7 @@ import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
-import java.util.Date;
+import java.time.Instant;
 
 @Data
 @Entity(name = "FOODIE_RESTAURANT")
@@ -32,5 +32,6 @@ public class RestaurantEntity {
     private String setMeals;
     @Enumerated(EnumType.STRING)
     private RestaurantType type;
-    private Date createdAt;
+    private Long sort;
+    private Instant createdAt;
 }

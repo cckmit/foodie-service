@@ -27,7 +27,7 @@ public class RestaurantRepresentationService {
     private RestaurantJpaRepository restaurantJpaRepository;
 
     public Pagination<RestaurantRepresentation> findAllByCityAndType(int page, int size, String cityId, RestaurantType type) {
-        var entities = restaurantJpaRepository.findByCityIdAndType(cityId, type, PageRequest.of(page - 1, size));
+        var entities = restaurantJpaRepository.findByCityIdAndTypeOrderBySort(cityId, type, PageRequest.of(page - 1, size));
         return PaginationUtils.map(entities, RestaurantRepresentation::from);
     }
 

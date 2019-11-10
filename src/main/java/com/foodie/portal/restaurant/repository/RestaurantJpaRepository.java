@@ -11,5 +11,5 @@ public interface RestaurantJpaRepository extends JpaRepository<RestaurantEntity,
 
     Page<RestaurantEntity> findByCityId(String cityId, Pageable page);
 
-    Page<RestaurantEntity> findByCityIdAndType(String cityId, RestaurantType type,  Pageable page);
+    Page<RestaurantEntity> findByCityIdAndTypeOrderBySort(String cityId, RestaurantType type, Pageable page);
 }

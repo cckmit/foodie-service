@@ -5,6 +5,7 @@ import com.foodie.portal.city.City;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.time.Instant;
 import java.util.Date;
 import java.util.List;
 
@@ -22,7 +23,8 @@ public class Restaurant {
     private String address;
     private List<SetMeal> setMeals;
     private RestaurantType type;
-    private Date createdAt;
+    private Long sort;
+    private Instant createdAt;
 
     private Restaurant(String title, String subTitle, String images,
                        String content, City city, String area, String address, RestaurantType type, List<SetMeal> setMeals) {
@@ -36,7 +38,8 @@ public class Restaurant {
         this.address = address;
         this.type = type;
         this.setMeals = setMeals;
-        this.createdAt = new Date();
+        this.sort = 999L;
+        this.createdAt = Instant.now();
     }
 
     public static Restaurant create(String title, String subTitle, String images,
