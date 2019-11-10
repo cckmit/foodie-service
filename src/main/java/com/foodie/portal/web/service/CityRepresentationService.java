@@ -27,7 +27,16 @@ public class CityRepresentationService {
     public List<CityRepresentation> listCities() {
         String sql = "SELECT * FROM FOODIE_CITY";
         return jdbcTemplate.query(sql, new BeanPropertyRowMapper(CityRepresentation.class));
+    }
 
+    public List<CityRepresentation> listActivityCities() {
+        String sql = "SELECT * FROM FOODIE_CITY where SHOW_ON_ACTIVITY=1";
+        return jdbcTemplate.query(sql, new BeanPropertyRowMapper(CityRepresentation.class));
+    }
+
+    public List<CityRepresentation> listRestaurantCities() {
+        String sql = "SELECT * FROM FOODIE_CITY where SHOW_ON_RESTAURANT=1";
+        return jdbcTemplate.query(sql, new BeanPropertyRowMapper(CityRepresentation.class));
     }
 
     public CityDetailRepresentation detail(String id) {

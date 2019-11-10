@@ -12,6 +12,8 @@ public class City {
     private String description;
     private String introduction;
     private String images;
+    private boolean showOnActivity;
+    private boolean showOnRestaurant;
 
     public City() {
         this.id = IdUtil.fastSimpleUUID();

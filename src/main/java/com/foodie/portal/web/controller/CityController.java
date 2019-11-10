@@ -25,6 +25,18 @@ public class CityController {
         return cityRepresentationService.listCities();
     }
 
+    @ApiOperation("所有活动城市")
+    @GetMapping("activity-cities")
+    public List<CityRepresentation> ActivityCityList() {
+        return cityRepresentationService.listActivityCities();
+    }
+
+    @ApiOperation("所有城市")
+    @GetMapping("restaurant-cities")
+    public List<CityRepresentation> RestaurantCityList() {
+        return cityRepresentationService.listRestaurantCities();
+    }
+
     @ApiOperation("城市详情")
     @GetMapping("cities/{id}")
     public CityDetailRepresentation detail(@PathVariable String id) {

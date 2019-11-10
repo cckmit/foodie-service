@@ -14,4 +14,6 @@ public class CreateCityCommand {
     private String introduction;
     @ApiModelProperty("城市图片")
     private String images;
+    private boolean showOnActivity;
+    private boolean showOnRestaurant;
 }

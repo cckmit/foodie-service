@@ -10,4 +10,6 @@ public class UpdateCityCommand {
     private String description;
     @ApiModelProperty("城市描述")
     private String introduction;
+    private boolean showOnActivity;
+    private boolean showOnRestaurant;
 }
