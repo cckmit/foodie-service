@@ -40,7 +40,7 @@ public class ActivityApplicationService {
         var activity = Activity.create(command.getTitle(), command.getSubTitle(),
                 command.getDescription(), command.getDuration(),
                 command.getMaxPeopleLimit(), command.getImages(), command.getLanguage(),
-                command.getAddress(), city, command.getCostList(), command.getType());
+                command.getArea(), command.getAddress(), city, command.getCostList(), command.getType());
         activity.setMerchant(merchant);
         activityRepository.save(activity);
     }
@@ -50,10 +50,10 @@ public class ActivityApplicationService {
     }
 
     public Pagination<Activity> find(int page, int size, String cityId) {
-        if(Strings.isBlank(cityId)) {
+        if (Strings.isBlank(cityId)) {
             return activityRepository.find(page - 1, size);
-        }else {
-            return activityRepository.findByCityId(page-1, size, cityId);
+        } else {
+            return activityRepository.findByCityId(page - 1, size, cityId);
         }
 
     }
@@ -68,7 +68,7 @@ public class ActivityApplicationService {
         activity.update(command.getTitle(), command.getSubTitle(),
                 command.getDescription(), command.getDuration(),
                 command.getMaxPeopleLimit(), command.getImages(), command.getLanguage(),
-                command.getAddress(), command.getCostList(), city);
+                command.getArea(), command.getAddress(), command.getCostList(), city);
         activityRepository.save(activity);
     }
 

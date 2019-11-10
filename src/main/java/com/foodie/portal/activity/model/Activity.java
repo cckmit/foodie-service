@@ -22,6 +22,7 @@ public class Activity {
     private int maxPeopleLimit;
     private String images;
     private String language;
+    private String area;
     private String address;
     private City city;
     private List<ActivityPrice> priceList;
@@ -36,7 +37,7 @@ public class Activity {
     }
 
     public Activity(String title, String subTitle, String desc, String time, int maxPeopleCount,
-                    String images, String language, String address, City city,
+                    String images, String language, String area, String address, City city,
                     List<ActivityPrice> costList, ActivityType type) {
         this();
         this.title = title;
@@ -46,6 +47,7 @@ public class Activity {
         this.maxPeopleLimit = maxPeopleCount;
         this.images = images;
         this.language = language;
+        this.area = area;
         this.address = address;
         this.city = city;
         this.priceList = costList;
@@ -53,16 +55,16 @@ public class Activity {
     }
 
     public static Activity create(String title, String subTitle, String desc, String duration, int maxPeopleCount,
-                                  String images, String language, String address, City city,
+                                  String images, String language, String area, String address, City city,
                                   List<ActivityPrice> costList, ActivityType type) {
         if (Objects.isNull(city)) {
             throw new RestException(ErrorCode.FAILED, "所选城市不能存在");
         }
-        return new Activity(title, subTitle, desc, duration, maxPeopleCount, images, language, address, city, costList, type);
+        return new Activity(title, subTitle, desc, duration, maxPeopleCount, images, language, area, address, city, costList, type);
     }
 
     public void update(String title, String subTitle, String desc, String time, int maxPeopleCount,
-                       String images, String language, String address,
+                       String images, String language, String area, String address,
                        List<ActivityPrice> costList, City city) {
         this.title = title;
         this.subTitle = subTitle;
@@ -71,6 +73,7 @@ public class Activity {
         this.maxPeopleLimit = maxPeopleCount;
         this.images = images;
         this.language = language;
+        this.area = area;
         this.address = address;
         this.priceList = costList;
         this.city = city;
@@ -104,7 +107,7 @@ public class Activity {
         ServiceScheduling scheduling = serviceSchedulingList.stream()
 
                 .filter(serviceScheduling ->
-                                DateUtil.format(serviceScheduling.getServiceDate(),"yyyy-MM-dd").equals(serviceDate))
+                        DateUtil.format(serviceScheduling.getServiceDate(), "yyyy-MM-dd").equals(serviceDate))
                 .findFirst()
                 .orElseThrow(() -> new RestException(ErrorCode.FAILED, "没有排班日期！"));
 

@@ -14,6 +14,8 @@ public class CreateRestaurantCommand {
     private String images;
     private String content;
     private String cityId;
+    private String area;
+    private String address;
     private List<SetMeal> setMeals;
     @NotNull
     private RestaurantType type;

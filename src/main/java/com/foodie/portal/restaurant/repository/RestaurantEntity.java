@@ -27,6 +27,7 @@ public class RestaurantEntity {
     @ManyToOne
     @NotFound(action = NotFoundAction.IGNORE)
     private CityEntity city;
+    private String area;
     private String address;
     private String setMeals;
     @Enumerated(EnumType.STRING)

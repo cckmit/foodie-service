@@ -36,6 +36,7 @@ public class ActivityEntity {
     private String maxPeopleLimit;
     private String images;
     private String language;
+    private String area;
     private String address;
     @ManyToOne
     @NotFound(action = NotFoundAction.IGNORE)

@@ -28,6 +28,8 @@ public class UpdateActivityCommand {
     private String images;
     @ApiModelProperty("服务所在城市ID")
     private String cityId;
+    @ApiModelProperty("行政区域")
+    private String area;
     @ApiModelProperty("活动语言")
     private String language;
     @ApiModelProperty("服务地点")

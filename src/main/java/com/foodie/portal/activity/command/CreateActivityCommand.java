@@ -29,6 +29,8 @@ public class CreateActivityCommand {
     private String images;
     @ApiModelProperty("活动语言")
     private String language;
+    @ApiModelProperty("行政区域")
+    private String area;
     @ApiModelProperty("服务地点")
     private String address;
     @ApiModelProperty("服务所在城市ID")
