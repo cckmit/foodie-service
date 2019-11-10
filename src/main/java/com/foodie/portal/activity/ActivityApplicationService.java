@@ -118,4 +118,10 @@ public class ActivityApplicationService {
         activity.updateReserve(serviceDate, startTime, count);
         activityRepository.save(activity);
     }
+
+    public void topActivity(String id) {
+        Activity activity = activityRepository.findById(id);
+        activity.top();
+        activityRepository.save(activity);
+    }
 }

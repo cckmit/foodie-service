@@ -118,4 +118,8 @@ public class Activity {
 
         scheduling.updateReserve(startTime, count, maxPeopleLimit);
     }
+
+    public void top() {
+        this.sort = 1L;
+    }
 }

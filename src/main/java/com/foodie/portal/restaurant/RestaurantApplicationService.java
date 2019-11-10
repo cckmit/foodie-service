@@ -50,4 +50,10 @@ public class RestaurantApplicationService {
                 command.getSetMeals());
         restaurantRepository.save(restaurant);
     }
+
+    public void top(String id) {
+        var restaurant = restaurantRepository.byId(id);
+        restaurant.top();
+        restaurantRepository.save(restaurant);
+    }
 }

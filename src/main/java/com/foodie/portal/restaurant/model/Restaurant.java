@@ -59,4 +59,8 @@ public class Restaurant {
         this.type = type;
         this.setMeals = setMeals;
     }
+
+    public void top() {
+        this.sort = 1L;
+    }
 }

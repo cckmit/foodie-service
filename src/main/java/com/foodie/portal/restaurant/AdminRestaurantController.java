@@ -57,4 +57,10 @@ public class AdminRestaurantController {
     public void update(@PathVariable String id, @RequestBody UpdateRestaurantCommand command) {
         restaurantApplicationService.update(id, command);
     }
+
+    @ApiOperation("置顶餐厅")
+    @PostMapping("{id}/top")
+    public void topRestaurant(@PathVariable String id) {
+        restaurantApplicationService.top(id);
+    }
 }

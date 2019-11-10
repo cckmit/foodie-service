@@ -45,6 +45,12 @@ public class AdminActivityController {
         activityApplicationService.updateActivity(id, activityCommand);
     }
 
+    @ApiOperation("置顶活动")
+    @PostMapping("{id}/top")
+    public void topActivity(@PathVariable String id) {
+        activityApplicationService.topActivity(id);
+    }
+
     @ApiOperation("删除活动")
     @DeleteMapping("{id}")
     public void deleteActivity(@PathVariable String id) {
