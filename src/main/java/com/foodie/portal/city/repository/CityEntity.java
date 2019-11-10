@@ -17,6 +17,6 @@ public class CityEntity {
     private String description;
     private String introduction;
     private String images;
-    private boolean showOnActivity;
-    private boolean showOnRestaurant;
+    private Boolean showOnActivity;
+    private Boolean showOnRestaurant;
 }

@@ -74,7 +74,6 @@ public class IndexRepresentationService {
     public List<ArticleRepresentation> findInterestedFoodGuide() {
         String sql = "select a.* , c.NAME as city_name from FOODIE_ARTICLE a " +
                 "left join FOODIE_CITY c on a.CITY_ID=c.ID where INTERESTED_RECOMMEND = 1";
-        sql = sql.concat(SORT_SQL);
         return jdbcTemplate.query(sql, new BeanPropertyRowMapper<>(ArticleRepresentation.class));
     }
 
