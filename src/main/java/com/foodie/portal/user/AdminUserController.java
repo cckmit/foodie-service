@@ -44,4 +44,10 @@ public class AdminUserController {
             throw new RestException(ErrorCode.FAILED.getCode(), "尝试输入错误次数过多，最多可以登录5次，请10分钟后重试。!");
         }
     }
+
+    @ApiOperation("商家登出")
+    @PostMapping("logout")
+    public void logout() {
+        SecurityUtils.getSubject().logout();
+    }
 }

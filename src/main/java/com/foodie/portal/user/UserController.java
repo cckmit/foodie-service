@@ -80,4 +80,10 @@ public class UserController {
         userApplicationService.changePassword(user.getId(), command);
 
     }
+
+    @ApiOperation("用户登出")
+    @PostMapping("logout")
+    public void userLogout() {
+        SecurityUtils.getSubject().logout();
+    }
 }

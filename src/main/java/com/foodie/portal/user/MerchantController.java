@@ -81,4 +81,9 @@ public class MerchantController {
         merchantApplicationService.updateInfo(merchant.getId(), command);
     }
 
+    @ApiOperation("商家登出")
+    @PostMapping("logout")
+    public void merchantLogout() {
+        SecurityUtils.getSubject().logout();
+    }
 }
