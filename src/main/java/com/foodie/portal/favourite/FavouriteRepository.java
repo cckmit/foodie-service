@@ -14,4 +14,8 @@ public class FavouriteRepository {
     public void save(Favourite favourite) {
         favouriteJpaRepository.save(FavouriteEntityMapper.INSTANCE.from(favourite));
     }
+
+    public void deleteByObjectIdAndTypeAndUserId(String objectId, FavouriteType type, String userId) {
+        favouriteJpaRepository.deleteByObjectIdAndTypeAndUserId(objectId,type,userId);
+    }
 }

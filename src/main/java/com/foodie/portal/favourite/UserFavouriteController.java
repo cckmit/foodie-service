@@ -12,6 +12,7 @@ import io.swagger.annotations.ApiOperation;
 import lombok.var;
 import org.apache.shiro.SecurityUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -43,11 +44,25 @@ public class UserFavouriteController {
         favouriteApplicationService.favouriteActivity(activityId, user);
     }
 
-    @ApiOperation("我的收藏活动")
+    @ApiOperation("取消收藏活动")
+    @DeleteMapping("activity")
+    public void cancelFavouriteActivity(String activityId) {
+        var user = (User) SecurityUtils.getSubject().getPrincipal();
+        favouriteApplicationService.cancelFavouriteActivity(activityId, user);
+    }
+
+    @ApiOperation("我的收藏餐厅")
     @GetMapping("restaurant")
     public Pagination<RestaurantRepresentation> getFavouriteRestaurant(PageCommand command) {
         var user = (User) SecurityUtils.getSubject().getPrincipal();
         return favouriteRepresentationService.findFavouriteRestaurantByUserId(user.getId(),command.getPage(), command.getSize());
+    }
+
+    @ApiOperation("取消收藏餐厅")
+    @DeleteMapping("restaurant")
+    public void cancelFavouriteRestaurant(String restaurantId) {
+        var user = (User) SecurityUtils.getSubject().getPrincipal();
+        favouriteApplicationService.cancelFavouriteRestaurant(restaurantId, user);
     }
 
     @ApiOperation("添加收藏餐厅")
@@ -69,5 +84,12 @@ public class UserFavouriteController {
     public void favouriteFoodGuide(String articleId) {
         var user = (User) SecurityUtils.getSubject().getPrincipal();
         favouriteApplicationService.favouriteFoodGuide(articleId, user);
+    }
+
+    @ApiOperation("取消收藏美食指南")
+    @DeleteMapping("food-guide")
+    public void cancelFavouriteFoodGuide(String foodGuideId) {
+        var user = (User) SecurityUtils.getSubject().getPrincipal();
+        favouriteApplicationService.cancelFavouriteGoodGuide(foodGuideId, user);
     }
 }
