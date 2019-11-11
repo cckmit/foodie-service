@@ -72,7 +72,7 @@ public class UserFavouriteController {
         favouriteApplicationService.favouriteRestaurant(restaurantId, user);
     }
 
-    @ApiOperation("我的收藏活动")
+    @ApiOperation("我的收藏美食指南")
     @GetMapping("food-guide")
     public Pagination<ArticleRepresentation> getFavouriteFoodGuide(PageCommand command) {
         var user = (User) SecurityUtils.getSubject().getPrincipal();
