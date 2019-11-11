@@ -121,7 +121,9 @@ public class ShiroConfig {
         //所以上面的url要苛刻，宽松的url要放在下面，尤其是"/**"要放到最下面，如果放前面的话其后的验证规则就没作用了。
 
         Map<String, Filter> filters = Maps.newHashMap();
-        filters.put("user", new SysUserFilter());
+        filters.put("user", new UserFilter());
+        filters.put("sysUser", new SysUserFilter());
+        filters.put("merchant", new MerchantFilter());
         shiroFilterFactoryBean.setFilters(filters);
 
         Map<String, String> filterChainDefinitionMap = new LinkedHashMap<>();
@@ -132,9 +134,9 @@ public class ShiroConfig {
         filterChainDefinitionMap.put("/swagger-ui.html**", "anon");
         filterChainDefinitionMap.put("/v2/api-docs**", "anon");
         filterChainDefinitionMap.put("/favicon.ico", "anon");
-        filterChainDefinitionMap.put("/merchant/**", "user");
+        filterChainDefinitionMap.put("/merchant/**", "merchant");
         filterChainDefinitionMap.put("/user/**", "user");
-        filterChainDefinitionMap.put("/admin/**", "user");
+        filterChainDefinitionMap.put("/admin/**", "sysUser");
 
         shiroFilterFactoryBean.setFilterChainDefinitionMap(filterChainDefinitionMap);
         return shiroFilterFactoryBean;
