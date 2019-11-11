@@ -28,6 +28,7 @@ public class ActivityRepresentation {
     private String address;
     private String cityId;
     private String cityName;
+    private String area;
     private ActivityType type;
     private String merchantName;
 

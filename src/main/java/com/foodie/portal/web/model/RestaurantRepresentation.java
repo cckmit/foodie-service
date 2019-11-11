@@ -22,6 +22,7 @@ public class RestaurantRepresentation {
     private String images;
     private String content;
     private String cityName;
+    private String area;
     private String address;
     private boolean favourite;
 

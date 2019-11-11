@@ -27,6 +27,7 @@ public class ActivityDetailRepresentation {
     private double price;
     private String images;
     private String language;
+    private String area;
     private String address;
     private String cityId;
     private String cityName;
