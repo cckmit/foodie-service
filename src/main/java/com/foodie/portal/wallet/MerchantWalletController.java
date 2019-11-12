@@ -1,5 +1,7 @@
 package com.foodie.portal.wallet;
 
+import com.foodie.portal.commons.PageCommand;
+import com.foodie.portal.commons.Pagination;
 import com.foodie.portal.user.model.Merchant;
 import com.foodie.portal.wallet.command.UpdateWithdrawInfoCommand;
 import com.foodie.portal.wallet.representation.IncomeItemRepresentation;
@@ -24,15 +26,15 @@ public class MerchantWalletController {
     private WalletApplicationService walletApplicationService;
 
     @GetMapping("income")
-    public List<IncomeItemRepresentation> listIncome() {
+    public Pagination<IncomeItemRepresentation> listIncome(PageCommand command) {
         var merchant = (Merchant) SecurityUtils.getSubject().getPrincipal();
-        return walletRepresentationService.listServiceIncome(merchant.getId());
+        return walletRepresentationService.listServiceIncome(merchant.getId(), command.getPage(), command.getSize());
     }
 
     @GetMapping("withdrawal")
-    public List<WithdrawalRepresentation> listWithdrawal() {
+    public Pagination<WithdrawalRepresentation> listWithdrawal(PageCommand command) {
         var merchant = (Merchant) SecurityUtils.getSubject().getPrincipal();
-        return walletRepresentationService.listWithdrawal(merchant.getId());
+        return walletRepresentationService.listWithdrawal(merchant.getId(), command.getPage(), command.getSize());
     }
 
     @PostMapping("withdraw-info")

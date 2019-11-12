@@ -1,34 +1,28 @@
 package com.foodie.portal.wallet.representation;
 
-import com.google.common.collect.ImmutableMap;
+import com.foodie.portal.commons.Pagination;
+import com.foodie.portal.wallet.repository.IncomeItemJpaRepository;
+import com.foodie.portal.wallet.repository.WithdrawalItemJpaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.jdbc.core.BeanPropertyRowMapper;
-import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
-
-import java.util.List;
 
 @Service
 public class WalletRepresentationService {
 
     @Autowired
-    private NamedParameterJdbcTemplate jdbcTemplate;
-
-    public List<IncomeItemRepresentation> listServiceIncome(String merchantId) {
-        String sql = "select * from FOODIE_INCOME_ITEM where MERCHANT_ID=:merchantId";
-        return jdbcTemplate.query(sql,
-                ImmutableMap.of("merchantId" ,merchantId),
-                new BeanPropertyRowMapper<>(IncomeItemRepresentation.class));
+    private IncomeItemJpaRepository incomeItemJpaRepository;
+    @Autowired
+    private WithdrawalItemJpaRepository withdrawalItemJpaRepository;
+    public Pagination<IncomeItemRepresentation> listServiceIncome(String merchantId, int page, int size) {
+        return IncomeItemRepresentationMapper.INSTANCE.to(
+                incomeItemJpaRepository.findAllByMerchantId(merchantId, PageRequest.of(page -1, size)));
     }
 
-    public List<WithdrawalRepresentation> listWithdrawal(String merchantId) {
-        String sql = "select * from FOODIE_WITHDRAWAL_ITEM where MERCHANT_ID=:merchantId";
-        return jdbcTemplate.query(sql,
-                ImmutableMap.of("merchantId" ,merchantId),
-                new BeanPropertyRowMapper<>(WithdrawalRepresentation.class));
-    }
-
-    public void updateWithdrawInfo() {
+    public Pagination<WithdrawalRepresentation> listWithdrawal(String merchantId, int page, int size) {
+        return WithdrawalItemRepresentationMapper.INSTANCE.to(
+                withdrawalItemJpaRepository.findAllByMerchantId(merchantId, PageRequest.of(page -1, size)));
 
     }
+
 }
