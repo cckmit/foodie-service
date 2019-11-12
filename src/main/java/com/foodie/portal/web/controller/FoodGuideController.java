@@ -34,7 +34,11 @@ public class FoodGuideController {
     @ApiOperation("美食指南详情")
     @GetMapping("food-guide/{id}")
     public ArticleDetailRepresentation detail(@PathVariable String id) {
-        var user = (User) SecurityUtils.getSubject().getPrincipal();
+        User user = null;
+        try {
+            user = (User) SecurityUtils.getSubject().getPrincipal();
+        } catch (Exception e) {
+        }
         return foodGuideRepresentationService.detail(id, user);
     }
 }

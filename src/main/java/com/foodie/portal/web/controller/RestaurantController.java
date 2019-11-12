@@ -33,7 +33,11 @@ public class RestaurantController {
     @ApiOperation("餐厅详情")
     @GetMapping("restaurants/{id}")
     public RestaurantRepresentation detail(@PathVariable String id) {
-        var user = (User) SecurityUtils.getSubject().getPrincipal();
+        User user = null;
+        try {
+            user = (User) SecurityUtils.getSubject().getPrincipal();
+        } catch (Exception e) {
+        }
         return restaurantRepresentationService.detail(id, user);
     }
 }

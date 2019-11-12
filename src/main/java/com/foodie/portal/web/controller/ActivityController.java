@@ -42,7 +42,11 @@ public class ActivityController {
     @ApiOperation("活动详情")
     @GetMapping("activities/{id}")
     public ActivityDetailRepresentation detail(@PathVariable String id) {
-        var user = (User) SecurityUtils.getSubject().getPrincipal();
+        User user = null;
+        try {
+            user = (User) SecurityUtils.getSubject().getPrincipal();
+        } catch (Exception e) {
+        }
         return activityRepresentationService.findActivityDetail(id,user);
     }
 
