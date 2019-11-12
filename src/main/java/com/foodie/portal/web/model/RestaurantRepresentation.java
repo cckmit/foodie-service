@@ -40,6 +40,7 @@ public class RestaurantRepresentation {
                 .setSetMeals(JsonUtils.toBean(entity.getSetMeals(), new TypeReference<List<SetMeal>>() {}))
                 .setAddress(entity.getAddress())
                 .setCityName(entity.getCityName())
+                .setArea(entity.getArea())
                 .setContent(entity.getContent())
                 .setImages(entity.getImages())
                 .setSubTitle(entity.getSubTitle())

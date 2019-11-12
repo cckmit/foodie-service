@@ -10,6 +10,10 @@ public class MerchantInfoRepresentation {
     private String name;
     private String description;
     private Double balance;
+    //未结算
+    private double openAccount;
+    //累计收益
+    private double accumulatedEarnings;
     private String withdrawAccount;
     private String withdrawName;
     private int orderCount;
