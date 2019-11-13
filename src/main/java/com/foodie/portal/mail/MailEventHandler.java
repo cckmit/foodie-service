@@ -30,7 +30,7 @@ public class MailEventHandler {
     @Async
     @EventListener
     public void sendPayNoMail(RestaurantOrderPaidEvent event) {
-        RestaurantOrder order = event.getOrder();
+        Order order = event.getOrder();
         String subject = String.format("餐厅订单成功：%s", order.getNumber());
         String content = String.format("您的服务码为: %s ", order.getPayNo());
         mailApplicationService.send(order.getUser().getEmail(), subject, content);
