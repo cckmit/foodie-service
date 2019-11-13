@@ -18,4 +18,8 @@ public class FavouriteRepository {
     public void deleteByObjectIdAndTypeAndUserId(String objectId, FavouriteType type, String userId) {
         favouriteJpaRepository.deleteByObjectIdAndTypeAndUserId(objectId,type,userId);
     }
+
+    public Favourite findByObjectIdAndTypeAndUserId(String objectId, FavouriteType type, String userId) {
+        return FavouriteEntityMapper.INSTANCE.to(favouriteJpaRepository.findByObjectIdAndTypeAndUserId(objectId, type, userId));
+    }
 }
