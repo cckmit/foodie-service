@@ -31,6 +31,7 @@ public class ExceptionHandlerAdvice {
 
     @ExceptionHandler(Exception.class)
     public Map<String, Object> exception(HttpServletRequest request, HttpServletResponse response, Exception ex) {
+        ex.printStackTrace();
         Map<String, Object> map = new HashMap<>();
         map.put("errorMessage", ex.getMessage());
         map.put("url", request.getRequestURL());
