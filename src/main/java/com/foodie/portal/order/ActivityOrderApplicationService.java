@@ -6,7 +6,7 @@ import com.foodie.portal.commons.ErrorCode;
 import com.foodie.portal.commons.EventPublisher;
 import com.foodie.portal.commons.RestException;
 import com.foodie.portal.commons.event.OrderAcceptedEvent;
-import com.foodie.portal.commons.event.OrderPaidEvent;
+import com.foodie.portal.commons.event.RestaurantOrderPaidEvent;
 import com.foodie.portal.commons.event.OrderFinishedEvent;
 import com.foodie.portal.commons.event.OrderRejectedEvent;
 import com.foodie.portal.order.command.CreateOrderCommand;
@@ -123,7 +123,7 @@ public class ActivityOrderApplicationService {
                 var order = orderRepository.byPaymentId(paymentId);
                 order.pay();
                 orderRepository.save(order);
-                eventPublisher.publish(new OrderPaidEvent(order));
+                eventPublisher.publish(new RestaurantOrderPaidEvent(order));
                 return order;
             }
         } catch (PayPalRESTException e) {

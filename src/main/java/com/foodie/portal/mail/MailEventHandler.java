@@ -3,7 +3,9 @@ package com.foodie.portal.mail;
 import com.foodie.portal.commons.event.MerchantApplyPassedEvent;
 import com.foodie.portal.commons.event.OrderAcceptedEvent;
 import com.foodie.portal.commons.event.OrderRejectedEvent;
+import com.foodie.portal.commons.event.RestaurantOrderPaidEvent;
 import com.foodie.portal.order.model.Order;
+import com.foodie.portal.order.model.RestaurantOrder;
 import com.foodie.portal.user.model.Merchant;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.event.EventListener;
@@ -20,10 +22,21 @@ public class MailEventHandler {
     @EventListener
     public void sendPayNoMail(OrderAcceptedEvent event) {
         Order order = event.getOrder();
-        String subject = String.format("订单成功：%s", order.getNumber());
+        String subject = String.format("活动订单成功：%s", order.getNumber());
         String content = String.format("您的服务码为: %s ", order.getPayNo());
         mailApplicationService.send(order.getUser().getEmail(), subject, content);
     }
+
+    @Async
+    @EventListener
+    public void sendPayNoMail(RestaurantOrderPaidEvent event) {
+        RestaurantOrder order = event.getOrder();
+        String subject = String.format("餐厅订单成功：%s", order.getNumber());
+        String content = String.format("您的服务码为: %s ", order.getPayNo());
+        mailApplicationService.send(order.getUser().getEmail(), subject, content);
+    }
+
+
 
     @Async
     @EventListener
