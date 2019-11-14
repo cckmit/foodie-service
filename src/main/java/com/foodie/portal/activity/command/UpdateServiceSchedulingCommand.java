@@ -11,12 +11,8 @@ import java.util.List;
 @ApiModel
 public class UpdateServiceSchedulingCommand {
 
-    private String id;
-    private Date serviceDate;
-    /**
-     * 班次
-     */
-    private List<ShiftCommand> shifts;
+    private List<ServiceScheduling> save;
+    private List<ServiceScheduling> delete;
 
 
     @ApiModel
@@ -24,6 +20,17 @@ public class UpdateServiceSchedulingCommand {
     public static class ShiftCommand {
         @ApiModelProperty("开始时间")
         private String startTime;
+    }
+
+
+    @Data
+    public static class ServiceScheduling{
+        private String id;
+        private Date serviceDate;
+        /**
+         * 班次
+         */
+        private List<ShiftCommand> shifts;
     }
 
 }

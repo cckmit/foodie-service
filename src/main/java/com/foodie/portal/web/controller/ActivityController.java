@@ -50,5 +50,4 @@ public class ActivityController {
         return activityRepresentationService.findActivityDetail(id,user);
     }
 
-
 }

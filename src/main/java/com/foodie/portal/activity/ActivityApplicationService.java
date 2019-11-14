@@ -26,6 +26,8 @@ public class ActivityApplicationService {
     @Autowired
     private ActivityRepository activityRepository;
     @Autowired
+    private ActivitySchedulingRepository activitySchedulingRepository;
+    @Autowired
     private CityApplicationService cityApplicationService;
     @Autowired
     private MerchantApplicationService merchantApplicationService;
@@ -97,15 +99,18 @@ public class ActivityApplicationService {
         return activityRepository.findByMerchantId(merchantId, page - 1, size);
     }
 
-    public void updateServiceScheduling(String id, List<UpdateServiceSchedulingCommand> command) {
-        List<ServiceScheduling> serviceSchedulingList = command.stream()
-                .map(item -> ServiceScheduling.create(item.getId(), id, item.getServiceDate(),
-                        item.getShifts().stream().map(shift -> Shift.create(shift.getStartTime())).collect(Collectors.toList())))
-                .collect(Collectors.toList());
-        Activity activity = activityRepository.findById(id);
+    public void updateServiceScheduling(String id, UpdateServiceSchedulingCommand command) {
 
-        activity.updateScheduling(serviceSchedulingList);
-        activityRepository.save(activity);
+        var saveScheduling = command.getSave().stream().map(item -> ServiceScheduling.create(item.getId(), id, item.getServiceDate(),
+                item.getShifts().stream().map(shift -> Shift.create(shift.getStartTime())).collect(Collectors.toList())))
+                .collect(Collectors.toList());
+        activitySchedulingRepository.save(saveScheduling);
+
+
+        var deleteScheduling = command.getDelete().stream().map(item -> ServiceScheduling.create(item.getId(), id, item.getServiceDate(),
+                item.getShifts().stream().map(shift -> Shift.create(shift.getStartTime())).collect(Collectors.toList())))
+                .collect(Collectors.toList());
+        activitySchedulingRepository.delete(deleteScheduling);
     }
 
     public void updateReserve(String id, String serviceDate, String startTime, int count) {
