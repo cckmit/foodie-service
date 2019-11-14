@@ -15,6 +15,7 @@ import lombok.var;
 import org.apache.logging.log4j.util.Strings;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Date;
 import java.util.List;
@@ -99,13 +100,13 @@ public class ActivityApplicationService {
         return activityRepository.findByMerchantId(merchantId, page - 1, size);
     }
 
+    @Transactional
     public void updateServiceScheduling(String id, UpdateServiceSchedulingCommand command) {
 
         var saveScheduling = command.getSave().stream().map(item -> ServiceScheduling.create(item.getId(), id, item.getServiceDate(),
                 item.getShifts().stream().map(shift -> Shift.create(shift.getStartTime())).collect(Collectors.toList())))
                 .collect(Collectors.toList());
         activitySchedulingRepository.save(saveScheduling);
-
 
         var deleteScheduling = command.getDelete().stream().map(item -> ServiceScheduling.create(item.getId(), id, item.getServiceDate(),
                 item.getShifts().stream().map(shift -> Shift.create(shift.getStartTime())).collect(Collectors.toList())))

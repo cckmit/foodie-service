@@ -4,6 +4,8 @@ import com.foodie.portal.activity.command.CreateActivityCommand;
 import com.foodie.portal.activity.command.UpdateActivityCommand;
 import com.foodie.portal.activity.command.UpdateServiceSchedulingCommand;
 import com.foodie.portal.activity.model.Activity;
+import com.foodie.portal.activity.model.ServiceScheduling;
+import com.foodie.portal.activity.representation.ActivityRepresentationService;
 import com.foodie.portal.commons.PageCommand;
 import com.foodie.portal.commons.Pagination;
 import com.foodie.portal.user.model.Merchant;
@@ -31,19 +33,21 @@ public class MerchantActivityController {
 
     @Autowired
     private ActivityApplicationService activityApplicationService;
+    @Autowired
+    private ActivityRepresentationService activityRepresentationService;
 
     @ApiOperation("发布我的活动")
     @PostMapping
     public void addActivity(@Valid @RequestBody CreateActivityCommand activityCommand) {
-        var merchant = (Merchant)SecurityUtils.getSubject().getPrincipal();
+        var merchant = (Merchant) SecurityUtils.getSubject().getPrincipal();
         activityApplicationService.addActivity(activityCommand, merchant);
     }
 
     @ApiOperation("我的活动")
     @GetMapping
     public Pagination<Activity> activities(PageCommand pageCommand) {
-        var merchant = (Merchant)SecurityUtils.getSubject().getPrincipal();
-        return  activityApplicationService.findOwnerActivity(merchant.getId(), pageCommand.getPage(), pageCommand.getSize());
+        var merchant = (Merchant) SecurityUtils.getSubject().getPrincipal();
+        return activityApplicationService.findOwnerActivity(merchant.getId(), pageCommand.getPage(), pageCommand.getSize());
     }
 
     @ApiOperation("我的活动详情")
@@ -67,8 +71,14 @@ public class MerchantActivityController {
     @ApiOperation("更新排期")
     @PostMapping("{id}/scheduling")
     public void scheduleService(@PathVariable String id, @RequestBody UpdateServiceSchedulingCommand command) {
-        activityApplicationService.updateServiceScheduling(id , command);
+        activityApplicationService.updateServiceScheduling(id, command);
 
+    }
+
+    @ApiOperation("查询排期")
+    @GetMapping("{id}/scheduling")
+    public List<ServiceScheduling> scheduleService(@PathVariable String id, String yearMonth) {
+        return activityRepresentationService.findSchedulingByActivityAndYearMonth(id, yearMonth);
     }
 
 }

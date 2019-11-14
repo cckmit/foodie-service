@@ -3,6 +3,7 @@ package com.foodie.portal.web.controller;
 
 import com.foodie.portal.activity.model.Activity;
 import com.foodie.portal.activity.model.ActivityType;
+import com.foodie.portal.activity.model.ServiceScheduling;
 import com.foodie.portal.commons.PageCommand;
 import com.foodie.portal.commons.Pagination;
 import com.foodie.portal.user.model.User;
@@ -48,6 +49,12 @@ public class ActivityController {
         } catch (Exception e) {
         }
         return activityRepresentationService.findActivityDetail(id,user);
+    }
+
+    @ApiOperation("查询排期")
+    @GetMapping("activities/{id}/scheduling")
+    public List<ServiceScheduling> scheduleService(@PathVariable String id, String yearMonth) {
+        return activityRepresentationService.findSchedulingByActivityAndYearMonth(id, yearMonth);
     }
 
 }

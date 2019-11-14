@@ -1,7 +1,10 @@
 package com.foodie.portal.web.service;
 
 import com.foodie.portal.activity.model.ActivityType;
+import com.foodie.portal.activity.model.ServiceScheduling;
 import com.foodie.portal.activity.repository.ActivityJpaRepository;
+import com.foodie.portal.activity.repository.ServiceSchedulingJpaRepository;
+import com.foodie.portal.activity.representation.ServiceSchedulingMapper;
 import com.foodie.portal.commons.Pagination;
 import com.foodie.portal.favourite.FavouriteType;
 import com.foodie.portal.favourite.repository.FavouriteJpaRepository;
@@ -29,6 +32,8 @@ public class ActivityRepresentationService {
     private ActivityJpaRepository activityJpaRepository;
     @Autowired
     private FavouriteJpaRepository favouriteJpaRepository;
+    @Autowired
+    private ServiceSchedulingJpaRepository serviceSchedulingJpaRepository;
 
 
     public Pagination<ActivityRepresentation> findAllByCityId(int page, int size, String cityId) {
@@ -74,5 +79,9 @@ public class ActivityRepresentationService {
                 .orElse(null);
 
 
+    }
+
+    public List<ServiceScheduling> findSchedulingByActivityAndYearMonth(String activityId, String yearMonth) {
+        return ServiceSchedulingMapper.INSTANCE.to(serviceSchedulingJpaRepository.findByActivityIdAndServiceDateStartingWith(activityId, yearMonth));
     }
 }
