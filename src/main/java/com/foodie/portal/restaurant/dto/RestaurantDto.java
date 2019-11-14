@@ -6,6 +6,7 @@ import com.foodie.portal.restaurant.model.SetMeal;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.time.Instant;
 import java.util.Date;
 import java.util.List;
 
@@ -20,10 +21,12 @@ public class RestaurantDto {
     private String content;
     private double price;
     private String cityName;
+    private String area;
+    private String address;
     private String cityId;
     private List<SetMeal> setMeals;
     private RestaurantType type;
-    private Date createdAt;
+    private Instant createdAt;
 
     public static RestaurantDto from(Restaurant restaurant) {
         return RestaurantDtoMapper.INSTANCE.from(restaurant);
