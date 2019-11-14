@@ -12,6 +12,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Component;
 
+import java.util.List;
+
 @Component
 public class OrderRepository {
 
@@ -57,8 +59,8 @@ public class OrderRepository {
         return OrderEntityMapper.instance.to(orderJpaRepository.findByMerchantId(merchantId, PageRequest.of(page, size)));
     }
 
-    public Pagination<Order> findByMerchantId(int page, int size, String merchantId, OrderStatus status) {
-        return OrderEntityMapper.instance.to(orderJpaRepository.findByMerchantIdAndStatus(merchantId, status, PageRequest.of(page, size)));
+    public Pagination<Order> findByMerchantIdAndStatus(int page, int size, String merchantId, List<OrderStatus> status) {
+        return OrderEntityMapper.instance.to(orderJpaRepository.findByMerchantIdAndStatusIn(merchantId, status, PageRequest.of(page, size)));
     }
 
     public Order findByIdAndMerchantId(String id, String merchantId) {

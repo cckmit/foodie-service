@@ -15,14 +15,10 @@ import io.swagger.annotations.ApiOperation;
 import lombok.var;
 import org.apache.shiro.SecurityUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.List;
 
 @Api(tags = "（商家）订单功能")
 @RestController
@@ -65,7 +61,7 @@ public class MerchantOrderController {
 
     @ApiOperation("我的服务列表")
     @GetMapping("list")
-    public Pagination<OrderSummaryRepresentation> orders(PageCommand command, OrderStatus status) {
+    public Pagination<OrderSummaryRepresentation> orders(PageCommand command,@RequestParam("status") List<OrderStatus> status) {
         var merchant = (Merchant) SecurityUtils.getSubject().getPrincipal();
         return orderRepresentationService.merchantOrderList(command.getPage(), command.getSize(), merchant, status);
     }

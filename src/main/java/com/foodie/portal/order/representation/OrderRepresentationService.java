@@ -8,9 +8,11 @@ import com.foodie.portal.user.model.Merchant;
 import com.foodie.portal.user.model.User;
 import com.foodie.portal.commons.utils.PaginationUtils;
 import lombok.var;
+import org.apache.commons.collections.CollectionUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Objects;
 
 @Service
@@ -26,12 +28,11 @@ public class OrderRepresentationService {
         return RestaurantOrderSummaryRepresentation.from(orderRepository.findRestaurantOrderByUserId(page - 1, size, user.getId()));
     }
 
-    public Pagination<OrderSummaryRepresentation> merchantOrderList(int page, int size, Merchant merchant, OrderStatus status) {
-        if(Objects.isNull(status)) {
+    public Pagination<OrderSummaryRepresentation> merchantOrderList(int page, int size, Merchant merchant, List<OrderStatus> status) {
+        if(CollectionUtils.isEmpty(status)) {
             return OrderSummaryRepresentation.from(orderRepository.findByMerchantId(page - 1, size, merchant.getId()));
-
         }
-        return OrderSummaryRepresentation.from(orderRepository.findByMerchantId(page - 1, size, merchant.getId(),status));
+        return OrderSummaryRepresentation.from(orderRepository.findByMerchantIdAndStatus(page - 1, size, merchant.getId(),status));
     }
 
 
