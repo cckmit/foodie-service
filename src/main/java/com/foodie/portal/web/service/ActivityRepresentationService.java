@@ -68,6 +68,7 @@ public class ActivityRepresentationService {
     }
 
     public ActivityDetailRepresentation findActivityDetail(String id, User user) {
+
         return activityJpaRepository.findById(id)
                 .map(ActivityDetailRepresentation::from)
                 .map(rep -> {

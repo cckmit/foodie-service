@@ -1,16 +1,10 @@
 package com.foodie.portal.web.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.core.type.TypeReference;
 import com.foodie.portal.activity.model.ActivityPrice;
-import com.foodie.portal.activity.model.ActivityStatus;
 import com.foodie.portal.activity.model.ActivityType;
-import com.foodie.portal.activity.model.ServiceScheduling;
 import com.foodie.portal.activity.repository.ActivityEntity;
-import com.foodie.portal.commons.utils.JsonUtils;
 import lombok.Data;
 import lombok.experimental.Accessors;
-import org.apache.commons.collections.CollectionUtils;
 
 import java.util.List;
 
@@ -32,7 +26,6 @@ public class ActivityDetailRepresentation {
     private String cityId;
     private String cityName;
     private List<ActivityPrice> priceList;
-    private List<ServiceScheduling> serviceSchedulingList;
     private ActivityType type;
     private String merchantName;
     private boolean favourite;
