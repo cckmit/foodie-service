@@ -29,7 +29,10 @@ public class CityApplicationService {
         city.setDescription(updateCityCommand.getDescription());
         city.setIntroduction(updateCityCommand.getIntroduction());
         city.setImages(updateCityCommand.getImages());
+        city.setShowOnActivity( updateCityCommand.getShowOnActivity());
+        city.setShowOnRestaurant( updateCityCommand.getShowOnRestaurant() );
         cityRepository.save(city);
+        
         return city;
     }
 
