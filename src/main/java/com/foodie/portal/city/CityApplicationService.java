@@ -29,8 +29,8 @@ public class CityApplicationService {
         city.setDescription(updateCityCommand.getDescription());
         city.setIntroduction(updateCityCommand.getIntroduction());
         city.setImages(updateCityCommand.getImages());
-        // city.setShowOnActivity( updateCityCommand.getShowOnActivity()); 
-        // city.setShowOnRestaurant( updateCityCommand.getShowOnRestaurant() );
+        city.setShowOnActivity( updateCityCommand.isShowOnActivity()); 
+        city.setShowOnRestaurant( updateCityCommand.isShowOnRestaurant() );
         cityRepository.save(city);
 
         return city;
