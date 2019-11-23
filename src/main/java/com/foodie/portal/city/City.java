@@ -25,6 +25,8 @@ public class City {
         this.introduction = introduction;
         this.description = desc;
         this.images = images;
+        this.showOnActivity = true;
+        this.showOnRestaurant = true;
     }
 
     public static City create(String name, String desc,String introduction, String images) {
