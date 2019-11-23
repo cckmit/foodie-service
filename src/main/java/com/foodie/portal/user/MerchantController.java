@@ -3,6 +3,7 @@ package com.foodie.portal.user;
 import com.foodie.portal.commons.ErrorCode;
 import com.foodie.portal.commons.RestException;
 import com.foodie.portal.commons.config.shiro.LoginToken;
+import com.foodie.portal.commons.utils.EncryptUtils;
 import com.foodie.portal.user.command.ChangeMerchantPasswordCommand;
 import com.foodie.portal.user.command.MerchantDto;
 import com.foodie.portal.user.command.MerchantLoginCommand;
@@ -71,7 +72,10 @@ public class MerchantController {
     @PostMapping("change-password")
     public void changePassword(@RequestBody ChangeMerchantPasswordCommand command) {
         var merchant = (Merchant)SecurityUtils.getSubject().getPrincipal();
-        merchantApplicationService.changePassword(merchant, command.getPassword());
+        
+        String password = EncryptUtils.getPassword(command.getPassword(), merchant.getEmail());
+
+        merchantApplicationService.changePassword(merchant, password);
     }
 
     @ApiOperation("修改商家信息")
