@@ -77,4 +77,12 @@ public class Merchant {
         this.avatar = avatar;
         this.description = description;
     }
+
+    public void changePassword(String oldPassword, String newPassword) {
+
+//        if (!password.equals(EncryptUtils.getPassword(oldPassword, email))) {
+//            throw new RestException(ErrorCode.FAILED, "密码错误");
+//        }
+        this.password = EncryptUtils.getPassword(newPassword, email);
+    }
 }

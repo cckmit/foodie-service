@@ -78,9 +78,9 @@ public class MerchantApplicationService {
         return merchantRepository.findByEmail(email);
     }
 
-    public void changePassword(Merchant merchant, String password) {
+    public void changePassword(Merchant merchant, String oldPassword, String newPassword) {
         var merchantInDb = merchantRepository.findById(merchant.getId());
-        merchantInDb.setPassword(password);
+        merchantInDb.changePassword(oldPassword, newPassword);
         merchantRepository.save(merchantInDb);
     }
 

@@ -73,9 +73,7 @@ public class MerchantController {
     public void changePassword(@RequestBody ChangeMerchantPasswordCommand command) {
         var merchant = (Merchant)SecurityUtils.getSubject().getPrincipal();
         
-        String password = EncryptUtils.getPassword(command.getPassword(), merchant.getEmail());
-
-        merchantApplicationService.changePassword(merchant, password);
+        merchantApplicationService.changePassword(merchant,command.getOldPassword(), command.getPassword());
     }
 
     @ApiOperation("修改商家信息")

@@ -4,5 +4,6 @@ import lombok.Data;
 
 @Data
 public class ChangeMerchantPasswordCommand {
+    private String oldPassword;
     private String password;
 }

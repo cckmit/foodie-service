@@ -21,14 +21,14 @@ public class User {
     private IdType idType;
     private String idNumber;
 
-    public User(String email, String password) {
+    public User(String email, String decryptPassword) {
         this.id = IdUtil.fastSimpleUUID();
         this.email = email;
-        this.password = EncryptUtils.getPassword(password, email);
+        this.password = EncryptUtils.getPassword(decryptPassword, email);
     }
 
-    public static User create(String email, String password) {
-        return new User(email, password);
+    public static User create(String email, String decryptPassword) {
+        return new User(email, decryptPassword);
     }
 
     public void updateInfo(String avatar, String lastName, String firstName, String nationality, IdType idType, String idNumber) {
