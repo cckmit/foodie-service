@@ -19,17 +19,27 @@ public class City {
         this.id = IdUtil.fastSimpleUUID();
     }
 
-    public City(String name, String desc, String introduction, String images) {
-        this.id = IdUtil.fastSimpleUUID();
+
+    public City(String name, String desc, String introduction, String images, boolean showOnActivity, boolean showOnRestaurant) {
+        this();
         this.name = name;
         this.introduction = introduction;
         this.description = desc;
         this.images = images;
-        this.showOnActivity = true;
-        this.showOnRestaurant = true;
+        this.showOnActivity = showOnActivity;
+        this.showOnRestaurant = showOnRestaurant;
     }
 
-    public static City create(String name, String desc,String introduction, String images) {
-        return new City(name, desc, introduction, images);
+    public static City create(String name, String desc, String introduction, String images, boolean showOnActivity, boolean showOnRestaurant) {
+        return new City(name, desc, introduction, images, showOnActivity, showOnRestaurant);
+    }
+
+    public void update(String name, String desc, String introduction, String images, boolean showOnActivity, boolean showOnRestaurant) {
+        this.name = name;
+        this.introduction = introduction;
+        this.description = desc;
+        this.images = images;
+        this.showOnActivity = showOnActivity;
+        this.showOnRestaurant = showOnRestaurant;
     }
 }

@@ -16,7 +16,12 @@ public class CityApplicationService {
     }
 
     public void addCity(CreateCityCommand cityCommand) {
-        var city = City.create(cityCommand.getName(), cityCommand.getDescription(), cityCommand.getIntroduction(), cityCommand.getImages());
+        var city = City.create(cityCommand.getName(),
+                cityCommand.getDescription(),
+                cityCommand.getIntroduction(),
+                cityCommand.getImages(),
+                cityCommand.isShowOnActivity(),
+                cityCommand.isShowOnRestaurant());
         cityRepository.save(city);
     }
 
@@ -24,13 +29,14 @@ public class CityApplicationService {
         return cityRepository.findById(id);
     }
 
-    public City updateCity(String id, UpdateCityCommand updateCityCommand) {
+    public City updateCity(String id, UpdateCityCommand command) {
         var city = cityRepository.findById(id);
-        city.setDescription(updateCityCommand.getDescription());
-        city.setIntroduction(updateCityCommand.getIntroduction());
-        city.setImages(updateCityCommand.getImages());
-        city.setShowOnActivity( updateCityCommand.isShowOnActivity()); 
-        city.setShowOnRestaurant( updateCityCommand.isShowOnRestaurant() );
+        city.update(command.getName(),
+                command.getDescription(),
+                command.getIntroduction(),
+                command.getImages(),
+                command.isShowOnActivity(),
+                command.isShowOnRestaurant());
         cityRepository.save(city);
 
         return city;

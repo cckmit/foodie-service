@@ -5,6 +5,7 @@ import lombok.Data;
 
 @Data
 public class UpdateCityCommand {
+    private String name;
     private String images;
     @ApiModelProperty("城市简介")
     private String description;
