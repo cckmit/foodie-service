@@ -61,4 +61,13 @@ public class MailEventHandler {
         String content = String.format("您的登录密码为: %s ", event.getPassword());
         mailApplicationService.send(merchant.getEmail(), subject, content);
     }
+
+    @Async
+    @EventListener
+    public void sendMerchantPasswordReset(MerchantPasswordResetEvent event) {
+        Merchant merchant = event.getMerchant();
+        String subject = String.format("商家密码重置成功：%s", merchant.getEmail());
+        String content = String.format("您的登录密码为: %s ", event.getPassword());
+        mailApplicationService.send(merchant.getEmail(), subject, content);
+    }
 }

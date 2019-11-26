@@ -60,7 +60,7 @@ public class UserController {
         return userApplicationService.register(userRegisterCommand);
     }
 
-    @ApiOperation("用户注册")
+    @ApiOperation("用户信息")
     @GetMapping("user-info")
     public User userInfo() {
         return userApplicationService.userInfo(((User) SecurityUtils.getSubject().getPrincipal()).getId());

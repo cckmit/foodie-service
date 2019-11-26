@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @Api(tags = "（用户）反馈")
 @RestController
-@RequestMapping("user/feedback")
+@RequestMapping("feedback")
 public class UserFeedbackController {
 
     @Autowired

@@ -85,6 +85,12 @@ public class AdminMerchantController {
         return merchantApplicationService.waitForApprovedMerchant(pageCommand.getPage(), pageCommand.getSize());
     }
 
+    @ApiOperation("待审核商家列表")
+    @PostMapping("merchants/{id}/password-reset")
+    public void resetMerchantPassword(@PathVariable String id) {
+        merchantApplicationService.resetMerchantPassword(id);
+    }
+
     @ApiOperation("用户列表")
     @GetMapping("user")
     public Pagination<User> listUser(PageCommand pageCommand) {

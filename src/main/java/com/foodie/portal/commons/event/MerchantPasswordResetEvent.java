@@ -6,7 +6,7 @@ import lombok.Getter;
 
 @AllArgsConstructor
 @Getter
-public class MerchantApplyPassedEvent extends DomainEvent{
+public class MerchantPasswordResetEvent extends DomainEvent{
     private Merchant merchant;
     private String password;
 }

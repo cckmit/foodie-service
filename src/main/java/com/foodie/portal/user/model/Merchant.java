@@ -85,4 +85,8 @@ public class Merchant {
 //        }
         this.password = EncryptUtils.getPassword(newPassword, email);
     }
+
+    public void resetPassword(String password) {
+        this.password = EncryptUtils.getPassword(password, email);
+    }
 }
