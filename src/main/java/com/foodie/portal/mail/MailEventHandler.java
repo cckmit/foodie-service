@@ -26,11 +26,20 @@ public class MailEventHandler {
 
     @Async
     @EventListener
-    public void sendPayNoMail(ActivityOrderPaidEvent event) {
+    public void sendPayStatusMail(ActivityOrderPaidEvent event) {
         Order order = event.getOrder();
         String subject = String.format("活动订单付款成功：%s", order.getNumber());
         String content = String.format("你的活动订单%s付款成功,请等待商家接单", order.getNumber());
         mailApplicationService.send(order.getUser().getEmail(), subject, content);
+    }
+
+    @Async
+    @EventListener
+    public void sendOrderMailToMerchant(ActivityOrderPaidEvent event) {
+        Order order = event.getOrder();
+        String subject = String.format("用户下单成功：%s", order.getNumber());
+        String content = String.format("用户活动订单%s付款成功,请您接单,活动标题: %s", order.getNumber(), order.getActivity().getTitle());
+        mailApplicationService.send(order.getMerchant().getEmail(), subject, content);
     }
 
     @Async
