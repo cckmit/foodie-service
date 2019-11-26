@@ -85,7 +85,7 @@ public class AdminMerchantController {
         return merchantApplicationService.waitForApprovedMerchant(pageCommand.getPage(), pageCommand.getSize());
     }
 
-    @ApiOperation("待审核商家列表")
+    @ApiOperation("商家密码重置")
     @PostMapping("merchants/{id}/password-reset")
     public void resetMerchantPassword(@PathVariable String id) {
         merchantApplicationService.resetMerchantPassword(id);
