@@ -4,4 +4,4 @@ spring:
       enabled: true
 
 logging:
-  file: ./logs/fooide-dev.log
+  file: ./logs/dev/fooide-dev.log

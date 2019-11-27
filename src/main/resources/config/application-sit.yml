@@ -12,7 +12,7 @@ spring:
 
 
 logging:
-  file: ./logs/fooide-sit.log
+  file: ./logs/sit/fooide-sit.log
 
 
 application:

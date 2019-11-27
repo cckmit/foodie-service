@@ -14,7 +14,7 @@ spring:
 
 
 logging:
-  file: ./logs/fooide-prd.log
+  file: ./logs/prd/fooide-prd.log
 
 application:
   payment:
