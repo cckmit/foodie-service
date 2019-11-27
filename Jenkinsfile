@@ -22,7 +22,9 @@ pipeline {
         }
         stage('Build') {
             steps {
-                sh './gradlew --no-daemon clean build'
+                withEnv(['JENKINS_NODE_COOKIE=dontkillme']) {
+                    sh './gradlew --no-daemon clean build'
+                }
             }
         }
 
