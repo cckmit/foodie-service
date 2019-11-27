@@ -38,7 +38,7 @@ public class FoodGuideRepresentationService {
     }
 
     public ArticleDetailRepresentation detail(String id, User user) {
-        String sql = "select * from FOODIE_ARTICLE t where t.id=:id";
+        String sql = "select t.*, c.NAME as cityName from FOODIE_ARTICLE t left join FOODIE_CITY c on t.CITY_ID=c.id where t.id=:id";
         ArticleDetailRepresentation representation = jdbcTemplate.queryForObject(sql, ImmutableMap.of("id", id), new BeanPropertyRowMapper<>(ArticleDetailRepresentation.class));
 
         if (Objects.isNull(user)) {
