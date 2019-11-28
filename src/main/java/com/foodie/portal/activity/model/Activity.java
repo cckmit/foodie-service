@@ -19,6 +19,7 @@ public class Activity {
     private String title;
     private String subTitle;
     private String description;
+    private String tags;
     private String duration;
     private int maxPeopleLimit;
     private String images;
@@ -41,14 +42,14 @@ public class Activity {
         createdAt = Instant.now();
     }
 
-    public Activity(String title, String subTitle, String desc, String time, int maxPeopleCount,
+    public Activity(String title, String subTitle, String desc, String tags, String duration, int maxPeopleCount,
                     String images, String language, String area, String address, City city,
                     List<ActivityPrice> costList, ActivityType type) {
         this();
         this.title = title;
         this.subTitle = subTitle;
         this.description = desc;
-        this.duration = time;
+        this.duration = duration;
         this.maxPeopleLimit = maxPeopleCount;
         this.images = images;
         this.language = language;
@@ -57,24 +58,25 @@ public class Activity {
         this.city = city;
         this.priceList = costList;
         this.type = type;
+        this.tags = tags;
     }
 
-    public static Activity create(String title, String subTitle, String desc, String duration, int maxPeopleCount,
+    public static Activity create(String title, String subTitle, String desc, String tags, String duration, int maxPeopleCount,
                                   String images, String language, String area, String address, City city,
                                   List<ActivityPrice> costList, ActivityType type) {
         if (Objects.isNull(city)) {
             throw new RestException(ErrorCode.FAILED, "所选城市不能存在");
         }
-        return new Activity(title, subTitle, desc, duration, maxPeopleCount, images, language, area, address, city, costList, type);
+        return new Activity(title, subTitle, desc, tags, duration, maxPeopleCount, images, language, area, address, city, costList, type);
     }
 
-    public void update(String title, String subTitle, String desc, String time, int maxPeopleCount,
+    public void update(String title, String subTitle, String desc, String tags, String duration, int maxPeopleCount,
                        String images, String language, String area, String address,
                        List<ActivityPrice> costList, City city) {
         this.title = title;
         this.subTitle = subTitle;
         this.description = desc;
-        this.duration = time;
+        this.duration = duration;
         this.maxPeopleLimit = maxPeopleCount;
         this.images = images;
         this.language = language;
@@ -82,6 +84,7 @@ public class Activity {
         this.address = address;
         this.priceList = costList;
         this.city = city;
+        this.tags = tags;
     }
 
     public void pass() {

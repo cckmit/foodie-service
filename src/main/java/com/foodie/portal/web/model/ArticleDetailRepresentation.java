@@ -1,6 +1,7 @@
 package com.foodie.portal.web.model;
 
 import lombok.Data;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import java.time.Instant;
 
@@ -12,6 +13,7 @@ public class ArticleDetailRepresentation {
     private String cover;
     private String cityName;
     private String content;
+    @DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
     private Instant createdAt;
     private boolean favourite;
 }

@@ -41,7 +41,7 @@ public class ActivityApplicationService {
     public void addActivity(CreateActivityCommand command, Merchant merchant) {
         var city = cityApplicationService.retrieve(command.getCityId());
         var activity = Activity.create(command.getTitle(), command.getSubTitle(),
-                command.getDescription(), command.getDuration(),
+                command.getDescription(), command.getTags(), command.getDuration(),
                 command.getMaxPeopleLimit(), command.getImages(), command.getLanguage(),
                 command.getArea(), command.getAddress(), city, command.getCostList(), command.getType());
         activity.setMerchant(merchant);
@@ -69,7 +69,7 @@ public class ActivityApplicationService {
         Activity activity = activityRepository.findById(id);
         var city = cityApplicationService.retrieve(command.getCityId());
         activity.update(command.getTitle(), command.getSubTitle(),
-                command.getDescription(), command.getDuration(),
+                command.getDescription(), command.getTags(), command.getDuration(),
                 command.getMaxPeopleLimit(), command.getImages(), command.getLanguage(),
                 command.getArea(), command.getAddress(), command.getCostList(), city);
         activityRepository.save(activity);

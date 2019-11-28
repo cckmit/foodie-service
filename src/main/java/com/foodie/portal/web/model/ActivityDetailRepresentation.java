@@ -16,6 +16,7 @@ public class ActivityDetailRepresentation {
     private String title;
     private String subTitle;
     private String description;
+    private String tags;
     private String duration;
     private int maxPeopleLimit;
     private double price;
