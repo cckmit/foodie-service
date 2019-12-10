@@ -17,9 +17,9 @@ public class EncryptorTest {
 
     @Test
     public void getPass() {
-        String name = encryptor.encrypt("root");
+        String name = encryptor.encrypt("AeI1mtRAp9QdG3gjBGCMokoAadE0McQKE9hfXF2HioSXjx5U0hIOYIfz8eJYQwEkOxqE5NetcaewmwAU");
         System.out.println(name+" ----------------");
-        String encryptMail = encryptor.encrypt("foodie_123");
+        String encryptMail = encryptor.encrypt("EBotB60IAd2gReYT5Wba8KhXhd3qa98NVRn8e24mGmlGb4yVdYYrhZMbCtJUHEUUBgN3ttReUA7xJd3P");
         System.out.println("mail: " + encryptMail);
         System.out.println("mail decrypt: " + encryptor.decrypt(encryptMail));
         Assert.assertTrue(name.length() > 0);
