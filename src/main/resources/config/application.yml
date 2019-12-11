@@ -64,9 +64,9 @@ jasypt:
 application:
   payment:
     paypal:
-      client-id: ASgMRT2a5ZkDHd_PZUWGjjG7V40kFIFpmvefEpwfe8z94aBPyzwLHq1WCKNogfINQSDv5DhrVno11r6N
-      client-secret: EKsOmilFgiYw15f3_6zXhkQnPtETUsgeael94E_D4awn3fTh7IzE_WWPqVQtG36hF5hOGZXusK1YCAoS
-      mode: sandbox
+      client-id: ENC(PTsNV6HdzoF2iGO5c0KZDiqImADIRzrg1/pFKdghJ5Wtomck7pLVHeoRzDSUm+mqjKCtFafkFAF/nHTPhgIldIiuE6x0rT848sd2+10Lbphlme+Q3Ffw3AhwsVkDIX5X)
+      client-secret: ENC(BCAJrLjbRA0eadMIpiMFXowKdsDT1dkMzadWRgh17Rsri2z32NkVa193t/wAwQRFugHF7spcFKoQWlXR1wijt192fwY2LQHTdArdWgyzhCmq0Ck+105ECD3mmfDE8oes)
+      mode: live
       activity-success-url: http://localhost:8081/#/main/activity/success?orderno=%s
       activity-cancel-url: http://localhost:8081/#/main/activity/cancel?orderno=%s
       restaurant-success-url: http://localhost:8081/#/main/restaurant/success?orderno=%s

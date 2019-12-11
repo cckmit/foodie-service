@@ -3,12 +3,14 @@ package com.foodie.portal.payment;
 import com.paypal.api.payments.*;
 import com.paypal.base.rest.APIContext;
 import com.paypal.base.rest.PayPalRESTException;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
 
+@Slf4j
 @Service
 public class PaymentApplicationService {
 
@@ -47,7 +49,7 @@ public class PaymentApplicationService {
         redirectUrls.setCancelUrl(String.format(properties.getPaypal().getRestaurantCancelUrl(), orderNo));
         redirectUrls.setReturnUrl(String.format(properties.getPaypal().getRestaurantSuccessUrl(), orderNo));
         payment.setRedirectUrls(redirectUrls);
-
+        log.info("创建paypal 支付");
         return payment.create(apiContext);
     }
 
