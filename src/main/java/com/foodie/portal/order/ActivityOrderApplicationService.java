@@ -14,6 +14,7 @@ import com.foodie.portal.payment.PaypalPaymentIntent;
 import com.foodie.portal.payment.PaypalPaymentMethod;
 import com.foodie.portal.user.model.Merchant;
 import com.foodie.portal.user.model.User;
+import com.google.common.base.Stopwatch;
 import com.paypal.api.payments.Links;
 import com.paypal.api.payments.Payment;
 import com.paypal.base.rest.PayPalRESTException;
@@ -22,8 +23,10 @@ import lombok.var;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.StopWatch;
 
 import javax.validation.Valid;
+import java.util.concurrent.TimeUnit;
 
 @Slf4j
 @Service
@@ -59,9 +62,14 @@ public class ActivityOrderApplicationService {
         order.prePay(command.getPaidPrice());
         Payment payment;
         try {
+
+            Stopwatch stopwatch = Stopwatch.createStarted();
             payment = paymentApplicationService.createActivityPayment(command.getPaidPrice(),
                     "USD", PaypalPaymentMethod.paypal,
                     PaypalPaymentIntent.sale, "订单支付", order.getNumber());
+            stopwatch.stop();
+            long elapsed = stopwatch.elapsed(TimeUnit.MILLISECONDS);
+            log.info("开始创建活动支付:{}, cost:{}", id, elapsed);
         } catch (PayPalRESTException e) {
             throw new RestException(ErrorCode.FAILED, "支付失败");
         }

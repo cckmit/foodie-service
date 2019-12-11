@@ -18,7 +18,7 @@ public class PaymentController {
         try {
             Payment activityPayment = paymentApplicationService.createActivityPayment(1D,
                     "USD", PaypalPaymentMethod.paypal,
-                    PaypalPaymentIntent.sale, "订单支付", "13123");
+                    PaypalPaymentIntent.sale, "订单支付", "11231231222222222323232323232322323232323232323232323232323231123123122222222232323232323232232323232323232323232323232323");
 
             for (Links links : activityPayment.getLinks()) {
                 if (links.getRel().equals("approval_url")) {
