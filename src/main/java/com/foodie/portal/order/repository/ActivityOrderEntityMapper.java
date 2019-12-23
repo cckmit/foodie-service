@@ -10,17 +10,17 @@ import org.mapstruct.Named;
 import org.mapstruct.factory.Mappers;
 
 @Mapper
-public interface OrderEntityMapper extends BaseMapper<Order, OrderEntity> {
+public interface ActivityOrderEntityMapper extends BaseMapper<Order, ActivityOrderEntity> {
 
-    OrderEntityMapper instance = Mappers.getMapper(OrderEntityMapper.class);
+    ActivityOrderEntityMapper instance = Mappers.getMapper(ActivityOrderEntityMapper.class);
 
     @Override
     @Mapping(target = "orderInfo", qualifiedByName = "toOrderInfo")
-    Order to(OrderEntity to);
+    Order to(ActivityOrderEntity to);
 
     @Override
     @Mapping(target = "orderInfo", qualifiedByName = "fromOrderInfo")
-    OrderEntity from(Order from);
+    ActivityOrderEntity from(Order from);
 
     @Named("toOrderInfo")
     default OrderInfo map(String orderInfo) {

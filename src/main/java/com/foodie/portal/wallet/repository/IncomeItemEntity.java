@@ -1,6 +1,6 @@
 package com.foodie.portal.wallet.repository;
 
-import com.foodie.portal.order.repository.OrderEntity;
+import com.foodie.portal.order.repository.ActivityOrderEntity;
 import com.foodie.portal.user.repository.MerchantEntity;
 import lombok.Data;
 
@@ -24,7 +24,7 @@ public class IncomeItemEntity {
     private MerchantEntity merchant;
     private String name;
     @ManyToOne
-    private OrderEntity order;
+    private ActivityOrderEntity order;
     private Double amount;
     private Instant createdAt;
 }

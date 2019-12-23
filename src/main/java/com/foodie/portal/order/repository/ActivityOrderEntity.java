@@ -19,7 +19,7 @@ import java.time.Instant;
 @Data
 @Entity
 @Table(name = "foodie_order")
-public class OrderEntity {
+public class ActivityOrderEntity {
     @Id
     private String id;
     private String number;

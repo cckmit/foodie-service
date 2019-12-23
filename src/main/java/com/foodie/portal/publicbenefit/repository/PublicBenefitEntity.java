@@ -1,6 +1,6 @@
 package com.foodie.portal.publicbenefit.repository;
 
-import com.foodie.portal.order.repository.OrderEntity;
+import com.foodie.portal.order.repository.ActivityOrderEntity;
 import com.foodie.portal.publicbenefit.PublicBenefitStatus;
 import lombok.Data;
 
@@ -29,7 +29,7 @@ public class PublicBenefitEntity {
     private BigDecimal currentFoundation;
     @OneToMany
     @JoinColumn(name = "public_benefit_id")
-    private List<OrderEntity> orders;
+    private List<ActivityOrderEntity> orders;
     @Enumerated(EnumType.STRING)
     private PublicBenefitStatus status;
     private Instant createdAt;

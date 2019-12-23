@@ -4,8 +4,8 @@ import com.foodie.portal.commons.Pagination;
 import com.foodie.portal.order.model.Order;
 import com.foodie.portal.order.model.OrderStatus;
 import com.foodie.portal.order.model.RestaurantOrder;
-import com.foodie.portal.order.repository.OrderEntityMapper;
-import com.foodie.portal.order.repository.OrderJpaRepository;
+import com.foodie.portal.order.repository.ActivityOrderEntityMapper;
+import com.foodie.portal.order.repository.ActivityOrderJpaRepository;
 import com.foodie.portal.order.repository.RestaurantOrderEntityMapper;
 import com.foodie.portal.order.repository.RestaurantOrderJpaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,13 +17,16 @@ import java.util.List;
 @Component
 public class OrderRepository {
 
-    @Autowired
-    private OrderJpaRepository orderJpaRepository;
-    @Autowired
-    private RestaurantOrderJpaRepository restaurantOrderJpaRepository;
+    private final ActivityOrderJpaRepository orderJpaRepository;
+    private final RestaurantOrderJpaRepository restaurantOrderJpaRepository;
+
+    public OrderRepository(ActivityOrderJpaRepository orderJpaRepository, RestaurantOrderJpaRepository restaurantOrderJpaRepository) {
+        this.orderJpaRepository = orderJpaRepository;
+        this.restaurantOrderJpaRepository = restaurantOrderJpaRepository;
+    }
 
     public void save(Order order) {
-        orderJpaRepository.save(OrderEntityMapper.instance.from(order));
+        orderJpaRepository.save(ActivityOrderEntityMapper.instance.from(order));
     }
 
     public void save(RestaurantOrder order) {
@@ -31,7 +34,7 @@ public class OrderRepository {
     }
 
     public Order findActivityOrderById(String id) {
-        return OrderEntityMapper.instance.to(orderJpaRepository.getOne(id));
+        return ActivityOrderEntityMapper.instance.to(orderJpaRepository.getOne(id));
     }
 
 
@@ -40,7 +43,7 @@ public class OrderRepository {
     }
 
     public Order byPaymentId(String paymentId) {
-        return OrderEntityMapper.instance.to(orderJpaRepository.findByPaymentId(paymentId));
+        return ActivityOrderEntityMapper.instance.to(orderJpaRepository.findByPaymentId(paymentId));
     }
 
     public RestaurantOrder findRestaurantOrderByPaymentId(String paymentId) {
@@ -48,7 +51,7 @@ public class OrderRepository {
     }
 
     public Order findActivityOrderByOrderNo(String orderNo) {
-        return OrderEntityMapper.instance.to(orderJpaRepository.findByNumber(orderNo));
+        return ActivityOrderEntityMapper.instance.to(orderJpaRepository.findByNumber(orderNo));
     }
 
     public RestaurantOrder findRestaurantOrderByOrderNo(String orderNo) {
@@ -56,24 +59,24 @@ public class OrderRepository {
     }
 
     public Pagination<Order> findByMerchantId(int page, int size, String merchantId) {
-        return OrderEntityMapper.instance.to(orderJpaRepository.findByMerchantId(merchantId, PageRequest.of(page, size)));
+        return ActivityOrderEntityMapper.instance.to(orderJpaRepository.findByMerchantId(merchantId, PageRequest.of(page, size)));
     }
 
     public Pagination<Order> findByMerchantIdAndStatus(int page, int size, String merchantId, List<OrderStatus> status) {
-        return OrderEntityMapper.instance.to(orderJpaRepository.findByMerchantIdAndStatusIn(merchantId, status, PageRequest.of(page, size)));
+        return ActivityOrderEntityMapper.instance.to(orderJpaRepository.findByMerchantIdAndStatusIn(merchantId, status, PageRequest.of(page, size)));
     }
 
     public Order findByIdAndMerchantId(String id, String merchantId) {
-        return OrderEntityMapper.instance.to(orderJpaRepository.findByIdAndMerchantId(id, merchantId));
+        return ActivityOrderEntityMapper.instance.to(orderJpaRepository.findByIdAndMerchantId(id, merchantId));
     }
 
     public Order findByIdAndUserId(String id, String userId) {
-        return OrderEntityMapper.instance.to(orderJpaRepository.findByIdAndUserId(id, userId));
+        return ActivityOrderEntityMapper.instance.to(orderJpaRepository.findByIdAndUserId(id, userId));
     }
 
 
     public Pagination<Order> findActivityOrderByUserId(int page, int size, String merchantId) {
-        return OrderEntityMapper.instance.to(orderJpaRepository.findByUserId(merchantId, PageRequest.of(page, size)));
+        return ActivityOrderEntityMapper.instance.to(orderJpaRepository.findByUserId(merchantId, PageRequest.of(page, size)));
     }
 
     public Pagination<RestaurantOrder> findRestaurantOrderByUserId(int page, int size, String merchantId) {
@@ -81,7 +84,7 @@ public class OrderRepository {
     }
 
     public Pagination<Order> findActivityOrdersByPage(int page, int size) {
-        return OrderEntityMapper.instance.to(orderJpaRepository.findAll(PageRequest.of(page, size)));
+        return ActivityOrderEntityMapper.instance.to(orderJpaRepository.findAll(PageRequest.of(page, size)));
     }
 
     public Pagination<RestaurantOrder> findRestaurantOrdersByPage(int page, int size) {
