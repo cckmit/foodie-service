@@ -52,7 +52,7 @@ public class Order {
         this.serviceDate = serviceDate;
         this.startTime = startTime;
         this.unitPrice = activity.getPrice(count);
-        this.price = NumberUtil.mul(activity.getPrice(count), count);
+        this.price = NumberUtil.mul(this.unitPrice, count);
         this.orderInfo = orderInfo;
         this.merchant = activity.getMerchant();
         this.totalExtract = NumberUtil.mul(price, merchant.getExtractRatio());

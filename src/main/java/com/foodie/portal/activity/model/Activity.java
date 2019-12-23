@@ -99,12 +99,11 @@ public class Activity {
         if (priceList == null) {
             throw new RestException(ErrorCode.REFUSED, "活动价格未设定");
         }
-        for (ActivityPrice activityPrice : priceList) {
-            if (activityPrice.getReserveCount() == count) {
-                return activityPrice.getPrice();
-            }
-        }
-        throw new RestException(ErrorCode.REFUSED, "当前人数价格未设置");
+        return priceList.stream()
+                .filter(activityPrice ->  activityPrice.getReserveCount() == count)
+                .findFirst()
+                .map(ActivityPrice::getPrice)
+                .orElseThrow(() -> new RestException(ErrorCode.REFUSED, "当前人数价格未设置"));
     }
 
     public void updateScheduling(List<ServiceScheduling> serviceSchedulingList) {
