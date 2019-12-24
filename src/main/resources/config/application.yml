@@ -1,9 +1,10 @@
 spring:
   datasource:
-    url: jdbc:log4jdbc:h2:file:~/h2/foodie
+    url: jdbc:log4jdbc:mysql://localhost:3306/foodie_mysql?allowMultiQueries=true&useUnicode=true&characterEncoding=UTF-8&connectionCollation=utf8mb4_bin&useServerPrepStmts=false&rewriteBatchedStatements=true
     driverClassName: net.sf.log4jdbc.sql.jdbcapi.DriverSpy
     type: com.alibaba.druid.pool.DruidDataSource
-    username: sa
+    username: root
+    password: 123456
     druid:
       initial-size: 8
       min-idle: 1
